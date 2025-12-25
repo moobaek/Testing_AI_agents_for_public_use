@@ -63,19 +63,19 @@
 #### 왜 이 시스템이 필요했나?
 ```mermaid
 graph TB
-    A[나: PM + 설계자 + 핵심 개발자] --> B[데이터 통합 플랫폼]
-    A --> C[분석 플랫폼]
-    A --> D[AI 시스템]
-    A --> E[외주 개발자 관리]
+    A["나: PM + 설계자 + 핵심 개발자"] --> B["데이터 통합 플랫폼"]
+    A --> C["분석 플랫폼"]
+    A --> D["AI 시스템"]
+    A --> E["외주 개발자 관리"]
 
-    B --> F[설계 문서 시스템<br/>obsidian_design_origin]
+    B --> F["설계 문서 시스템<br/>obsidian_design_origin"]
     C --> F
     D --> F
     E --> F
 
-    F --> G[자동 진행 추적]
-    F --> H[AI 코딩 지원]
-    F --> I[문서-코드 일관성]
+    F --> G["자동 진행 추적"]
+    F --> H["AI 코딩 지원"]
+    F --> I["문서-코드 일관성"]
 
     style A fill:#fce4ec
     style F fill:#e1f5ff

@@ -51,20 +51,20 @@
 
 ```mermaid
 graph TB
-    A[AI 프롬프트 25개+] --> B[문서 자동 생성]
-    B --> C[Evaluation System]
-    C --> D[Prompt Evaluation Engine]
+    A["AI 프롬프트 25개+"] --> B["문서 자동 생성"]
+    B --> C["Evaluation System"]
+    C --> D["Prompt Evaluation Engine"]
 
-    D --> E[목적 적합성 검증]
-    D --> F[기능적 정확성 검증]
-    D --> G[설계 일관성 검증]
+    D --> E["목적 적합성 검증"]
+    D --> F["기능적 정확성 검증"]
+    D --> G["설계 일관성 검증"]
 
     E --> H{통과?}
     F --> H
     G --> H
 
-    H -->|Yes| I[문서 승인]
-    H -->|No| J[재생성 요청]
+    H -->|Yes| I["문서 승인"]
+    H -->|No| J["재생성 요청"]
     J --> B
 
     style C fill:#e1f5ff

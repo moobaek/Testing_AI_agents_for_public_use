@@ -28,10 +28,10 @@
 
 ```mermaid
 graph TD
-    A[신기술 탐색/리서치] --> B[Saved Upgrade Plans 작성]
-    B --> C[기존 모듈(Step 4) 업그레이드]
-    C --> D[신규 도메인 적용 (포항 공장 등)]
-    D --> E[학술적 검증 및 특허/논문]
+    A["신기술 탐색/리서치"] --> B["Saved Upgrade Plans 작성"]
+    B --> C["기존 모듈(Step 4) 업그레이드"]
+    C --> D["신규 도메인 적용 (포항 공장 등)"]
+    D --> E["학술적 검증 및 특허/논문"]
     E --> A
     
     style A fill:#f3e5f5

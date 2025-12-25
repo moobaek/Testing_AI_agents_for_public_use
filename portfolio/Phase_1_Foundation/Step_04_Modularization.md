@@ -119,11 +119,11 @@ specs/04_Prompts/chain/
 
 ```mermaid
 sequenceDiagram
-    participant User as 사용자
-    participant Chain as Chain Orchestrator
-    participant P1 as 1_UI 분석
-    participant P2 as 2_Backend 분석
-    participant P3 as 3_관계 매핑
+    participant User as "사용자"
+    participant Chain as "Chain Orchestrator"
+    participant P1 as "1_UI 분석"
+    participant P2 as "2_Backend 분석"
+    participant P3 as "3_관계 매핑"
     
     User->>Chain: Development_Analysis_Chain 실행
     Chain->>P1: UI 구조 분석

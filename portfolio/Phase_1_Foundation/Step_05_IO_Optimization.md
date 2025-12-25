@@ -18,17 +18,17 @@
 ```mermaid
 graph TB
     subgraph "Traditional DB Approach"
-        A1[사용자 입력] --> B1[Application]
-        B1 --> C1[Database]
-        C1 --> D1[복잡한 쿼리]
-        D1 --> E1[결과]
+        A1["사용자 입력"] --> B1["Application"]
+        B1 --> C1["Database"]
+        C1 --> D1["복잡한 쿼리"]
+        D1 --> E1["결과"]
     end
     
     subgraph "File-Based Approach"
-        A2[Input.json] --> B2[AI Process]
-        B2 --> C2[Output.json]
-        C2 --> D2[다음 Process]
-        D2 --> E2[Final Result]
+        A2["Input.json"] --> B2["AI Process"]
+        B2 --> C2["Output.json"]
+        C2 --> D2["다음 Process"]
+        D2 --> E2["Final Result"]
     end
     
     style A2 fill:#e1f5ff
@@ -56,11 +56,11 @@ graph TB
 
 ```mermaid
 sequenceDiagram
-    participant User as 사용자
-    participant Input as factory_ontology.json
-    participant AI as AI Processing
-    participant Output as routing_config.json
-    participant WebService as 웹 서비스
+    participant User as "사용자"
+    participant Input as "factory_ontology.json"
+    participant AI as "AI Processing"
+    participant Output as "routing_config.json"
+    participant WebService as "웹 서비스"
     
     User->>Input: BOM 구조 정의
     Input->>AI: JSON 파싱 및 분석
@@ -126,12 +126,12 @@ sequenceDiagram
 
 ```mermaid
 graph LR
-    A[Blue_Print.md] -->|Database_Design_Prompt| B[AI Process]
-    B --> C[Database_Design.md]
-    C -->|API_Design_Prompt| D[AI Process]
-    D --> E[API_Design.md]
-    E -->|Integration_Check| F[AI Process]
-    F --> G[Integration_Issues.md]
+    A["Blue_Print.md"] -->|Database_Design_Prompt| B["AI Process"]
+    B --> C["Database_Design.md"]
+    C -->|API_Design_Prompt| D["AI Process"]
+    D --> E["API_Design.md"]
+    E -->|Integration_Check| F["AI Process"]
+    F --> G["Integration_Issues.md"]
     
     style A fill:#e1f5ff
     style C fill:#e8f5e9

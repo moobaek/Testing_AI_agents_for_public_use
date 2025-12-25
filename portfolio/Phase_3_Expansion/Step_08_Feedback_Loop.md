@@ -29,9 +29,9 @@
 
 ```mermaid
 sequenceDiagram
-    participant Dev as 나 (권순룡)
-    participant AI as Evaluation Framework
-    participant Field as 산업 현장 전문가
+    participant Dev as "나 (권순룡)"
+    participant AI as "Evaluation Framework"
+    participant Field as "산업 현장 전문가"
     
     Dev->>AI: 코드 및 설계서 제출
     AI->>Dev: 객관적 성능 평가 및 개선안 (Score: 92/100)

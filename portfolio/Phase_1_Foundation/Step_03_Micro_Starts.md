@@ -24,15 +24,15 @@
 
 ```mermaid
 graph TB
-    A[Step 1-2: 설계 문서 시스템] --> B[검증 필요]
-    B --> C[Micro Project 1:<br/>all_platform_center]
-    B --> D[Micro Project 2:<br/>factory_ontology_manager]
-    B --> E[Micro Project 3:<br/>pipeline_system_complete]
+    A["Step 1-2: 설계 문서 시스템"] --> B["검증 필요"]
+    B --> C["Micro Project 1:<br/>all_platform_center"]
+    B --> D["Micro Project 2:<br/>factory_ontology_manager"]
+    B --> E["Micro Project 3:<br/>pipeline_system_complete"]
 
-    C --> F[빠른 성공]
+    C --> F["빠른 성공"]
     D --> F
     E --> F
-    F --> G[시스템 신뢰도 확보]
+    F --> G["시스템 신뢰도 확보"]
 
     style C fill:#e1f5ff
     style D fill:#fff4e1

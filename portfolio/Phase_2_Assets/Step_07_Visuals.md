@@ -28,9 +28,9 @@
 
 ```mermaid
 graph LR
-    A[Markdown Log] -->|Mermaid| B[Flowchart/Sequence]
-    A -->|AI Tool| C[Audio/Video Summary]
-    B --> D[Visual Portfolio]
+    A["Markdown Log"] -->|Mermaid| B["Flowchart/Sequence"]
+    A -->|AI Tool| C["Audio/Video Summary"]
+    B --> D["Visual Portfolio"]
     C --> D
     
     style A fill:#e1f5ff

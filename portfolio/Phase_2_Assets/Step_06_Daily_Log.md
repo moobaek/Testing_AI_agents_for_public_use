@@ -28,13 +28,13 @@
 
 ```mermaid
 graph TD
-    A[오늘의 작업 시작] --> B[Daily Note 작성]
+    A["오늘의 작업 시작"] --> B["Daily Note 작성"]
     B --> C{이슈 발생?}
-    C -- YES --> D[Troubleshooting 로그 기록]
-    C -- NO --> E[성공 사례/코드 조각 기록]
-    D --> F[Permanent Asset으로 승격]
+    C -- "YES" --> D["Troubleshooting 로그 기록"]
+    C -- "NO" --> E["성공 사례/코드 조각 기록"]
+    D --> F["Permanent Asset으로 승격"]
     E --> F
-    F --> G[내일의 기획안(Next Step)에 반영]
+    F --> G["내일의 기획안(Next Step)에 반영"]
 ```
 
 ### 실제 로그 예시 (obsidian_design_origin)

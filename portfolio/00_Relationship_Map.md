@@ -10,53 +10,53 @@
 ```mermaid
 graph TB
     subgraph "9단계 실행 가이드"
-        S1[Step 1: 반복 업무 식별]
-        S2[Step 2: 전문성 타겟팅]
-        S3[Step 3: 초소형 시작]
-        S4[Step 4: 모듈화]
-        S5[Step 5: I/O 최적화]
-        S6[Step 6: 데일리 로그]
-        S7[Step 7: 시각 자산]
-        S8[Step 8: 피드백 루프]
-        S9[Step 9: 지속 업데이트]
+        S1["Step 1: 반복 업무 식별"]
+        S2["Step 2: 전문성 타겟팅"]
+        S3["Step 3: 초소형 시작"]
+        S4["Step 4: 모듈화"]
+        S5["Step 5: I/O 최적화"]
+        S6["Step 6: 데일리 로그"]
+        S7["Step 7: 시각 자산"]
+        S8["Step 8: 피드백 루프"]
+        S9["Step 9: 지속 업데이트"]
     end
     
     subgraph "핵심 프로젝트"
-        AMS[AMS: 이상 탐지]
-        DPS[DPS: AI 플랫폼]
-        CoCTK[CoCTK: 데이터 분석]
-        SENSOR[스마트센서 3종]
-        ENERGY[에너지 최적화]
+        AMS["AMS: 이상 탐지"]
+        DPS["DPS: AI 플랫폼"]
+        CoCTK["CoCTK: 데이터 분석"]
+        SENSOR["스마트센서 3종"]
+        ENERGY["에너지 최적화"]
     end
     
     subgraph "학술 검증"
-        P1[피쉬본 자동화 논문]
-        P2[에너지 효율 논문]
-        P3[데이터 분석 논문]
+        P1["피쉬본 자동화 논문"]
+        P2["에너지 효율 논문"]
+        P3["데이터 분석 논문"]
     end
     
     subgraph "실증 사례"
-        T1[세아특수강]
-        T2[포미아]
-        T3[일본 글로벌 기업]
+        T1["세아특수강"]
+        T2["포미아"]
+        T3["일본 글로벌 기업"]
     end
     
     S1 --> S2 --> S3 --> S4 --> S5
     S5 --> S6 --> S7 --> S8 --> S9
     
-    S1 -.implements.-> AMS
-    S1 -.implements.-> DPS
-    S3 -.implements.-> SENSOR
-    S4 -.implements.-> CoCTK
-    S5 -.implements.-> ENERGY
+    S1 -. "implements" .-> AMS
+    S1 -. "implements" .-> DPS
+    S3 -. "implements" .-> SENSOR
+    S4 -. "implements" .-> CoCTK
+    S5 -. "implements" .-> ENERGY
     
-    AMS -.validates.-> P1
-    ENERGY -.validates.-> P2
-    CoCTK -.validates.-> P3
+    AMS -. "validates" .-> P1
+    ENERGY -. "validates" .-> P2
+    CoCTK -. "validates" .-> P3
     
-    AMS -.proves.-> T1
-    DPS -.proves.-> T2
-    SENSOR -.proves.-> T3
+    AMS -. "proves" .-> T1
+    DPS -. "proves" .-> T2
+    SENSOR -. "proves" .-> T3
     
     style S1 fill:#e1f5ff
     style AMS fill:#fff4e1
@@ -72,28 +72,28 @@ graph TB
 
 ```mermaid
 graph LR
-    AMS[AMS 프로젝트]
+    AMS["AMS 프로젝트"]
     
     subgraph "실행 단계"
-        S1[Step 1: 설계 문서 시스템]
-        S4[Step 4: 25개 프롬프트 모듈화]
-        S5[Step 5: 파일 기반 I/O]
+        S1["Step 1: 설계 문서 시스템"]
+        S4["Step 4: 25개 프롬프트 모듈화"]
+        S5["Step 5: 파일 기반 I/O"]
     end
     
     subgraph "핵심 기술"
-        T1[Python ML]
-        T2[Neo4j 그래프 DB]
-        T3[피쉬본 알고리즘]
+        T1["Python ML"]
+        T2["Neo4j 그래프 DB"]
+        T3["피쉬본 알고리즘"]
     end
     
     subgraph "학술 성과"
-        P1[피쉬본 자동화 논문]
-        P2[이상 탐지 정확도 논문]
+        P1["피쉬본 자동화 논문"]
+        P2["이상 탐지 정확도 논문"]
     end
     
     subgraph "실증"
-        C1[세아특수강 납품]
-        C2[이상 탐지율 93.7%]
+        C1["세아특수강 납품"]
+        C2["이상 탐지율 93.7%"]
     end
     
     S1 --> AMS
@@ -146,11 +146,11 @@ graph TB
     
     DPS --> L1 --> L2 --> L3 --> L4 --> L5
     
-    S3 -.implements.-> DPS
-    S6 -.documents.-> DPS
+    S3 -. "implements" .-> DPS
+    S6 -. "documents" .-> DPS
     
-    DPS -.proves.-> C1
-    DPS -.proves.-> C2
+    DPS -. "proves" .-> C1
+    DPS -. "proves" .-> C2
 ```
 
 **관련 문서**:
@@ -299,7 +299,7 @@ graph LR
     S1 --> S2 --> S3 --> S4 --> S5
     S5 --> S6 --> S7
     S7 --> S8 --> S9
-    S9 -.순환.-> S1
+    S9 -. "순환" .-> S1
     
     style S1 fill:#e1f5ff
     style S6 fill:#e8f5e9
