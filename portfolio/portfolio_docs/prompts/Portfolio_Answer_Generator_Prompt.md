@@ -45,7 +45,7 @@ relations:
 
 ## 역할
 
-관계 그래프를 기반으로 포트폴리오 질문에 대한 구조화된 답변을 생성합니다. 체인 프롬프트 결과를 활용하여 관련 문서 내용을 추출하고 종합적인 답변을 제공합니다.
+관계 그래프를 기반으로 포트폴리오 질문에 대한 구조화된 답변을 생성합니다. 체인 프롬프트 결과를 활용하여 관련 문서 내용을 추출하고 종합적인 답변을 제공합니다. 질문자 직군에 따라 적절한 직군별 프롬프트를 호출하여 맞춤형 답변을 생성합니다.
 
 ## 입력 (Input)
 
@@ -125,17 +125,62 @@ relations:
 
 **출력**: 추출된 문서 내용
 
-### 3단계: 답변 구조화
+### 3단계: 질문자 직군 확인 및 라우팅
 
-**답변 구조**:
+**입력**: `data/temp/clarified_question.json`의 `questioner_role` 필드
+
+**라우팅 로직**:
+
+```mermaid
+graph TD
+    CheckRole{질문자 직군 확인}
+    CheckRole -->|author| AuthorPrompt[Answer_For_Author_Prompt]
+    CheckRole -->|evaluator_developer| DevPrompt[Answer_For_Developer_Prompt]
+    CheckRole -->|evaluator_business| BusinessPrompt[Answer_For_Business_Prompt]
+    CheckRole -->|evaluator_pm| PMPrompt[Answer_For_PM_Prompt]
+    CheckRole -->|evaluator_researcher| ResearcherPrompt[Answer_For_Researcher_Prompt]
+    CheckRole -->|evaluator_other| OtherPrompt[Answer_For_Other_Prompt]
+    CheckRole -->|general_public| GeneralPrompt[Answer_For_General_Prompt]
+    CheckRole -->|evaluator_*| ContinuousConv[Continuous_Conversation_Entry_Prompt<br/>연속 대화 시스템]
+    
+    AuthorPrompt --> FinalAnswer[최종 답변 생성]
+    DevPrompt --> ContinuousConv
+    BusinessPrompt --> FinalAnswer
+    PMPrompt --> FinalAnswer
+    ResearcherPrompt --> FinalAnswer
+    OtherPrompt --> FinalAnswer
+    GeneralPrompt --> FinalAnswer
+    ContinuousConv --> FinalAnswer
+```
+
+**라우팅 규칙**:
+- **author**: `role_based/Answer_For_Author_Prompt.md` 호출
+- **evaluator_developer**: `role_based/Continuous_Conversation_Entry_Prompt.md` 호출 (연속 대화 시스템)
+- **evaluator_business**: `role_based/Answer_For_Business_Prompt.md` 호출
+- **evaluator_pm**: `role_based/Answer_For_PM_Prompt.md` 호출
+- **evaluator_researcher**: `role_based/Answer_For_Researcher_Prompt.md` 호출
+- **evaluator_other**: `role_based/Answer_For_Other_Prompt.md` 호출
+- **general_public**: `role_based/Answer_For_General_Prompt.md` 호출
+
+**참고**: 평가자(evaluator_*) 중 개발자는 연속 대화 시스템으로 라우팅되며, 나머지 평가자는 일반 답변 생성 프롬프트를 호출합니다.
+
+### 4단계: 직군별 답변 생성
+
+**직군별 프롬프트 호출**:
+- 각 직군별 프롬프트는 `clarified_question.json`, `portfolio_relationship_map.md`, 관련 문서 내용을 입력으로 받습니다.
+- 각 프롬프트는 해당 직군에 맞는 답변 스타일로 답변을 생성합니다.
+
+### 5단계: 답변 구조화
+
+**답변 구조** (직군별 프롬프트에서 생성):
 1. **질문 요약**: 정리된 질문
-2. **핵심 답변**: 질문에 대한 직접적인 답변
-3. **상세 설명**: 관련 섹션 내용
-4. **관계 그래프**: 머메이드 다이어그램
+2. **핵심 답변**: 질문에 대한 직접적인 답변 (직군별 스타일)
+3. **상세 설명**: 관련 섹션 내용 (직군별 설명 수준)
+4. **관계 그래프**: 머메이드 다이어그램 (해당 시)
 5. **관련 문서**: 문서 링크 목록
 6. **추가 정보**: 추가로 확인할 수 있는 문서 제안
 
-### 4단계: 답변 생성
+### 6단계: 답변 생성
 
 **출력 형식** (`data/temp/portfolio_answer.md`):
 
@@ -188,6 +233,10 @@ relations:
 ## Enforcement Rules
 
 > [!IMPORTANT]
+> **ROLE-BASED ROUTING**
+> 질문자 직군에 따라 반드시 적절한 직군별 프롬프트를 호출해야 합니다. `clarified_question.json`의 `questioner_role` 필드를 확인하세요.
+
+> [!IMPORTANT]
 > **ANSWER ACCURACY**
 > 답변은 반드시 관련 문서의 실제 내용을 기반으로 해야 합니다. 추측이나 가정을 포함하지 마세요.
 
@@ -198,6 +247,10 @@ relations:
 > [!IMPORTANT]
 > **MERMAID DIAGRAM**
 > 관계 그래프는 반드시 머메이드 다이어그램으로 포함해야 합니다.
+
+> [!IMPORTANT]
+> **ROLE-SPECIFIC STYLE**
+> 각 직군별 프롬프트의 답변 스타일 가이드를 준수해야 합니다.
 
 ---
 

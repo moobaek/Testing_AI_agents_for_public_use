@@ -50,9 +50,12 @@ relations:
 ## 입력 (Input)
 
 - **입력 1**: 사용자의 자연어 질문
-- **입력 2**: `Architecture_Overview.md` - 아키텍처 개요 문서
-- **입력 3**: `data/architecture_structure.json` - 아키텍처 구조 데이터
-- **입력 4**: `data/document_relationships.json` - 문서 관계 데이터
+- **입력 2**: `data/temp/portfolio_question_entry.json` (선택사항 - 진입점에서 전달된 정보)
+  - `questioner_role`: 질문자 직군 정보 (필수)
+  - `user_question`: 사용자 질문 내용
+- **입력 3**: `Architecture_Overview.md` - 아키텍처 개요 문서
+- **입력 4**: `data/architecture_structure.json` - 아키텍처 구조 데이터
+- **입력 5**: `data/document_relationships.json` - 문서 관계 데이터
 
 ## 출력 (Output)
 
@@ -79,6 +82,8 @@ relations:
 
 **입력 데이터 확인**:
 - [ ] 사용자 질문이 수집되었는지 확인
+- [ ] `portfolio_question_entry.json`이 있는지 확인 (선택사항)
+- [ ] `questioner_role` 정보가 포함되어 있는지 확인 (필수)
 - [ ] Architecture_Overview.md가 로드되었는지 확인
 - [ ] 데이터 파일들이 로드되었는지 확인
 
@@ -155,6 +160,9 @@ relations:
   },
   "original_question": "사용자의 원본 질문",
   "clarified_question": "정리된 질문",
+  "questioner_role": "author | evaluator_developer | evaluator_business | evaluator_pm | evaluator_researcher | evaluator_other | general_public",
+  "role_specific_intent": "직군별 질문 의도 설명",
+  "answer_style": "technical_detailed | business_focused | project_management | academic | general | author_internal",
   "question_type": "information_query | document_modification | relationship_analysis | navigation_query | technical_query",
   "keywords": ["키워드1", "키워드2"],
   "intent": "질문 의도 설명",
@@ -283,6 +291,9 @@ relations:
   },
   "original_question": "AMS 시스템의 아키텍처는 어떻게 구성되어 있나요?",
   "clarified_question": "AMS (Anomaly Management System)의 시스템 아키텍처 구조를 설명해주세요",
+  "questioner_role": "evaluator_developer",
+  "role_specific_intent": "기술적 평가를 위한 상세 정보 요청",
+  "answer_style": "technical_detailed",
   "question_type": "technical_query",
   "keywords": ["AMS", "시스템", "아키텍처"],
   "intent": "AMS 프로젝트의 기술적 아키텍처를 이해하고자 함",

@@ -116,6 +116,7 @@ relations:
 **문서 ID**: `qa.[날짜].[질문_폴더명].[질문_요약]`
 **날짜**: YYYY-MM-DD
 **질문 유형**: [질문 유형]
+**질문자 직군**: [질문자 직군] (author | evaluator_developer | evaluator_business | evaluator_pm | evaluator_researcher | evaluator_other | general_public)
 **생성 일시**: YYYY-MM-DD HH:MM:SS
 
 ## 원본 질문
@@ -148,6 +149,7 @@ relations:
 ```yaml
 question_id: "질문 ID"
 question_type: "질문 유형"
+questioner_role: "질문자 직군"
 related_documents:
   - "문서 ID 1"
   - "문서 ID 2"
@@ -184,6 +186,7 @@ answer_path:
   "date": "2025-01-XX",
   "question": "원본 질문",
   "question_type": "질문 유형",
+  "questioner_role": "질문자 직군",
   "answer": "답변 요약",
   "related_documents": ["문서 ID 목록"],
   "file_path": "qa/2025-01-XX_질문폴더명/질문요약.md",
