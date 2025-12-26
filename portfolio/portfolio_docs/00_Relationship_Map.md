@@ -122,7 +122,7 @@ graph LR
 
 ---
 
-### 2️⃣ DPS (Data Processing & Sensing Platform)
+### 2️⃣ DPS (데이터수집시스템)
 
 ```mermaid
 graph TB

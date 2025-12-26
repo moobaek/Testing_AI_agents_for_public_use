@@ -45,7 +45,7 @@
    - 프로젝트 ID: `project.seah.dps`
    - 고객: 세아특수강
    - 기간: 2025년
-   - 납품 시스템: DPS (Digital Production System)
+   - 납품 시스템: DPS (데이터수집시스템)
    - 역할: 총 사업관리 PM
 
 ### 성과 지표

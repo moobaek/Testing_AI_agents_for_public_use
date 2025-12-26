@@ -339,6 +339,23 @@ AI 에이전트와 자동화 시스템을 구축하기 전, 제가 결과물에 
 
 **위치**: `Original_Development_Plan/docs/Prompt_Evaluation_Engine/`
 
+### 🚀 Claude Sub-Agent로의 발전 (2024~2025)
+
+**이전 방식**: 단순 평가 프롬프트 사용  
+**현재 방식**: 구조화된 평가 프레임워크 + Claude Sub-Agent
+
+**핵심 킥 요소**: **프롬프트 저지(Prompt Judging) 시스템으로 활용**
+- AI가 생성한 프롬프트를 다른 AI가 평가하는 저지 시스템
+- 프롬프트 품질을 객관적으로 검증하는 자동화된 저지 프로세스
+- 생성 AI와 평가 AI의 분리로 환각(Hallucination) 방지
+
+**주요 특징**:
+- 역할 기반 가중치 시스템
+- 5단계 평가 프로세스 (Role Inference → Metrics → Consolidation → Report → Translation)
+- Human-in-the-Loop 프로세스
+- 배치 처리 지원
+- Claude Code Task tool 기반 Multi-Agent Workflow
+
 ### 1️⃣ 프롬프트 품질 평가 시스템
 
 #### 평가 대상: 25개+ AI 프롬프트 자체
@@ -617,6 +634,66 @@ Chain_Behavior:
 
 ---
 
+## 🤖 구축한 시스템 3: FMEA 자동화 생성 시스템 (Claude Sub-Agent)
+
+**위치**: `platform_all/FMEA_Automation_Generation_Technology_claude_sub_agent/`
+
+### 🚀 Claude Sub-Agent로의 발전 (2024~2025)
+
+**이전 방식**: 파일을 주고 에이전트처럼 사용  
+**현재 방식**: Claude Code의 Task tool을 활용한 Multi-Agent Workflow
+
+**핵심 킥 요소**: **코딩 에이전트의 역설계 시스템을 따온 구조**
+- 코딩 에이전트가 코드를 분석하고 구조를 파악하는 방식에서 영감
+- 복잡한 FMEA 프로세스를 역으로 분석하여 Sub-Agent로 분해
+- 각 Sub-Agent가 전문 영역(R&D, Mfg, QA)을 담당하는 구조
+
+**주요 특징**:
+- 8개 독립 Sub-Agent의 협업 구조
+- Claude Code 세션이 Master Orchestrator 역할
+- Phase 0~5까지의 체계적인 워크플로우 자동화
+- 범용 도메인 지원 (제조업, 사무업무, 서비스업)
+- AIAG & VDA FMEA 표준 기반 리스크 분석 시스템
+
+### 시스템 구조
+
+```mermaid
+graph TB
+    A[Claude Code Master Orchestrator] --> B[Phase 0: 초기 분석 Sub-Agent]
+    A --> C[Phase 1: 구조 분석 Sub-Agent]
+    A --> D[Phase 2: FMEA 생성 Sub-Agent]
+    A --> E[Phase 3: 검증 Sub-Agent]
+    A --> F[Phase 4: 통합 Sub-Agent]
+    A --> G[Phase 5: 최종화 Sub-Agent]
+    
+    B --> H[R&D 전문 Sub-Agent]
+    B --> I[Mfg 전문 Sub-Agent]
+    B --> J[QA 전문 Sub-Agent]
+    
+    H --> D
+    I --> D
+    J --> D
+    
+    D --> E
+    E --> F
+    F --> G
+    
+    style A fill:#e1f5ff
+    style D fill:#fff4e1
+    style H fill:#e8f5e9
+    style I fill:#e8f5e9
+    style J fill:#e8f5e9
+```
+
+### Task tool 기반 구현의 의의
+
+- **Python 스크립트 없이 Claude Code 세션 자체가 Orchestrator**
+- 코드 작성 없이 워크플로우 구현
+- 프롬프트 기반 완전 자동화
+- 유연한 워크플로우 조정 가능
+
+---
+
 ## 🔄 통합 워크플로우: Evaluation + Prompt Engine
 
 ### 전체 검증 프로세스
@@ -765,6 +842,81 @@ sequenceDiagram
 - DB 스키마: Database_Design.md
 - 기존 설계 문서: Blue_Print.md, API_Design.md
 ```
+
+---
+
+## 🗺️ 구축한 시스템 4: Original_Development_Plan (Obsidian Design Origin)
+
+### 전체 에이전트 시스템
+
+**핵심 의의**: 코드 에이전트 + 에이전트 중간 문서 확인 + 프롬프트 보완의 전체 에이전트 시스템
+
+**구조적 특징**:
+
+- **코드 에이전트 통합**: 개발 에이전트 실시간 평가
+  - Development_Agent_Evaluation_Prompt로 개발 에이전트가 생성한 코드를 실시간 평가
+  - 설계 문서 준수도, ID 시스템 준수, 코드 품질 확인
+
+- **에이전트 중간 문서 확인**: Phase별 문서 자동 검증
+  - 각 Phase별 생성 문서를 자동 검증하고 일관성 확인
+  - Document_Update_Checker_Prompt로 큰 수정 시 자동으로 문서 업데이트 필요성 판단
+
+- **프롬프트 보완**: 전문가 요약 시스템
+  - 각 단계별 도메인 지식 기반 핵심 정보 추출
+  - State 기반 정보 전달로 컨텍스트 최적화
+
+- **전체 에이전트 시스템**: Phase 0-13 워크플로우
+  - Phase 0: 역 엔지니어링
+  - Phase 1-8: 기본 설계 문서 생성
+  - Phase 9: 온톨로지 영향 관계 분석
+  - Phase 10: 화면 설계서
+  - Phase 11: 온톨로지 영향 분석 확장
+  - Phase 12: 최종 확인 (휴먼 루프)
+  - Phase 13: 개발용 리팩토링
+
+### 21개 development 프롬프트: 개발 단계의 정교한 관리 (2025.10~12 집중 개발)
+
+**개발 워크플로우**: 사용자 요청 → 개발 작업 변환 → 코드 생성 → 개발 완료 후 휴먼 루프
+
+**연속 개발 지원**: 개발 완료 후 휴먼 루프를 통한 연속 진행 (진행/수정/browser 디버깅/트러블 관리)
+
+**문서 업데이트 자동 체크**: 큰 수정 시 자동으로 문서 업데이트 필요성 판단 및 일관성 확인
+
+**변경 관리**: 변경 영향 매트릭스 기반 자동 영향 분석 및 변경 전파
+
+**주요 프롬프트**:
+- Development_Workflow_Prompt: 개발 워크플로우 메인
+- Development_Completion_Human_Loop_Prompt: 개발 완료 후 휴먼 루프 (연속 개발 지원)
+- Document_Update_Checker_Prompt: 문서 업데이트 자동 체크
+- Development_Direction_Finder_Prompt: 개발 방향 찾기
+- Development_Step_Design_Document_Prompt: 단계별 뒷받침 설계 문서 생성
+- Development_Step_Checklist_Prompt: 단계별 체크리스트 생성
+- Browser_Debugging_Prompt: 브라우저 디버깅
+- Troubleshooting_Management_Prompt: 트러블 관리
+- Change_Report_Generator_Prompt: 변경 리포트 생성
+- Development_Agent_Evaluation_Prompt: 개발 에이전트 실시간 평가
+- Development_Integrity_Checklist_Prompt: 개발 무결성 체크리스트
+- 기타 10개 유틸리티 프롬프트
+
+### 개발 타임라인
+
+- **2025년 5월~7월**: 컨소들 모여서 연구 사업계획서 작성 및 아이디어 구체화
+- **2025년 8월~10월**: 배경 연구 및 테스트, 내용 보완
+- **2025년 10월~12월**: 핵심 개발 집중 (21개 development 프롬프트 구축)
+
+### 내부 구조의 촘촘함
+
+**파일 to 파일 구조이지만 내부적으로 촘촘하게 연결**:
+- 21개 development 프롬프트가 유기적으로 연결되어 연속 개발 워크플로우 지원
+- Workflow_Orchestrator로 실행 순서 및 의존성 관리
+- State_Management_System으로 정보 전달 최적화
+- Session_Context_Manager로 휘발성 정보 관리
+- 변경 관리 프로세스로 문서 일관성 자동 유지
+
+**변경 관리 프로세스**:
+- 변경 영향 매트릭스 기반 자동 영향 분석
+- 변경 전파 규칙에 따른 자동 문서 업데이트
+- 설계 단계별 의존성 매트릭스 관리
 
 ---
 

@@ -30,7 +30,7 @@
 - **성과**: AMS의 핵심 모듈(03_FBS)로 발전
 - **주요 모듈**: 03_FBS (6개 Python 파일) - 피쉬본 구조 생성, 원인 분석
 
-### 2. Digital Transformation Platform: DPS (Digital Production System)
+### 2. Digital Transformation Platform: DPS (데이터수집시스템)
 금속 공정 자동화를 위한 **모듈화 5층 아키텍처**입니다. 
 
 ```mermaid
@@ -414,6 +414,266 @@ obsidian_design_origin/
 
 ---
 
+## 5. AI Workflow & Automation: Claude Sub-Agent Systems
+
+### FMEA 자동화 생성 시스템 (Claude Sub-Agent)
+
+**핵심 구조**: 코딩 에이전트의 역설계 시스템 구조 적용
+- 복잡한 FMEA 프로세스를 역으로 분석하여 Sub-Agent로 분해
+- 각 Sub-Agent가 전문 영역(R&D, Mfg, QA)을 담당하는 구조
+- 8개 독립 Sub-Agent의 협업 구조
+
+**아키텍처**:
+```mermaid
+graph TB
+    A[Claude Code Master Orchestrator] --> B[Phase 0: 초기 분석]
+    A --> C[Phase 1: 구조 분석]
+    A --> D[Phase 2: FMEA 생성]
+    A --> E[Phase 3: 검증]
+    A --> F[Phase 4: 통합]
+    A --> G[Phase 5: 최종화]
+    
+    B --> H[R&D 전문 Sub-Agent]
+    B --> I[Mfg 전문 Sub-Agent]
+    B --> J[QA 전문 Sub-Agent]
+    
+    H --> D
+    I --> D
+    J --> D
+    
+    D --> E
+    E --> F
+    F --> G
+    
+    style A fill:#e1f5ff
+    style D fill:#fff4e1
+```
+
+**기술적 의의**:
+- Python 스크립트 없이 Claude Code 세션 자체가 Orchestrator
+- 프롬프트 기반 완전 자동화
+- AIAG & VDA FMEA 표준 기반 범용 리스크 분석 시스템
+
+### 프롬프트 평가 엔진 (Claude Sub-Agent)
+
+**핵심 구조**: 프롬프트 저지(Prompt Judging) 시스템
+- AI가 생성한 프롬프트를 다른 AI가 평가하는 저지 시스템
+- 생성 AI와 평가 AI의 분리로 환각(Hallucination) 방지
+- 5단계 평가 프로세스 (Role Inference → Metrics → Consolidation → Report → Translation)
+
+**아키텍처**:
+```mermaid
+graph LR
+    A[프롬프트 생성 AI] --> B[생성된 프롬프트]
+    B --> C[프롬프트 평가 엔진]
+    C --> D[역할 추론]
+    C --> E[메트릭 평가]
+    C --> F[통합 분석]
+    C --> G[리포트 생성]
+    C --> H[번역]
+    
+    D --> I{통과?}
+    E --> I
+    F --> I
+    G --> I
+    H --> I
+    
+    I -->|Yes| J[승인된 프롬프트]
+    I -->|No| K[재생성 요청]
+    K --> A
+    
+    style C fill:#fff4e1
+    style I fill:#ffebee
+    style J fill:#e8f5e9
+```
+
+**기술적 의의**:
+- 역할 기반 가중치 시스템
+- Human-in-the-Loop 프로세스
+- 배치 처리 지원
+- 25개+ 프롬프트 품질 보장
+
+### Multi-Agent Workflow 구조
+
+**전체 워크플로우**:
+```mermaid
+sequenceDiagram
+    participant User as 사용자
+    participant Master as Master Orchestrator
+    participant FMEA as FMEA Sub-Agents
+    participant Eval as Evaluation Engine
+    participant Output as 최종 결과
+    
+    User->>Master: FMEA 생성 요청
+    Master->>FMEA: Phase 0~5 실행
+    FMEA->>FMEA: 8개 Sub-Agent 협업
+    FMEA->>Output: FMEA 문서 생성
+    
+    Output->>Eval: 프롬프트 평가 요청
+    Eval->>Eval: 5단계 평가 프로세스
+    Eval->>User: 평가 결과 및 개선 제안
+    
+    alt 평가 통과
+        User->>Output: 최종 승인
+    else 평가 실패
+        User->>Master: 재생성 요청
+        Master->>FMEA: 수정된 워크플로우 실행
+    end
+```
+
+---
+
+## 6. 사무 자동화의 미래 비전: Obsidian Design Origin 기반 업그레이드
+
+### 현재 상태
+
+- FMEA 자동화와 프롬프트 평가 엔진을 Claude Sub-Agent로 구현
+- Task tool 기반 Multi-Agent Workflow 구축
+- 코딩 에이전트 역설계 시스템 구조 적용
+
+### 미래 비전: 체계적인 워크플로우 자동화 시스템
+
+**Obsidian Design Origin의 구조를 참조한 사무 자동화 업그레이드 계획**
+
+#### 핵심 구조 요소
+
+1. **ID 기반 온톨로지 맵 문서 시스템**
+   - 모든 요소에 고유 ID 부여 (`page.*`, `comp.*`, `api.*`, `db.*`)
+   - 문서 간 관계 추적 및 의존성 관리
+   - 온톨로지 기반 영향 관계 분석
+
+2. **Phase 기반 체계적인 워크플로우**
+   - Phase 0-13까지의 단계별 프로세스 자동화
+   - 각 Phase별 전문가 Sub-Agent 역할 분담
+   - 의존성 기반 자동 실행 순서 관리
+
+3. **State 기반 정보 전달 시스템 (LangGraph/CrewAI 스타일)**
+   - 각 단계에서 핵심 정보만 추출하여 컨텍스트 길이 최적화
+   - 전문가 요약 시스템으로 도메인 지식 기반 핵심 정보 추출
+   - 세션 컨텍스트 관리로 휘발성 정보 효율적 관리
+
+4. **변경 관리 프로세스**
+   - 변경 영향 매트릭스 기반 자동 영향 분석
+   - 변경 전파 규칙에 따른 자동 문서 업데이트
+   - 설계 단계별 의존성 매트릭스 관리
+
+5. **Human-in-the-Loop 통합**
+   - 청사진 생성 전 방향 선택
+   - 평가 후 최종 확인
+   - 개발 완료 후 연속 개발 워크플로우
+
+#### Phase 0-13 워크플로우 다이어그램
+
+```mermaid
+flowchart TD
+    Start([프로젝트 시작]) --> Phase0[Phase 0: 역 엔지니어링]
+    Phase0 --> Phase1[Phase 1: 초기 분석]
+    Phase1 --> Phase2[Phase 2: 프로세스 개요]
+    Phase2 --> Phase3[Phase 3: 프로젝트 구조]
+    Phase3 --> Phase4[Phase 4: 데이터베이스 설계]
+    Phase4 --> Phase5[Phase 5: 통합 체크리스트]
+    Phase5 --> Phase6[Phase 6: 문서화 시스템]
+    Phase6 --> Phase7[Phase 7: 일일 추적]
+    Phase7 --> Phase8[Phase 8: 테스트 및 품질]
+    Phase8 --> Phase9[Phase 9: 온톨로지 영향 관계 분석]
+    Phase9 --> Phase10[Phase 10: 화면 설계서]
+    Phase10 --> Phase11[Phase 11: 온톨로지 영향 분석 확장]
+    Phase11 --> Phase12[Phase 12: 최종 확인]
+    Phase12 --> Decision{사용자 승인}
+    Decision -->|proceed| Phase13[Phase 13: 개발용 리팩토링]
+    Decision -->|modify/rerun| Phase12
+    Phase13 --> End([개발 준비 완료])
+    
+    style Start fill:#2a9d8f
+    style End fill:#2a9d8f
+    style Phase9 fill:#9b59b6
+    style Phase10 fill:#9b59b6
+    style Phase11 fill:#9b59b6
+```
+
+#### State 기반 정보 전달 시스템 구조
+
+```mermaid
+graph TB
+    A[Phase N 실행] --> B[전문가 요약 시스템]
+    B --> C[핵심 정보 추출]
+    C --> D[State 병합]
+    D --> E[Phase N+1 실행]
+    
+    F[세션 컨텍스트] --> D
+    G[이전 Phase 결과] --> D
+    
+    E --> H[최종 문서 생성]
+    
+    style B fill:#fff4e1
+    style D fill:#e1f5ff
+    style H fill:#e8f5e9
+```
+
+#### 변경 관리 프로세스 흐름도
+
+```mermaid
+graph LR
+    A[변경 요청] --> B[변경 영향 매트릭스 분석]
+    B --> C[영향받는 문서 식별]
+    C --> D[변경 전파 규칙 적용]
+    D --> E[자동 문서 업데이트]
+    E --> F[일관성 검증]
+    F --> G{검증 통과?}
+    G -->|Yes| H[변경 완료]
+    G -->|No| I[수동 검토]
+    I --> E
+    
+    style B fill:#fff4e1
+    style D fill:#e1f5ff
+    style H fill:#e8f5e9
+```
+
+#### 전문가 Sub-Agent 협업 구조
+
+```mermaid
+graph TB
+    A[Master Orchestrator] --> B[설계 전문가 Sub-Agent]
+    A --> C[개발 전문가 Sub-Agent]
+    A --> D[테스트 전문가 Sub-Agent]
+    A --> E[문서화 전문가 Sub-Agent]
+    
+    B --> F[Phase 2-4 실행]
+    C --> G[Phase 7-8 실행]
+    D --> H[Phase 8 실행]
+    E --> I[Phase 6 실행]
+    
+    F --> J[통합 결과]
+    G --> J
+    H --> J
+    I --> J
+    
+    J --> K[최종 산출물]
+    
+    style A fill:#e1f5ff
+    style J fill:#fff4e1
+    style K fill:#e8f5e9
+```
+
+#### 기술적 의의
+
+- **이전**: 단순 프롬프트 체인으로 작업 수행
+- **미래**: ID 기반 온톨로지 맵 + Phase 워크플로우 + State 기반 정보 전달의 통합 시스템
+- **주요 특징**:
+  - 설계부터 개발까지 전체 라이프사이클 자동화
+  - 문서 간 관계 추적 및 일관성 유지
+  - 변경 영향 분석 및 전파
+  - 전문가별 Sub-Agent 협업
+
+#### 적용 분야
+
+- **프로젝트 설계 자동화**: 신규 프로젝트 설계 및 기존 프로젝트 역설계
+- **문서 생성 자동화**: 설계 문서, API 문서, 데이터베이스 설계 자동 생성
+- **품질 평가 자동화**: 문서 품질 평가, 일관성 확인, 개발 준비도 평가
+- **개발 워크플로우 자동화**: 개발 방향 찾기, 단계별 설계 문서 생성, 체크리스트 자동 생성
+
+---
+
 ## 🔄 버전 진화
 
 ### obsidian_design_origin 버전별 발전
@@ -436,6 +696,202 @@ obsidian_design_origin/
 - [[02_Projects_Overview|프로젝트 개요]] (`page.portfolio.projects`) - 13개 프로젝트 상세
 - [[04_Academic_Publications|학술 논문]] (`page.portfolio.academic`) - 기술의 학술적 근거
 - [[00_Portfolio_Index|포트폴리오 인덱스]] (`page.portfolio.index`) - 전체 포트폴리오 개요
+
+---
+
+## 7. Platform All: 통합 플랫폼 생태계 (`section.architecture.platform_all`)
+
+### 7.1 Original_Development_Plan (Obsidian Design Origin)
+
+**전체 에이전트 시스템 구조**:
+
+- **코드 에이전트**: Development_Agent_Evaluation_Prompt로 실시간 코드 평가
+- **에이전트 중간 문서 확인**: Phase별 문서 자동 검증
+- **프롬프트 보완**: 전문가 요약 시스템
+- **State 기반 정보 전달**: LangGraph/CrewAI 스타일
+
+**Phase 0-13 워크플로우**:
+
+- Phase 0: 역 엔지니어링
+- Phase 1-8: 기본 설계 문서 생성
+- Phase 9: 온톨로지 영향 관계 분석
+- Phase 10: 화면 설계서
+- Phase 11: 온톨로지 영향 분석 확장
+- Phase 12: 최종 확인 (휴먼 루프)
+- Phase 13: 개발용 리팩토링
+
+**내부 구조의 촘촘함**:
+
+- **Workflow_Orchestrator**: 실행 순서 및 의존성 관리
+- **State_Management_System**: 정보 전달 최적화
+- **Session_Context_Manager**: 휘발성 정보 관리
+- **21개 development 프롬프트**: 개발 단계의 정교한 관리
+  - 개발 워크플로우: 사용자 요청을 개발 작업으로 변환, 코드 생성
+  - 개발 완료 후 휴먼 루프: 연속 개발 지원 (진행/수정/browser 디버깅/트러블 관리)
+  - 문서 업데이트 자동 체크: 큰 수정 시 자동으로 문서 업데이트 필요성 판단
+  - 개발 방향 찾기: 변경 영향 매트릭스 기반 개발 방향 결정
+  - 단계별 뒷받침 설계 문서 생성: 변경 전파 규칙 통합
+  - 단계별 체크리스트 생성: 검증 항목 및 완료 기준 설정
+  - 브라우저 디버깅: 브라우저 기반 디버깅 지원
+  - 트러블 관리: 변경 전파 규칙 통합
+  - 변경 리포트 생성: 자동 변경 리포트 생성
+
+- **변경 관리 프로세스**: 문서 일관성 자동 유지
+  - 변경 영향 매트릭스 기반 자동 영향 분석
+  - 변경 전파 규칙에 따른 자동 문서 업데이트
+  - 설계 단계별 의존성 매트릭스 관리
+
+**개발 타임라인**:
+
+- **2025년 10월~12월**: 핵심 개발 집중 (21개 development 프롬프트 구축)
+- **2025년 5월~7월**: 컨소들 모여서 연구 사업계획서 작성 및 아이디어 구체화
+- **2025년 8월~10월**: 배경 연구 및 테스트, 내용 보완
+
+### 7.2 factory_ontology_manager
+
+**시각적 팩토리 관리 시스템**:
+
+- shapez.io 게임에서 영감을 받은 드래그 앤 드롭 인터페이스
+- 계층적 구조 관리 (공장 > 작업장 > 생산라인 > 공정)
+- 마스터 데이터 통합 (자재, 센서, PLC)
+
+### 7.3 pipeline_system_complete
+
+**시계열 데이터 파이프라인**:
+
+- 8단계 파이프라인 구조
+- Supabase 기반 실시간 데이터 처리
+- 체계적인 문서화 (219개 Markdown)
+
+### 7.4 TAM_Hub
+
+**기술 자산 관리 허브**:
+
+- MCP 서버 통합 (32개 Python 파일)
+- AMS 엔진, progressing_engine 통합
+- Obsidian Design Origin 기반 문서화
+
+### 7.5 Evaluation_Framework
+
+**AI 에이전트 평가 프레임워크**:
+
+- 6가지 관점 평가 시스템
+- LangGraph 워크플로우 오케스트레이션
+- Docker 기반 배포
+
+### 7.6 all_platform_center
+
+**통합 플랫폼 센터**:
+
+- 모든 플랫폼의 중앙 관리
+- 통합 대시보드
+- 사용자 인증 및 권한 관리
+
+### 7.7 FMEA_Automation_Generation_Technology (Claude Sub-Agent)
+
+**코드 에이전트에서 영감을 받은 전체 공장/회사/사무 자동화의 백정보 핵심**:
+
+- **Multi-Agent Architecture**: 8개 독립 Sub-Agent 협업 (R&D Team 3개, Manufacturing Team 3개, QA Team 2개)
+- **역설계 시스템**: 코딩 에이전트의 역설계 시스템 구조를 FMEA 분석에 적용
+- **범용 도메인 지원**: 제조업, 사무업무, 서비스업 모두 지원
+- **Phase 0-5 워크플로우**: 컨텍스트 수집 → 범위 정의 → 심층 분석 → 리스크 평가 → 최적화 & 문서 생성 → 지속 개선
+- **Living Document**: 지속적 개선 추적 시스템
+- **AIAG & VDA FMEA 표준**: 국제 표준 기반 리스크 분석
+
+**Platform All 통합 플랫폼 생태계 구성 다이어그램**:
+
+```mermaid
+graph TB
+    subgraph "Platform All 통합 플랫폼 생태계"
+        direction TB
+        
+        subgraph "1. Original_Development_Plan"
+            ODP[Obsidian Design Origin<br/>전체 에이전트 시스템]
+            ODP --> |Phase 0-13 워크플로우| PhaseWorkflow[설계부터 개발까지<br/>전체 라이프사이클]
+            ODP --> |21개 development 프롬프트| DevPrompts[개발 단계 정교한 관리]
+            ODP --> |코드 에이전트| CodeAgent[개발 에이전트<br/>실시간 평가]
+            ODP --> |문서 확인| DocCheck[Phase별 문서<br/>자동 검증]
+            ODP --> |프롬프트 보완| PromptEnhance[전문가 요약 시스템]
+        end
+        
+        subgraph "2. Evaluation_Framework"
+            Eval[AI 에이전트 평가 프레임워크]
+            Eval --> |6가지 관점 평가| EvalPerspectives[업체 표준/AI 설계/<br/>제품/개발업체/팀/외부기관]
+            Eval --> |LangGraph| WorkflowOrch[워크플로우 오케스트레이션]
+        end
+        
+        subgraph "3. TAM_Hub"
+            TAM[기술 자산 관리 허브]
+            TAM --> |MCP 서버| MCPServers[32개 Python MCP 서버]
+            TAM --> |AMS 엔진| AMSEngine[AMS 엔진 통합]
+            TAM --> |progressing_engine| ProgressEngine[진행 엔진 통합]
+        end
+        
+        subgraph "4. factory_ontology_manager"
+            Factory[팩토리 온톨로지 관리]
+            Factory --> |계층적 구조| Hierarchy[공장>작업장><br/>생산라인>공정]
+            Factory --> |드래그 앤 드롭| VisualDesign[시각적 공정 설계]
+        end
+        
+        subgraph "5. pipeline_system_complete"
+            Pipeline[시계열 데이터 파이프라인]
+            Pipeline --> |8단계 파이프라인| DataFlow[데이터 수집부터<br/>분석까지]
+        end
+        
+        subgraph "6. all_platform_center"
+            Center[통합 플랫폼 센터]
+            Center --> |통합 대시보드| Dashboard[모든 플랫폼<br/>중앙 관리]
+            Center --> |인증/권한| Auth[사용자 인증 및<br/>권한 관리]
+        end
+        
+        subgraph "7. FMEA_Automation_Generation_Technology"
+            FMEA[FMEA 자동화 생성 시스템<br/>코드 에이전트에서 영감]
+            FMEA --> |8개 Sub-Agent| MultiAgent[R&D/Manufacturing/QA<br/>팀별 협업]
+            FMEA --> |Phase 0-5 워크플로우| FMEAWorkflow[컨텍스트 수집부터<br/>지속 개선까지]
+            FMEA --> |역설계 시스템| ReverseEng[코딩 에이전트<br/>역설계 구조]
+            FMEA --> |범용 도메인| UniversalDomain[제조업/사무업무/<br/>서비스업 지원]
+        end
+    end
+    
+    ODP -.->|설계 문서 생성| Eval
+    ODP -.->|평가 기준 제공| Eval
+    Eval -.->|평가 결과| TAM
+    TAM -.->|기술 자산 관리| Factory
+    Factory -.->|온톨로지 데이터| Pipeline
+    Pipeline -.->|파이프라인 결과| Center
+    Center -.->|통합 관리| ODP
+    FMEA -.->|백정보 핵심| ODP
+    FMEA -.->|리스크 분석 결과| Factory
+    FMEA -.->|FMEA 데이터| Pipeline
+    ODP -.->|코드 에이전트 구조| FMEA
+    
+    style ODP fill:#e74c3c,color:#fff
+    style Eval fill:#3498db,color:#fff
+    style TAM fill:#9b59b6,color:#fff
+    style Factory fill:#e67e22,color:#fff
+    style Pipeline fill:#1abc9c,color:#fff
+    style Center fill:#f39c12,color:#fff
+    style FMEA fill:#16a085,color:#fff
+```
+
+**생태계 연동 목적**:
+
+1. **Original_Development_Plan → Evaluation_Framework**: 설계 문서를 평가 프레임워크에 제공하여 AI 에이전트 평가 기준으로 활용
+2. **Evaluation_Framework → TAM_Hub**: 평가 결과를 기술 자산으로 관리하여 지속적 개선 추적
+3. **TAM_Hub → factory_ontology_manager**: 기술 자산을 팩토리 온톨로지에 통합하여 제조 공정 설계에 활용
+4. **factory_ontology_manager → pipeline_system_complete**: 팩토리 온톨로지 데이터를 시계열 파이프라인으로 전달하여 실시간 분석
+5. **pipeline_system_complete → all_platform_center**: 파이프라인 결과를 통합 플랫폼 센터로 집중하여 대시보드 표시
+6. **all_platform_center → Original_Development_Plan**: 통합 관리 결과를 Original_Development_Plan에 피드백하여 지속적 개선
+7. **Original_Development_Plan → FMEA_Automation_Generation_Technology**: 코드 에이전트 구조를 FMEA 시스템에 제공하여 역설계 시스템 구현
+8. **FMEA_Automation_Generation_Technology → factory_ontology_manager**: FMEA 리스크 분석 결과를 팩토리 온톨로지에 통합하여 제조 공정 리스크 관리
+9. **FMEA_Automation_Generation_Technology → pipeline_system_complete**: FMEA 데이터를 시계열 파이프라인으로 전달하여 리스크 추적 및 분석
+10. **FMEA_Automation_Generation_Technology → Original_Development_Plan**: 전체 공장/회사/사무 자동화의 백정보 핵심으로 활용
+
+**생태계의 핵심 가치**:
+
+- **자동화된 워크플로우**: 설계부터 평가, 관리, 분석까지 전체 프로세스 자동화
+- **데이터 연동**: 각 플랫폼 간 데이터 흐름을 통한 통합 분석
+- **지속적 개선**: 평가 결과를 기술 자산으로 관리하고 설계에 반영하는 순환 구조
 
 ---
 
