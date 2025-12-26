@@ -2,12 +2,329 @@
 
 **문서 ID**: `page.portfolio.architecture`
 
-> [!NOTE] 문서 목적
-> 본 문서는 단순한 단일 시스템이 아닌, **4대 전문 영역(AI, 플랫폼, 센서, 산업안전/에너지)**에서 구축된 다양한 솔루션들의 통합 아키텍처와 기술 스택을 상세히 설명합니다.
+> [!NOTE] 옵시디언 네비게이션 허브
+> 본 문서는 **옵시디언에서 네비게이션 역할을 하는 위키백과 첫 페이지**처럼 설계되었습니다. 포트폴리오의 전체 구조를 한눈에 파악하고, 각 문서로 빠르게 이동할 수 있도록 구성되어 있습니다.
+
+---
+
+## 👤 사용자 소개 및 문서 개요
+
+### 작성자 정보
+
+**이름**: 권순룡  
+**소속**: 한솔코에버 연구소 대리 (2020.09 ~ 재직중)  
+**총 경력**: 5년 (2020~2025)
+
+> [!QUOTE] 핵심 철학
+> **"모델보다 데이터, 데이터보다 정보, 지식구조를 정리하는 현장친화적 연구원"**
+
+### 주요 성과
+
+- **GS 인증 2개**: CoCTK, AMS(PDS) 소프트웨어 품질 인증 1등급
+- **20개 이상 프로젝트**: 4대 전문 영역에서 다양한 솔루션 구축
+- **9편 논문**: 학술 연구 및 논문 발표
+- **특허 출원/등록**: 피쉬본 관리 시스템 등
+
+### 문서 목적
+
+본 문서는 단순한 단일 시스템이 아닌, **4대 전문 영역(AI, 플랫폼, 센서, 산업안전/에너지)**에서 구축된 다양한 솔루션들의 통합 아키텍처와 기술 스택을 상세히 설명합니다.
+
+**대상 독자**:
+- 기술자: 시스템 아키텍처와 기술 스택을 이해하고자 하는 개발자
+- PM/기획자: 프로젝트 구조와 비즈니스 가치를 파악하고자 하는 기획자
+- 연구자: 기술의 학술적 근거와 실증 사례를 확인하고자 하는 연구자
+- 처음 보는 사람: 포트폴리오의 전체 구조를 빠르게 파악하고자 하는 독자
+
+**관련 문서**: [[00_Personal_Profile|개인 프로필]] (`page.portfolio.personal_profile`) - 상세한 개인 정보 및 기술 철학
+
+---
+
+## 📑 목차 (Table of Contents)
+
+1. [👤 사용자 소개 및 문서 개요](#사용자-소개-및-문서-개요) - 권순룡 소개 및 핵심 철학
+2. [📂 포트폴리오 문서 구조](#포트폴리오-문서-구조) - 폴더 구조 및 문서 간 관계
+3. [🧭 옵시디언 빠른 네비게이션](#옵시디언-빠른-네비게이션) - 카테고리별 빠른 링크
+4. [🏗️ 솔루션 도메인별 아키텍처](#솔루션-도메인별-아키텍처)
+   - 1. AI & Analytics: AMS/CoCTK 엔진
+   - 2. Digital Transformation Platform: DPS
+   - 3. Energy Optimization
+   - 4. Smart Sensors & IoT
+5. [🎯 AMS 프로젝트 핵심 성과](#ams-프로젝트-핵심-성과)
+6. [🏗️ AMS 시스템 아키텍처](#ams-시스템-아키텍처)
+7. [📊 데이터 파이프라인](#데이터-파이프라인)
+8. [📋 데이터베이스 설계](#데이터베이스-설계)
+9. [🗺️ obsidian_design_origin 시스템](#obsidian_design_origin-시스템)
+10. [🤖 AI Workflow & Automation](#ai-workflow--automation)
+11. [🚀 사무 자동화의 미래 비전](#사무-자동화의-미래-비전)
+12. [🌐 Platform All: 통합 플랫폼 생태계](#platform-all-통합-플랫폼-생태계)
+
+> [!TIP] 옵시디언 네비게이션
+> 옵시디언에서 자동으로 앵커 링크가 생성되므로, 목차의 링크를 클릭하면 해당 섹션으로 바로 이동할 수 있습니다.
+
+---
+
+## 📂 포트폴리오 문서 구조
+
+### 폴더 구조 개요
+
+포트폴리오 문서는 `portfolio/portfolio_docs/` 폴더에 체계적으로 구성되어 있습니다. 각 폴더와 파일의 역할은 다음과 같습니다:
+
+**폴더 구조 머메이드 그래프**:
+
+```mermaid
+graph TB
+    subgraph "portfolio/portfolio_docs/"
+        direction TB
+        
+        subgraph "핵심 문서 (00_*.md)"
+            Index[00_Portfolio_Index.md<br/>포트폴리오 인덱스]
+            Profile[00_Personal_Profile.md<br/>개인 프로필]
+            IDGuide[00_ID_System_Guide.md<br/>ID 시스템 가이드]
+            AIGuide[00_AI_Workflow_Guide.md<br/>AI 워크플로우 가이드]
+            PMGuide[00_PM_Roles_Guide.md<br/>PM 역할 가이드]
+            TeamGuide[00_Team_Roles_Guide.md<br/>팀 역할 가이드]
+            RelMap[00_Relationship_Map.md<br/>관계 맵]
+        end
+        
+        subgraph "프로젝트 문서"
+            Projects[02_Projects_Overview.md<br/>프로젝트 개요]
+            Architecture[Architecture_Overview.md<br/>아키텍처 개요<br/>현재 문서]
+            Academic[04_Academic_Publications.md<br/>학술 논문]
+            Testing[Testing_Context.md<br/>테스트 컨텍스트]
+        end
+        
+        subgraph "Executive_Summary/"
+            Exec00[00_Overview_For_Non_Technical.md<br/>비전문가용 개요]
+            Exec01[01_Key_Achievements.md<br/>핵심 성과]
+            Exec02[02_Business_Value.md<br/>비즈니스 가치]
+            Exec03[03_Technology_Simplified.md<br/>기술 간소화]
+            Exec04[04_Visual_Portfolio.md<br/>시각적 포트폴리오]
+        end
+        
+        subgraph "Phase_1_Foundation/"
+            Step01[Step_01_Repetitive_Work.md<br/>반복 업무 식별]
+            Step02[Step_02_Expertise_Targeting.md<br/>전문성 타겟팅]
+            Step03[Step_03_Micro_Starts.md<br/>초소형 시작]
+            Step04[Step_04_Modularization.md<br/>모듈화]
+            Step05[Step_05_IO_Optimization.md<br/>I/O 최적화]
+        end
+        
+        subgraph "Phase_2_Assets/"
+            Step06[Step_06_Daily_Log.md<br/>데일리 로그]
+            Step07[Step_07_Visuals.md<br/>시각 자산]
+        end
+        
+        subgraph "Phase_3_Expansion/"
+            Step08[Step_08_Feedback_Loop.md<br/>피드백 루프]
+            Step09[Step_09_Continuous_Update.md<br/>지속 업데이트]
+        end
+        
+        subgraph "templates/"
+            Templates[템플릿 문서들<br/>8개 파일]
+        end
+        
+        subgraph "assets/"
+            Assets[자산 파일들<br/>PDF, 이미지 등]
+        end
+    end
+    
+    Architecture -.->|참조| Index
+    Architecture -.->|참조| Profile
+    Architecture -.->|참조| Projects
+    Architecture -.->|참조| Academic
+    Architecture -.->|참조| Testing
+    Architecture -.->|참조| Exec01
+    Architecture -.->|참조| Step02
+    
+    style Architecture fill:#e74c3c,color:#fff
+    style Index fill:#3498db,color:#fff
+    style Profile fill:#9b59b6,color:#fff
+    style Projects fill:#e67e22,color:#fff
+```
+
+### 문서 간 연결 관계
+
+**문서 간 연결 관계 머메이드 그래프**:
+
+```mermaid
+graph LR
+    Start[Architecture_Overview.md<br/>현재 문서<br/>네비게이션 허브]
+    
+    Profile[00_Personal_Profile.md<br/>개인 프로필]
+    Index[00_Portfolio_Index.md<br/>포트폴리오 인덱스]
+    Projects[02_Projects_Overview.md<br/>프로젝트 개요]
+    Academic[04_Academic_Publications.md<br/>학술 논문]
+    Testing[Testing_Context.md<br/>테스트 컨텍스트]
+    Exec00[Executive_Summary/<br/>00_Overview_For_Non_Technical.md]
+    Exec01[Executive_Summary/<br/>01_Key_Achievements.md]
+    Exec02[Executive_Summary/<br/>02_Business_Value.md]
+    Step02[Phase_1_Foundation/<br/>Step_02_Expertise_Targeting.md]
+    IDGuide[00_ID_System_Guide.md<br/>ID 시스템 가이드]
+    AIGuide[00_AI_Workflow_Guide.md<br/>AI 워크플로우 가이드]
+    RelMap[00_Relationship_Map.md<br/>관계 맵]
+    
+    Start -->|개인 정보| Profile
+    Start -->|전체 개요| Index
+    Start -->|프로젝트 상세| Projects
+    Start -->|학술 성과| Academic
+    Start -->|실증 사례| Testing
+    Start -->|비전문가용| Exec00
+    Start -->|핵심 성과| Exec01
+    Start -->|비즈니스 가치| Exec02
+    Start -->|실행 가이드| Step02
+    Start -->|ID 시스템| IDGuide
+    Start -->|AI 워크플로우| AIGuide
+    Start -->|관계 맵| RelMap
+    
+    style Start fill:#e74c3c,color:#fff
+    style Profile fill:#9b59b6,color:#fff
+    style Projects fill:#e67e22,color:#fff
+    style Exec01 fill:#3498db,color:#fff
+```
+
+### 각 폴더/파일의 역할
+
+#### 핵심 문서 (00_*.md)
+
+- **[[00_Portfolio_Index|00_Portfolio_Index.md]]**: 포트폴리오의 전체 인덱스 및 9단계 실행 가이드
+- **[[00_Personal_Profile|00_Personal_Profile.md]]**: 개인 프로필, 학력, 경력, 기술 철학
+- **[[00_ID_System_Guide|00_ID_System_Guide.md]]**: ID 시스템 명명 규칙 및 사용 방법
+- **[[00_AI_Workflow_Guide|00_AI_Workflow_Guide.md]]**: AI 워크플로우 및 문서 참조 전략
+- **[[00_PM_Roles_Guide|00_PM_Roles_Guide.md]]**: PM 역할 및 책임 가이드
+- **[[00_Team_Roles_Guide|00_Team_Roles_Guide.md]]**: 팀 역할 및 협업 가이드
+- **[[00_Relationship_Map|00_Relationship_Map.md]]**: 프로젝트 간 관계 시각화
+
+#### 프로젝트 문서
+
+- **[[02_Projects_Overview|02_Projects_Overview.md]]**: 20개 이상 프로젝트 상세 요약
+- **Architecture_Overview.md** (현재 문서): 통합 시스템 아키텍처 및 기술 스택
+- **[[04_Academic_Publications|04_Academic_Publications.md]]**: 학술 연구 및 논문 성과
+- **[[Testing_Context|Testing_Context.md]]**: 실증 및 검증 사례
+
+#### Executive_Summary/ (요약 문서)
+
+- **[[Executive_Summary/00_Overview_For_Non_Technical|00_Overview_For_Non_Technical.md]]**: 비전문가를 위한 개요
+- **[[Executive_Summary/01_Key_Achievements|01_Key_Achievements.md]]**: 핵심 성과 요약
+- **[[Executive_Summary/02_Business_Value|02_Business_Value.md]]**: 비즈니스 가치 분석
+- **[[Executive_Summary/03_Technology_Simplified|03_Technology_Simplified.md]]**: 기술 간소화 설명
+- **[[Executive_Summary/04_Visual_Portfolio|04_Visual_Portfolio.md]]**: 시각적 포트폴리오
+
+#### Phase_1_Foundation/ (Phase 1 문서)
+
+- **[[Phase_1_Foundation/Step_01_Repetitive_Work|Step_01_Repetitive_Work.md]]**: 반복 업무 식별
+- **[[Phase_1_Foundation/Step_02_Expertise_Targeting|Step_02_Expertise_Targeting.md]]**: 전문성 타겟팅
+- **[[Phase_1_Foundation/Step_03_Micro_Starts|Step_03_Micro_Starts.md]]**: 초소형 시작
+- **[[Phase_1_Foundation/Step_04_Modularization|Step_04_Modularization.md]]**: 모듈화 전략
+- **[[Phase_1_Foundation/Step_05_IO_Optimization|Step_05_IO_Optimization.md]]**: I/O 최적화
+
+#### Phase_2_Assets/ (Phase 2 문서)
+
+- **[[Phase_2_Assets/Step_06_Daily_Log|Step_06_Daily_Log.md]]**: 데일리 로그 기록
+- **[[Phase_2_Assets/Step_07_Visuals|Step_07_Visuals.md]]**: 시각적 자산 생성
+
+#### Phase_3_Expansion/ (Phase 3 문서)
+
+- **[[Phase_3_Expansion/Step_08_Feedback_Loop|Step_08_Feedback_Loop.md]]**: 피드백 루프
+- **[[Phase_3_Expansion/Step_09_Continuous_Update|Step_09_Continuous_Update.md]]**: 지속 업데이트
+
+#### templates/ (템플릿)
+
+- 8개의 문서 템플릿 (프로젝트 요약, 평가, 메트릭, 타임라인 등)
+
+#### assets/ (자산)
+
+- PDF 문서, 이미지 등 자산 파일
+
+### ID 시스템
+
+모든 문서는 고유 ID를 가지며, `type.module.name` 형식으로 명명됩니다:
+- `page.portfolio.*`: 포트폴리오 문서
+- `phase.foundation.*`: Phase 1 단계
+- `project.*`: 프로젝트
+
+자세한 내용은 [[00_ID_System_Guide|ID 시스템 가이드]]를 참조하세요.
+
+---
+
+## 🧭 옵시디언 빠른 네비게이션
+
+### 📋 시작하기
+
+- [[00_Portfolio_Index|포트폴리오 인덱스]] (`page.portfolio.index`) - 전체 포트폴리오 개요
+- [[00_Personal_Profile|개인 프로필]] (`page.portfolio.personal_profile`) - 권순룡 소개 및 기술 철학
+
+### 📊 프로젝트 정보
+
+- [[02_Projects_Overview|프로젝트 개요]] (`page.portfolio.projects`) - 20개 이상 프로젝트 상세
+- [[04_Academic_Publications|학술 논문]] (`page.portfolio.academic`) - 9편 논문 목록
+- [[Testing_Context|테스트 컨텍스트]] (`page.portfolio.testing`) - 실증 사례
+
+### 📈 요약 문서
+
+- [[Executive_Summary/00_Overview_For_Non_Technical|비전문가용 개요]] - 비전문가를 위한 간단한 설명
+- [[Executive_Summary/01_Key_Achievements|핵심 성과]] - 주요 성과 요약
+- [[Executive_Summary/02_Business_Value|비즈니스 가치]] - 비즈니스 가치 분석
+- [[Executive_Summary/03_Technology_Simplified|기술 간소화]] - 기술을 쉽게 설명
+- [[Executive_Summary/04_Visual_Portfolio|시각적 포트폴리오]] - 시각화된 포트폴리오
+
+### 🎯 실행 가이드
+
+#### Phase 1: Foundation (작은 성공)
+- [[Phase_1_Foundation/Step_01_Repetitive_Work|Step 1: 반복 업무 식별]]
+- [[Phase_1_Foundation/Step_02_Expertise_Targeting|Step 2: 전문성 타겟팅]]
+- [[Phase_1_Foundation/Step_03_Micro_Starts|Step 3: 초소형 시작]]
+- [[Phase_1_Foundation/Step_04_Modularization|Step 4: 모듈화]]
+- [[Phase_1_Foundation/Step_05_IO_Optimization|Step 5: I/O 최적화]]
+
+#### Phase 2: Assets (지식 자산화)
+- [[Phase_2_Assets/Step_06_Daily_Log|Step 6: 데일리 로그]]
+- [[Phase_2_Assets/Step_07_Visuals|Step 7: 시각 자산]]
+
+#### Phase 3: Expansion (확장)
+- [[Phase_3_Expansion/Step_08_Feedback_Loop|Step 8: 피드백 루프]]
+- [[Phase_3_Expansion/Step_09_Continuous_Update|Step 9: 지속 업데이트]]
+
+### 📚 가이드 문서
+
+- [[00_ID_System_Guide|ID 시스템 가이드]] (`guide.id.system`) - ID 명명 규칙 및 사용 방법
+- [[00_AI_Workflow_Guide|AI 워크플로우 가이드]] (`guide.ai.workflow`) - AI 워크플로우 및 문서 참조 전략
+- [[00_Relationship_Map|관계 맵]] (`page.portfolio.relationship_map`) - 프로젝트 간 관계 시각화
+- [[00_PM_Roles_Guide|PM 역할 가이드]] - PM 역할 및 책임
+- [[00_Team_Roles_Guide|팀 역할 가이드]] - 팀 역할 및 협업
+
+### 📖 문서 읽기 순서 가이드
+
+#### 처음 보는 사람
+1. [[00_Personal_Profile|개인 프로필]] - 작성자 소개
+2. [[00_Portfolio_Index|포트폴리오 인덱스]] - 전체 개요
+3. [[Executive_Summary/00_Overview_For_Non_Technical|비전문가용 개요]] - 간단한 설명
+
+#### 기술자
+1. **Architecture_Overview.md** (현재 문서) - 시스템 아키텍처
+2. [[02_Projects_Overview|프로젝트 개요]] - 프로젝트 상세
+3. [[Testing_Context|테스트 컨텍스트]] - 실증 사례
+
+#### PM/기획자
+1. [[Executive_Summary/02_Business_Value|비즈니스 가치]] - 비즈니스 가치 분석
+2. [[Executive_Summary/01_Key_Achievements|핵심 성과]] - 주요 성과
+3. [[02_Projects_Overview|프로젝트 개요]] - 프로젝트 상세
+
+#### 연구자
+1. [[04_Academic_Publications|학술 논문]] - 논문 목록
+2. [[Testing_Context|테스트 컨텍스트]] - 실증 사례
+3. **Architecture_Overview.md** (현재 문서) - 기술 아키텍처
 
 ---
 
 ## 🏗️ 솔루션 도메인별 아키텍처
+
+> [!NOTE] 섹션 개요
+> 본 섹션은 4대 전문 영역(AI, 플랫폼, 센서, 산업안전/에너지)에서 구축된 다양한 솔루션들의 아키텍처를 설명합니다.
+> 
+> **관련 문서**:
+> - [[02_Projects_Overview|프로젝트 개요]] - 프로젝트 상세 정보
+> - [[Executive_Summary/01_Key_Achievements|핵심 성과]] - 주요 성과 요약
+> - [[Testing_Context|테스트 컨텍스트]] - 실증 사례
 
 ### 1. AI & Analytics: AMS/CoCTK 엔진
 
@@ -64,6 +381,14 @@ graph TD
 ---
 
 ## 🎯 AMS 프로젝트 핵심 성과
+
+> [!NOTE] 섹션 개요
+> 본 섹션은 AMS (Anomaly Management System) 프로젝트의 핵심 성과를 상세히 설명합니다.
+> 
+> **관련 문서**:
+> - [[02_Projects_Overview|프로젝트 개요]] - AMS 프로젝트 상세 정보
+> - [[Executive_Summary/01_Key_Achievements|핵심 성과]] - 주요 성과 요약
+> - [[Testing_Context|테스트 컨텍스트]] - 실증 사례 (세아특수강, 포미아)
 
 ### 프로젝트 개요
 
@@ -134,6 +459,13 @@ AI_docker_en/
 ---
 
 ## 🏗️ AMS 시스템 아키텍처
+
+> [!NOTE] 섹션 개요
+> 본 섹션은 AMS 시스템의 전체 아키텍처, 기술 스택, 프론트엔드/백엔드 구조를 설명합니다.
+> 
+> **관련 문서**:
+> - [[02_Projects_Overview|프로젝트 개요]] - AMS 프로젝트 상세 정보
+> - [[Phase_1_Foundation/Step_02_Expertise_Targeting|전문성 타겟팅]] - AMS 개발 과정
 
 ### 전체 시스템 구조
 
@@ -213,6 +545,13 @@ graph TB
 ---
 
 ## 📊 데이터 파이프라인
+
+> [!NOTE] 섹션 개요
+> 본 섹션은 AMS의 데이터 파이프라인 구조와 각 단계별 처리 과정을 설명합니다.
+> 
+> **관련 문서**:
+> - [[Phase_1_Foundation/Step_05_IO_Optimization|I/O 최적화]] - 파일 기반 파이프라인
+> - [[02_Projects_Overview|프로젝트 개요]] - 파이프라인 관련 프로젝트
 
 ### AMS 전체 파이프라인
 
@@ -307,6 +646,13 @@ sequenceDiagram
 
 ## 📋 데이터베이스 설계
 
+> [!NOTE] 섹션 개요
+> 본 섹션은 AMS 시스템의 데이터베이스 설계, 주요 테이블 구조, Neo4j 그래프 구조를 설명합니다.
+> 
+> **관련 문서**:
+> - [[Phase_1_Foundation/Step_04_Modularization|모듈화 전략]] - 모듈화된 데이터베이스 구조
+> - [[02_Projects_Overview|프로젝트 개요]] - 데이터베이스 관련 프로젝트
+
 ### 주요 테이블
 
 #### AMS3000M - AMS 설정 테이블
@@ -355,6 +701,14 @@ CREATE TABLE AMS4000M (
 ---
 
 ## 🛠️ obsidian_design_origin 시스템
+
+> [!NOTE] 섹션 개요
+> 본 섹션은 설계 문서 기반 개발 시스템인 obsidian_design_origin의 구조와 주요 Architecture 문서를 설명합니다.
+> 
+> **관련 문서**:
+> - [[Phase_1_Foundation/Step_01_Repetitive_Work|반복적 업무 식별]] - 문서 구조 중심 개발 시스템
+> - [[Phase_1_Foundation/Step_04_Modularization|모듈화 전략]] - ID 시스템 및 프롬프트 라이브러리
+> - [[Phase_1_Foundation/Step_05_IO_Optimization|I/O 최적화]] - 파일 기반 파이프라인
 
 ### 개요
 
@@ -414,7 +768,14 @@ obsidian_design_origin/
 
 ---
 
-## 5. AI Workflow & Automation: Claude Sub-Agent Systems
+## 🤖 AI Workflow & Automation: Claude Sub-Agent Systems
+
+> [!NOTE] 섹션 개요
+> 본 섹션은 Claude Sub-Agent 기반 AI 워크플로우 자동화 시스템(FMEA 자동화, 프롬프트 평가 엔진)을 설명합니다.
+> 
+> **관련 문서**:
+> - [[Phase_1_Foundation/Step_02_Expertise_Targeting|전문성 타겟팅]] - FMEA 자동화 시스템 구축 과정
+> - [[00_AI_Workflow_Guide|AI 워크플로우 가이드]] - AI 워크플로우 전략
 
 ### FMEA 자동화 생성 시스템 (Claude Sub-Agent)
 
@@ -523,7 +884,15 @@ sequenceDiagram
 
 ---
 
-## 6. 사무 자동화의 미래 비전: Obsidian Design Origin 기반 업그레이드
+## 🚀 사무 자동화의 미래 비전: Obsidian Design Origin 기반 업그레이드
+
+> [!NOTE] 섹션 개요
+> 본 섹션은 Obsidian Design Origin 구조를 참조한 사무 자동화 업그레이드 계획과 미래 비전을 설명합니다.
+> 
+> **관련 문서**:
+> - [[Phase_1_Foundation/Step_01_Repetitive_Work|반복적 업무 식별]] - 문서 구조 중심 개발 시스템
+> - [[Phase_1_Foundation/Step_04_Modularization|모듈화 전략]] - ID 시스템 및 프롬프트 라이브러리
+> - [[00_AI_Workflow_Guide|AI 워크플로우 가이드]] - AI 워크플로우 전략
 
 ### 현재 상태
 
@@ -689,17 +1058,34 @@ graph TB
 
 ## 🔗 관련 문서
 
+### 핵심 문서
+- [[00_Portfolio_Index|포트폴리오 인덱스]] (`page.portfolio.index`) - 전체 포트폴리오 개요
+- [[00_Personal_Profile|개인 프로필]] (`page.portfolio.personal_profile`) - 개인 정보 및 기술 철학
+- [[02_Projects_Overview|프로젝트 개요]] (`page.portfolio.projects`) - 20개 이상 프로젝트 상세
+- [[04_Academic_Publications|학술 논문]] (`page.portfolio.academic`) - 기술의 학술적 근거
+- [[Testing_Context|테스트 컨텍스트]] (`page.portfolio.testing`) - 테스트 및 시연 사례
+
+### Phase 문서
 - [[Phase_1_Foundation/Step_01_Repetitive_Work|Step 1: 반복적 업무 식별]] (`phase.foundation.step01`) - 문서 구조 중심 개발 시스템
+- [[Phase_1_Foundation/Step_02_Expertise_Targeting|Step 2: 전문성 타겟팅]] (`phase.foundation.step02`) - 전문성 타겟팅 및 시스템 구축
 - [[Phase_1_Foundation/Step_04_Modularization|Step 4: 모듈화 전략]] (`phase.foundation.step04`) - ID 시스템 및 프롬프트 라이브러리
 - [[Phase_1_Foundation/Step_05_IO_Optimization|Step 5: I/O 최적화]] (`phase.foundation.step05`) - 파일 기반 파이프라인
-- [[Testing_Context|테스트 컨텍스트]] (`page.portfolio.testing`) - 테스트 및 시연 사례
-- [[02_Projects_Overview|프로젝트 개요]] (`page.portfolio.projects`) - 13개 프로젝트 상세
-- [[04_Academic_Publications|학술 논문]] (`page.portfolio.academic`) - 기술의 학술적 근거
-- [[00_Portfolio_Index|포트폴리오 인덱스]] (`page.portfolio.index`) - 전체 포트폴리오 개요
+
+### 가이드 문서
+- [[00_ID_System_Guide|ID 시스템 가이드]] (`guide.id.system`) - ID 명명 규칙 및 사용 방법
+- [[00_AI_Workflow_Guide|AI 워크플로우 가이드]] (`guide.ai.workflow`) - AI 워크플로우 및 문서 참조 전략
+- [[00_Relationship_Map|관계 맵]] (`page.portfolio.relationship_map`) - 프로젝트 간 관계 시각화
 
 ---
 
-## 7. Platform All: 통합 플랫폼 생태계 (`section.architecture.platform_all`)
+## 🌐 Platform All: 통합 플랫폼 생태계 (`section.architecture.platform_all`)
+
+> [!NOTE] 섹션 개요
+> 본 섹션은 7개 통합 플랫폼 프로젝트(Original_Development_Plan, factory_ontology_manager, pipeline_system_complete, TAM_Hub, Evaluation_Framework, all_platform_center, FMEA_Automation_Generation_Technology)의 생태계 구성을 설명합니다.
+> 
+> **관련 문서**:
+> - [[02_Projects_Overview|프로젝트 개요]] - Platform All 프로젝트 상세 정보
+> - [[Phase_1_Foundation/Step_02_Expertise_Targeting|전문성 타겟팅]] - Platform All 구축 과정
 
 ### 7.1 Original_Development_Plan (Obsidian Design Origin)
 
