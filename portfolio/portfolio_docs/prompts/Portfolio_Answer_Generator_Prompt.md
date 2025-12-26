@@ -135,22 +135,20 @@ relations:
 graph TD
     CheckRole{질문자 직군 확인}
     CheckRole -->|author| AuthorPrompt[Answer_For_Author_Prompt]
-    CheckRole -->|evaluator_developer| DevPrompt[Answer_For_Developer_Prompt]
+    CheckRole -->|evaluator_developer| ContinuousConv[Continuous_Conversation_Entry_Prompt<br/>연속 대화 시스템]
     CheckRole -->|evaluator_business| BusinessPrompt[Answer_For_Business_Prompt]
     CheckRole -->|evaluator_pm| PMPrompt[Answer_For_PM_Prompt]
     CheckRole -->|evaluator_researcher| ResearcherPrompt[Answer_For_Researcher_Prompt]
     CheckRole -->|evaluator_other| OtherPrompt[Answer_For_Other_Prompt]
     CheckRole -->|general_public| GeneralPrompt[Answer_For_General_Prompt]
-    CheckRole -->|evaluator_*| ContinuousConv[Continuous_Conversation_Entry_Prompt<br/>연속 대화 시스템]
     
     AuthorPrompt --> FinalAnswer[최종 답변 생성]
-    DevPrompt --> ContinuousConv
+    ContinuousConv --> FinalAnswer
     BusinessPrompt --> FinalAnswer
     PMPrompt --> FinalAnswer
     ResearcherPrompt --> FinalAnswer
     OtherPrompt --> FinalAnswer
     GeneralPrompt --> FinalAnswer
-    ContinuousConv --> FinalAnswer
 ```
 
 **라우팅 규칙**:
