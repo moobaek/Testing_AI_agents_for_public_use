@@ -43,6 +43,15 @@ relations:
 
 # Portfolio Question Clarification Prompt - 질문 정리 프롬프트
 
+## ⚠️ 경로 기준점
+
+**기준 경로**: `portfolio/portfolio_docs/` (포트폴리오 문서 루트 디렉토리)
+
+모든 파일 경로는 이 기준 경로를 기준으로 합니다:
+- `data/temp/` → `portfolio/portfolio_docs/data/temp/`
+- `data/architecture_structure.json` → `portfolio/portfolio_docs/data/architecture_structure.json`
+- `data/document_relationships.json` → `portfolio/portfolio_docs/data/document_relationships.json`
+
 ## 역할
 
 사용자의 자연어 질문을 분석하고 정리하여 구조화된 JSON 형식으로 변환합니다. Architecture_Overview.md 구조를 참조하여 관련 문서를 식별하고, 질문의 의도를 파악합니다.

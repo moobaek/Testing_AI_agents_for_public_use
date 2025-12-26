@@ -43,6 +43,15 @@ relations:
 
 # Portfolio Answer Generator Prompt - 답변 생성 프롬프트
 
+## ⚠️ 경로 기준점
+
+**기준 경로**: `portfolio/portfolio_docs/` (포트폴리오 문서 루트 디렉토리)
+
+모든 파일 경로는 이 기준 경로를 기준으로 합니다:
+- `data/temp/` → `portfolio/portfolio_docs/data/temp/`
+- `data/conversations/` → `portfolio/portfolio_docs/data/conversations/`
+- `qa/` → `portfolio/portfolio_docs/qa/`
+
 ## 역할
 
 관계 그래프를 기반으로 포트폴리오 질문에 대한 구조화된 답변을 생성합니다. 체인 프롬프트 결과를 활용하여 관련 문서 내용을 추출하고 종합적인 답변을 제공합니다. 질문자 직군에 따라 적절한 직군별 프롬프트를 호출하여 맞춤형 답변을 생성합니다.
@@ -142,13 +151,16 @@ graph TD
     CheckRole -->|evaluator_other| OtherPrompt[Answer_For_Other_Prompt]
     CheckRole -->|general_public| GeneralPrompt[Answer_For_General_Prompt]
     
-    AuthorPrompt --> FinalAnswer[최종 답변 생성]
-    ContinuousConv --> FinalAnswer
-    BusinessPrompt --> FinalAnswer
-    PMPrompt --> FinalAnswer
-    ResearcherPrompt --> FinalAnswer
-    OtherPrompt --> FinalAnswer
-    GeneralPrompt --> FinalAnswer
+    AuthorPrompt --> JSONSummary[JSON 요약 생성<br/>role_based_answer_summary.json]
+    BusinessPrompt --> JSONSummary
+    PMPrompt --> JSONSummary
+    ResearcherPrompt --> JSONSummary
+    OtherPrompt --> JSONSummary
+    GeneralPrompt --> JSONSummary
+    
+    JSONSummary --> Soonryong[Soonryong_Answer_Generator<br/>순룡 페르소나 답변]
+    ContinuousConv --> Soonryong
+    Soonryong --> FinalAnswer[최종 답변<br/>portfolio_answer.md]
 ```
 
 **라우팅 규칙**:
@@ -162,23 +174,30 @@ graph TD
 
 **참고**: 평가자(evaluator_*) 중 개발자는 연속 대화 시스템으로 라우팅되며, 나머지 평가자는 일반 답변 생성 프롬프트를 호출합니다.
 
-### 4단계: 직군별 답변 생성
+### 4단계: 직군별 답변 생성 및 요약
 
 **직군별 프롬프트 호출**:
 - 각 직군별 프롬프트는 `clarified_question.json`, `portfolio_relationship_map.md`, 관련 문서 내용을 입력으로 받습니다.
 - 각 프롬프트는 해당 직군에 맞는 답변 스타일로 답변을 생성합니다.
+- 각 프롬프트는 JSON 요약을 생성하여 `data/temp/role_based_answer_summary.json`에 저장합니다.
 
-### 5단계: 답변 구조화
+**출력 확인**:
+- [ ] `data/temp/role_based_answer_summary.json` 파일이 생성되었는지 확인
+- [ ] JSON 형식이 올바른지 검증
+- [ ] 필수 필드가 모두 포함되었는지 확인
 
-**답변 구조** (직군별 프롬프트에서 생성):
-1. **질문 요약**: 정리된 질문
-2. **핵심 답변**: 질문에 대한 직접적인 답변 (직군별 스타일)
-3. **상세 설명**: 관련 섹션 내용 (직군별 설명 수준)
-4. **관계 그래프**: 머메이드 다이어그램 (해당 시)
-5. **관련 문서**: 문서 링크 목록
-6. **추가 정보**: 추가로 확인할 수 있는 문서 제안
+**⚠️ 중요**: 평가자(evaluator_developer)는 연속 대화 시스템으로 라우팅되며, 이 경우 Soonryong_Answer_Generator_Prompt.md가 직접 호출됩니다.
 
-### 6단계: 답변 생성
+### 5단계: 순룡 답변 생성
+
+**Soonryong_Answer_Generator_Prompt.md 호출**:
+- 입력: `data/temp/role_based_answer_summary.json` (역할별 답변 요약)
+- 입력: `data/temp/clarified_question.json` (정리된 질문)
+- 입력: `data/temp/portfolio_relationship_map.md` (관계 그래프)
+- 입력: 관련 문서 내용
+- 순룡 페르소나로 최종 답변 생성
+
+**출력**: `data/temp/portfolio_answer.md` (순룡 페르소나 스타일)
 
 **출력 형식** (`data/temp/portfolio_answer.md`):
 
@@ -247,8 +266,12 @@ graph TD
 > 관계 그래프는 반드시 머메이드 다이어그램으로 포함해야 합니다.
 
 > [!IMPORTANT]
-> **ROLE-SPECIFIC STYLE**
-> 각 직군별 프롬프트의 답변 스타일 가이드를 준수해야 합니다.
+> **JSON SUMMARY REQUIRED**
+> 역할별 프롬프트가 JSON 요약을 생성했는지 반드시 확인해야 합니다. 이 파일이 없으면 Soonryong_Answer_Generator_Prompt.md로 진행할 수 없습니다.
+
+> [!IMPORTANT]
+> **SOONRYONG ANSWER GENERATOR**
+> JSON 요약이 생성되면 반드시 Soonryong_Answer_Generator_Prompt.md를 호출하여 순룡 페르소나 스타일의 최종 답변을 생성해야 합니다.
 
 ---
 
@@ -333,9 +356,10 @@ graph TB
 
 1. **사용자에게 답변 제시**
 2. **Portfolio_Documentation_Prompt.md 실행**
-   - 입력: `portfolio_answer.md`
+   - 입력: `portfolio_answer.md` (순룡 페르소나 스타일)
    - 입력: `clarified_question.json`
    - 입력: `portfolio_relationship_map.md`
+   - 입력: `role_based_answer_summary.json` (선택사항)
    - QA 폴더에 저장
 
 ---
@@ -344,6 +368,8 @@ graph TB
 
 - `chain/Portfolio_Analysis_Chain_Prompt.md` - 체인 Orchestrator
 - `Portfolio_Question_Clarification_Prompt.md` - 질문 정리 프롬프트
+- `role_based/Soonryong_Answer_Generator_Prompt.md` - 순룡 답변 생성 프롬프트
+- `role_based/Answer_For_PM_Prompt.md` - PM 평가자용 프롬프트 (예시)
 - `Portfolio_Documentation_Prompt.md` - 문서화 프롬프트
 - `Architecture_Overview.md` - 아키텍처 개요
 

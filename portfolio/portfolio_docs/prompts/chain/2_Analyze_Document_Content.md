@@ -42,6 +42,14 @@ relations:
 
 # 2_Analyze_Document_Content Prompt
 
+## ⚠️ 경로 기준점
+
+**기준 경로**: `portfolio/portfolio_docs/` (포트폴리오 문서 루트 디렉토리)
+
+모든 파일 경로는 이 기준 경로를 기준으로 합니다:
+- `data/temp/` → `portfolio/portfolio_docs/data/temp/`
+- 관련 문서 파일들 → `portfolio/portfolio_docs/` 하위의 문서들
+
 ## 🌊 Flow Diagram
 
 ```mermaid

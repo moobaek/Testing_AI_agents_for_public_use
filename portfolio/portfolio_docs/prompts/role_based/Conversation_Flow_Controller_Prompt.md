@@ -37,6 +37,13 @@ relations:
 
 # Conversation Flow Controller Prompt - 대화 흐름 제어
 
+## ⚠️ 경로 기준점
+
+**기준 경로**: `portfolio/portfolio_docs/` (포트폴리오 문서 루트 디렉토리)
+
+모든 파일 경로는 이 기준 경로를 기준으로 합니다:
+- `data/conversations/` → `portfolio/portfolio_docs/data/conversations/`
+
 ## 역할
 
 연속 대화 루프를 제어합니다. 다음 질문을 대기하고 분석하며, 이전 컨텍스트를 참조하여 일관성 있는 답변을 제공합니다.

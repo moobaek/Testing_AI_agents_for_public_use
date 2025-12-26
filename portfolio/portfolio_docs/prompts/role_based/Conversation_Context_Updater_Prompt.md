@@ -37,6 +37,13 @@ relations:
 
 # Conversation Context Updater Prompt - 컨텍스트 업데이트
 
+## ⚠️ 경로 기준점
+
+**기준 경로**: `portfolio/portfolio_docs/` (포트폴리오 문서 루트 디렉토리)
+
+모든 파일 경로는 이 기준 경로를 기준으로 합니다:
+- `data/conversations/` → `portfolio/portfolio_docs/data/conversations/`
+
 ## 역할
 
 각 답변 후 대화 컨텍스트를 업데이트합니다. 파악한 정보를 추출하여 저장하고, 다음 질문을 위한 힌트를 생성합니다.

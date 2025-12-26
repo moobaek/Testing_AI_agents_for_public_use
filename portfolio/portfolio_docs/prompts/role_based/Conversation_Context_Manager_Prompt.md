@@ -37,6 +37,13 @@ relations:
 
 # Conversation Context Manager Prompt - 대화 컨텍스트 관리
 
+## ⚠️ 경로 기준점
+
+**기준 경로**: `portfolio/portfolio_docs/` (포트폴리오 문서 루트 디렉토리)
+
+모든 파일 경로는 이 기준 경로를 기준으로 합니다:
+- `data/conversations/` → `portfolio/portfolio_docs/data/conversations/`
+
 ## 역할
 
 대화 컨텍스트를 초기화하고 관리합니다. 이전 대화 내용을 저장 및 업데이트하며, 정보 파악 상태를 추적합니다.

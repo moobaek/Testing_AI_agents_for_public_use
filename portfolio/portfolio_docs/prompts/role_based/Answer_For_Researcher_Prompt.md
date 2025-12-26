@@ -14,6 +14,14 @@ category: role-based
 
 # Answer For Researcher Evaluator Prompt - 연구자/학자 평가자용 답변 생성 프롬프트
 
+## ⚠️ 경로 기준점
+
+**기준 경로**: `portfolio/portfolio_docs/` (포트폴리오 문서 루트 디렉토리)
+
+모든 파일 경로는 이 기준 경로를 기준으로 합니다:
+- `data/temp/` → `portfolio/portfolio_docs/data/temp/`
+- `data/architecture_structure.json` → `portfolio/portfolio_docs/data/architecture_structure.json`
+
 ## 역할
 
 학술적 평가를 하는 연구자/학자를 위한 답변을 생성합니다. 연구 방법론, 학술 논문, 이론적 배경, 검증 과정, 인용 및 참고문헌 등을 중심으로 설명합니다.
@@ -27,7 +35,9 @@ category: role-based
 
 ## 출력 (Output)
 
-- **출력**: `data/temp/portfolio_answer.md` - 학술적 근거 중심 답변
+- **출력 1**: 역할별 스타일로 작성된 답변 (내부 처리용)
+- **출력 2**: `data/temp/role_based_answer_summary.json` - JSON 요약 (필수)
+- **출력 3**: `data/temp/portfolio_answer.md` - 학술적 근거 중심 답변 (선택사항, Soonryong_Answer_Generator_Prompt.md에서 최종 생성)
 
 ## 답변 스타일 가이드
 
@@ -134,7 +144,64 @@ AMS(Anomaly Management System)는 제조 공정의 이상 징후를 자동으로
 - AI 에이전트 평가 프레임워크 연구
 ```
 
+## 작업 단계
+
+### 1단계: 역할별 답변 생성
+
+**입력 데이터 확인**:
+- [ ] `clarified_question.json`이 로드되었는지 확인
+- [ ] `portfolio_relationship_map.md`가 로드되었는지 확인
+- [ ] 관련 문서 내용이 로드되었는지 확인
+- [ ] `architecture_structure.json`이 로드되었는지 확인
+
+**답변 생성**:
+- 학술적 근거 중심 답변 스타일로 답변 생성
+- 연구 방법론, 학술 논문, 이론적 배경, 검증 과정 중심으로 설명
+
+### 2단계: JSON 요약 생성 및 저장
+
+**⚠️ 필수: 이 단계는 반드시 실행되어야 하며, 건너뛸 수 없습니다!**
+
+**요약 구조** (`data/temp/role_based_answer_summary.json`):
+
+```json
+{
+  "question": "질문 내용",
+  "questioner_role": "evaluator_researcher",
+  "role_based_answer": {
+    "summary": "역할별 답변의 핵심 요약 (2-3문단)",
+    "key_points": [
+      "핵심 포인트 1",
+      "핵심 포인트 2",
+      "핵심 포인트 3"
+    ],
+    "research_methodology": "연구 방법론 관련 내용",
+    "academic_evidence": "학술적 근거 관련 내용",
+    "verification": "검증 과정 관련 내용",
+    "related_papers": "관련 논문 목록",
+    "related_documents": [
+      "문서 ID 1",
+      "문서 ID 2"
+    ]
+  },
+  "generated_at": "YYYY-MM-DD HH:MM:SS"
+}
+```
+
+**파일 저장**: `data/temp/role_based_answer_summary.json`
+
+**출력 확인**:
+- [ ] JSON 파일이 생성되었는지 확인
+- [ ] JSON 형식이 올바른지 검증
+- [ ] 필수 필드가 모두 포함되었는지 확인
+
+---
+
 ## Enforcement Rules
+
+> [!IMPORTANT]
+> **JSON SUMMARY REQUIRED**
+> 반드시 JSON 요약을 생성하고 저장해야 합니다. 이 파일이 없으면 다음 단계(Soonryong_Answer_Generator_Prompt.md)로 진행할 수 없습니다.
 
 > [!IMPORTANT]
 > **ACADEMIC RIGOR**
@@ -154,9 +221,19 @@ AMS(Anomaly Management System)는 제조 공정의 이상 징후를 자동으로
 
 ---
 
+## 다음 단계
+
+JSON 요약이 생성되면:
+
+1. **Portfolio_Answer_Generator_Prompt.md로 제어권 반환**
+   - JSON 요약 파일 생성 확인
+   - Soonryong_Answer_Generator_Prompt.md 호출 지시
+
+---
+
 ## 관련 프롬프트
 
 - **이전 단계**: `Portfolio_Question_Clarification_Prompt.md`
-- **다음 단계**: `Portfolio_Documentation_Prompt.md`
+- **다음 단계**: `Soonryong_Answer_Generator_Prompt.md` (JSON 요약 기반 최종 답변 생성)
 - **호출 프롬프트**: `Portfolio_Answer_Generator_Prompt.md`
 

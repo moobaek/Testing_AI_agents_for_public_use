@@ -48,6 +48,16 @@ relations:
 
 # Portfolio Analysis Chain Prompt (Orchestrator)
 
+## ⚠️ 경로 기준점
+
+**기준 경로**: `portfolio/portfolio_docs/` (포트폴리오 문서 루트 디렉토리)
+
+모든 파일 경로는 이 기준 경로를 기준으로 합니다:
+- `data/temp/` → `portfolio/portfolio_docs/data/temp/`
+- `Architecture_Overview.md` → `portfolio/portfolio_docs/Architecture_Overview.md`
+- `data/architecture_structure.json` → `portfolio/portfolio_docs/data/architecture_structure.json`
+- `data/document_relationships.json` → `portfolio/portfolio_docs/data/document_relationships.json`
+
 ## 🌊 Chain Flow Diagram
 
 ```mermaid

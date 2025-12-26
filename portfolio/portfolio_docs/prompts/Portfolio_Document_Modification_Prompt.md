@@ -37,6 +37,14 @@ relations:
 
 # Portfolio Document Modification Prompt - 문서 수정 프롬프트
 
+## ⚠️ 경로 기준점
+
+**기준 경로**: `portfolio/portfolio_docs/` (포트폴리오 문서 루트 디렉토리)
+
+모든 파일 경로는 이 기준 경로를 기준으로 합니다:
+- 문서 파일들 → `portfolio/portfolio_docs/` 하위의 문서들
+- `Architecture_Overview.md` → `portfolio/portfolio_docs/Architecture_Overview.md`
+
 ## 역할
 
 포트폴리오 문서를 수정하거나 업데이트합니다. 새 폴더 추가, 기존 문서 수정, 섹션 추가 등을 처리하며, Architecture_Overview.md 구조를 유지합니다.

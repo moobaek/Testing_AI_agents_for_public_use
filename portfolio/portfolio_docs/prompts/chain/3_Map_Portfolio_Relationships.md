@@ -50,6 +50,15 @@ relations:
 
 # 3_Map_Portfolio_Relationships Prompt
 
+## ⚠️ 경로 기준점
+
+**기준 경로**: `portfolio/portfolio_docs/` (포트폴리오 문서 루트 디렉토리)
+
+모든 파일 경로는 이 기준 경로를 기준으로 합니다:
+- `data/temp/` → `portfolio/portfolio_docs/data/temp/`
+- `Architecture_Overview.md` → `portfolio/portfolio_docs/Architecture_Overview.md`
+- `00_Relationship_Map.md` → `portfolio/portfolio_docs/00_Relationship_Map.md`
+
 ## 🌊 Flow Diagram
 
 ```mermaid

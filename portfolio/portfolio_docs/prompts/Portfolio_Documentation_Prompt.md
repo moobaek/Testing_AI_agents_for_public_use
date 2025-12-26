@@ -37,6 +37,15 @@ relations:
 
 # Portfolio Documentation Prompt - 문서화 프롬프트
 
+## ⚠️ 경로 기준점
+
+**기준 경로**: `portfolio/portfolio_docs/` (포트폴리오 문서 루트 디렉토리)
+
+모든 파일 경로는 이 기준 경로를 기준으로 합니다:
+- `data/temp/` → `portfolio/portfolio_docs/data/temp/`
+- `data/qa_history.json` → `portfolio/portfolio_docs/data/qa_history.json`
+- `qa/` → `portfolio/portfolio_docs/qa/`
+
 ## 역할
 
 질문과 답변을 문서화하여 QA 폴더에 저장합니다. 날짜, 질문 내용에 대한 폴더명, md 파일로 저장하며, Architecture_Overview.md 구조에 맞게 저장합니다.
@@ -53,8 +62,8 @@ relations:
 
 - **형식**: Markdown 파일
 - **내용**: 질문, 답변, 관계 그래프, 관련 문서 링크
-- **저장 위치**: `portfolio/portfolio_docs/qa/[날짜]_[질문_폴더명]/[질문_요약].md`
-- **히스토리 업데이트**: `data/qa_history.json`에 항목 추가
+- **저장 위치**: `qa/[날짜]_[질문_폴더명]/[질문_요약].md` (기준 경로: `portfolio/portfolio_docs/qa/`)
+- **히스토리 업데이트**: `data/qa_history.json`에 항목 추가 (기준 경로: `portfolio/portfolio_docs/data/qa_history.json`)
 
 ---
 
@@ -168,7 +177,7 @@ answer_path:
 ### 3단계: 파일 저장
 
 **저장 위치**:
-- `portfolio/portfolio_docs/qa/[날짜]_[질문_폴더명]/[질문_요약].md`
+- `qa/[날짜]_[질문_폴더명]/[질문_요약].md` (기준 경로: `portfolio/portfolio_docs/qa/`)
 
 **저장 규칙**:
 1. 폴더가 없으면 생성

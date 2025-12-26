@@ -30,6 +30,19 @@ relations:
 
 # 포트폴리오 질문 시스템 사용 가이드
 
+## ⚠️ 경로 기준점
+
+**기준 경로**: `portfolio/portfolio_docs/` (포트폴리오 문서 루트 디렉토리)
+
+모든 프롬프트에서 사용하는 파일 경로는 이 기준 경로를 기준으로 합니다:
+- `data/temp/` → `portfolio/portfolio_docs/data/temp/`
+- `data/conversations/` → `portfolio/portfolio_docs/data/conversations/`
+- `data/architecture_structure.json` → `portfolio/portfolio_docs/data/architecture_structure.json`
+- `qa/` → `portfolio/portfolio_docs/qa/`
+- `prompts/` → `portfolio/portfolio_docs/prompts/`
+
+**⚠️ 중요**: 프롬프트 실행 시 작업 디렉토리가 `portfolio/portfolio_docs/`인지 확인하거나, 모든 경로를 기준 경로 기준으로 절대 경로로 해석해야 합니다.
+
 ## 📄 문서 요약 (Document Summary)
 
 ### 🔑 핵심 키워드 (Keywords)

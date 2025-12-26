@@ -38,6 +38,15 @@ relations:
 
 # Portfolio Question Entry Prompt - 포트폴리오 질문 시스템 진입점
 
+## ⚠️ 경로 기준점
+
+**기준 경로**: `portfolio/portfolio_docs/` (포트폴리오 문서 루트 디렉토리)
+
+모든 파일 경로는 이 기준 경로를 기준으로 합니다:
+- `prompts/` → `portfolio/portfolio_docs/prompts/`
+- `data/temp/` → `portfolio/portfolio_docs/data/temp/`
+- `Architecture_Overview.md` → `portfolio/portfolio_docs/Architecture_Overview.md`
+
 ## 📄 문서 요약 (Document Summary)
 
 ### 🔑 핵심 키워드 (Keywords)
