@@ -114,11 +114,17 @@
 ### 지표 트렌드
 
 ```mermaid
-xychart-beta
-    title "지표 트렌드"
-    x-axis [1월, 2월, 3월, 4월, 5월]
-    y-axis "지표 값" 0 --> 100
-    line [값1, 값2, 값3, 값4, 값5]
+graph LR
+    M1["1월<br/>값1"] --> M2["2월<br/>값2"]
+    M2 --> M3["3월<br/>값3"]
+    M3 --> M4["4월<br/>값4"]
+    M4 --> M5["5월<br/>값5"]
+    
+    style M1 fill:#e1f5ff
+    style M2 fill:#fff4e1
+    style M3 fill:#e8f5e9
+    style M4 fill:#fff4e1
+    style M5 fill:#e1f5ff
 ```
 
 ---

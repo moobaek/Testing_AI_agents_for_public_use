@@ -293,6 +293,10 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
 
   const rawContent = content || fileContent || defaultHomeContent;
 
+  // #region agent log
+  fetch('http://127.0.0.1:7244/ingest/ce74763c-2088-422f-b4f8-666a2ecc75d0',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'MarkdownRenderer.tsx:294',message:'MarkdownRenderer render start',data:{hasContent:!!content,hasFileContent:!!fileContent,hasError:!!error,loading},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'C'})}).catch(()=>{});
+  // #endregion
+
   return (
     <div className="relative flex-1">
       <ScrollArea className={`flex-1 ${className}`}>
@@ -303,7 +307,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
           </div>
           
           <article 
-            className="wiki-content prose prose-slate max-w-none pr-72"
+            className="wiki-content prose prose-slate max-w-none pr-64"
             dangerouslySetInnerHTML={{ __html: htmlContent }}
           />
         </div>

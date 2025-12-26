@@ -4,6 +4,8 @@
 
 > [!QUOTE] 핵심 철학
 > "자신이 가장 잘 아는 도메인에서 작고 확실한 성공(Small Wins)을 거두고, 그 과정의 지식을 자산화(Assetize)하여, 피드백을 통해 끊임없이 확장하라."
+> 
+> **개인 철학**: "모델보다 데이터, 데이터보다 정보, 지식구조를 정리하는 현장친화적 연구원" - [[00_Personal_Profile|개인 프로필 상세 보기]]
 
 본 포트폴리오는 **9단계 실행 가이드**를 `platform_all` 및 `AI_agent_test` 프로젝트에 실제로 적용한 사례를 담고 있습니다. 단일 설계 문서에서 시작하여 웹 서비스와 백엔드가 결합된 거대한 통합 솔루션으로 진화해 나가는 과정을 투명하게 공개합니다.
 
@@ -28,16 +30,17 @@
 
 본 포트폴리오는 **9단계 AI 업무 혁신 & 성장 실행 가이드**를 실무에 적용하여, 단순한 기술 개발을 넘어 산업 현장의 실질적인 문제를 해결하고 DX(Digital Transformation)를 이끌어낸 과정을 기록한 문서입니다.
 
-단일 사업이 아닌 **13개 이상의 독립된 AI, 플랫폼, 센서 솔루션**을 성공적으로 수행한 성과를 담고 있습니다.
+단일 사업이 아닌 **5대 영역(AI & Analytics, Digital Platforms, Sensors & IoT, Safety & Energy, Healthcare)에서 20개 이상의 독립된 프로젝트와 솔루션**을 성공적으로 수행한 성과를 담고 있습니다.
 
 ## 📂 포트폴리오 주요 문서
 
 ### 핵심 문서
 - [00_Portfolio_Index.md](00_Portfolio_Index.md) (`page.portfolio.index`) - 현재 문서
+- [00_Personal_Profile.md](00_Personal_Profile.md) (`page.portfolio.personal_profile`) - **개인 프로필 및 기술 철학** 👤
 - [00_Relationship_Map.md](00_Relationship_Map.md) (`page.portfolio.relationship_map`) - 프로젝트 간 관계 시각화
-- [02_Projects_Overview.md](02_Projects_Overview.md) (`page.portfolio.projects`) - **13개 주요 프로젝트 & 솔루션 요약** ⚡
+- [02_Projects_Overview.md](02_Projects_Overview.md) (`page.portfolio.projects`) - **5대 영역 20개 이상 프로젝트 & 솔루션 요약** ⚡
 - [04_Academic_Publications.md](04_Academic_Publications.md) (`page.portfolio.academic`) - **학술 연구 및 논문 성과 (2020-2025)** 🎓
-- [Architecture_Overview.md](Architecture_Overview.md) (`page.portfolio.architecture`) - 통합 시스템 아키텍처
+- [Architecture_Overview.md](Architecture_Overview.md) (`page.portfolio.architecture`) - 통합 시스템 아키텍처 (AMS, CoCTK, FBS, DPS 등)
 - [Testing_Context.md](Testing_Context.md) (`page.portfolio.testing`) - 실증 및 검증 사례 (세아특수강, 포미아 등)
 
 ### 가이드 문서
@@ -67,7 +70,12 @@
 
 - **문서 ID**: `page.portfolio.index`
 - **관련 Phase**: `phase.foundation.*`, `phase.assets.*`, `phase.expansion.*`
-- **관련 프로젝트**: `project.ams`, `project.dps`, `project.coctk` 등
+- **관련 프로젝트**:
+  - AI & Analytics: `project.ams`, `project.coctk`, `project.fbs`, `project.japan_dx`, `project.quality_prediction`
+  - Digital Platforms: `project.dps`, `project.production_integration`, `project.dx_center`, `project.injection_dx`
+  - Sensors & IoT: `project.smart_sensors`, `project.ai_composite_sensor`, `project.virtual_sensor`, `project.seah.data_integration`
+  - Safety & Energy: `project.cleanroom_energy`, `project.energy_pattern`, `project.power_prediction`, `project.digital_twin_safety`, `project.power_quality`
+  - Healthcare: `project.medical_constitution`
 - **관련 문서**: `page.portfolio.*`
 - **가이드 문서**: `guide.id.system`, `guide.ai.workflow`, `guide.team.roles`, `guide.pm.roles`
 - **템플릿**: `template.*`
