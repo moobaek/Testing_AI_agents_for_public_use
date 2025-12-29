@@ -54,7 +54,7 @@
 7. [📊 데이터 파이프라인](#데이터-파이프라인)
 8. [📋 데이터베이스 설계](#데이터베이스-설계)
 9. [🗺️ obsidian_design_origin 시스템](#obsidian_design_origin-시스템)
-10. [🤖 AI Workflow & Automation](#ai-workflow--automation)
+10. [🤖 Cloud Sub-Agent & Governance](#ai-workflow--automation)
 11. [🚀 사무 자동화의 미래 비전](#사무-자동화의-미래-비전)
 12. [🌐 Platform All: 통합 플랫폼 생태계](#platform-all-통합-플랫폼-생태계)
 
@@ -313,6 +313,56 @@ graph LR
 1. [[04_Academic_Publications|학술 논문]] - 논문 목록
 2. [[Testing_Context|테스트 컨텍스트]] - 실증 사례
 3. **Architecture_Overview.md** (현재 문서) - 기술 아키텍처
+
+---
+
+## 🏛️ Global Governance Architecture
+
+> [!IMPORTANT] 거버넌스 레이어 (The "Overseers")
+> 단순한 기능 구현을 넘어, 전체 시스템의 품질, 표준 준수, 리스크를 관리하는 **3대 거버넌스 에이전트**가 존재합니다.
+
+### 시스템 거버넌스 계층 구조
+
+```mermaid
+graph TB
+    subgraph "Governance & QA Layer (Supervisory)"
+        EVAL[Evaluation Framework<br/>(Validation)]
+        PROMPT[Prompt Eval Engine<br/>(Gating)]
+        PM[PM Agent<br/>(Management)]
+    end
+
+    subgraph "Implementation Layer (Execution)"
+        AMS[AMS Engine]
+        DPS[DPS Platform]
+        CoCTK[CoCTK Tool]
+        Service[Microservices]
+    end
+
+    EVAL -- "전수 검사" --> Implementation Layer
+    PROMPT -- "입력 통제" --> Implementation Layer
+    PM -- "프로세스 관리" --> Implementation Layer
+
+    style EVAL fill:#ffcdd2,stroke:#d32f2f
+    style PROMPT fill:#e1bee7,stroke:#7b1fa2
+    style PM fill:#bbdefb,stroke:#1976d2
+```
+
+### 3대 거버넌스 에이전트
+
+#### 1. Evaluation Framework (System-wide Validator)
+- **역할**: 전사적 코드 및 문서 품질 검증
+- **범위**: 49개 Python 모듈, 298개 기술 문서 전수 검사
+- **권한**: 아키텍처 위배 사항 발견 시 배포 차단 권고
+
+#### 2. Prompt Evaluation Engine (AI Gatekeeper)
+- **역할**: AI 프롬프트 최적화 및 승인
+- **범위**: 모든 AI 생성물(코드, 문서)의 입력 프롬프트 검열
+- **권한**: 저품질 프롬프트 실행 차단 (Gatekeeping)
+
+#### 3. PM Agent (Execution Manager)
+- **역할**: 비즈니스 리스크 및 일정 무결성 관리
+- **범위**: 계약서, 회의록, 과업지시서 등 비정형 문서
+- **권한**: 누락된 산출물 식별 및 경고 (Integrity Check)
 
 ---
 

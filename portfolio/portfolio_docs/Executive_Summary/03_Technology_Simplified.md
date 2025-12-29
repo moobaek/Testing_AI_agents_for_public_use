@@ -301,6 +301,50 @@ graph LR
 
 ---
 
+## 🏗️ 솔루션 5: 거버넌스 에이전트 (공장의 AI 감독관)
+
+### 무엇을 하나요?
+**"단순히 일만 하는 것이 아니라, '일을 제대로 하고 있는지' 감독하는 AI 관리자들"**
+
+### 비유로 이해하기: 건설 현장
+건물을 지을 때 벽돌공(실무자)만 있어서는 튼튼한 건물을 지을 수 없죠? 
+설계대로 짓는지 검사하는 **감리사**와 자재를 관리하는 **현장 소장**이 필요합니다.
+
+```mermaid
+graph TB
+    subgraph "감독팀 (거버넌스)"
+        Supervisor["철저한 감리사<br/>(Evaluation Agent)"]
+        Guard["입구 경비원<br/>(Prompt Eval Agent)"]
+        Manager["현장 소장<br/>(PM Agent)"]
+    end
+    
+    subgraph "작업팀 (프로젝트)"
+        Worker1["벽돌공<br/>(AMS 엔진)"]
+        Worker2["미장공<br/>(DPS 플랫폼)"]
+    end
+    
+    Guard -- "불량 자재 반입 금지" --> Worker1 & Worker2
+    Supervisor -- "부실 공사 체크" --> Worker1 & Worker2
+    Manager -- "공사 일정 관리" --> Worker1 & Worker2
+    
+    style Supervisor fill:#ffcdd2,stroke:#d32f2f
+    style Guard fill:#e1bee7,stroke:#7b1fa2
+    style Manager fill:#bbdefb,stroke:#1976d2
+```
+
+### AI 감독관 3인방
+1. **꼼꼼한 감리사 (Evaluation Agent)**
+   - **역할**: "이 코드, 설계도랑 다르게 짰는데? 다시 해."
+   - **기능**: 전체 기술 문서를 다 읽고, 잘못된 부분을 찾아냅니다.
+2. **엄격한 입구 경비원 (Prompt Agent)**
+   - **역할**: "작업 지시서(프롬프트)가 엉망이네. 통과 못 시켜."
+   - **기능**: 엉터리 명령이 AI에게 전달되지 않도록 미리 막습니다.
+3. **빈틈없는 현장 소장 (PM Agent)**
+   - **역할**: "계약서에 독소 조항이 숨어있네? 이거 위험해."
+   - **기능**: 사업 문서의 위험 요소를 찾고, 일정을 빈틈없이 챙깁니다.
+ 
+---
+
 ## 🔧 핵심 기술 요약
 
 ### 기술 스택을 쉽게 설명하면?

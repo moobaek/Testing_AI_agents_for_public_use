@@ -32,6 +32,15 @@
 
 단일 사업이 아닌 **5대 영역(AI & Analytics, Digital Platforms, Sensors & IoT, Safety & Energy, Healthcare)에서 20개 이상의 독립된 프로젝트와 솔루션**을 성공적으로 수행한 성과를 담고 있습니다.
 
+## 🏛️ Governance Agents (The Overseers)
+**전체 포트폴리오의 품질과 방향성을 책임지는 3대 핵심 에이전트**
+
+- **[[02_Projects_Overview#Evaluation_Framework|Evaluation Agent]]**: 시스템 전수 검사 및 품질 보증 (System-wide Validator)
+- **[[02_Projects_Overview#프롬프트_평가_엔진_Claude_Sub_Agent|Prompt Eval Agent]]**: AI 프롬프트 품질 게이트키퍼 (AI Gatekeeper)
+- **[[02_Projects_Overview#PM_Agent_Business_Management_Sub_Agent|PM Agent]]**: 사업 리스크 및 일정 무결성 관리 (Execution Manager)
+
+---
+
 ## 📂 포트폴리오 주요 문서
 
 ### 핵심 문서
