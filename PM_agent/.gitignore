@@ -1,0 +1,17 @@
+# User Data (Customer Information)
+background/
+templates/세아특수강_프로젝트/
+templates/*_project*/
+prompts/temp/
+data/
+
+# System Cache
+__pycache__/
+*.pyc
+.DS_Store
+
+# Temporary Files
+~$*
+*.tmp
+*.bak
+*.log

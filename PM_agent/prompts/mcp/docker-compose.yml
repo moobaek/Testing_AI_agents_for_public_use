@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  pm-parser-mcp:
+    build: .
+    container_name: pm-parser-mcp
+    ports:
+      - "8080:8080"
+    volumes:
+      # 문서 폴더 마운트 (읽기 전용)
+      - ../../background:/app/data:ro
+      # 출력 폴더
+      - ../temp:/app/output
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
