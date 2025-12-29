@@ -1,0 +1,362 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Wikipedia-style Wiki Design System */
+/* Optimized for readability and content-focused design */
+
+@layer base {
+  :root {
+    /* Wikipedia-inspired color palette */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 13%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 13%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 13%;
+
+    /* Wikipedia blue for links and primary actions */
+    --primary: 216 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 13%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 13%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 216 100% 50%;
+
+    --radius: 0.25rem;
+
+    /* Sidebar styling */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 20%;
+    --sidebar-primary: 216 100% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 94%;
+    --sidebar-accent-foreground: 0 0% 13%;
+    --sidebar-border: 0 0% 88%;
+    --sidebar-ring: 216 100% 50%;
+
+    /* Wiki-specific colors */
+    --wiki-link: 216 100% 50%;
+    --wiki-link-visited: 270 50% 40%;
+    --wiki-link-hover: 216 100% 40%;
+    --wiki-toc-bg: 0 0% 97%;
+    --wiki-code-bg: 0 0% 96%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+  }
+
+  /* Wikipedia-style typography */
+  .wiki-content {
+    @apply text-base leading-relaxed;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .wiki-content h1 {
+    @apply text-3xl font-normal border-b border-border pb-2 mb-6;
+    font-family: 'Georgia', serif;
+  }
+
+  .wiki-content h2 {
+    @apply text-xl font-medium mt-8 mb-4 border-b border-border pb-1;
+  }
+
+  .wiki-content h3 {
+    @apply text-lg font-medium mt-6 mb-3;
+  }
+
+  .wiki-content h4,
+  .wiki-content h5,
+  .wiki-content h6 {
+    @apply text-base font-medium mt-4 mb-2;
+  }
+
+  .wiki-content p {
+    @apply mb-4;
+  }
+
+  .wiki-content ul,
+  .wiki-content ol {
+    @apply mb-4 ml-6;
+  }
+
+  .wiki-content li {
+    @apply mb-1;
+  }
+
+  .wiki-content blockquote {
+    @apply border-l-4 border-border pl-4 italic my-4;
+  }
+
+  .wiki-content code {
+    @apply bg-[hsl(var(--wiki-code-bg))] px-1 py-0.5 rounded text-sm;
+  }
+
+  .wiki-content pre {
+    @apply bg-[hsl(var(--wiki-code-bg))] p-4 rounded overflow-x-auto mb-4;
+  }
+
+  .wiki-content pre code {
+    @apply bg-transparent p-0;
+  }
+
+  /* Wiki links styling */
+  .wiki-link {
+    @apply text-[hsl(var(--wiki-link))] hover:text-[hsl(var(--wiki-link-hover))] underline;
+  }
+
+  .wiki-link:visited {
+    @apply text-[hsl(var(--wiki-link-visited))];
+  }
+
+  /* Table of Contents styling */
+  .toc {
+    @apply bg-[hsl(var(--wiki-toc-bg))] border border-border rounded p-4;
+  }
+
+  .toc-title {
+    @apply font-semibold mb-3 text-sm;
+  }
+
+  .toc-list {
+    @apply text-sm space-y-1;
+  }
+
+  .toc-item {
+    @apply block py-1 px-2 rounded hover:bg-accent transition-colors;
+  }
+
+  .toc-item.active {
+    @apply bg-accent font-medium;
+  }
+
+  /* Mermaid diagram styling */
+  .mermaid {
+    @apply my-8 text-center;
+    background: white;
+    border: 1px solid hsl(var(--border));
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  }
+
+  .mermaid svg {
+    max-width: 100%;
+    height: auto;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Mermaid 다이어그램 요소 스타일링 */
+  .mermaid .node rect,
+  .mermaid .node circle,
+  .mermaid .node ellipse,
+  .mermaid .node polygon {
+    fill: hsl(var(--primary)) !important;
+    stroke: hsl(var(--primary)) !important;
+    stroke-width: 2px !important;
+  }
+
+  .mermaid .node .label {
+    color: white !important;
+    font-weight: 500 !important;
+  }
+
+  .mermaid .edgePath .path {
+    stroke: hsl(var(--muted-foreground)) !important;
+    stroke-width: 2px !important;
+  }
+
+  .mermaid .edgeLabel {
+    background-color: white !important;
+    border: 1px solid hsl(var(--border)) !important;
+    border-radius: 4px !important;
+    padding: 2px 6px !important;
+    font-size: 12px !important;
+  }
+
+  /* Search highlight styling */
+  .search-highlight {
+    @apply transition-all duration-200;
+    animation: highlight-pulse 0.3s ease-in-out;
+  }
+
+  @keyframes highlight-pulse {
+    0% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(255, 255, 0, 0.7);
+    }
+    50% {
+      transform: scale(1.05);
+      box-shadow: 0 0 0 4px rgba(255, 255, 0, 0.3);
+    }
+    100% {
+      transform: scale(1);
+      box-shadow: 0 0 0 0 rgba(255, 255, 0, 0);
+    }
+  }
+
+  /* Scrollbar marker styling */
+  .scrollbar-marker {
+    @apply transition-all duration-200;
+  }
+
+  .scrollbar-marker:hover {
+    @apply scale-110 shadow-lg;
+  }
+
+  /* Search interface styling */
+  .search-interface {
+    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .wiki-content {
+      font-size: 16px;
+    }
+    
+    .search-interface {
+      width: calc(100vw - 2rem);
+      right: 1rem;
+    }
+  }
+}
+
+/* Dark mode styles */
+.dark {
+  color-scheme: dark;
+}
+
+.dark body {
+  @apply bg-gray-900 text-gray-100;
+}
+
+.dark .bg-white {
+  @apply bg-gray-800;
+}
+
+.dark .bg-gray-50 {
+  @apply bg-gray-900;
+}
+
+.dark .text-gray-900 {
+  @apply text-gray-100;
+}
+
+.dark .text-gray-600 {
+  @apply text-gray-300;
+}
+
+.dark .text-gray-500 {
+  @apply text-gray-400;
+}
+
+.dark .border-gray-200 {
+  @apply border-gray-700;
+}
+
+.dark .bg-blue-50 {
+  @apply bg-blue-900/20;
+}
+
+.dark .border-blue-200 {
+  @apply border-blue-700;
+}
+
+.dark .text-blue-900 {
+  @apply text-blue-100;
+}
+
+.dark .wiki-content {
+  @apply text-gray-100;
+}
+
+.dark .wiki-content h1,
+.dark .wiki-content h2,
+.dark .wiki-content h3,
+.dark .wiki-content h4,
+.dark .wiki-content h5,
+.dark .wiki-content h6 {
+  @apply text-gray-100;
+}
+
+.dark .wiki-content p {
+  @apply text-gray-200;
+}
+
+.dark .wiki-content code {
+  @apply bg-gray-800 text-gray-200;
+}
+
+.dark .wiki-content pre {
+  @apply bg-gray-800 border-gray-700;
+}
+
+.dark .wiki-content blockquote {
+  @apply border-l-gray-600 bg-gray-800/50;
+}

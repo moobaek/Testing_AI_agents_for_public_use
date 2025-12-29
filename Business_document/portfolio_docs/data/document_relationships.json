@@ -1,0 +1,113 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "last_updated": "2025-01-XX",
+    "source": "Architecture_Overview.md, 00_Relationship_Map.md"
+  },
+  "documents": [
+    {
+      "id": "page.portfolio.architecture",
+      "title": "Architecture Overview",
+      "type": "navigation_hub",
+      "filename": "Architecture_Overview.md",
+      "related": [
+        {"id": "page.portfolio.index", "relation": "references", "description": "전체 개요 참조"},
+        {"id": "page.portfolio.personal_profile", "relation": "references", "description": "개인 정보 참조"},
+        {"id": "page.portfolio.projects", "relation": "references", "description": "프로젝트 상세 정보 참조"},
+        {"id": "page.portfolio.academic", "relation": "references", "description": "학술 성과 참조"},
+        {"id": "page.portfolio.testing", "relation": "references", "description": "실증 사례 참조"},
+        {"id": "exec.achievements.key", "relation": "references", "description": "핵심 성과 참조"},
+        {"id": "phase.foundation.step02", "relation": "references", "description": "실행 가이드 참조"}
+      ]
+    },
+    {
+      "id": "page.portfolio.index",
+      "title": "포트폴리오 인덱스",
+      "type": "index",
+      "filename": "00_Portfolio_Index.md",
+      "related": [
+        {"id": "page.portfolio.personal_profile", "relation": "links_to"},
+        {"id": "page.portfolio.projects", "relation": "links_to"},
+        {"id": "page.portfolio.architecture", "relation": "links_to"}
+      ]
+    },
+    {
+      "id": "page.portfolio.projects",
+      "title": "프로젝트 개요",
+      "type": "project_overview",
+      "filename": "02_Projects_Overview.md",
+      "related": [
+        {"id": "page.portfolio.architecture", "relation": "referenced_by"},
+        {"id": "page.portfolio.testing", "relation": "links_to"}
+      ]
+    },
+    {
+      "id": "page.portfolio.personal_profile",
+      "title": "개인 프로필",
+      "type": "profile",
+      "filename": "00_Personal_Profile.md",
+      "related": [
+        {"id": "page.portfolio.architecture", "relation": "referenced_by"},
+        {"id": "page.portfolio.index", "relation": "referenced_by"}
+      ]
+    },
+    {
+      "id": "phase.foundation.step02",
+      "title": "전문성 타겟팅",
+      "type": "phase_document",
+      "filename": "Phase_1_Foundation/Step_02_Expertise_Targeting.md",
+      "related": [
+        {"id": "page.portfolio.architecture", "relation": "referenced_by"}
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "source": "page.portfolio.architecture",
+      "target": "page.portfolio.projects",
+      "relation": "references",
+      "description": "프로젝트 상세 정보 참조",
+      "type": "Reference",
+      "direction": "forward"
+    },
+    {
+      "source": "page.portfolio.architecture",
+      "target": "page.portfolio.personal_profile",
+      "relation": "references",
+      "description": "개인 정보 참조",
+      "type": "Reference",
+      "direction": "forward"
+    },
+    {
+      "source": "page.portfolio.index",
+      "target": "page.portfolio.architecture",
+      "relation": "links_to",
+      "description": "아키텍처 개요로 링크",
+      "type": "Link",
+      "direction": "forward"
+    }
+  ],
+  "relationship_types": {
+    "references": {
+      "description": "문서가 다른 문서를 참조함",
+      "direction": "forward"
+    },
+    "referenced_by": {
+      "description": "문서가 다른 문서에 의해 참조됨",
+      "direction": "backward"
+    },
+    "links_to": {
+      "description": "문서가 다른 문서로 링크함",
+      "direction": "forward"
+    },
+    "implements": {
+      "description": "Phase가 프로젝트를 구현함",
+      "direction": "forward"
+    },
+    "validates": {
+      "description": "프로젝트가 논문을 검증함",
+      "direction": "forward"
+    }
+  }
+}
+

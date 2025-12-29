@@ -1,0 +1,169 @@
+{
+  "document_id": "page.portfolio.architecture",
+  "metadata": {
+    "title": "Architecture Overview",
+    "type": "navigation_hub",
+    "last_updated": "2025-01-XX"
+  },
+  "sections": [
+    {
+      "id": "user_intro",
+      "title": "사용자 소개 및 문서 개요",
+      "content_type": "overview",
+      "related_documents": ["page.portfolio.personal_profile"],
+      "anchor": "#사용자-소개-및-문서-개요"
+    },
+    {
+      "id": "document_structure",
+      "title": "포트폴리오 문서 구조",
+      "content_type": "navigation",
+      "anchor": "#포트폴리오-문서-구조",
+      "folder_structure": {
+        "core_documents": {
+          "path": "00_*.md",
+          "documents": [
+            {"id": "page.portfolio.index", "filename": "00_Portfolio_Index.md"},
+            {"id": "page.portfolio.personal_profile", "filename": "00_Personal_Profile.md"},
+            {"id": "guide.id.system", "filename": "00_ID_System_Guide.md"},
+            {"id": "guide.ai.workflow", "filename": "00_AI_Workflow_Guide.md"},
+            {"id": "page.portfolio.relationship_map", "filename": "00_Relationship_Map.md"}
+          ]
+        },
+        "project_documents": {
+          "path": "*.md",
+          "documents": [
+            {"id": "page.portfolio.projects", "filename": "02_Projects_Overview.md"},
+            {"id": "page.portfolio.architecture", "filename": "Architecture_Overview.md"},
+            {"id": "page.portfolio.academic", "filename": "04_Academic_Publications.md"},
+            {"id": "page.portfolio.testing", "filename": "Testing_Context.md"}
+          ]
+        },
+        "executive_summary": {
+          "path": "Executive_Summary/",
+          "documents": [
+            {"id": "exec.overview.non_technical", "filename": "00_Overview_For_Non_Technical.md"},
+            {"id": "exec.achievements.key", "filename": "01_Key_Achievements.md"},
+            {"id": "exec.business.value", "filename": "02_Business_Value.md"}
+          ]
+        },
+        "phase_documents": {
+          "path": "Phase_*/",
+          "documents": [
+            {"id": "phase.foundation.step01", "path": "Phase_1_Foundation/Step_01_Repetitive_Work.md"},
+            {"id": "phase.foundation.step02", "path": "Phase_1_Foundation/Step_02_Expertise_Targeting.md"}
+          ]
+        }
+      }
+    },
+    {
+      "id": "navigation",
+      "title": "옵시디언 빠른 네비게이션",
+      "content_type": "navigation",
+      "anchor": "#옵시디언-빠른-네비게이션"
+    },
+    {
+      "id": "solution_architecture",
+      "title": "솔루션 도메인별 아키텍처",
+      "content_type": "technical",
+      "anchor": "#솔루션-도메인별-아키텍처",
+      "subsections": [
+        {"id": "ai_analytics", "title": "AI & Analytics: AMS/CoCTK 엔진"},
+        {"id": "dps", "title": "Digital Transformation Platform: DPS"},
+        {"id": "energy", "title": "Energy Optimization"},
+        {"id": "sensors", "title": "Smart Sensors & IoT"}
+      ]
+    },
+    {
+      "id": "ams_achievements",
+      "title": "AMS 프로젝트 핵심 성과",
+      "content_type": "project",
+      "anchor": "#ams-프로젝트-핵심-성과",
+      "related_documents": ["page.portfolio.projects", "page.portfolio.testing"]
+    },
+    {
+      "id": "ams_architecture",
+      "title": "AMS 시스템 아키텍처",
+      "content_type": "technical",
+      "anchor": "#ams-시스템-아키텍처"
+    },
+    {
+      "id": "data_pipeline",
+      "title": "데이터 파이프라인",
+      "content_type": "technical",
+      "anchor": "#데이터-파이프라인"
+    },
+    {
+      "id": "database_design",
+      "title": "데이터베이스 설계",
+      "content_type": "technical",
+      "anchor": "#데이터베이스-설계"
+    },
+    {
+      "id": "obsidian_design",
+      "title": "obsidian_design_origin 시스템",
+      "content_type": "system",
+      "anchor": "#obsidian_design_origin-시스템"
+    },
+    {
+      "id": "ai_workflow",
+      "title": "AI Workflow & Automation",
+      "content_type": "system",
+      "anchor": "#ai-workflow--automation"
+    },
+    {
+      "id": "future_vision",
+      "title": "사무 자동화의 미래 비전",
+      "content_type": "vision",
+      "anchor": "#사무-자동화의-미래-비전"
+    },
+    {
+      "id": "platform_all",
+      "title": "Platform All: 통합 플랫폼 생태계",
+      "content_type": "ecosystem",
+      "anchor": "#platform-all-통합-플랫폼-생태계"
+    }
+  ],
+  "navigation_links": {
+    "quick_start": [
+      {"id": "page.portfolio.index", "title": "포트폴리오 인덱스"},
+      {"id": "page.portfolio.personal_profile", "title": "개인 프로필"}
+    ],
+    "project_info": [
+      {"id": "page.portfolio.projects", "title": "프로젝트 개요"},
+      {"id": "page.portfolio.academic", "title": "학술 논문"},
+      {"id": "page.portfolio.testing", "title": "테스트 컨텍스트"}
+    ],
+    "executive_summary": [
+      {"id": "exec.overview.non_technical", "title": "비전문가용 개요"},
+      {"id": "exec.achievements.key", "title": "핵심 성과"},
+      {"id": "exec.business.value", "title": "비즈니스 가치"}
+    ],
+    "phase_guides": [
+      {"id": "phase.foundation.step01", "title": "Step 1: 반복 업무 식별"},
+      {"id": "phase.foundation.step02", "title": "Step 2: 전문성 타겟팅"}
+    ],
+    "guides": [
+      {"id": "guide.id.system", "title": "ID 시스템 가이드"},
+      {"id": "guide.ai.workflow", "title": "AI 워크플로우 가이드"},
+      {"id": "page.portfolio.relationship_map", "title": "관계 맵"}
+    ]
+  },
+  "document_map": {
+    "page.portfolio.architecture": {
+      "filename": "Architecture_Overview.md",
+      "type": "navigation_hub",
+      "role": "포트폴리오 네비게이션 허브"
+    },
+    "page.portfolio.index": {
+      "filename": "00_Portfolio_Index.md",
+      "type": "index",
+      "role": "포트폴리오 전체 인덱스"
+    },
+    "page.portfolio.personal_profile": {
+      "filename": "00_Personal_Profile.md",
+      "type": "profile",
+      "role": "개인 프로필 및 기술 철학"
+    }
+  }
+}
+
