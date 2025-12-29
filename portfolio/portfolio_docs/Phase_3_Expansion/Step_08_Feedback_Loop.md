@@ -25,20 +25,36 @@
 
 ---
 
-## 🛠️ 피드백 메커니즘
+## 🛠️ 피드백 메커니즘 (Human-in-the-Loop)
+
+**핵심**: AI의 자동화된 평가뿐만 아니라, 결정적인 순간에는 **반드시 인간의 검증(Checkpoint)**이 개입해야 합니다.
 
 ```mermaid
 sequenceDiagram
-    participant Dev as "나 (권순룡)"
-    participant AI as "Evaluation Framework"
-    participant Field as "산업 현장 전문가"
+    participant Dev as "나 (User)"
+    participant AI as "AI Agent"
+    participant Field as "현장 전문가"
     
-    Dev->>AI: 코드 및 설계서 제출
-    AI->>Dev: 객관적 성능 평가 및 개선안 (Score: 92/100)
-    Dev->>Field: 시각적 자산 (Step 7) 공유
-    Field->>Dev: 실무적 한계 및 요구사항 피드백
-    Dev->>Dev: 시스템 고도화 및 업데이트 반영 (Step 9)
+    Dev->>AI: 1. 작업 지시 (Start)
+    AI->>AI: 2. 분석 및 초안 생성
+    AI->>Dev: 3. 🛑 승인 요청 (Checkpoint)
+    
+    alt 승인 (Approve)
+        Dev->>AI: 진행해!
+        AI->>AI: 4. 최종 산출물 생성
+        AI->>Field: 5. 산출물 공유
+        Field->>Dev: 6. 현장 피드백
+        Dev->>AI: 7. 수정 지시
+    else 거절 (Reject)
+        Dev->>AI: 다시 해 (Feedback)
+        AI->>AI: 2. 분석 및 초안 생성 (Loop)
+    end
 ```
+
+### 필수 점검 포인트 (Checkpoints)
+1. **분석 완료 직후**: "내가 의도한 파일들을 제대로 찾았는가?"
+2. **설계/계획 수립 후**: "이 계획대로 진행해도 안전한가?"
+3. **최종 생성 전**: "결과물의 품질이 기준을 충족하는가?"
 
 ---
 

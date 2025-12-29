@@ -141,6 +141,28 @@ python mcp_client_runner.py --tool scan_folder_files --args '{"folder_path": "/a
 
 ---
 
+## 🤖 에이전트 호출 (Human-in-the-Loop)
+
+이 에이전트는 **대화형(Human-in-the-Loop)** 방식으로 가장 잘 작동합니다. 
+아래 프롬프트를 복사하여 Claude에게 전달하면, 에이전트가 스스로 분석을 시작하고 필요한 시점에 검토를 요청합니다.
+
+### 📋 원클릭 시작 프롬프트
+
+> **"현재 `background` 폴더에 있는 프로젝트 문서들을 분석해서 리포트를 만들어줘. 
+> 파일 스캔부터 파싱, 그리고 최종 리포트 생성까지 단계별로 진행하고, 
+> 각 단계마다 내가 검토(Confirm)할 수 있도록 진행 상황을 알려줘."**
+
+### 🔄 진행 프로세스 (Interaction Flow)
+1. **User**: 위 프롬프트 입력
+2. **Agent**: `scan_folder_files`로 목록 확인 후 보고 → **(사용자 승인 대기)**
+3. **User**: "진행해"
+4. **Agent**: `batch_parse_folder`로 데이터 변환 및 분석
+5. **Agent**: 초안 리포트 생성 및 주요 리스크 요약 → **(사용자 피드백 요청)**
+6. **User**: 피드백 제공 (수정 요청 등)
+7. **Agent**: 최종 리포트 파일 생성 (`templates/` 폴더)
+
+---
+
 ## 📊 워크플로우 (Workflow)
 
 1.  **Input**: 사용자가 `background` 폴더에 문서를 넣습니다.

@@ -11,19 +11,18 @@
 
 ```mermaid
 graph TB
+    subgraph "Governance & Quality Assurance Layer"
+        EVAL["Evaluation Framework<br/>(System-wide Validator)"]
+        PROMPT["Prompt Eval Engine<br/>(AI Gatekeeper)"]
+        PM["PM Agent<br/>(Execution Manager)"]
+    end
+
     subgraph "9단계 실행 가이드"
-        S1["Step 1: 반복 업무 식별"]
-        S2["Step 2: 전문성 타겟팅"]
-        S3["Step 3: 초소형 시작"]
-        S4["Step 4: 모듈화"]
-        S5["Step 5: I/O 최적화"]
-        S6["Step 6: 데일리 로그"]
-        S7["Step 7: 시각 자산"]
-        S8["Step 8: 피드백 루프"]
-        S9["Step 9: 지속 업데이트"]
+        S1 --> S2 --> S3 --> S4 --> S5
+        S5 --> S6 --> S7 --> S8 --> S9
     end
     
-    subgraph "핵심 프로젝트"
+    subgraph "핵심 프로젝트 (Implementation)"
         AMS["AMS: 이상 탐지"]
         DPS["DPS: AI 플랫폼"]
         CoCTK["CoCTK: 데이터 분석"]
@@ -43,9 +42,12 @@ graph TB
         T3["일본 글로벌 기업"]
     end
     
-    S1 --> S2 --> S3 --> S4 --> S5
-    S5 --> S6 --> S7 --> S8 --> S9
+    %% Governance Relations - The Overseers
+    EVAL == "Validates All" ==> AMS & DPS & CoCTK & SENSOR & ENERGY
+    PROMPT == "Optimizes Inputs" ==> S1 & S4
+    PM == "Manages Lifecycle" ==> S1 & S6 & S8
     
+    %% Standard Project Relations
     S1 -. "implements" .-> AMS
     S1 -. "implements" .-> DPS
     S3 -. "implements" .-> SENSOR
@@ -60,10 +62,9 @@ graph TB
     DPS -. "proves" .-> T2
     SENSOR -. "proves" .-> T3
     
-    style S1 fill:#e1f5ff
-    style AMS fill:#fff4e1
-    style P1 fill:#e8f5e9
-    style T1 fill:#fce4ec
+    style EVAL fill:#ffcdd2,stroke:#d32f2f,stroke-width:3px
+    style PROMPT fill:#e1bee7,stroke:#7b1fa2,stroke-width:3px
+    style PM fill:#bbdefb,stroke:#1976d2,stroke-width:3px
 ```
 
 ---
@@ -399,6 +400,7 @@ graph TB
 - `template.project.summary` - 프로젝트 요약 템플릿
 - `phase.foundation.step01` - Step 1 문서
 - `project.ams` - AMS 프로젝트
+- `project.pm_agent` - PM Agent (사업 관리)
 
 **관련 문서**: [[00_ID_System_Guide|ID 시스템 가이드]] (`guide.id.system`)
 

@@ -1,0 +1,473 @@
+{
+    "metadata": {
+        "title": "PM 템플릿 문서 관계도",
+        "version": "2.0",
+        "created": "2025-12-29",
+        "updated": "2025-12-29",
+        "description": "프로젝트 단계별 문서 간 관계 및 의존성 정의"
+    },
+    "phases": {
+        "pre_sales": {
+            "id": "phase0",
+            "name": "영업/제안",
+            "documents": [
+                {
+                    "id": "doc_rfp_response",
+                    "name": "제안요청서 응답",
+                    "path": "0_pre_sales/rfp_response.md"
+                },
+                {
+                    "id": "doc_proposal",
+                    "name": "제안서",
+                    "path": "0_pre_sales/proposal.md"
+                }
+            ]
+        },
+        "initiation": {
+            "id": "phase1",
+            "name": "프로젝트 착수",
+            "documents": [
+                {
+                    "id": "doc_charter",
+                    "name": "프로젝트 헌장",
+                    "path": "1_project_initiation/01_project_charter/template.md"
+                },
+                {
+                    "id": "doc_sow",
+                    "name": "과업지시서",
+                    "path": "1_project_initiation/07_sow/sow_template.md"
+                },
+                {
+                    "id": "doc_quotation",
+                    "name": "견적서",
+                    "path": "1_project_initiation/05_quotation/quotation_template.md"
+                },
+                {
+                    "id": "doc_cost",
+                    "name": "사업비 산출내역서",
+                    "path": "1_project_initiation/05_quotation/cost_calculation.md"
+                },
+                {
+                    "id": "doc_fp",
+                    "name": "FP 산정표",
+                    "path": "1_project_initiation/05_quotation/fp_estimation.md"
+                },
+                {
+                    "id": "doc_contract",
+                    "name": "계약서",
+                    "path": "1_project_initiation/06_contract/contract_template.md"
+                },
+                {
+                    "id": "doc_pmp",
+                    "name": "프로젝트 관리 계획서",
+                    "path": "1_project_initiation/02_project_management_plan/PMP_template.md"
+                },
+                {
+                    "id": "doc_wbs",
+                    "name": "WBS",
+                    "path": "1_project_initiation/02_project_management_plan/WBS_template.md"
+                },
+                {
+                    "id": "doc_brd",
+                    "name": "BRD",
+                    "path": "1_project_initiation/03_requirements/BRD_template.md"
+                },
+                {
+                    "id": "doc_frd",
+                    "name": "FRD",
+                    "path": "1_project_initiation/03_requirements/FRD_template.md"
+                },
+                {
+                    "id": "doc_rtm",
+                    "name": "RTM",
+                    "path": "1_project_initiation/03_requirements/RTM_template.md"
+                },
+                {
+                    "id": "doc_design",
+                    "name": "설계서",
+                    "path": "1_project_initiation/04_design/design_template.md"
+                }
+            ]
+        },
+        "execution": {
+            "id": "phase2",
+            "name": "프로젝트 수행",
+            "documents": [
+                {
+                    "id": "doc_weekly",
+                    "name": "주간 보고서",
+                    "path": "2_project_execution/01_status_report/weekly_report.md"
+                },
+                {
+                    "id": "doc_monthly",
+                    "name": "월간 보고서",
+                    "path": "2_project_execution/01_status_report/monthly_report.md"
+                },
+                {
+                    "id": "doc_raid",
+                    "name": "RAID 로그",
+                    "path": "2_project_execution/02_raid_log/RAID_template.md"
+                },
+                {
+                    "id": "doc_issue",
+                    "name": "이슈 리스트",
+                    "path": "2_project_execution/05_issue_list/issue_list.md"
+                },
+                {
+                    "id": "doc_cr",
+                    "name": "변경요청서",
+                    "path": "2_project_execution/03_change_request/CR_template.md"
+                },
+                {
+                    "id": "doc_meeting",
+                    "name": "회의록",
+                    "path": "2_project_execution/04_meeting/meeting_template.md"
+                },
+                {
+                    "id": "doc_comm",
+                    "name": "커뮤니케이션 로그",
+                    "path": "2_project_execution/06_communication/communication_log.md"
+                },
+                {
+                    "id": "doc_stakeholder",
+                    "name": "이해관계자 매트릭스",
+                    "path": "2_project_execution/06_communication/stakeholder_matrix.md"
+                },
+                {
+                    "id": "doc_add_req",
+                    "name": "추가 요구사항 명세서",
+                    "path": "2_project_execution/07_requirements_change/additional_requirements.md"
+                },
+                {
+                    "id": "doc_change_history",
+                    "name": "요구사항 변경 이력",
+                    "path": "2_project_execution/07_requirements_change/change_history.md"
+                },
+                {
+                    "id": "doc_impact",
+                    "name": "수정 영향 분석서",
+                    "path": "2_project_execution/07_requirements_change/impact_analysis.md"
+                },
+                {
+                    "id": "doc_scope_change",
+                    "name": "범위 변경 합의서",
+                    "path": "2_project_execution/07_requirements_change/scope_change_agreement.md"
+                }
+            ]
+        },
+        "closure": {
+            "id": "phase3",
+            "name": "프로젝트 종료",
+            "documents": [
+                {
+                    "id": "doc_uat",
+                    "name": "UAT 결과",
+                    "path": "3_project_closure/01_uat_result/UAT_report.md"
+                },
+                {
+                    "id": "doc_handover",
+                    "name": "운영 인수인계",
+                    "path": "3_project_closure/02_operation_handover/"
+                },
+                {
+                    "id": "doc_sla",
+                    "name": "SLA",
+                    "path": "3_project_closure/03_sla/SLA_template.md"
+                },
+                {
+                    "id": "doc_maint",
+                    "name": "유지보수 계약",
+                    "path": "3_project_closure/04_maintenance/maintenance_contract.md"
+                },
+                {
+                    "id": "doc_closure",
+                    "name": "종료 보고서",
+                    "path": "3_project_closure/05_closure_report/closure_report.md"
+                },
+                {
+                    "id": "doc_training",
+                    "name": "교육 자료",
+                    "path": "3_project_closure/06_training/training_material.md"
+                },
+                {
+                    "id": "doc_nps",
+                    "name": "고객 만족도",
+                    "path": "3_project_closure/07_customer_satisfaction/nps_survey.md"
+                },
+                {
+                    "id": "doc_accept",
+                    "name": "최종 인수증",
+                    "path": "3_project_closure/08_acceptance/acceptance_form.md"
+                }
+            ]
+        },
+        "verification": {
+            "id": "phase4",
+            "name": "검증 체크리스트",
+            "documents": [
+                {
+                    "id": "doc_phase1",
+                    "name": "Phase 1 핵심산출물",
+                    "path": "4_verification_checklist/phase1_core_deliverables.md"
+                },
+                {
+                    "id": "doc_phase2",
+                    "name": "Phase 2 운영인수인계",
+                    "path": "4_verification_checklist/phase2_operation_handover.md"
+                },
+                {
+                    "id": "doc_phase3",
+                    "name": "Phase 3 검수품질",
+                    "path": "4_verification_checklist/phase3_quality.md"
+                },
+                {
+                    "id": "doc_phase4",
+                    "name": "Phase 4 계약법무",
+                    "path": "4_verification_checklist/phase4_contract.md"
+                },
+                {
+                    "id": "doc_phase5",
+                    "name": "Phase 5 교육지식이전",
+                    "path": "4_verification_checklist/phase5_training.md"
+                },
+                {
+                    "id": "doc_phase6",
+                    "name": "Phase 6 최종인수",
+                    "path": "4_verification_checklist/phase6_acceptance.md"
+                },
+                {
+                    "id": "doc_phase7",
+                    "name": "Phase 7 문서정리",
+                    "path": "4_verification_checklist/phase7_documentation.md"
+                },
+                {
+                    "id": "doc_phase8",
+                    "name": "Phase 8 향후개선",
+                    "path": "4_verification_checklist/phase8_improvement.md"
+                },
+                {
+                    "id": "doc_phase9",
+                    "name": "Phase 9 최종보고",
+                    "path": "4_verification_checklist/phase9_final_report.md"
+                },
+                {
+                    "id": "doc_phase10",
+                    "name": "Phase 10 운영이관",
+                    "path": "4_verification_checklist/phase10_transition.md"
+                }
+            ]
+        }
+    },
+    "relationships": [
+        {
+            "from": "doc_rfp_response",
+            "to": "doc_proposal",
+            "type": "input",
+            "description": "RFP 분석이 제안서 기초"
+        },
+        {
+            "from": "doc_proposal",
+            "to": "doc_quotation",
+            "type": "precedes",
+            "description": "제안서 승인 후 견적"
+        },
+        {
+            "from": "doc_proposal",
+            "to": "doc_sow",
+            "type": "input",
+            "description": "제안 범위가 과업지시서 기초"
+        },
+        {
+            "from": "doc_sow",
+            "to": "doc_charter",
+            "type": "input",
+            "description": "과업지시서가 헌장의 기초"
+        },
+        {
+            "from": "doc_sow",
+            "to": "doc_quotation",
+            "type": "input",
+            "description": "과업범위가 견적 기초"
+        },
+        {
+            "from": "doc_fp",
+            "to": "doc_cost",
+            "type": "input",
+            "description": "FP 산정이 비용 산출 기초"
+        },
+        {
+            "from": "doc_cost",
+            "to": "doc_quotation",
+            "type": "input",
+            "description": "산출내역이 견적 구성"
+        },
+        {
+            "from": "doc_quotation",
+            "to": "doc_contract",
+            "type": "precedes",
+            "description": "견적 승인 후 계약"
+        },
+        {
+            "from": "doc_contract",
+            "to": "doc_pmp",
+            "type": "triggers",
+            "description": "계약 후 PMP 수립"
+        },
+        {
+            "from": "doc_charter",
+            "to": "doc_pmp",
+            "type": "input",
+            "description": "헌장이 PMP 기초"
+        },
+        {
+            "from": "doc_pmp",
+            "to": "doc_wbs",
+            "type": "contains",
+            "description": "PMP에 WBS 포함"
+        },
+        {
+            "from": "doc_sow",
+            "to": "doc_brd",
+            "type": "input",
+            "description": "과업범위에서 요구사항 도출"
+        },
+        {
+            "from": "doc_brd",
+            "to": "doc_frd",
+            "type": "refines",
+            "description": "BR에서 FR 상세화"
+        },
+        {
+            "from": "doc_frd",
+            "to": "doc_rtm",
+            "type": "tracked_by",
+            "description": "FR을 RTM에서 추적"
+        },
+        {
+            "from": "doc_frd",
+            "to": "doc_design",
+            "type": "input",
+            "description": "FR 기반 설계"
+        },
+        {
+            "from": "doc_wbs",
+            "to": "doc_weekly",
+            "type": "tracks",
+            "description": "WBS 기반 주간 보고"
+        },
+        {
+            "from": "doc_weekly",
+            "to": "doc_monthly",
+            "type": "aggregates",
+            "description": "주간을 월간으로 집계"
+        },
+        {
+            "from": "doc_raid",
+            "to": "doc_issue",
+            "type": "contains",
+            "description": "RAID에 이슈 포함"
+        },
+        {
+            "from": "doc_cr",
+            "to": "doc_rtm",
+            "type": "updates",
+            "description": "CR이 RTM 업데이트"
+        },
+        {
+            "from": "doc_meeting",
+            "to": "doc_raid",
+            "type": "generates",
+            "description": "회의에서 RAID 생성"
+        },
+        {
+            "from": "doc_comm",
+            "to": "doc_stakeholder",
+            "type": "references",
+            "description": "이해관계자별 커뮤니케이션"
+        },
+        {
+            "from": "doc_add_req",
+            "to": "doc_impact",
+            "type": "triggers",
+            "description": "추가 요구사항이 영향 분석 촉발"
+        },
+        {
+            "from": "doc_impact",
+            "to": "doc_scope_change",
+            "type": "precedes",
+            "description": "영향 분석 후 범위 변경 합의"
+        },
+        {
+            "from": "doc_scope_change",
+            "to": "doc_change_history",
+            "type": "updates",
+            "description": "합의 내용이 변경 이력에 기록"
+        },
+        {
+            "from": "doc_add_req",
+            "to": "doc_change_history",
+            "type": "updates",
+            "description": "추가 요구가 변경 이력에 기록"
+        },
+        {
+            "from": "doc_change_history",
+            "to": "doc_rtm",
+            "type": "updates",
+            "description": "변경 이력이 RTM 업데이트"
+        },
+        {
+            "from": "doc_cr",
+            "to": "doc_add_req",
+            "type": "triggers",
+            "description": "CR이 추가 요구사항 명세 촉발"
+        },
+        {
+            "from": "doc_rtm",
+            "to": "doc_uat",
+            "type": "validates",
+            "description": "RTM으로 UAT 검증"
+        },
+        {
+            "from": "doc_design",
+            "to": "doc_handover",
+            "type": "input",
+            "description": "설계가 인수인계 입력"
+        },
+        {
+            "from": "doc_uat",
+            "to": "doc_accept",
+            "type": "precedes",
+            "description": "UAT 후 인수"
+        },
+        {
+            "from": "doc_contract",
+            "to": "doc_sla",
+            "type": "references",
+            "description": "계약 기반 SLA"
+        },
+        {
+            "from": "doc_sla",
+            "to": "doc_maint",
+            "type": "input",
+            "description": "SLA가 유지보수 기준"
+        },
+        {
+            "from": "doc_training",
+            "to": "doc_handover",
+            "type": "supports",
+            "description": "교육이 인수인계 지원"
+        },
+        {
+            "from": "doc_accept",
+            "to": "doc_closure",
+            "type": "triggers",
+            "description": "인수 후 종료 보고"
+        },
+        {
+            "from": "doc_nps",
+            "to": "doc_closure",
+            "type": "input",
+            "description": "만족도가 종료보고 입력"
+        }
+    ]
+}

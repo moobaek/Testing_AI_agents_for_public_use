@@ -49,12 +49,9 @@ PDF 포트폴리오 분석을 통해 확인된 13개 이상의 주요 프로젝�
 |:---|:---|:---|:---|
 | **Original_Development_Plan (Obsidian Design Origin)** (`project.obsidian_design_origin`) | 2020~2025<br/>(집중 개발: 2025.5~7, 2025.8~10, 2025.10~12)<br/>내부 개발 | ID 기반 온톨로지 맵, Phase 0-13 워크플로우, State 기반 정보 전달, 코드 에이전트 통합, 전문가 요약 시스템, 21개 development 프롬프트 | **전체 에이전트 시스템 설계 (PM 활동에서 문서, 개발 진행 관리에 활용)**, 코드 에이전트 + 문서 확인 + 프롬프트 보완 통합, 298개+ 설계 문서, 25개+ AI 프롬프트 체인, 21개 development 프롬프트(수정 관리 시스템 포함), 개발 에이전트 실시간 평가 시스템, 연속 개발 워크플로우 |
 | **FMEA 자동화 생성 시스템 (Claude Sub-Agent)** (`project.fmea_claude_agent`) | 2024~2025<br/>내부 개발 | Claude Code Task tool, Multi-Agent Workflow, 8개 Sub-Agent 협업 | **Master Orchestrator 설계**, 코딩 에이전트의 역설계 시스템 구조 적용, AIAG & VDA FMEA 표준 기반 범용 리스크 분석 시스템, Phase 0~5 자동화 워크플로우, **코드 에이전트에서 영감을 받은 전체 공장/회사/사무 자동화의 백정보 핵심** |
-| **프롬프트 평가 엔진 (Claude Sub-Agent)** (`project.prompt_eval_claude_agent`) | 2024~2025<br/>내부 개발 | 구조화된 평가 프레임워크, 역할 기반 가중치, Human-in-the-Loop | **프롬프트 저지 시스템 설계**, AI 생성 프롬프트를 다른 AI가 평가하는 이중 검증, 25개+ 프롬프트 품질 보장, 5단계 평가 프로세스, 배치 처리 지원 |
-| **factory_ontology_manager** (`project.factory_ontology`) | 2024~2025<br/>내부 개발 | React, TypeScript, Supabase, 드래그 앤 드롭 인터페이스 | shapez.io 게임에서 영감을 받은 시각적 팩토리 온톨로지 관리 시스템, 계층적 구조(공장>작업장>생산라인>공정) 관리 |
-| **pipeline_system_complete** (`project.pipeline_system`) | 2024~2025<br/>내부 개발 | React, TypeScript, Supabase, 시계열 데이터 처리 | 8단계 시계열 데이터 파이프라인 시스템, 219개 Markdown + 25개 TSX + 17개 TS 파일 |
-| **TAM_Hub** (`project.tam_hub`) | 2024~2025<br/>내부 개발 | MCP 서버, Obsidian Design Origin, 32개 Python 파일 | 기술 자산 관리 허브, MCP 서버 통합(AMS 엔진, progressing_engine), 263개 Markdown 문서 |
-| **Evaluation_Framework** (`project.evaluation_framework`) | 2024~2025<br/>내부 개발 | Python, FastAPI, LangGraph, React, Docker | AI 에이전트 평가 프레임워크 웹 애플리케이션, 49개 Python 파일, 298개 Markdown 문서, 6가지 관점 평가 시스템 |
-| **all_platform_center** (`project.platform_center`) | 2024~2025<br/>내부 개발 | React, TypeScript, Supabase, 통합 대시보드 | 통합 플랫폼 센터, 모든 플랫폼의 중앙 관리 시스템, 사용자 인증 및 권한 관리 |
+| **Evaluation_Framework** (`project.evaluation_framework`) | 2024~2025<br/>내부 개발 | Python, FastAPI, LangGraph, React, Docker | **System-Wide Quality Assurance Layer**: 49개 Python 모듈과 298개 문서 전체를 전수 검사하는 거대 평가 엔진 (6가지 관점 평가 수행), 단순 프로젝트가 아닌 전체 아키텍처의 건전성을 책임짐 |
+| **프롬프트 평가 엔진 (Claude Sub-Agent)** (`project.prompt_eval_claude_agent`) | 2024~2025<br/>내부 개발 | 구조화된 평가 프레임워크, 역할 기반 가중치, Human-in-the-Loop | **AI Gatekeeper**: 모든 AI 생성물의 '입구'를 통제하는 심사관. 25개+ 프롬프트의 품질을 승인/반려하는 권한을 가짐. AI 생성 프롬프트를 다른 AI가 평가하는 이중 검증(Double-Check) 시스템 |
+| **PM Agent (Business Management Sub-Agent)** (`project.pm_agent`) | 2024~2025<br/>내부 개발 | MCP (Model Context Protocol), Docker, Claude Agent, HWP 파서 | **Execution Manager & Governance**: 사업 관리의 '전체 라이프사이클'을 관장.<br/>1. **Risk Management**: 계약서/과업지시서 내 독소 조항 자동 추출 및 리스크 평가<br/>2. **Schedule Tracking**: 회의록 분석을 통한 타임라인 자동 현행화<br/>3. **Integrity Check**: 누락된 문서나 데이터 파편화를 방지하는 무결성 검증 |
 
 ## 7. 미래 프로젝트: 사무 자동화 업그레이드 (`section.projects.future`)
 | 프로젝트명 | 기간 | 핵심 기술 | 목표 |
@@ -90,5 +87,5 @@ PDF 포트폴리오 분석을 통해 확인된 13개 이상의 주요 프로젝�
   - Sensors & IoT: `project.smart_sensors`, `project.ai_composite_sensor`, `project.virtual_sensor`, `project.seah.data_integration`
   - Safety & Energy: `project.cleanroom_energy`, `project.energy_pattern`, `project.power_prediction`, `project.digital_twin_safety`, `project.power_quality`
   - Healthcare: `project.medical_constitution`
-  - AI Workflow: `project.fmea_claude_agent`, `project.prompt_eval_claude_agent`
+  - AI Workflow: `project.fmea_claude_agent`, `project.prompt_eval_claude_agent`, `project.pm_agent`
   - Future: `project.office_automation_upgrade`
