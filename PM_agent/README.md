@@ -1,12 +1,39 @@
 # PM Agent (Project Management AI Assistant) 🚀
 
+---
+**Obsidian Structure:**
+`@Testing_AI_agents_for_public_use/PM_agent/README`
+---
+
 **PM Agent**는 프로젝트 관리자가 다루는 비정형 문서(계약서, 회의록, 과업지시서 등)를 **AI와 MCP(Model Context Protocol)** 기술을 활용하여 자동으로 분석하고, 체계적인 프로젝트 산출물(리포트)로 변환해주는 지능형 에이전트 시스템입니다.
 
 단순한 텍스트 변환을 넘어, **"읽고(Parsing) → 검증하고(Integrity) → 이해하여(Insight)"** 핵심 리스크와 액션 아이템을 도출합니다.
 
 ---
 
-## 🏗️ 프로젝트 구조 (Directory Structure)
+## 🏗️ 시스템 아키텍처 (System Architecture)
+
+```mermaid
+flowchart TB
+    User[👤 Project Manager] -->|Documents| Agent[🤖 PM Agent]
+    
+    subgraph "Core System (Git Tracked)"
+        Agent -->|Control| Prompts[📜 System Prompts]
+        Prompts -->|Orchestrate| MCP_Server[⚡ MCP Server (Docker)]
+        MCP_Server -->|Tools| Parsers[🛠️ Parsers (HWP/DOCX/XLS)]
+        MCP_Server -->|Audit| Integrity[🛡️ Integrity Checker]
+    end
+    
+    subgraph "Data Layer (Local Only)"
+        MCP_Server <-->|Read/Write| Background[🔒 Raw Documents]
+        Agent -->|Generate| Templates[📄 Structured Reports]
+    end
+    
+    Parsers -->|JSON| Agent
+    Integrity -->|Report| Agent
+```
+
+## 📂 프로젝트 구조 (Directory Structure)
 
 이 프로젝트는 데이터(보안)와 로직(시스템)이 철저히 분리되어 있습니다.
 
@@ -41,6 +68,31 @@ PM_agent/
 ### 3. 적응형 파싱 (Adaptive Parsing) 🔄
 - 파일 인코딩(EUC-KR/UTF-8) 오류나 포맷 문제를 AI가 스스로 진단합니다.
 - `read_file_chunk` 도구로 헤더를 미리 읽어보고, 올바른 방식으로 다시 시도합니다.
+
+### 🔄 데이터 처리 파이프라인 (Processing Flow)
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant A as Agent (Claude)
+    participant M as MCP Server
+    participant F as File System
+
+    U->>A: "이 폴더 분석해줘"
+    A->>M: scan_folder_files()
+    M->>F: 파일 목록 스캔 (무결성 검증)
+    F-->>M: 유효 파일 리스트
+    M-->>A: [Total: 10, Valid: 10]
+    
+    A->>M: batch_parse_folder()
+    M->>F: 파일 내용 파싱
+    F-->>M: Raw Data
+    M-->>A: JSON Data
+    
+    A->>A: Cross-Check (Scan vs Parse)
+    A->>A: Deep Analysis & Insight
+    A->>U: Final Report (MD)
+```
 
 ---
 
