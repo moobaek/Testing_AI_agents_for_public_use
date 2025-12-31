@@ -233,7 +233,7 @@
 - [[00_Portfolio_Index|포트폴리오 인덱스]] (`page.portfolio.index`) - 전체 포트폴리오 개요
 - [[02_Projects_Overview|프로젝트 개요]] (`page.portfolio.projects`) - 20개 이상 프로젝트 상세
 - [[Executive_Summary/01_Key_Achievements|핵심 성과]] (`page.portfolio.achievements`) - 5년간의 성과 요약
-- [[04_Academic_Publications|학술 논문]] (`page.portfolio.academic`) - 9편 논문 목록
+- [[04_Academic_Publications|학술 논문]] (`page.portfolio.academic`) - 10편 논문 목록
 
 ### 기술 문서
 - [[Architecture_Overview|아키텍처 개요]] (`page.portfolio.architecture`) - 시스템 아키텍처 상세
