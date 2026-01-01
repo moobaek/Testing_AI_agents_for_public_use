@@ -19,14 +19,22 @@ graph TD
     CHECK1 -->|No| ERROR1[Error: Step 1 Failed]
 
     STEP2 --> CHECK2{Step 2 Done?}
-    CHECK2 -->|Yes| PARALLEL{병렬 생성}
+    CHECK2 -->|Yes| CHECK3{자기소개서<br/>필요?}
     CHECK2 -->|No| ERROR2[Error: Step 2 Failed]
+
+    CHECK3 -->|Yes| PARALLEL{병렬 생성}
+    CHECK3 -->|No| PARALLEL2{병렬 생성<br/>이력서+포폴만}
 
     PARALLEL --> STEP3A[Step 3: Generate Resume]
     PARALLEL --> STEP3B[Step 4: Generate Integrated Portfolio]
+    PARALLEL --> STEP5[Step 5: Generate Cover Letter]
+
+    PARALLEL2 --> STEP3A
+    PARALLEL2 --> STEP3B
 
     STEP3A --> MERGE[통합 검증]
     STEP3B --> MERGE
+    STEP5 --> MERGE
 
     MERGE --> REVIEW[사용자 리뷰]
     REVIEW --> DECIDE{승인?}
@@ -47,7 +55,7 @@ graph TD
 
 ## Role
 
-You are the **Resume Generator Chain Orchestrator**. You manage the 4-step process to generate customized resume and integrated portfolio based on job descriptions.
+You are the **Resume Generator Chain Orchestrator**. You manage the 5-step process to generate customized resume, integrated portfolio, and cover letter based on job descriptions.
 
 ## Task
 
@@ -59,13 +67,19 @@ You are the **Resume Generator Chain Orchestrator**. You manage the 4-step proce
    - Input: `job_description_analysis.json` + portfolio documents
    - Output: `resume_generator/data/temp/portfolio_job_matching.json`
 
-3. **Execute Step 3 & 4 (Parallel)**: Call both prompts simultaneously
+3. **Execute Step 3, 4 & 5 (Parallel)**: Call prompts simultaneously
    - Step 3: `3_Generate_Resume.md` → `resume_generator/data/temp/resume_content.md`
    - Step 4: `4_Generate_Integrated_Portfolio.md` → `resume_generator/data/temp/integrated_portfolio_content.md`
+   - Step 5: `5_Generate_Cover_Letter.md` → `resume_generator/data/temp/cover_letter_content.md` (조건부: `cover_letter_sections.required`가 `true`일 때만)
 
-4. **Validate & Review**: Present generated documents to user
+4. **Final Cleanup**: Remove strikethrough and other unwanted markdown syntax from generated documents
 
-5. **Finalize**: Save final documents to `assets/` folder
+5. **Validate & Review**: Present generated documents to user
+
+6. **Finalize**: Save final documents to `assets/[회사명]/` folder
+   - 회사명 폴더 생성 (없으면 생성)
+   - 파일 저장
+   - PDF 변환 (선택사항)
 
 ## Input
 
@@ -75,17 +89,19 @@ You are the **Resume Generator Chain Orchestrator**. You manage the 4-step proce
 
 ## Output
 
-- **Final Resume**: `assets/[회사명]_이력서_[직무].md`
-- **Final Portfolio**: `assets/[회사명]_포트폴리오_통합문서.md`
+- **Final Resume**: `assets/[회사명]/권순룡_이력서_[회사명]_[직무].md`
+- **Final Portfolio**: `assets/[회사명]/권순룡_포트폴리오_[회사명]_[직무].md`
+- **Final Cover Letter**: `assets/[회사명]/권순룡_자기소개서_[회사명]_[직무].md` (조건부)
 - **PDF Files** (optional):
-  - `assets/[회사명]_이력서_[직무]_mermaid.pdf`
-  - `assets/[회사명]_포트폴리오_통합문서_mermaid.pdf`
+  - `assets/[회사명]/권순룡_이력서_[회사명]_[직무].pdf`
+  - `assets/[회사명]/권순룡_포트폴리오_[회사명]_[직무].pdf`
+  - `assets/[회사명]/권순룡_자기소개서_[회사명]_[직무].pdf` (조건부)
 
 ## Enforcement Rules
 
 > [!CRITICAL]
 > **SEQUENCE ENFORCEMENT**
-> You CANNOT skip steps. Step 2 requires Step 1 completion. Step 3 & 4 require Step 2 completion.
+> You CANNOT skip steps. Step 2 requires Step 1 completion. Step 3, 4, 5 require Step 2 completion.
 
 > [!IMPORTANT]
 > **OUTPUT VALIDATION**
@@ -94,10 +110,16 @@ You are the **Resume Generator Chain Orchestrator**. You manage the 4-step proce
 > - Step 2: Valid JSON file with matching scores
 > - Step 3: Valid Markdown with Mermaid diagrams
 > - Step 4: Valid Markdown with Mermaid diagrams
+> - Step 5: Valid Markdown (조건부: `cover_letter_sections.required`가 `true`일 때만)
 
 > [!IMPORTANT]
 > **PARALLEL EXECUTION**
-> Step 3 and Step 4 should run in parallel for efficiency. Use multiple tool calls in a single message.
+> Step 3, 4, and 5 should run in parallel for efficiency. Use multiple tool calls in a single message.
+> Step 5 is conditional: only execute if `cover_letter_sections.required` is `true`.
+
+> [!CRITICAL]
+> **FINAL CLEANUP**
+> Step 3 & 4 완료 후 반드시 Final Cleanup 단계를 실행하여 취소선(`~~텍스트~~`) 및 기타 불필요한 마크다운 문법을 제거해야 함.
 
 ## Execution Flow
 
@@ -187,33 +209,84 @@ You are the **Resume Generator Chain Orchestrator**. You manage the 4-step proce
 - ✅ Mermaid 다이어그램 5개 이상 포함
 - ✅ 필수 섹션 포함 (구조도, 성과대시보드, 타임라인, 프로젝트, LLM활용)
 
+### Step 5: Generate Cover Letter (조건부 실행)
+
+**프롬프트**: `resume_generator/prompts/5_Generate_Cover_Letter.md`
+
+**실행 조건**:
+- `job_description_analysis.json`의 `cover_letter_sections.required`가 `true`인 경우에만 실행
+
+**입력**:
+- `resume_generator/data/temp/job_description_analysis.json` (Step 1 출력)
+- `resume_generator/data/temp/portfolio_job_matching.json` (Step 2 출력)
+- `resume_generator/templates/Cover_Letter_Structure_Template.md`
+- `00_Personal_Profile.md` (개인 정보)
+
+**출력 확인**:
+- `resume_generator/data/temp/cover_letter_content.md` 파일 존재 확인
+- Markdown 형식 유효성 검증
+- 각 항목이 `max_length` 이내인지 확인
+- 취소선 문법이 포함되지 않았는지 확인
+
+**성공 조건**:
+- ✅ `cover_letter_content.md` 파일 존재
+- ✅ Markdown 형식 유효
+- ✅ 모든 항목이 `max_length` 이내
+- ✅ 취소선 문법 없음
+- ✅ 순룡 페르소나 스타일 적용됨
+
+### Final Cleanup (최종 정리)
+
+**생성된 마크다운 파일에서 자동으로 제거**:
+1. 취소선 문법 (`~~텍스트~~` → `텍스트`)
+2. 빈 줄 3개 이상 연속 → 2개로 통일
+3. 불필요한 공백 제거
+4. 마크다운 문법 오류 수정
+
+**처리 파일**:
+- `resume_generator/data/temp/resume_content.md`
+- `resume_generator/data/temp/integrated_portfolio_content.md`
+- `resume_generator/data/temp/cover_letter_content.md` (조건부)
+
+**성공 조건**:
+- ✅ 취소선 문법이 모두 제거됨
+- ✅ 문서 형식이 정리됨
+- ✅ 불필요한 공백이 제거됨
+
 ### User Review & Approval
 
 **사용자에게 제시**:
-- `resume_generator/data/temp/resume_content.md` 미리보기
-- `resume_generator/data/temp/integrated_portfolio_content.md` 미리보기
+- `resume_generator/data/temp/resume_content.md` 미리보기 (정리 후)
+- `resume_generator/data/temp/integrated_portfolio_content.md` 미리보기 (정리 후)
+- `resume_generator/data/temp/cover_letter_content.md` 미리보기 (정리 후, 조건부)
 
 **사용자 선택**:
 - **승인**: 최종 파일 저장 및 PDF 변환
-- **수정 요청**: 피드백 수집 후 Step 3 & 4 재실행
+- **수정 요청**: 피드백 수집 후 Step 3, 4, 5 재실행
 
 ### Finalization
 
 **파일 저장**:
-1. `assets/` 폴더로 복사:
-   - `resume_content.md` → `assets/[회사명]_이력서_[직무].md`
-   - `integrated_portfolio_content.md` → `assets/[회사명]_포트폴리오_통합문서.md`
+1. **회사명 폴더 생성**: `assets/[회사명]/` 폴더가 없으면 생성
+   - 회사명은 `job_description_analysis.json`의 `company` 필드에서 가져옴
+   
+2. `assets/[회사명]/` 폴더로 복사:
+   - `resume_content.md` → `assets/[회사명]/권순룡_이력서_[회사명]_[직무].md`
+   - `integrated_portfolio_content.md` → `assets/[회사명]/권순룡_포트폴리오_[회사명]_[직무].md`
+   - `cover_letter_content.md` → `assets/[회사명]/권순룡_자기소개서_[회사명]_[직무].md` (조건부)
 
-2. PDF 변환 (선택사항):
+3. PDF 변환 (선택사항):
    ```bash
-   cd assets/
-   node convert-to-pdf.js "[회사명]_이력서_[직무].md" "[회사명]_이력서_[직무]_mermaid.pdf"
-   node convert-to-pdf.js "[회사명]_포트폴리오_통합문서.md" "[회사명]_포트폴리오_통합문서_mermaid.pdf"
+   cd assets/[회사명]/
+   node ../convert-to-pdf.js "권순룡_이력서_[회사명]_[직무].md" "권순룡_이력서_[회사명]_[직무].pdf"
+   node ../convert-to-pdf.js "권순룡_포트폴리오_[회사명]_[직무].md" "권순룡_포트폴리오_[회사명]_[직무].pdf"
+   node ../convert-to-pdf.js "권순룡_자기소개서_[회사명]_[직무].md" "권순룡_자기소개서_[회사명]_[직무].pdf"  # 조건부
    ```
 
 **성공 조건**:
-- ✅ Markdown 파일 2개 `assets/` 폴더에 저장
-- ✅ PDF 파일 2개 생성 (선택사항)
+- ✅ 회사명 폴더 생성 (`assets/[회사명]/`)
+- ✅ Markdown 파일 2-3개 `assets/[회사명]/` 폴더에 저장 (커버레터는 조건부)
+- ✅ PDF 파일 2-3개 생성 (선택사항, 커버레터는 조건부)
 
 ## Error Handling
 
@@ -271,8 +344,8 @@ You are the **Resume Generator Chain Orchestrator**. You manage the 4-step proce
 2. 회사명: "토스증권", 직무: "Data_Engineer_AI" 추출
 3. 전체 워크플로우 실행
 4. 최종 파일명:
-   - assets/토스증권_이력서_Data_Engineer_AI.md
-   - assets/토스증권_포트폴리오_통합문서.md
+   - assets/토스증권/권순룡_이력서_토스증권_Data_Engineer_AI.md
+   - assets/토스증권/권순룡_포트폴리오_토스증권_Data_Engineer_AI.md
 ```
 
 ## 다음 단계

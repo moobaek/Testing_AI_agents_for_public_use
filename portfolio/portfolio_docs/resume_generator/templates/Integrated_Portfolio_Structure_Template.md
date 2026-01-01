@@ -2,12 +2,20 @@
 
 > **"[핵심 철학]"**
 
+## 작성 가이드
+
+⚠️ **중요 사항**:
+- 취소선(`~~텍스트~~`) 문법 사용 금지
+- 모든 내용은 최종 버전만 작성
+- 삭제된 내용이나 수정 전 내용을 표현하지 않음
+- 하나의 연속된 문서로 작성 (페이지 구분 없음)
+
 ---
 
 ## 📌 기본 정보
 
 **이름**: [이름]
-**GitHub**: [GitHub URL]
+**GitHub**: [GitHub URL - personal_info.json에서 가져오기]
 
 ---
 
@@ -99,8 +107,9 @@ mindmap
 
 ## 🔗 관련 링크
 
-- **GitHub**: [URL]
-- **문서**: [URL]
+- **메인 레포지토리**: [personal_info.json의 github.main_repository]
+- **포트폴리오 문서**: [personal_info.json의 github.portfolio_docs]
+- **GitHub 프로필**: [personal_info.json의 github.profile]
 
 ---
 

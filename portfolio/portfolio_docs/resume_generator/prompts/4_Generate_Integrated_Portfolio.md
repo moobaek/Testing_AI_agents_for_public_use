@@ -13,6 +13,7 @@ You are the **Integrated Portfolio Generator**. Create a comprehensive portfolio
 - `resume_generator/data/temp/job_description_analysis.json`
 - `resume_generator/data/temp/portfolio_job_matching.json`
 - `resume_generator/templates/Integrated_Portfolio_Structure_Template.md`
+- `resume_generator/data/personal_info.json` (개인 정보 및 GitHub 링크)
 - 전체 포트폴리오 문서
 
 ## Task
@@ -24,7 +25,12 @@ You are the **Integrated Portfolio Generator**. Create a comprehensive portfolio
 5. 기술 스택 맵 (job tech_stack 강조)
 6. LLM 활용 방법 (Agent/MCP/RAG 상세)
 7. 학술 성과
-8. GitHub 링크
+8. **GitHub 링크**: `personal_info.json`에서 GitHub 정보를 읽어서 실제 URL로 작성
+   - 템플릿의 플레이스홀더([GitHub URL], [사용자명] 등)를 `personal_info.json`의 실제 값으로 치환
+   - `personal_info.json`의 `github` 필드에서 다음 정보 사용:
+     - `github.profile`: GitHub 프로필 URL
+     - `github.main_repository`: 메인 레포지토리 URL
+     - `github.portfolio_docs`: 포트폴리오 문서 URL
 
 ## Output
 
@@ -65,7 +71,12 @@ You are the **Integrated Portfolio Generator**. Create a comprehensive portfolio
 [Agent, MCP, RAG 상세 - job preferred requirements]
 
 ## 🔗 관련 링크
-[GitHub, 문서 링크]
+
+### GitHub
+
+- **메인 레포지토리**: [personal_info.json의 github.main_repository 값]
+- **포트폴리오 문서**: [personal_info.json의 github.portfolio_docs 값]
+- **GitHub 프로필**: [personal_info.json의 github.profile 값]
 ```
 
 ## Enforcement Rules
@@ -81,6 +92,16 @@ You are the **Integrated Portfolio Generator**. Create a comprehensive portfolio
 > [!IMPORTANT]
 > **LLM SECTION**
 > Agent/MCP/RAG 관련 내용 상세히 작성 (preferred requirements)
+
+> [!CRITICAL]
+> **NO STRIKETHROUGH**
+> 취소선(`~~텍스트~~`) 문법 사용 금지. 모든 텍스트는 정상적으로 표시되어야 함.
+> 삭제된 내용이나 수정 전 내용을 표현할 때 취소선을 사용하지 말고, 최종 버전만 작성.
+
+> [!CRITICAL]
+> **NO PLACEHOLDERS IN OUTPUT**
+> GitHub 링크는 `personal_info.json`에서 읽어온 실제 URL로 작성하고 양식([GitHub URL], [사용자명] 등)을 사용하지 말 것.
+> 템플릿의 모든 플레이스홀더는 `personal_info.json`의 실제 값으로 치환해야 함.
 
 ## 다음 단계
 

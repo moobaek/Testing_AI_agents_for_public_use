@@ -51,6 +51,7 @@ You are the **Job Description Parser**. Your responsibility is to extract struct
    - Tech stack and tools
    - Key responsibilities (주요 업무)
    - Company culture and values (if available)
+   - **Cover letter sections (자기소개서 항목)** - if available
 
 3. **Structure** the extracted information into JSON format
 4. **Validate** the JSON output
@@ -124,6 +125,26 @@ You are the **Job Description Parser**. Your responsibility is to extract struct
     "ai_ml": 70,
     "infrastructure": 60,
     "business_understanding": 50
+  },
+  "cover_letter_sections": {
+    "required": false,
+    "sections": [
+      {
+        "name": "지원동기",
+        "max_length": 1000,
+        "description": "지원동기 (1000자 이내)"
+      },
+      {
+        "name": "경력기술",
+        "max_length": 1000,
+        "description": "경력기술(경력목표 포함) (1000자 이내)"
+      },
+      {
+        "name": "입사 후 기여방안",
+        "max_length": 1000,
+        "description": "입사 후 기여방안 (1000자 이내)"
+      }
+    ]
   }
 }
 ```
@@ -221,13 +242,63 @@ You are the **Job Description Parser**. Your responsibility is to extract struct
 - `infrastructure`: 인프라/DevOps 관련
 - `business_understanding`: 도메인/비즈니스 이해
 
+### Cover Letter Sections Extraction (자기소개서 항목 파싱)
+
+**추출 대상**:
+- "자기소개서" 키워드 검색
+- 각 항목의 제목과 글자 수 제한 추출
+- "1000자 이내", "500자 이내" 같은 패턴 매칭
+
+**파싱 패턴**:
+- "지원동기 (1000자 이내)" → name: "지원동기", max_length: 1000
+- "경력기술(경력목표 포함) (1000자 이내)" → name: "경력기술", max_length: 1000
+- "입사 후 기여방안 (1000자 이내)" → name: "입사 후 기여방안", max_length: 1000
+
+**예시**:
+```
+자기소개서
+지원동기 (1000자 이내)
+경력기술(경력목표 포함) (1000자 이내)
+입사 후 기여방안 (1000자 이내)
+```
+
+→ cover_letter_sections:
+```json
+{
+  "required": true,
+  "sections": [
+    {
+      "name": "지원동기",
+      "max_length": 1000,
+      "description": "지원동기 (1000자 이내)"
+    },
+    {
+      "name": "경력기술",
+      "max_length": 1000,
+      "description": "경력기술(경력목표 포함) (1000자 이내)"
+    },
+    {
+      "name": "입사 후 기여방안",
+      "max_length": 1000,
+      "description": "입사 후 기여방안 (1000자 이내)"
+    }
+  ]
+}
+```
+
+**처리 방법**:
+- "자기소개서" 키워드가 없으면 `required: false`, `sections: []`로 설정
+- 각 항목의 제목과 글자 수 제한을 정확히 추출
+- 글자 수 제한이 명시되지 않은 경우 기본값 1000자로 설정
+
 ## Validation Rules
 
 1. **Metadata 필수 필드**: `company`, `position`, `parsed_date`
 2. **Requirements 필수 필드**: `essential` (최소 1개), `preferred` (최소 1개)
 3. **Tech Stack 필수 필드**: `languages` (최소 1개), `tools` (최소 1개)
 4. **Responsibilities**: 최소 3개 항목
-5. **JSON 형식**: 유효한 JSON 형식
+5. **Cover Letter Sections**: `cover_letter_sections` 필드 필수 (없으면 `required: false`, `sections: []`)
+6. **JSON 형식**: 유효한 JSON 형식
 
 ## Error Handling
 
@@ -255,6 +326,13 @@ You are the **Job Description Parser**. Your responsibility is to extract struct
 1. 해당 섹션 빈 배열로 초기화
 2. 사용자에게 수동 입력 요청
 3. 계속 진행 (다른 섹션 추출)
+
+### 자기소개서 섹션 없음
+
+**정상 동작**:
+- "자기소개서" 키워드가 없으면 `cover_letter_sections.required: false`로 설정
+- `sections: []` 빈 배열로 설정
+- 에러가 아닌 정상적인 경우로 처리
 
 ## Example Output
 
@@ -328,14 +406,18 @@ You are the **Job Description Parser**. Your responsibility is to extract struct
     "GraphDB",
     "Neo4j"
   ],
-  "emphasis": {
-    "data_engineering": 95,
-    "ai_ml": 80,
-    "infrastructure": 75,
-    "business_understanding": 60
+    "emphasis": {
+      "data_engineering": 95,
+      "ai_ml": 80,
+      "infrastructure": 75,
+      "business_understanding": 60
+    },
+    "cover_letter_sections": {
+      "required": false,
+      "sections": []
+    }
   }
-}
-```
+  ```
 
 ## 다음 단계
 
@@ -360,3 +442,4 @@ You are the **Job Description Parser**. Your responsibility is to extract struct
 | 날짜 | 변경 내용 |
 |------|----------|
 | 2025-12-27 | Job Description Parser 프롬프트 생성 |
+| 2025-01-27 | 자기소개서 섹션 파싱 로직 추가 |

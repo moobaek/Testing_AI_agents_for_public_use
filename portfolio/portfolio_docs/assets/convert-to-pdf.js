@@ -46,6 +46,12 @@ async function convertMarkdownToPDF(mdFile, outputFile) {
     <style>
 ${cssContent ? cssContent : `
         /* Fallback basic styles */
+        @page {
+            size: auto;
+            margin: 0;
+            page-break-before: avoid;
+            page-break-after: avoid;
+        }
         body {
             font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
             max-width: 100%;
@@ -53,6 +59,16 @@ ${cssContent ? cssContent : `
             padding: 20px;
             line-height: 1.7;
             color: #1e293b;
+            page-break-inside: avoid;
+            break-inside: avoid;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            page-break-after: avoid;
+            break-after: avoid;
+        }
+        table, img, pre, .mermaid {
+            page-break-inside: avoid;
+            break-inside: avoid;
         }
         h1, h2, h3 { font-weight: 700; }
         h1 { font-size: 24pt; border-bottom: 3px solid #2563eb; text-align: center; }
@@ -105,16 +121,29 @@ ${html}
     // Wait for Mermaid diagrams to render
     await new Promise(resolve => setTimeout(resolve, 5000));
 
+    // Get page height to create single continuous page
+    const bodyHeight = await page.evaluate(() => {
+        return Math.max(
+            document.body.scrollHeight,
+            document.body.offsetHeight,
+            document.documentElement.clientHeight,
+            document.documentElement.scrollHeight,
+            document.documentElement.offsetHeight
+        );
+    });
+
     await page.pdf({
         path: outputFile,
-        format: 'A4',
+        width: '210mm',  // A4 width
+        height: `${Math.ceil(bodyHeight * 0.264583)}mm`,  // Convert px to mm (1px = 0.264583mm)
         margin: {
             top: '20mm',
             right: '15mm',
             bottom: '20mm',
             left: '15mm'
         },
-        printBackground: true
+        printBackground: true,
+        preferCSSPageSize: false
     });
 
     await browser.close();

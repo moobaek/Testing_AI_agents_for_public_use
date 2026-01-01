@@ -1,16 +1,17 @@
 # Resume Generator System - 사용 가이드
 
-채용 공고를 입력받아 자동으로 맞춤형 이력서와 통합 포트폴리오를 생성하는 시스템입니다.
+채용 공고를 입력받아 자동으로 맞춤형 이력서, 통합 포트폴리오, 그리고 커버레터(자기소개서)를 생성하는 시스템입니다.
 
 ---
 
 ## 🎯 주요 기능
 
-1. **채용 공고 자동 파싱**: 요구사항, 기술 스택, 책임 사항 추출
+1. **채용 공고 자동 파싱**: 요구사항, 기술 스택, 책임 사항, 자기소개서 양식 추출
 2. **포트폴리오 스마트 매칭**: AI가 관련 프로젝트와 경험 자동 선별
 3. **맞춤형 이력서 생성**: 채용 공고에 최적화된 이력서 자동 작성
 4. **통합 포트폴리오 생성**: 전체 포트폴리오를 채용 공고 맥락으로 재구성
-5. **PDF 자동 변환**: Mermaid 다이어그램 포함 PDF 자동 생성
+5. **커버레터 자동 생성**: 순룡 페르소나 스타일로 자기소개서 별도 파일 자동 작성 (조건부)
+6. **PDF 자동 변환**: Mermaid 다이어그램 포함 PDF 자동 생성 (이력서, 포트폴리오, 커버레터)
 
 ---
 
@@ -29,6 +30,7 @@
 - 우대사항
 - 기술 스택
 - 주요 업무
+- 자기소개서 양식 (선택사항: 지원동기, 경력기술, 입사 후 기여방안 등)
 
 ### 2. 포트폴리오 문서 확인
 
@@ -37,6 +39,30 @@
 - `02_Projects_Overview.md`
 - `Architecture_Overview.md`
 - `04_Academic_Publications.md`
+
+### 3. 개인 정보 파일 확인
+
+**위치**: `resume_generator/data/personal_info.json`
+
+**내용**: GitHub 링크 등 개인 정보가 포함된 JSON 파일
+
+**형식**:
+```json
+{
+  "name": "권순룡",
+  "github": {
+    "profile": "https://github.com/moobaek",
+    "main_repository": "https://github.com/moobaek/Testing_AI_agents_for_public_use",
+    "portfolio_docs": "https://github.com/moobaek/Testing_AI_agents_for_public_use/tree/main/portfolio/portfolio_docs"
+  },
+  "contact": {
+    "email": "",
+    "linkedin": ""
+  }
+}
+```
+
+**주의**: GitHub 정보가 변경되면 이 파일을 수정하면 됩니다. 템플릿이나 프롬프트를 수정할 필요가 없습니다.
 
 ---
 
@@ -53,22 +79,29 @@
 **2단계: 자동 실행**
 
 시스템이 자동으로 다음을 수행합니다:
-- ✅ Step 1: 채용 공고 파싱
+- ✅ Step 1: 채용 공고 파싱 (자기소개서 양식 포함)
 - ✅ Step 2: 포트폴리오 매칭
-- ✅ Step 3 & 4: 이력서 및 포트폴리오 생성 (병렬)
+- ✅ Step 3, 4, 5: 이력서, 포트폴리오, 커버레터 생성 (병렬)
+  - 자기소개서 양식이 있으면 커버레터를 별도 파일로 자동 생성
 
 **3단계: 결과 확인**
 
 생성된 파일 확인:
 - `resume_generator/data/temp/resume_content.md`
 - `resume_generator/data/temp/integrated_portfolio_content.md`
+- `resume_generator/data/temp/cover_letter_content.md` (조건부)
 
 **4단계: 승인 후 저장**
 
 승인하면 자동으로:
-- `assets/[회사명]_이력서_[직무].md` 저장
-- `assets/[회사명]_포트폴리오_통합문서.md` 저장
+- `assets/[회사명]/권순룡_이력서_[회사명]_[직무].md` 저장
+- `assets/[회사명]/권순룡_포트폴리오_[회사명]_[직무].md` 저장
+- `assets/[회사명]/권순룡_자기소개서_[회사명]_[직무].md` 저장 (조건부)
 - PDF 파일 생성 (선택사항)
+
+**폴더 구조**:
+각 회사의 문서들은 `assets/[회사명]/` 폴더에 저장됩니다.
+예: `assets/크래프톤/`, `assets/한화생명/`, `assets/토스증권/`
 
 ---
 
@@ -111,16 +144,19 @@ resume_generator/
 │   ├── 1_Parse_Job_Description.md            # Step 1
 │   ├── 2_Match_Portfolio_To_Job.md           # Step 2
 │   ├── 3_Generate_Resume.md                  # Step 3
-│   └── 4_Generate_Integrated_Portfolio.md    # Step 4
+│   ├── 4_Generate_Integrated_Portfolio.md    # Step 4
+│   └── 5_Generate_Cover_Letter.md            # Step 5 (조건부)
 ├── templates/
 │   ├── Resume_Structure_Template.md          # 이력서 템플릿
-│   └── Integrated_Portfolio_Structure_Template.md  # 포트폴리오 템플릿
+│   ├── Integrated_Portfolio_Structure_Template.md  # 포트폴리오 템플릿
+│   └── Cover_Letter_Structure_Template.md    # 커버레터 템플릿
 └── data/
     └── temp/                                  # 임시 데이터
         ├── job_description_analysis.json     # Step 1 출력
         ├── portfolio_job_matching.json       # Step 2 출력
         ├── resume_content.md                 # Step 3 출력
-        └── integrated_portfolio_content.md   # Step 4 출력
+        ├── integrated_portfolio_content.md   # Step 4 출력
+        └── cover_letter_content.md            # Step 5 출력 (조건부)
 ```
 
 ---
@@ -178,6 +214,31 @@ resume_generator/
 - `Integrated_Portfolio_Structure_Template.md`
 
 **출력**: `data/temp/integrated_portfolio_content.md`
+
+**특징**:
+- Mermaid 다이어그램 5개 이상
+- 채용 공고 관련 프로젝트 우선 배치
+- LLM 활용 방법 상세 설명
+- GitHub 링크 포함
+
+### Step 5: Generate Cover Letter (병렬, 조건부)
+
+**실행 조건**: `job_description_analysis.json`의 `cover_letter_sections.required`가 `true`인 경우에만 실행
+
+**입력**:
+- `job_description_analysis.json`
+- `portfolio_job_matching.json`
+- `Cover_Letter_Structure_Template.md`
+
+**출력**: `data/temp/cover_letter_content.md`
+
+**특징**:
+- 순룡 페르소나 스타일로 작성
+- 각 항목은 `max_length` 이내 (기본 1000자)
+- 취소선 방지 규칙 적용
+- 하나의 연속된 문서로 작성
+
+---
 
 **특징**:
 - Mermaid 다이어그램 5개 이상
@@ -264,6 +325,15 @@ assets/토스증권_이력서_Data_Engineer_AI_mermaid.pdf
 assets/토스증권_포트폴리오_통합문서.md
 assets/토스증권_포트폴리오_통합문서_mermaid.pdf
 ```
+
+### 커버레터 파일명 (조건부)
+
+```
+assets/토스증권_자기소개서_Data_Engineer_AI.md
+assets/토스증권_자기소개서_Data_Engineer_AI_mermaid.pdf
+```
+
+**참고**: 커버레터는 채용 공고에 자기소개서 양식이 포함된 경우에만 생성됩니다.
 
 ---
 
