@@ -136,7 +136,7 @@ job requirements 키워드로 검색
   "matched_projects": [
     {
       "project_id": "project.ams",
-      "project_name": "AMS (Anomaly Management System)",
+      "project_name": "AMS (Analysis Management System)",
       "relevance_score": 95,
       "matching_requirements": {
         "essential": [
@@ -284,7 +284,7 @@ job requirements 키워드로 검색
         "experience": "최신 AI 트렌드 적용",
         "proficiency": "advanced",
         "evidence": [
-          "2024-2025 Multi-Agent Architecture 적용",
+          "2025.6~ Multi-Agent Architecture 적용",
           "코딩 에이전트 역설계 시스템 구조",
           "Obsidian Design Origin 298개 문서"
         ],

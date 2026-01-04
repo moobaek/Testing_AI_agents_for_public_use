@@ -299,7 +299,7 @@ relations:
     "version": "1.0.0"
   },
   "original_question": "AMS 시스템의 아키텍처는 어떻게 구성되어 있나요?",
-  "clarified_question": "AMS (Anomaly Management System)의 시스템 아키텍처 구조를 설명해주세요",
+  "clarified_question": "AMS (Analysis Management System)의 시스템 아키텍처 구조를 설명해주세요",
   "questioner_role": "evaluator_developer",
   "role_specific_intent": "기술적 평가를 위한 상세 정보 요청",
   "answer_style": "technical_detailed",

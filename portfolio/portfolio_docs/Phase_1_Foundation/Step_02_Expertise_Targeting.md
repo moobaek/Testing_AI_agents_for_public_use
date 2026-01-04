@@ -339,7 +339,7 @@ AI 에이전트와 자동화 시스템을 구축하기 전, 제가 결과물에 
 
 **위치**: `Original_Development_Plan/docs/Prompt_Evaluation_Engine/`
 
-### 🚀 Claude Sub-Agent로의 발전 (2024~2025)
+### 🚀 Claude Sub-Agent로의 발전 (2025.6~)
 
 **이전 방식**: 단순 평가 프롬프트 사용  
 **현재 방식**: 구조화된 평가 프레임워크 + Claude Sub-Agent
@@ -638,7 +638,7 @@ Chain_Behavior:
 
 **위치**: `platform_all/FMEA_Automation_Generation_Technology_claude_sub_agent/`
 
-### 🚀 Claude Sub-Agent로의 발전 (2024~2025)
+### 🚀 Claude Sub-Agent로의 발전 (2025.6~)
 
 **이전 방식**: 파일을 주고 에이전트처럼 사용  
 **현재 방식**: Claude Code의 Task tool을 활용한 Multi-Agent Workflow

@@ -378,7 +378,7 @@ graph TB
 
 ### 1. AI & Analytics: AMS/CoCTK 엔진
 
-**AMS (Anomaly Management System)**는 데이터 수집부터 이상 탐지, FMEA 생성까지의 전체 파이프라인을 담당하는 핵심 분석 엔진입니다.
+**AMS (Analysis Management System)**는 데이터 수집부터 이상 탐지, FMEA 생성까지의 전체 파이프라인을 담당하는 핵심 분석 엔진입니다.
 - **개발 기간**: 2020~2025 (최종: 2024.07~2025.03, 한국산업기술진흥원)
 - **역할**: 총괄 PM
 - **성과**: GS 1등급, 이상탐지율 93.7%, 특허 등록
@@ -433,7 +433,7 @@ graph TD
 ## 🎯 AMS 프로젝트 핵심 성과
 
 > [!NOTE] 섹션 개요
-> 본 섹션은 AMS (Anomaly Management System) 프로젝트의 핵심 성과를 상세히 설명합니다.
+> 본 섹션은 AMS (Analysis Management System) 프로젝트의 핵심 성과를 상세히 설명합니다.
 > 
 > **관련 문서**:
 > - [[02_Projects_Overview|프로젝트 개요]] - AMS 프로젝트 상세 정보
@@ -444,7 +444,7 @@ graph TD
 
 **개발 기간**: 2020~2025년 초 (최종 단계: 2024.07~2025.03)
 **발주처**: 한국산업기술진흥원 (KIAT)
-**프로젝트**: 한솔코에버 AMS (Anomaly Management System)
+**프로젝트**: 한솔코에버 AMS (Analysis Management System)
 **역할**: 총괄 PM (Project Manager)
 **개발 총괄**: 권순룡 (한솔코에버 연구소 팀장)
 
@@ -463,7 +463,7 @@ graph TD
 | **02_CoCTK** (Cost Control Toolkit) | 4개 | 비용 분석, 최적화 | 권순룡 |
 | **03_FBS** (Fishbone Structure) | 6개 | 피쉬본 구조 생성, 원인 분석 | 권순룡 |
 | **04_RMS** (Range Management System) | 4개 | 범위 관리, 클러스터링 | 권순룡 |
-| **05_AMS_dev** (Anomaly Management System) | 17 개 | 통합 이상 관리, FMEA 생성 | 권순룡 |
+| **05_AMS_dev** (Analysis Management System) | 17 개 | 통합 이상 관리, FMEA 생성 | 권순룡 |
 | **common** | 2개 | 공통 모듈 (DB 연결, 로깅) | 권순룡 |
 
 **주요 파일**:
@@ -677,7 +677,7 @@ sequenceDiagram
 - K-means 클러스터링
 - 이진화 및 정상/비정상 범위 설정
 
-#### 4단계: AMS (Anomaly Management System)
+#### 4단계: AMS (Analysis Management System)
 
 **주요 파일**:
 - `main_ams.py`: AMS 메인 서비스
@@ -868,41 +868,103 @@ graph TB
 ### 프롬프트 평가 엔진 (Claude Sub-Agent)
 
 **핵심 구조**: 프롬프트 저지(Prompt Judging) 시스템
-- AI가 생성한 프롬프트를 다른 AI가 평가하는 저지 시스템
+- **AI Gatekeeper**: 모든 AI 생성물의 '입구'를 통제하는 심사관
+- **전체 프롬프트 전수 평가**: 시스템 내 모든 프롬프트를 평가하는 완전 자동화 시스템
+- AI가 생성한 프롬프트를 다른 AI가 평가하는 이중 검증(Double-Check) 시스템
 - 생성 AI와 평가 AI의 분리로 환각(Hallucination) 방지
-- 5단계 평가 프로세스 (Role Inference → Metrics → Consolidation → Report → Translation)
+
+**평가 프레임워크**:
+
+**3가지 핵심 차원**:
+1. **Quality**: Correctness, Faithfulness, Relevance, Helpfulness, Tone, Safety
+2. **Consistency**: Reproducibility, Stability across versions/models
+3. **Cost**: Token usage, Latency, Throughput
+
+**MLOps Priority Matrix** (실패 영향 기반 가중치):
+- **Structural Adherence (40%)**: 파이프라인 중단, JSON 파싱 오류 방지 (최우선)
+- **Answer Correctness (30%)**: 환각, 법적 책임 방지
+- **Contextual Relevancy (20%)**: 리소스 낭비, UX 저하 방지
+- **Coherence/Tone/Safety (10%)**: 브랜드 일관성 유지
+
+**17가지 역할별 동적 가중치 시스템**:
+- Chain, Summary, Document, Developer, Analysis, Conversational, Transformation, Extraction, Classification, Validation, RAG, Creative, Educational, Review, Debugging, Translation 등
+- 각 역할에 맞는 최적화된 가중치 자동 적용
+
+**병렬 처리 구조**:
+- 4개 메트릭 평가를 병렬로 수행 (Structural, Correctness, Relevancy, Coherence)
+- 각 평가 후 즉시 요약하여 컨텍스트 압축
+- 토큰 효율성 극대화
+
+**5단계 평가 프로세스**:
+1. **Phase 1: Role Inference** - 역할 추론 (폴더명, 파일명, 내용 기반 가중치 점수)
+2. **Phase 2: Metrics Parallel** - 4개 메트릭 병렬 평가
+3. **Phase 3: Consolidation** - 평가자 역할(점수 계산) + 개선방향 역할(권장사항)
+4. **Phase 4: Report Generation** - 구조화된 JSON 리포트 생성
+5. **Phase 5: Translation** - 한국어 번역 (모든 사용자 소통은 한국어)
 
 **아키텍처**:
 ```mermaid
-graph LR
+graph TB
     A[프롬프트 생성 AI] --> B[생성된 프롬프트]
-    B --> C[프롬프트 평가 엔진]
-    C --> D[역할 추론]
-    C --> E[메트릭 평가]
-    C --> F[통합 분석]
-    C --> G[리포트 생성]
-    C --> H[번역]
+    B --> C[프롬프트 평가 엔진<br/>AI Gatekeeper]
     
-    D --> I{통과?}
-    E --> I
-    F --> I
-    G --> I
-    H --> I
+    C --> D[Phase 1: 역할 추론]
+    D --> D1[요약: 역할 정보 압축]
     
-    I -->|Yes| J[승인된 프롬프트]
-    I -->|No| K[재생성 요청]
-    K --> A
+    D1 --> E{Phase 2: 병렬 평가 4개}
+    E --> E1[구조적 준수 평가]
+    E --> E2[정답 정확성 평가]
+    E --> E3[맥락 관련성 평가]
+    E --> E4[일관성/어조/안전성 평가]
+    
+    E1 --> F1[요약: 구조 평가]
+    E2 --> F2[요약: 정확성 평가]
+    E3 --> F3[요약: 관련성 평가]
+    E4 --> F4[요약: 일관성 평가]
+    
+    F1 --> G[컨텍스트 리셋]
+    F2 --> G
+    F3 --> G
+    F4 --> G
+    
+    G --> H[Phase 3-1: 평가자 역할<br/>점수 계산 및 판정]
+    G --> I[Phase 3-2: 개선방향 역할<br/>권장사항 제시]
+    
+    H --> J[Phase 4: 리포트 생성]
+    I --> J
+    J --> K[Phase 5: 한국어 번역]
+    K --> L{통과?}
+    
+    L -->|Yes| M[승인된 프롬프트]
+    L -->|No| N[재생성 요청]
+    N --> A
     
     style C fill:#fff4e1
-    style I fill:#ffebee
-    style J fill:#e8f5e9
+    style E fill:#fff3cd
+    style G fill:#d1ecf1
+    style H fill:#d4edda
+    style I fill:#d4edda
+    style L fill:#ffebee
+    style M fill:#e8f5e9
 ```
 
+**Human-in-the-Loop 프로세스** (8단계 필수 검증):
+1. Asset Integrity Check - 필수 스펙 파일 확인
+2. Input Scanning - 파일/폴더/목록 입력
+3. Folder File Selection - 폴더 내 파일 선택
+4. Task Selection - 평가/가이드 수정/결과 조회
+5. Role Inference & Confirmation - 역할 추론 및 확인
+6. API Selection - Target API 또는 Universal 평가
+7. Save Path Confirmation - 저장 경로 확인
+8. Final Evaluation Start - 최종 확인 후 실행
+
 **기술적 의의**:
-- 역할 기반 가중치 시스템
-- Human-in-the-Loop 프로세스
-- 배치 처리 지원
-- 25개+ 프롬프트 품질 보장
+- **전체 프롬프트 전수 평가**: 시스템 내 모든 프롬프트를 평가하는 완전 자동화
+- **역할 기반 동적 가중치 시스템**: 17가지 역할별 최적화된 평가
+- **병렬 처리 최적화**: 4개 메트릭 동시 평가로 효율성 극대화
+- **컨텍스트 압축 전략**: 평가 후 즉시 요약하여 토큰 효율성 확보
+- **배치 처리 지원**: 여러 프롬프트 일괄 평가 및 종합 리포트 생성
+- **25개+ 프롬프트 품질 보장**: 모든 AI 생성물의 입구를 통제하는 Gatekeeper 역할
 
 ### Multi-Agent Workflow 구조
 
@@ -1287,6 +1349,14 @@ graph TB
             FMEA --> |역설계 시스템| ReverseEng[코딩 에이전트<br/>역설계 구조]
             FMEA --> |범용 도메인| UniversalDomain[제조업/사무업무/<br/>서비스업 지원]
         end
+        
+        subgraph "8. Virtual_Company_Creation_Agent"
+            VCCA[Virtual Company Creation Agent<br/>AI 에이전트로만 구성된 가상 기업]
+            VCCA --> |HQONS 구조| HQONS[Hyper-Quantum Omni-Net<br/>13개 조직 유형]
+            VCCA --> |하이퍼디멘션| HDC[초차원 공간 정보 전달<br/>양자 얽힘-like 통신]
+            VCCA --> |6개 Phase| PhaseChain[Phase 1-6 Chain Workflow<br/>기업 설계 자동화]
+            VCCA --> |12개 시스템| Systems[12개 시스템 110개 Sub<br/>완전 자동화 기업]
+        end
     end
     
     ODP -.->|설계 문서 생성| Eval
@@ -1300,6 +1370,10 @@ graph TB
     FMEA -.->|리스크 분석 결과| Factory
     FMEA -.->|FMEA 데이터| Pipeline
     ODP -.->|코드 에이전트 구조| FMEA
+    VCCA -.->|HQONS 아키텍처| ODP
+    VCCA -.->|가상 기업 설계| Center
+    Center -.->|통합 생태계| VCCA
+    VCCA -.->|확장성 극대화| ODP
     
     style ODP fill:#e74c3c,color:#fff
     style Eval fill:#3498db,color:#fff
@@ -1308,6 +1382,7 @@ graph TB
     style Pipeline fill:#1abc9c,color:#fff
     style Center fill:#f39c12,color:#fff
     style FMEA fill:#16a085,color:#fff
+    style VCCA fill:#8e44ad,color:#fff
 ```
 
 **생태계 연동 목적**:
@@ -1322,6 +1397,8 @@ graph TB
 8. **FMEA_Automation_Generation_Technology → factory_ontology_manager**: FMEA 리스크 분석 결과를 팩토리 온톨로지에 통합하여 제조 공정 리스크 관리
 9. **FMEA_Automation_Generation_Technology → pipeline_system_complete**: FMEA 데이터를 시계열 파이프라인으로 전달하여 리스크 추적 및 분석
 10. **FMEA_Automation_Generation_Technology → Original_Development_Plan**: 전체 공장/회사/사무 자동화의 백정보 핵심으로 활용
+11. **Virtual_Company_Creation_Agent → Platform All**: HQONS 기반 초차원 공간 정보 전달 시스템으로 Platform All 생태계의 확장성과 효율성 극대화, 양자 얽힘-like 통신으로 무한 확장성 달성
+12. **Platform All → Virtual_Company_Creation_Agent**: 기존 플랫폼들의 경험과 구조를 가상 기업 생성에 활용하여 실증된 아키텍처 기반 기업 설계 자동화
 
 **생태계의 핵심 가치**:
 

@@ -147,15 +147,21 @@
 
 ### Claude Sub-Agent 시스템 개발 경험
 
-**Multi-Agent Architecture의 실제 적용** (2024~2025):
+**Multi-Agent Architecture의 실제 적용** (2025.6~):
 - FMEA 자동화 생성 시스템: 코딩 에이전트의 역설계 시스템 구조 적용
   - 복잡한 FMEA 프로세스를 역으로 분석하여 8개 Sub-Agent로 분해
   - 각 Sub-Agent가 전문 영역(R&D, Mfg, QA)을 담당하는 구조
   - Claude Code Task tool 기반 Master Orchestrator 설계
 - 프롬프트 평가 엔진: 프롬프트 저지(Prompt Judging) 시스템 설계
-  - AI가 생성한 프롬프트를 다른 AI가 평가하는 이중 검증 구조
+  - **AI Gatekeeper**: 모든 AI 생성물의 '입구'를 통제하는 심사관, **전체 프롬프트를 전수 평가**하는 완전 자동화 시스템
+  - AI가 생성한 프롬프트를 다른 AI가 평가하는 이중 검증(Double-Check) 구조
   - 생성 AI와 평가 AI의 분리로 환각(Hallucination) 방지
-  - 5단계 평가 프로세스 및 배치 처리 지원
+  - **3가지 핵심 차원 평가**: Quality, Consistency, Cost
+  - **MLOps Priority Matrix**: 실패 영향 기반 가중치 (Structural 40%, Correctness 30%, Relevancy 20%, Tone 10%)
+  - **17가지 역할별 동적 가중치 시스템**: 각 역할에 맞는 최적화된 평가
+  - **병렬 처리 구조**: 4개 메트릭 동시 평가로 효율성 극대화
+  - 5단계 평가 프로세스 (Role Inference → Metrics Parallel → Consolidation → Report → Translation)
+  - Human-in-the-Loop 8단계 필수 검증 프로세스 및 배치 처리 지원
 
 **기술적 의의**:
 - Python 스크립트 없이 Claude Code 세션 자체가 Orchestrator 역할

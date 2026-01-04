@@ -181,7 +181,7 @@ graph LR
 
 ### 3️⃣ AMS Python Engine: CSV/JSON 파이프라인
 
-**프로젝트**: AMS (Anomaly Management System)  
+**프로젝트**: AMS (Analysis Management System)  
 **개발**: 권순룡 (한솔코에버 연구소 팀장)  
 **목적**: 머신러닝 데이터 파이프라인을 파일 기반으로 구축
 

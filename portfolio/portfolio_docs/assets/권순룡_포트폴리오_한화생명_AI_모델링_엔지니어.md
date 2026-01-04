@@ -242,7 +242,7 @@ graph TB
 
 **기술 스택**: Python, MCP (Model Context Protocol), Neo4j, RAG
 
-### 4. AMS (Anomaly Management System) - 총괄 PM
+### 4. AMS (Analysis Management System) - 총괄 PM
 
 **기간**: 2024.07 ~ 2025.03  
 **발주처**: 한국산업기술진흥원  

@@ -78,7 +78,7 @@
 **개발 PM으로 담당한 프로젝트**: 나머지 모든 프로젝트
 
 **주요 프로젝트 예시**:
-- AMS (Anomaly Management System) 개발
+- AMS (Analysis Management System) 개발
 - CoCTK (Consulting Tool Kit) 개발
 - 스마트센서 3종 개발
 - 에너지 최적화 시스템 개발

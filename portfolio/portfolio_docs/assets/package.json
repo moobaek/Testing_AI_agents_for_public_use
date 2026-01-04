@@ -7,6 +7,12 @@
     "pdf:portfolio": "node convert-to-pdf.js 권순룡_포트폴리오_통합문서.md 권순룡_포트폴리오_통합문서_mermaid.pdf",
     "pdf:resume": "node convert-to-pdf.js 권순룡_이력서_토스증권_Data_Engineer_AI.md 권순룡_이력서_토스증권_Data_Engineer_AI_mermaid.pdf",
     "pdf:all": "npm run pdf:portfolio && npm run pdf:resume",
+    "pdf:kakao:portfolio": "node convert-to-pdf.js 권순룡_포트폴리오_카카오_Agentic_AI_Platform.md 권순룡_포트폴리오_카카오_Agentic_AI_Platform.pdf",
+    "pdf:kakao:resume": "node convert-to-pdf.js 권순룡_이력서_카카오_Agentic_AI_Platform.md 권순룡_이력서_카카오_Agentic_AI_Platform.pdf",
+    "pdf:kakao:selfintro": "node convert-to-pdf.js 권순룡_자기소개서_카카오_Agentic_AI_Platform.md 권순룡_자기소개서_카카오_Agentic_AI_Platform.pdf",
+    "pdf:kakao:projects": "node convert-to-pdf.js 카카오_프로젝트_수행이력.md 카카오_프로젝트_수행이력.pdf",
+    "pdf:kakao:all": "npm run pdf:kakao:portfolio && npm run pdf:kakao:resume && npm run pdf:kakao:selfintro && npm run pdf:kakao:projects",
+    "hwp:business-plan": "node convert-business-plan-to-hwp.js ../사업계획서_전처리_라벨링_기술.md ../사업계획서_전처리_라벨링_기술.docx",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

@@ -78,7 +78,7 @@ category: role-based
 ```
 **AMS 시스템의 비즈니스 가치**
 
-AMS(Anomaly Management System)는 제조 공장의 이상 징후를 자동으로 감지하고 관리하는 시스템으로, 다음과 같은 비즈니스 가치를 제공합니다:
+AMS(Analysis Management System)는 제조 공장의 이상 징후를 자동으로 감지하고 관리하는 시스템으로, 다음과 같은 비즈니스 가치를 제공합니다:
 
 **1. 비용 절감 효과**
 - 불량품 발생 감소로 인한 원가 절감

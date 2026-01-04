@@ -71,7 +71,7 @@ graph TB
 
 ## 🔗 프로젝트별 상세 관계
 
-### 1️⃣ AMS (Anomaly Management System)
+### 1️⃣ AMS (Analysis Management System)
 
 ```mermaid
 graph LR

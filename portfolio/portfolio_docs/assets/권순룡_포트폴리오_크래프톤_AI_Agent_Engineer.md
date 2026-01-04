@@ -276,7 +276,7 @@ graph TB
 
 **기술 스택**: ID 기반 온톨로지 맵, Phase 0-13 워크플로우, State 기반 정보 전달, 코드 에이전트 통합
 
-### 6. AMS (Anomaly Management System) - 총괄 PM
+### 6. AMS (Analysis Management System) - 총괄 PM
 
 **기간**: 2024.07 ~ 2025.03  
 **발주처**: 한국산업기술진흥원  

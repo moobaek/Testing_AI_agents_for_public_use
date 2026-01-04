@@ -150,13 +150,19 @@ ${html}
     console.log(`PDF created: ${outputFile}`);
 }
 
-// Get command line arguments
-const mdFile = process.argv[2];
-const outputFile = process.argv[3] || mdFile.replace('.md', '.pdf');
+// Export function for use as a module
+module.exports = { convertMarkdownToPDF };
 
-if (!mdFile) {
-    console.error('Usage: node convert-to-pdf.js <input.md> [output.pdf]');
-    process.exit(1);
+// CLI 실행 부분 (직접 실행 시에만)
+if (require.main === module) {
+    // Get command line arguments
+    const mdFile = process.argv[2];
+    const outputFile = process.argv[3] || mdFile.replace('.md', '.pdf');
+
+    if (!mdFile) {
+        console.error('Usage: node convert-to-pdf.js <input.md> [output.pdf]');
+        process.exit(1);
+    }
+
+    convertMarkdownToPDF(mdFile, outputFile).catch(console.error);
 }
-
-convertMarkdownToPDF(mdFile, outputFile).catch(console.error);

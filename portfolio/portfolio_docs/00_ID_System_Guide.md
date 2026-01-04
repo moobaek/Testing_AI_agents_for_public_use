@@ -89,7 +89,7 @@ template.evaluation: "templates/Evaluation_Prompt_Template.md"
 
 ```yaml
 # 주요 프로젝트
-project.ams: "AMS (Anomaly Management System)"
+project.ams: "AMS (Analysis Management System)"
 project.dps: "DPS (데이터수집시스템)"
 project.coctk: "CoCTK (Consulting Tool Kit)"
 project.sensor: "스마트센서 3종"

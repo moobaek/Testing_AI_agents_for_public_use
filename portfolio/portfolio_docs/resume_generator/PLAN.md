@@ -164,7 +164,7 @@ graph TD
   "matched_projects": [
     {
       "project_id": "project.ams",
-      "project_name": "AMS (Anomaly Management System)",
+      "project_name": "AMS (Analysis Management System)",
       "relevance_score": 95,
       "matching_requirements": [
         "데이터 파이프라인 구축",

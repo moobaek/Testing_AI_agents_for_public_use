@@ -10,7 +10,7 @@
 ## 🎯 테스트 환경 개요
 
 **기간**: 2020~2025년 초  
-**프로젝트**: 한솔코에버 AMS (Anomaly Management System)  
+**프로젝트**: 한솔코에버 AMS (Analysis Management System)  
 **개발 총括**: 권순룡 (한솔코에버 연구소 팀장)
 
 ###테스트 컨텍스트 분류
@@ -55,7 +55,7 @@ graph TB
 | **CoCTK** (Cost Control Toolkit) | 4개 | 비용 분석, 최적화 | 시뮬레이션 데이터 |
 | **FBS** (Fishbone Structure) | 6개 | 피쉬본 구조 생성, 원인 분석 | 샘플 이상 데이터 |
 | **RMS** (Range Management System) | 4개 | 범위 관리, 클러스터링 | 통계 검증 |
-| **AMS** (Anomaly Management System) | 17개 | 통합 이상 관리, FMEA 생성 | End-to-End Test |
+| **AMS** (Analysis Management System) | 17개 | 통합 이상 관리, FMEA 생성 | End-to-End Test |
 
 #### 테스트 도구 및 프로그램
 
@@ -128,7 +128,7 @@ def generate_test_sensor_data(num_samples=1000):
 - **고객**: 세아특수강 (철강 제조업)
 - **목적**: AI/DPS 플랫폼 납품
 - **기간**: 2025년
-- **납품 시스템**: AMS (Anomaly Management System)
+- **납품 시스템**: AMS (Analysis Management System)
 
 #### 테스트 환경
 

@@ -63,7 +63,7 @@
 
 ## Point 2: AI/ML 플랫폼 개발 경험 - 실전 검증된 솔루션
 
-### AMS (Anomaly Management System) 프로젝트
+### AMS (Analysis Management System) 프로젝트
 
 **핵심 성과**:
 - 이상 탐지 정확도 93.7% 달성

@@ -72,10 +72,12 @@ relations:
 
 ### 2. 작업 유형 선택
 
-**3가지 옵션**:
+**5가지 옵션**:
 1. **질문 답변** (question_answer): 포트폴리오에 대한 질문 답변
 2. **문서 수정** (document_modification): 포트폴리오 문서 수정
 3. **문서화** (documentation): 질문과 답변 문서화
+4. **이력/포폴/자소서 생성** (resume_generation): 채용 공고 기반 맞춤형 문서 생성
+5. **문서 보강** (document_enhancement): 문서 내용을 더 풍부하게 만드는 작업
 
 ### 3. 워크플로우 모드 선택
 
@@ -138,6 +140,28 @@ relations:
 3. **Portfolio_Documentation_Prompt.md** (문서화)
    - 변경 사항 문서화
 
+### 이력/포폴/자소서 생성 워크플로우
+
+1. **Portfolio_Question_Entry_Prompt.md** (진입점)
+   - 선택: `resume_generation`
+   - 채용 공고 파일 경로, 회사명, 직무명 입력
+
+2. **Resume_Generator_Chain_Prompt.md** (이력서 생성 체인)
+   - Step 1: 채용 공고 파싱
+   - Step 2: 포트폴리오 매칭
+   - Step 3, 4, 5: 이력서/포트폴리오/자기소개서 병렬 생성
+   - 최종 파일 저장 및 PDF 변환
+
+### 문서 보강 워크플로우
+
+1. **Portfolio_Question_Entry_Prompt.md** (진입점)
+   - 선택: `document_enhancement`
+   - 보강할 문서, 보강 유형, 보강할 섹션 입력
+
+2. **Portfolio_Document_Enhancement_Prompt.md** (문서 보강)
+   - 문서 보강 작업 수행
+   - 내용 추가, 시각화 추가, 링크 추가 등
+
 ---
 
 ## 🔗 주요 프롬프트
@@ -190,6 +214,19 @@ relations:
   - 문서 수정 수행
   - Architecture_Overview.md 업데이트
 
+### 이력/포폴/자소서 생성
+
+- **Resume_Generator_Chain_Prompt.md**: 이력서 생성 체인
+  - 5단계 워크플로우 실행
+  - 채용 공고 기반 맞춤형 문서 생성
+  - PDF 변환 지원
+
+### 문서 보강
+
+- **Portfolio_Document_Enhancement_Prompt.md**: 문서 보강
+  - 문서 내용을 더 풍부하게 만드는 작업
+  - 내용 추가, 시각화 추가, 링크 추가 등
+
 ---
 
 ## 📂 파일 구조
@@ -202,7 +239,11 @@ portfolio/portfolio_docs/
 │   ├── Portfolio_Answer_Generator_Prompt.md
 │   ├── Portfolio_Documentation_Prompt.md
 │   ├── Portfolio_Document_Modification_Prompt.md
+│   ├── Portfolio_Document_Enhancement_Prompt.md
 │   ├── README.md (현재 문서)
+│   └── resume_generator/
+│       └── prompts/
+│           └── Resume_Generator_Chain_Prompt.md
 │   └── chain/
 │       ├── Portfolio_Analysis_Chain_Prompt.md (Orchestrator)
 │       ├── 1_Analyze_Portfolio_Structure.md
@@ -237,6 +278,8 @@ graph TD
     Option -->|질문 답변| Clarify[Portfolio_Question_Clarification_Prompt]
     Option -->|문서 수정| Modify[Portfolio_Document_Modification_Prompt]
     Option -->|문서화| Doc[Portfolio_Documentation_Prompt]
+    Option -->|이력/포폴/자소서 생성| Resume[Resume_Generator_Chain_Prompt]
+    Option -->|문서 보강| Enhance[Portfolio_Document_Enhancement_Prompt]
     
     Clarify --> Mode{워크플로우 모드}
     Mode -->|Chain| Chain[Portfolio_Analysis_Chain_Prompt<br/>3단계 체인]
@@ -251,12 +294,17 @@ graph TD
     Answer --> Doc
     Modify --> Doc
     Doc --> Save[QA 폴더에 저장]
+    Resume --> ResumeSave[assets/[회사명]/<br/>파일 저장]
+    ResumeSave --> ResumePDF[PDF 변환]
+    Enhance --> EnhanceSave[보강된 문서 저장]
     
     style Entry fill:#e74c3c
     style HumanLoop fill:#f39c12
     style Chain fill:#3498db
     style Answer fill:#9b59b6
     style Doc fill:#27ae60
+    style Resume fill:#16a085
+    style Enhance fill:#8e44ad
 ```
 
 ---

@@ -196,7 +196,7 @@ relations:
     "properties": {
       "selected_option": {
         "type": "string",
-        "enum": ["question_answer", "document_modification", "documentation"],
+        "enum": ["question_answer", "document_modification", "documentation", "resume_generation", "document_enhancement"],
         "description": "선택된 작업 유형"
       },
       "user_question": {
@@ -231,6 +231,35 @@ relations:
             "type": "string",
             "enum": ["qa_entry", "update_existing"],
             "description": "문서화 유형 (documentation 선택 시)"
+          },
+          "job_description_path": {
+            "type": "string",
+            "description": "채용 공고 파일 경로 (resume_generation 선택 시)"
+          },
+          "company_name": {
+            "type": "string",
+            "description": "회사명 (resume_generation 선택 시, 파일명용)"
+          },
+          "position_title": {
+            "type": "string",
+            "description": "직무명 (resume_generation 선택 시, 파일명용)"
+          },
+          "generate_pdf": {
+            "type": "boolean",
+            "description": "PDF 변환 여부 (resume_generation 선택 시)"
+          },
+          "target_document": {
+            "type": "string",
+            "description": "보강할 문서 경로 (document_enhancement 선택 시)"
+          },
+          "enhancement_type": {
+            "type": "string",
+            "enum": ["content_addition", "visualization", "link_addition", "diagram_addition"],
+            "description": "보강 유형 (document_enhancement 선택 시)"
+          },
+          "target_section": {
+            "type": "string",
+            "description": "보강할 섹션 (document_enhancement 선택 시, 선택사항)"
           }
         }
       }
@@ -284,6 +313,41 @@ relations:
 
 **추가 질문** (Function Call의 `additional_info.documentation_type`):
 - 새 QA 항목 생성 또는 기존 항목 업데이트
+
+### 옵션 4: 이력/포폴/자소서 생성 (Resume Generation)
+
+**설명**: 채용 공고를 기반으로 맞춤형 이력서, 통합 포트폴리오, 자기소개서를 생성합니다.
+
+**선택 시 처리**:
+- `resume_generator/prompts/Resume_Generator_Chain_Prompt.md` 실행
+- 채용 공고 파일 경로 입력 받기
+- 5단계 워크플로우 실행:
+  1. Step 1: Parse Job Description
+  2. Step 2: Match Portfolio To Job
+  3. Step 3: Generate Resume (병렬)
+  4. Step 4: Generate Integrated Portfolio (병렬)
+  5. Step 5: Generate Cover Letter (병렬, 조건부)
+- 최종 파일을 `assets/[회사명]/` 폴더에 저장
+- PDF 변환 옵션 제공
+
+**추가 정보 수집** (Function Call의 `additional_info`):
+- `job_description_path`: 채용 공고 파일 경로
+- `company_name`: 회사명 (파일명용)
+- `position_title`: 직무명 (파일명용)
+- `generate_pdf`: PDF 변환 여부 (boolean)
+
+### 옵션 5: 문서 보강 (Document Enhancement)
+
+**설명**: 기존 문서의 내용을 더 풍부하게 만드는 작업입니다. 문서 수정과 구분되며, 내용 추가, 시각화 요소 추가, 링크 추가 등을 포함합니다.
+
+**선택 시 처리**:
+- `Portfolio_Document_Enhancement_Prompt.md` 실행
+- 문서 보강 작업 수행
+
+**추가 정보 수집** (Function Call의 `additional_info`):
+- `target_document`: 보강할 문서 경로
+- `enhancement_type`: 보강 유형 (content_addition / visualization / link_addition 등)
+- `target_section`: 보강할 섹션 (선택사항)
 
 ---
 
@@ -369,12 +433,67 @@ relations:
 
 ---
 
+### 옵션 4: 이력/포폴/자소서 생성 (resume_generation)
+
+#### 워크플로우
+
+1. **Resume_Generator_Chain_Prompt 실행**
+   - 채용 공고 파일 경로 확인 (`additional_info.job_description_path`)
+   - 회사명 및 직무명 확인 (`additional_info.company_name`, `additional_info.position_title`)
+
+2. **5단계 워크플로우 실행**:
+   - Step 1: `1_Parse_Job_Description.md` 실행
+     - 입력: 채용 공고 파일
+     - 출력: `resume_generator/data/temp/job_description_analysis.json`
+   - Step 2: `2_Match_Portfolio_To_Job.md` 실행
+     - 입력: `job_description_analysis.json` + portfolio documents
+     - 출력: `resume_generator/data/temp/portfolio_job_matching.json`
+   - Step 3, 4, 5 (병렬 실행):
+     - Step 3: `3_Generate_Resume.md` → `resume_generator/data/temp/resume_content.md`
+     - Step 4: `4_Generate_Integrated_Portfolio.md` → `resume_generator/data/temp/integrated_portfolio_content.md`
+     - Step 5: `5_Generate_Cover_Letter.md` → `resume_generator/data/temp/cover_letter_content.md` (조건부)
+
+3. **최종 파일 저장**
+   - `assets/[회사명]/` 폴더 생성 (없으면 생성)
+   - 파일 저장:
+     - `권순룡_이력서_[회사명]_[직무].md`
+     - `권순룡_포트폴리오_[회사명]_[직무].md`
+     - `권순룡_자기소개서_[회사명]_[직무].md` (조건부)
+
+4. **PDF 변환** (선택사항, `additional_info.generate_pdf`가 true인 경우)
+   - `convert-to-pdf.js` 스크립트 사용
+   - PDF 파일 생성
+
+---
+
+### 옵션 5: 문서 보강 (document_enhancement)
+
+#### 워크플로우
+
+1. **Portfolio_Document_Enhancement_Prompt 실행**
+   - 보강할 문서 경로 확인 (`additional_info.target_document`)
+   - 보강 유형 확인 (`additional_info.enhancement_type`)
+   - 보강할 섹션 확인 (`additional_info.target_section`, 선택사항)
+
+2. **문서 보강 작업 수행**
+   - 내용 추가: 프로젝트 설명에 더 자세한 기술 스택 추가, 섹션에 예시나 사례 추가
+   - 시각화 추가: 다이어그램이나 시각화 요소 추가
+   - 링크 추가: 관련 문서 링크 추가
+   - 순룡 페르소나 스타일 유지
+   - ID 시스템 준수
+
+3. **변경 사항 문서화**
+   - Portfolio_Documentation_Prompt 실행 (선택사항)
+   - 변경 리포트 생성
+
+---
+
 ## ✅ 휴먼 루프 완료 확인
 
 **⚠️ 필수: 다음 항목을 모두 확인한 후에만 다음 단계로 진행할 수 있습니다:**
 
 - [ ] Function Call `portfolio_question_entry_selection`이 실행되었는지 확인
-- [ ] `selected_option`이 올바르게 수집되었는지 확인 (question_answer / document_modification / documentation)
+- [ ] `selected_option`이 올바르게 수집되었는지 확인 (question_answer / document_modification / documentation / resume_generation / document_enhancement)
 - [ ] `questioner_role`이 올바르게 수집되었는지 확인 (author / evaluator_* / general_public)
 - [ ] `workflow_mode`가 올바르게 수집되었는지 확인 (chain_workflow / custom_workflow / continuous_conversation)
 - [ ] `user_question`이 수집되었는지 확인
@@ -398,6 +517,8 @@ relations:
 4. **Portfolio_Answer_Generator_Prompt.md** - 답변 생성
 5. **Portfolio_Documentation_Prompt.md** - 문서화
 6. **Portfolio_Document_Modification_Prompt.md** - 문서 수정
+7. **Resume_Generator_Chain_Prompt.md** - 이력/포폴/자소서 생성 (resume_generator)
+8. **Portfolio_Document_Enhancement_Prompt.md** - 문서 보강
 
 ### 빠른 시작 가이드
 
@@ -438,6 +559,25 @@ graph TD
     MODE3 -->|Chain| DOC_CHAIN[Portfolio_Documentation_Prompt<br/>체인 결과 포함]
     MODE3 -->|Custom| DOC[Portfolio_Documentation_Prompt<br/>직접 실행]
     
+    OPTION -->|이력/포폴/자소서 생성| RESUME[Resume_Generator_Chain_Prompt<br/>5단계 워크플로우]
+    RESUME --> RESUME_STEP1[Step 1: Parse Job Description]
+    RESUME_STEP1 --> RESUME_STEP2[Step 2: Match Portfolio]
+    RESUME_STEP2 --> RESUME_PARALLEL{병렬 생성}
+    RESUME_PARALLEL --> RESUME_STEP3[Step 3: Generate Resume]
+    RESUME_PARALLEL --> RESUME_STEP4[Step 4: Generate Portfolio]
+    RESUME_PARALLEL --> RESUME_STEP5[Step 5: Generate Cover Letter]
+    RESUME_STEP3 --> RESUME_SAVE[assets/[회사명]/<br/>파일 저장]
+    RESUME_STEP4 --> RESUME_SAVE
+    RESUME_STEP5 --> RESUME_SAVE
+    RESUME_SAVE --> RESUME_PDF{PDF 변환?}
+    RESUME_PDF -->|Yes| PDF_CONVERT[PDF 변환]
+    RESUME_PDF -->|No| RESUME_END[완료]
+    PDF_CONVERT --> RESUME_END
+    
+    OPTION -->|문서 보강| ENHANCE[Portfolio_Document_Enhancement_Prompt<br/>문서 보강 작업]
+    ENHANCE --> ENHANCE_DOC[내용/시각화/링크 추가]
+    ENHANCE_DOC --> ENHANCE_SAVE[변경 사항 저장]
+    
     CHAIN --> ANSWER[Portfolio_Answer_Generator_Prompt<br/>답변 생성]
     CLARIFY --> ANSWER
     ANSWER --> DOC
@@ -454,6 +594,8 @@ graph TD
     style CHAIN fill:#3498db
     style ANSWER fill:#e67e22
     style DOC fill:#27ae60
+    style RESUME fill:#16a085
+    style ENHANCE fill:#8e44ad
 ```
 
 ---

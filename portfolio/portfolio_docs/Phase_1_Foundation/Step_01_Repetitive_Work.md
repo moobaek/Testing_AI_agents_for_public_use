@@ -123,8 +123,8 @@ obsidian_design_origin/
 
 **1. Blue_Print.md** - 프로젝트 청사진
 ```yaml
-프로젝트명: AMS (Anomaly Management System)
-목적: AI 기반 이상 관리 시스템
+프로젝트명: AMS (Analysis Management System)
+목적: AI 기반 분석 관리 시스템
 담당자:
   - PM/설계자/핵심 개발: 나
   - 외주 개발자: UI/일반 기능 개발
@@ -269,7 +269,7 @@ sequenceDiagram
 
 ## 📊 실제 적용 프로젝트
 
-### 프로젝트 1: AMS (Anomaly Management System)
+### 프로젝트 1: AMS (Analysis Management System)
 
 **기술 스택**:
 - **Backend (내가 주로 개발)**:
