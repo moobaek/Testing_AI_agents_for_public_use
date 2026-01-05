@@ -326,9 +326,9 @@ graph LR
 ```mermaid
 graph TB
     subgraph "Governance & QA Layer (Supervisory)"
-        EVAL[Evaluation Framework<br/>(Validation)]
-        PROMPT[Prompt Eval Engine<br/>(Gating)]
-        PM[PM Agent<br/>(Management)]
+        EVAL["Evaluation Framework<br/>Validation"]
+        PROMPT["Prompt Eval Engine<br/>Gating"]
+        PM["PM Agent<br/>Management"]
     end
 
     subgraph "Implementation Layer (Execution)"
@@ -338,9 +338,18 @@ graph TB
         Service[Microservices]
     end
 
-    EVAL -- "전수 검사" --> Implementation Layer
-    PROMPT -- "입력 통제" --> Implementation Layer
-    PM -- "프로세스 관리" --> Implementation Layer
+    EVAL --> AMS
+    EVAL --> DPS
+    EVAL --> CoCTK
+    EVAL --> Service
+    PROMPT --> AMS
+    PROMPT --> DPS
+    PROMPT --> CoCTK
+    PROMPT --> Service
+    PM --> AMS
+    PM --> DPS
+    PM --> CoCTK
+    PM --> Service
 
     style EVAL fill:#ffcdd2,stroke:#d32f2f
     style PROMPT fill:#e1bee7,stroke:#7b1fa2
@@ -1399,6 +1408,16 @@ graph TB
 10. **FMEA_Automation_Generation_Technology → Original_Development_Plan**: 전체 공장/회사/사무 자동화의 백정보 핵심으로 활용
 11. **Virtual_Company_Creation_Agent → Platform All**: HQONS 기반 초차원 공간 정보 전달 시스템으로 Platform All 생태계의 확장성과 효율성 극대화, 양자 얽힘-like 통신으로 무한 확장성 달성
 12. **Platform All → Virtual_Company_Creation_Agent**: 기존 플랫폼들의 경험과 구조를 가상 기업 생성에 활용하여 실증된 아키텍처 기반 기업 설계 자동화
+
+**Virtual Company Creation Agent 설계 문서** (2026.1.4 시작, 설계 단계 완료):
+- 설계 문서 경로: `platform_all/Virtual_company_creation_agent/docs/obsidian_design_origin/architecture/`
+- 주요 설계 문서 (20개 이상):
+  - [Blue_Print.md](../../../platform_all/Virtual_company_creation_agent/docs/obsidian_design_origin/architecture/Blue_Print.md) - 전체 시스템 청사진 (15 Systems, 225 Sub-Agents, 7단계 Chain Workflow)
+  - [Business_Summary.md](../../../platform_all/Virtual_company_creation_agent/docs/obsidian_design_origin/architecture/Business_Summary.md) - 비즈니스 요약 및 가치 제안
+  - [Process_Overview.md](../../../platform_all/Virtual_company_creation_agent/docs/obsidian_design_origin/architecture/Process_Overview.md) - 7단계 Chain 워크플로우 프로세스
+  - [Ontology_Overview.md](../../../platform_all/Virtual_company_creation_agent/docs/obsidian_design_origin/architecture/Ontology_Overview.md) - 14 Layer 좌표 체계 및 온톨로지 구조
+  - [Grape_Cluster_Architecture.md](../../../platform_all/Virtual_company_creation_agent/docs/obsidian_design_origin/architecture/Grape_Cluster_Architecture.md) - Grape Cluster 저장 구조 (포도송이 구조 DB)
+  - [API_Design.md](../../../platform_all/Virtual_company_creation_agent/docs/obsidian_design_origin/architecture/API_Design.md), [Database_Design.md](../../../platform_all/Virtual_company_creation_agent/docs/obsidian_design_origin/architecture/Database_Design.md), [State_Management_Design.md](../../../platform_all/Virtual_company_creation_agent/docs/obsidian_design_origin/architecture/State_Management_Design.md) 등
 
 **생태계의 핵심 가치**:
 
