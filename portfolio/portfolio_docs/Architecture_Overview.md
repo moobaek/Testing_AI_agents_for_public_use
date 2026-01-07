@@ -1229,9 +1229,19 @@ graph TB
 
 **내부 구조의 촘촘함**:
 
-- **Workflow_Orchestrator**: 실행 순서 및 의존성 관리
+- **Workflow_Orchestrator & Status Tracker**: 실행 순서 및 의존성 관리, 워크플로우 상태 추적
 - **State_Management_System**: 정보 전달 최적화
 - **Session_Context_Manager**: 휘발성 정보 관리
+- **Adaptive Doc Generation Chain**: doc_generation tool (DG.1-DG.5 Chain Prompts)
+  - DG.1: 문서 구조 분석 및 템플릿 선택
+  - DG.2: 핵심 정보 추출 및 요약
+  - DG.3: Human Loop를 통한 사용자 확인
+  - DG.4: Schema 기반 문서 생성
+  - DG.5: 최종 문서 검증 및 포맷팅
+  - **Summarizers**: 문서 생성 프로세스의 핵심 정보 요약
+  - **Human Loops**: 사용자 확인 및 피드백 수집
+  - **Schemas**: 문서 구조 및 데이터 형식 정의
+  - **Templates**: 표준화된 문서 템플릿 제공
 - **21개 development 프롬프트**: 개발 단계의 정교한 관리
   - 개발 워크플로우: 사용자 요청을 개발 작업으로 변환, 코드 생성
   - 개발 완료 후 휴먼 루프: 연속 개발 지원 (진행/수정/browser 디버깅/트러블 관리)
@@ -1365,6 +1375,10 @@ graph TB
             VCCA --> |하이퍼디멘션| HDC[초차원 공간 정보 전달<br/>양자 얽힘-like 통신]
             VCCA --> |6개 Phase| PhaseChain[Phase 1-6 Chain Workflow<br/>기업 설계 자동화]
             VCCA --> |12개 시스템| Systems[12개 시스템 110개 Sub<br/>완전 자동화 기업]
+            VCCA --> |Chain Infrastructure| ChainInfra[Master Orchestrator<br/>Chain 00/01/02<br/>Human/AI Guides]
+            VCCA --> |Element Layer| ElementLayer[Schemas, Personas<br/>Templates Type D/E/F]
+            VCCA --> |Human Guides| HumanGuides[6개 가이드 생성 완료<br/>Deployment/Admin/Dev<br/>User/Setup/AI Operator]
+            VCCA --> |AI Agent Guides| AIGuides[6개 에이전트 가이드<br/>DEPLOY/ADMIN/DEV<br/>QUERY/SETUP/TUNING]
         end
     end
     
@@ -1418,6 +1432,87 @@ graph TB
   - [Ontology_Overview.md](../../../platform_all/Virtual_company_creation_agent/docs/obsidian_design_origin/architecture/Ontology_Overview.md) - 14 Layer 좌표 체계 및 온톨로지 구조
   - [Grape_Cluster_Architecture.md](../../../platform_all/Virtual_company_creation_agent/docs/obsidian_design_origin/architecture/Grape_Cluster_Architecture.md) - Grape Cluster 저장 구조 (포도송이 구조 DB)
   - [API_Design.md](../../../platform_all/Virtual_company_creation_agent/docs/obsidian_design_origin/architecture/API_Design.md), [Database_Design.md](../../../platform_all/Virtual_company_creation_agent/docs/obsidian_design_origin/architecture/Database_Design.md), [State_Management_Design.md](../../../platform_all/Virtual_company_creation_agent/docs/obsidian_design_origin/architecture/State_Management_Design.md) 등
+
+**Chain Infrastructure 완료** (2026.1 업데이트):
+- **Master Orchestrator**: 문서 생성 전체 프로세스 조율 (`prompts/doc_chains/Doc_Master_Orchestrator.md`)
+- **Chain 00 (Structure)**: 문서 구조 정의 및 Type 매핑 (`prompts/doc_chains/Chain_00_Structure.md`)
+- **Chain 01 (Human Guide)**: 인간 독자를 위한 운영 가이드 생성 (`prompts/doc_chains/Chain_01_Human_Guide.md`)
+- **Chain 02 (AI Agent Guide)**: AI 에이전트를 위한 가이드 생성 (`prompts/doc_chains/Chain_02_AI_Agent.md`)
+
+**Element Layer** (Type D/E/F 완료):
+- **Schemas**: Type별 필수 정보 구조 정의 (`prompts/doc_chains/schemas/`)
+- **Personas**: Type별 사용자 페르소나 정의 (`prompts/doc_chains/personas/`)
+- **Templates**: Type별 문서 템플릿 (`prompts/doc_chains/elements/Element_TypeD.md`, `Element_TypeE.md`, `Element_TypeF.md`)
+
+**Human Guides 생성 완료** (6개):
+- `docs/operation_guides/Deployment_Guide.md` (Type A)
+- `docs/operation_guides/Admin_Operations_Manual.md` (Type B)
+- `docs/operation_guides/Developer_Maintenance_Guide.md` (Type C)
+- `docs/operation_guides/End_User_Guide.md` (Type D)
+- `docs/operation_guides/Initial_Setup_Guide.md` (Type E)
+- `docs/operation_guides/AI_Operator_Guide.md` (Type F)
+
+**AI Agent Guides 생성 완료** (6개):
+- `prompts/agents/DEPLOY_AGENT.md` (Type A')
+- `prompts/agents/ADMIN_AGENT.md` (Type B')
+- `prompts/agents/DEV_AGENT.md` (Type C')
+- `prompts/agents/QUERY_AGENT.md` (Type D')
+- `prompts/agents/SETUP_AGENT.md` (Type E')
+- `prompts/agents/TUNING_AGENT.md` (Type F')
+
+### 8.1 AI_DB_tester (VACTS - Virtual AI Company Test Suite)
+
+**프로젝트 개요**:
+- **개발 시작**: 2026년 1월 7일
+- **상태**: 거의 완료 (설계 문서 23개, 구현 파일 24개 완료)
+- **목적**: Virtual Company Creation Agent의 전체 파이프라인을 자동으로 테스트하고 검증하는 AI 기반 QA 시스템
+
+**핵심 특징**:
+- **Cursor-Native**: 별도 UI 없이 IDE의 Chat/Composer 기능을 런타임으로 활용
+- **시뮬레이션 공장**: 실제처럼 보이는 시뮬레이션 실행
+- **자동 검증**: GFS (Grape File System), 온톨로지, 스키마 자동 검증
+- **자동 리포트**: 테스트 결과 자동 리포트 생성
+
+**5가지 실행 모드**:
+1. **Company Creation Full Test**: 회사 구축 전체 과정 테스트 (Chain 01~07)
+2. **Full Simulation**: Chain 01~07 전체 시뮬레이션
+3. **Single Chain**: 단일 Chain 시뮬레이션
+4. **Single System**: 단일 시스템 시뮬레이션
+5. **I/O Test**: 파일 시스템 I/O 테스트
+
+**자연어 쿼리 기능**:
+- **QUERY_AGENT**: 사용자의 자연어 질문을 이해하고 테스트를 실행하는 AI Agent
+- **자연어 인터페이스**: Cursor Chat에서 자연어로 테스트 요청 및 결과 조회
+  - 예시: "@QUERY_AGENT.md Chain 01 테스트 실행해줘"
+  - 예시: "@QUERY_AGENT.md 최신 리포트 보여줘"
+  - 예시: "@QUERY_AGENT.md HR 시스템만 테스트해줘"
+- **의도 파악**: 사용자 질문을 분석하여 적절한 테스트 모드 선택 및 실행
+- **결과 요약**: 테스트 결과를 자연어로 요약하여 제공
+
+**기술 스택**:
+- **Python**: 테스트 자동화 스크립트
+- **프롬프트 기반**: 모든 실행이 프롬프트 파일을 통해 이루어짐
+- **Cursor IDE 통합**: Cursor의 Chat/Composer 기능을 인터페이스로 활용
+- **시뮬레이션 엔진**: 실제 API 호출 없이 시뮬레이션 처리
+- **검증 엔진**: GFS 무결성, 온톨로지, 스키마, 좌표 정합성 검증
+
+**프로젝트 구조**:
+- **설계 문서**: 23개 (Phase 0~12 완료)
+- **프롬프트 파일**: 14개 (Master Workflow, Agent 프롬프트, 실행 모드, 검증 프롬프트)
+- **스키마 파일**: 3개 (agent_identity_schema_v2.json, validation_schema.json, checkpoint_schema.json)
+- **템플릿 파일**: 3개 (test_report_template.md, validation_report_template.md, gfs_health_template.md)
+
+**비즈니스 가치**:
+- **87.5% 시간 절감**: 수동 테스트 대비 대폭 시간 절감
+- **329% ROI**: 초기 투자 대비 높은 수익
+- **2.8개월 투자 회수**: 빠른 투자 회수
+
+**설계 문서 경로**: `platform_all/AI_DB_tester/docs/obsidian_design_origin/architecture/`
+- 주요 설계 문서: Initial_Situation_Report.md, Blue_Print.md, Process_Overview.md, API_Design.md, Database_Design.md, Business_Summary.md 등
+
+**관계**:
+- **AI_DB_tester → Virtual_Company_Creation_Agent**: Virtual Company Creation Agent의 전체 파이프라인 테스트 및 검증
+- **AI_DB_tester → Platform All**: Platform All 생태계의 품질 보장 도구로 활용
 
 **생태계의 핵심 가치**:
 
