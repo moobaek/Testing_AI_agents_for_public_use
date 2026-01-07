@@ -123,7 +123,7 @@ relations:
 다음과 같은 언급이 감지되면 **즉시 Function Call을 실행**해야 합니다:
 
 **포트폴리오 관련 키워드**:
-- `@portfolio`, `@portfolio/portfolio_docs`, `portfolio/portfolio_docs`
+- `@portfolio`, `@portfolio/portfolio_docs`, `portfolio/portfolio_docs`, `portfolio`
 - "포트폴리오", "portfolio"
 - "포트폴리오 문서", "portfolio docs"
 - "포트폴리오 질문", "portfolio question"
@@ -139,7 +139,7 @@ relations:
 - "포트폴리오 문서 보여줘"
 
 **파일/폴더 언급**:
-- `portfolio/portfolio_docs` 폴더 언급
+- `portfolio`, `portfolio/portfolio_docs` 폴더 언급
 - 포트폴리오 문서 파일명 언급
 - `prompts/` 폴더 언급 (포트폴리오 프롬프트 시스템)
 
@@ -196,7 +196,7 @@ relations:
     "properties": {
       "selected_option": {
         "type": "string",
-        "enum": ["question_answer", "document_modification", "documentation", "resume_generation", "document_enhancement"],
+        "enum": ["question_answer", "document_modification", "documentation", "resume_generation", "document_enhancement", "business_document_generation"],
         "description": "선택된 작업 유형"
       },
       "user_question": {
@@ -260,6 +260,25 @@ relations:
           "target_section": {
             "type": "string",
             "description": "보강할 섹션 (document_enhancement 선택 시, 선택사항)"
+          },
+          "client_type": {
+            "type": "string",
+            "enum": ["government", "private", "public_agency", "other"],
+            "description": "발주처 유형 (business_document_generation 선택 시)"
+          },
+          "document_type": {
+            "type": "string",
+            "enum": ["proposal", "business_plan", "inception_report"],
+            "description": "문서 유형 (business_document_generation 선택 시)"
+          },
+          "requirements_path": {
+            "type": "string",
+            "description": "요구조건 파일 경로 (business_document_generation 선택 시, 선택사항)"
+          },
+          "architecture_files": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Architecture 파일 경로 배열 (business_document_generation 선택 시, 선택사항)"
           }
         }
       }
@@ -269,7 +288,7 @@ relations:
 }
 ```
 
-**⚠️ 필수: 반드시 위의 Function Call을 실행하여 사용자에게 다음 3가지 옵션을 제시하고 선택을 받아야 합니다:**
+**⚠️ 필수: 반드시 위의 Function Call을 실행하여 사용자에게 다음 6가지 옵션을 제시하고 선택을 받아야 합니다:**
 
 ### 옵션 1: 질문 답변 (Question Answer)
 
@@ -348,6 +367,37 @@ relations:
 - `target_document`: 보강할 문서 경로
 - `enhancement_type`: 보강 유형 (content_addition / visualization / link_addition 등)
 - `target_section`: 보강할 섹션 (선택사항)
+
+### 옵션 6: 사업계획서/제안서/착수보고서 작성 (Business Document Generation)
+
+**설명**: Business Document Generator를 사용하여 사업계획서, 제안서, 또는 착수보고서를 자동 생성합니다.
+
+**선택 시 처리**:
+- `business_document_generator/prompts/Business_Document_Chain_Prompt.md` 실행
+- 발주처 유형 선택 (정부/민간/공공기관/기타)
+- 문서 유형 선택 (제안서/사업계획서/착수보고서)
+- 요구조건 파일 및 Architecture 파일 파싱
+- 포트폴리오 스마트 매칭
+- 발주처 유형별 페르소나 적용
+
+**추가 정보 수집** (Function Call의 `additional_info`):
+- `client_type`: 발주처 유형 (government / private / public_agency / other)
+- `document_type`: 문서 유형 (proposal / business_plan / inception_report)
+- `requirements_path`: 요구조건 파일 경로 (선택사항)
+- `architecture_files`: Architecture 파일 경로 배열 (선택사항)
+
+**워크플로우**:
+1. Step 0.5: 발주처 유형 선택
+2. Step 1: 요구조건 파싱
+3. Step 2: Architecture 파일 파싱
+4. Step 3: 포트폴리오 매칭
+5. Step 3.5: 정보 통합 연결
+6. Step 4.1: 문서 제목 입력 요청
+7. Step 4.1.5: 페이지 수 입력 요청
+8. Step 4.2: 섹션별 청크 생성 (전문가 페르소나 적용)
+9. Step 4.3: 청크 통합 (PM 페르소나)
+10. Step 4.4: 일관성 검증 및 최종 정리
+11. Step 4.5: 폴더 구조로 저장
 
 ---
 
@@ -488,12 +538,51 @@ relations:
 
 ---
 
+### 옵션 6: 사업계획서/제안서/착수보고서 작성 (business_document_generation)
+
+#### 워크플로우
+
+1. **Business_Document_Chain_Prompt 실행**
+   - 발주처 유형 확인 (`additional_info.client_type`) 또는 Step 0.5에서 선택
+   - 문서 유형 확인 (`additional_info.document_type`)
+   - 요구조건 파일 경로 확인 (`additional_info.requirements_path`, 선택사항)
+   - Architecture 파일 경로 확인 (`additional_info.architecture_files`, 선택사항)
+
+2. **5단계 워크플로우 실행**:
+   - Step 0.5: 발주처 유형 선택 (없으면 사용자에게 요청)
+   - Step 1: `1_Parse_Requirements.md` 실행
+     - 입력: 요구조건 파일
+     - 출력: `business_document_generator/data/temp/requirements_analysis.json`
+   - Step 2: `2_Parse_Architecture.md` 실행
+     - 입력: Architecture 파일(들)
+     - 출력: `business_document_generator/data/temp/architecture_analysis.json`
+   - Step 3: `3_Match_Company_Portfolio.md` 실행
+     - 입력: `requirements_analysis.json` + portfolio documents
+     - 출력: `business_document_generator/data/temp/company_portfolio_matching.json`
+   - Step 3.5: `3.5_Connect_All_Information.md` 실행
+     - 입력: 모든 이전 출력 + client_type
+     - 출력: `business_document_generator/data/temp/integrated_document_data.json`
+
+3. **문서 생성 단계**:
+   - Step 4.1: `4.1_Get_Document_Title.md` 실행 (사용자에게 제목 입력 요청)
+   - Step 4.1.5: `4.1.5_Get_Page_Target.md` 실행 (사용자에게 페이지 수 입력 요청)
+   - Step 4.2: `4.2_Generate_Document_Chunk.md` 실행 (섹션별 청크 생성, 전문가 페르소나 적용)
+   - Step 4.3: `4.3_Merge_Document_Chunks.md` 실행 (청크 통합, PM 페르소나)
+   - Step 4.4: `4.4_Validate_Document_Consistency.md` 실행 (일관성 검증 및 최종 정리)
+   - Step 4.5: `4.5_Save_Document.md` 실행 (폴더 구조로 저장)
+
+4. **사용자 리뷰 및 승인**
+   - 생성된 문서 리뷰 요청
+   - 승인 시 최종 저장 및 PDF 변환 (선택사항)
+
+---
+
 ## ✅ 휴먼 루프 완료 확인
 
 **⚠️ 필수: 다음 항목을 모두 확인한 후에만 다음 단계로 진행할 수 있습니다:**
 
 - [ ] Function Call `portfolio_question_entry_selection`이 실행되었는지 확인
-- [ ] `selected_option`이 올바르게 수집되었는지 확인 (question_answer / document_modification / documentation / resume_generation / document_enhancement)
+- [ ] `selected_option`이 올바르게 수집되었는지 확인 (question_answer / document_modification / documentation / resume_generation / document_enhancement / business_document_generation)
 - [ ] `questioner_role`이 올바르게 수집되었는지 확인 (author / evaluator_* / general_public)
 - [ ] `workflow_mode`가 올바르게 수집되었는지 확인 (chain_workflow / custom_workflow / continuous_conversation)
 - [ ] `user_question`이 수집되었는지 확인
