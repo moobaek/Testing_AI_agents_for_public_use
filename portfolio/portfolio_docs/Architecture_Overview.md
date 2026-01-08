@@ -1272,6 +1272,10 @@ graph TB
 - shapez.io 게임에서 영감을 받은 드래그 앤 드롭 인터페이스
 - 계층적 구조 관리 (공장 > 작업장 > 생산라인 > 공정)
 - 마스터 데이터 통합 (자재, 센서, PLC)
+- **DB 이전 완료**: factory_ontology_manager의 DB를 AI_DB_center로 이전 완료 (Virtual_company_creation_agent 기반)
+  - 이전 완료, 테스트 완료, 정상 작동 확인
+  - AI_DB_center JSON 파일 기반 데이터 저장소 사용 (`.vacts/enriched_info_company_SYON_*.json`)
+  - 데이터 저장 경로: `data.platform_ecosystem.platforms[].stored_data.factories[]`
 
 ### 7.3 pipeline_system_complete
 
@@ -1481,14 +1485,17 @@ graph TB
 4. **Single System**: 단일 시스템 시뮬레이션
 5. **I/O Test**: 파일 시스템 I/O 테스트
 
-**자연어 쿼리 기능**:
+**자연어 쿼리 기능 (LangGraph 기반)**:
 - **QUERY_AGENT**: 사용자의 자연어 질문을 이해하고 테스트를 실행하는 AI Agent
+- **LangGraph 기반 질문-답변 구조화 워크플로우**: 질문 분석 → 데이터 추출 → 프롬프트 최적화 → AI 쿼리 → 답변 구조화 → 포맷팅
 - **자연어 인터페이스**: Cursor Chat에서 자연어로 테스트 요청 및 결과 조회
-  - 예시: "@QUERY_AGENT.md Chain 01 테스트 실행해줘"
-  - 예시: "@QUERY_AGENT.md 최신 리포트 보여줘"
-  - 예시: "@QUERY_AGENT.md HR 시스템만 테스트해줘"
+  - 테스트 실행: "@QUERY_AGENT.md Chain 01 테스트 실행해줘", "@QUERY_AGENT.md Company Creation Full Test 실행해줘"
+  - 결과 조회: "@QUERY_AGENT.md 최신 리포트 보여줘", "@QUERY_AGENT.md Chain 04 결과 확인해줘"
+  - 자연어 질문: "@QUERY_AGENT.md SYON의 주요 제품은 무엇인가요?", "@QUERY_AGENT.md SYON Alchemy에 대해 자세히 알려주세요"
 - **의도 파악**: 사용자 질문을 분석하여 적절한 테스트 모드 선택 및 실행
-- **결과 요약**: 테스트 결과를 자연어로 요약하여 제공
+- **구조화된 답변**: 일반적인 데이터 조회 대비 구조화된 답변 제공, DB 구조 기반 카테고리화 및 포맷팅
+- **Instructor 통합**: Pydantic 모델을 사용한 구조화된 데이터 추출 및 검증, 타입 안전성 보장
+- **개선점**: LangGraph 워크플로우를 통한 질문-답변 구조화로 더 정확하고 맥락에 맞는 답변 생성
 
 **기술 스택**:
 - **Python**: 테스트 자동화 스크립트
@@ -1523,11 +1530,62 @@ graph TB
 
 ---
 
+### 8.2 Factory Ontology Manager AI Agent
+
+**프로젝트 개요**:
+- **개발 시작**: 2026년 1월 8일 (설계 완료)
+- **개발 완료 예정**: 2026년 1월 9일
+- **목적**: Factory Ontology Manager에 AI 에이전트 기능을 추가하여 자연어로 기술된 공정 문서를 파싱하고, 실제 공장 데이터(DB)와 매핑하여 공장 모니터링 캔버스 레이아웃을 자동 생성
+
+**핵심 기능**:
+1. **자연어 공정 문서 파싱**: 공정 엔지니어가 자연어로 작성한 공정 문서를 자동으로 파싱하여 구조화된 정보 추출
+2. **DB Grounding**: 사용자의 추상적 요청을 실제 DB의 설비/센서 ID로 자동 매핑
+   - 예시: "용접기 온도 보여줘" → DB에서 WELD_ROBOT_01 (ID: EQ_99) 및 TAG_TEMP_W01 찾기
+3. **Ontology Mapping**: 설비 간 관계 및 데이터 흐름을 분석하여 시각화 구조 생성
+4. **Spec-First Modification**: 수정 요청 시 바로 코드를 고치는 것이 아니라, '요구사항 명세서'를 먼저 작성 후 데이터 수정
+5. **캔버스 레이아웃 자동 생성**: 자연어 공정 문서 → 캔버스 JSON (dic) 자동 변환
+
+**자연어 쿼리 기능**:
+- **ODM/OED 대응**: 자연어로 설비/조직 연결, 생성/조정
+- **공정/조직 연결**: 자연어 요청을 통한 공정과 조직 간 자동 연결
+- **생성/조정**: 자연어로 캔버스 레이아웃 생성 및 수정
+
+**기술 스택**:
+- **Frontend**: React 18.3.1 + TypeScript 5.5.3 + Vite 7.1.12
+- **UI**: shadcn-ui (Radix UI) + Tailwind CSS 3.4.11
+- **상태 관리**: Zustand 5.0.9 + React Query 5.56.2
+- **Backend**: Flask (Python)
+- **LLM 통합**: Instructor (Pydantic 기반 LLM 검증)
+- **DB**: AI_DB_center JSON 파일 기반 (`.vacts/enriched_info_company_SYON_*.json`)
+
+**아키텍처**:
+- **Component-based Architecture**: React 컴포넌트 기반 구조
+- **AI Agent Window**: 새 창(모달/사이드바)로 AI 인터페이스 제공
+- **코드 모드 사이드바 통합**: 기존 Factory Ontology Manager 캔버스에 자연스럽게 통합
+- **API Layer**: RESTful API (AI_DB_center JSON 파일 기반)
+- **Instructor 통합**: LLM 응답을 Pydantic 스키마로 검증
+
+**비즈니스 가치**:
+- **레이아웃 생성 시간 80% 단축**: 기존 2-3시간 → 개선 20-30분
+- **수정 요청 처리 시간 50% 단축**: Spec-First Modification으로 명확한 변경 계획
+- **유지보수 시간 30% 단축**: 요구사항 명세서 자동 생성으로 변경 이력 추적 용이
+- **학습 곡선 단축**: 기존 시스템 학습 시간 1-2주 → AI 에이전트 사용 즉시 사용 가능 (자연어)
+
+**설계 문서 경로**: `platform_all/factory_ontology_manager/AI_manager/docs/obsidian_design_origin/architecture/`
+- 주요 설계 문서: Initial_Situation_Report.md, Blue_Print.md, Business_Summary.md, API_Design.md, Database_Design.md, Component_Interfaces_Design.md 등
+
+**관계**:
+- **Factory Ontology Manager AI Agent → factory_ontology_manager**: 기존 Factory Ontology Manager에 AI 기능 통합
+- **Factory Ontology Manager AI Agent → AI_DB_center**: AI_DB_center JSON 파일 기반 데이터 저장소 사용
+- **Factory Ontology Manager AI Agent → Virtual_Company_Creation_Agent**: Virtual_company_creation_agent 기반 DB 구조 활용
+
+---
+
 ## ID 참조
 
 - **문서 ID**: `page.portfolio.architecture`
 - **관련 Phase**: `phase.foundation.*`
-- **관련 프로젝트**: `project.ams`, `project.dps`, `project.coctk` 등
+- **관련 프로젝트**: `project.ams`, `project.dps`, `project.coctk`, `project.ai_db_tester`, `project.factory_ontology_manager_ai_agent` 등
 - **관련 문서**: `page.portfolio.*`
 
 ---

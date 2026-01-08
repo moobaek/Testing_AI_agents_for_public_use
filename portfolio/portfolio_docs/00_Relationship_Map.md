@@ -401,6 +401,8 @@ graph TB
 - `phase.foundation.step01` - Step 1 문서
 - `project.ams` - AMS 프로젝트
 - `project.pm_agent` - PM Agent (사업 관리)
+- `project.ai_db_tester` - AI_DB_tester (VACTS) - Virtual Company Creation Agent 테스트 자동화 시스템 (LangGraph 기반 자연어 쿼리 포함)
+- `project.factory_ontology_manager_ai_agent` - Factory Ontology Manager AI Agent - 자연어 기반 공정 문서 파싱 및 캔버스 레이아웃 자동 생성
 
 **관련 문서**: [[00_ID_System_Guide|ID 시스템 가이드]] (`guide.id.system`)
 
