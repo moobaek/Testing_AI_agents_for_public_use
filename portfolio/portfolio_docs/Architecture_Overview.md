@@ -58,6 +58,7 @@
 10. [🤖 Cloud Sub-Agent & Governance](#ai-workflow--automation)
 11. [🚀 사무 자동화의 미래 비전](#사무-자동화의-미래-비전)
 12. [🌐 Platform All: 통합 플랫폼 생태계](#platform-all-통합-플랫폼-생태계)
+    - 7.1 Original_Development_Plan: LangGraph Chain 설계 방법론 및 LLM 트러블슈팅 시스템
 
 > [!TIP] 옵시디언 네비게이션
 > 옵시디언에서 자동으로 앵커 링크가 생성되므로, 목차의 링크를 클릭하면 해당 섹션으로 바로 이동할 수 있습니다.
@@ -1251,8 +1252,93 @@ graph TB
   - 단계별 뒷받침 설계 문서 생성: 변경 전파 규칙 통합
   - 단계별 체크리스트 생성: 검증 항목 및 완료 기준 설정
   - 브라우저 디버깅: 브라우저 기반 디버깅 지원
-  - 트러블 관리: 변경 전파 규칙 통합
+  - 트러블 관리: 변경 전파 규칙 통합, LLM 트러블슈팅 Mock 테스트 시스템
   - 변경 리포트 생성: 자동 변경 리포트 생성
+
+**LangGraph Chain 설계 방법론 (2026-01-10 업그레이드)**:
+
+Original_Development_Plan은 LangGraph/CrewAI 기반 복합 AI Agent 시스템을 체계적으로 설계하기 위한 **4단계 심화 설계 프로세스**를 제공합니다.
+
+**4단계 파이프라인**:
+
+```mermaid
+graph TD
+    subgraph "Phase 1: Parsing"
+        P1[RG_00 요구사항 파싱] --> P2[RG_01 코드베이스 분석]
+        P2 --> P3[RG_02 UI/화면 파싱]
+        P2 --> P4[RG_03 DB/컴포넌트 파싱]
+        P3 & P4 --> P5[RG_04 통합 분석]
+    end
+    
+    subgraph "Phase 2: Summarizing"
+        P5 --> S1[Summarizer UI]
+        P5 --> S2[Summarizer Logic]
+        P5 --> S3[Summarizer DB]
+        S1 & S2 & S3 --> HL1{Human Loop 1<br/>요약 검토}
+    end
+    
+    subgraph "Phase 3: Designing"
+        HL1 -->|승인| D1[RG_05 Blueprint]
+        D1 --> D2[RG_06 State 설계]
+        D1 --> D3[RG_07 Node Logic]
+        D2 & D3 --> D4[RG_08 UI Integration]
+        D4 --> HL2{Human Loop 2<br/>설계 검토}
+    end
+    
+    subgraph "Phase 4: Planning"
+        HL2 -->|승인| R1[RG_09 리팩토링 계획]
+    end
+    
+    R1 --> IMPL[코드 구현 진행]
+    
+    style HL1 fill:#f39c12
+    style HL2 fill:#f39c12
+    style IMPL fill:#27ae60
+```
+
+**주요 특징**:
+- **기존 자산 활용**: 화면, DB, 컴포넌트를 체계적으로 파싱하여 구조화
+- **전문가 페르소나**: UI/DB/Logic 전문가 관점에서 핵심 정보 요약
+- **Human-in-the-Loop**: 2회 승인 게이트로 품질 보장
+- **체계적 설계**: Blueprint → State → Node Logic → UI Integration 순차 설계
+- **실행 계획**: 리팩토링 계획 문서를 `04_planning/` 폴더에 생성하여 체계적 구현
+
+**출력물 구조**:
+- **파싱 단계**: `architecture/temp/rg_*.json` (중간 분석 결과)
+- **요약 단계**: `architecture/temp/rg_*_summary.md` (전문가 요약)
+- **설계 단계**: `architecture/RG_*.md` (Blueprint, State, Node Logic, UI Integration)
+- **계획 단계**: `chain/langgraph_chain/04_planning/RG_Refactoring_Plan.md` (실행 계획)
+
+**참고 문서 경로**: `platform_all/Original_Development_Plan/docs/obsidian_design_origin/specs/04_Prompts/development/chain/langgraph_chain/`
+
+**LLM 트러블슈팅 시스템 (2026-01-10 추가)**:
+
+LangChain/CrewAI 기반 시스템의 트러블슈팅을 위한 **Mock 테스트 시스템**이 구축되었습니다.
+
+**트러블슈팅 프로세스**:
+
+1. **문제 유형 분류**: Troubleshooting_Management_Prompt에서 "LLM 문제 (LangChain/CrewAI)"로 분류
+2. **Mock 테스트 시스템 사용**: `docs/development/test_LLM/` 폴더로 이동
+3. **체크리스트 생성**: 요구사항 기반으로 테스트 체크리스트 자동 생성
+   ```bash
+   python checklist_generator.py "요구사항 텍스트" -o checklist.json -f langchain
+   ```
+4. **Mock 테스트 실행**: 실제 LLM API 호출 없이 로직 검증
+   ```bash
+   python test_runner.py checklist.json
+   ```
+5. **결과 분석**: `outputs/` 폴더의 리포트 확인 및 문제 원인 파악
+6. **해결 방법 도출**: Mock 테스트 결과를 바탕으로 실제 코드 수정 및 재검증
+
+**Mock 테스트 시스템 구성**:
+- **LangChain/LangGraph Mock**: Chain, Graph 실행 시뮬레이션
+- **CrewAI Mock**: Agent, Task, Crew 실행 시뮬레이션
+- **체크리스트 자동 생성**: 사용자 요구사항을 기반으로 테스트 케이스 자동 생성
+- **입출력 파일 형식**: JSON 기반 테스트 결과 관리 및 리포트 생성
+
+**참고 문서 경로**: 
+- `platform_all/Original_Development_Plan/docs/obsidian_design_origin/docs/development/test_LLM/README.md`
+- `platform_all/Original_Development_Plan/docs/obsidian_design_origin/specs/04_Prompts/development/Troubleshooting_Management_Prompt.md`
 
 - **변경 관리 프로세스**: 문서 일관성 자동 유지
   - 변경 영향 매트릭스 기반 자동 영향 분석
@@ -1264,6 +1350,7 @@ graph TB
 - **2025년 10월~12월**: 핵심 개발 집중 (21개 development 프롬프트 구축)
 - **2025년 5월~7월**: 컨소들 모여서 연구 사업계획서 작성 및 아이디어 구체화
 - **2025년 8월~10월**: 배경 연구 및 테스트, 내용 보완
+- **2026년 1월 10일**: LangGraph Chain 설계 방법론 및 LLM 트러블슈팅 Mock 테스트 시스템 추가
 
 ### 7.2 factory_ontology_manager
 
