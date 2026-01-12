@@ -102,3 +102,6 @@ uploaded_files/
 # --- Documentation (excluded from Git) ---
 docs/
 
+# --- Business Document Generator Temp Files ---
+portfolio_docs/business_document_generator/data/temp/
+portfolio_docs/business_document_generator/data/temp/chunks/

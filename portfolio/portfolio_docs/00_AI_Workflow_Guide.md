@@ -16,6 +16,73 @@
 
 ---
 
+## 포트폴리오 문서 폴더 진입 시 필수 확인 사항
+
+> [!WARNING] 필수 규칙
+> AI가 `@portfolio` 또는 `@portfolio/portfolio_docs` 폴더에 진입할 때는 **반드시** 사용자에게 작업 유형을 먼저 확인해야 합니다.
+
+### 작업 유형 확인 프로세스
+
+포트폴리오 문서 폴더에 진입 시 다음 질문을 사용자에게 먼저 제시해야 합니다:
+
+**필수 질문**:
+1. **문서 수정/업데이트**: 기존 문서를 수정하거나 업데이트하시겠습니까?
+2. **새 포트폴리오 문서 생성**: 새로운 포트폴리오 문서를 생성하시겠습니까?
+3. **사업계획서/제안서/착수보고서 작성**: Business Document Generator를 사용하여 사업계획서, 제안서, 또는 착수보고서를 작성하시겠습니까?
+4. **문서 검토 및 일관성 확인**: 문서를 검토하거나 일관성을 확인하시겠습니까?
+5. **기타**: 다른 작업을 원하시나요?
+
+**워크플로우**:
+```mermaid
+graph TD
+    A[포트폴리오 문서 폴더 진입] --> B{작업 유형 확인}
+    B -->|문서 수정| C[기존 문서 수정 프로세스]
+    B -->|문서 생성| D[새 문서 생성 프로세스]
+    B -->|사업계획서/제안서/착수보고서| G[Business Document Generator 실행]
+    B -->|문서 검토| E[문서 검토 프로세스]
+    B -->|기타| F[사용자 요청 확인]
+    
+    G --> G1[발주처 유형 선택<br/>정부/민간/공공기관/기타]
+    G1 --> G2[문서 유형 선택<br/>제안서/사업계획서/착수보고서]
+    G2 --> G3[Business Document Chain 실행]
+    
+    style B fill:#fff4e1
+    style C fill:#e8f5e9
+    style D fill:#e1f5ff
+    style G fill:#f39c12
+    style E fill:#f3e5f5
+```
+
+**예시**:
+```
+사용자: @portfolio 또는 @portfolio/portfolio_docs
+
+AI 응답:
+포트폴리오 폴더에 진입했습니다. 어떤 작업을 진행하시겠습니까?
+
+1. 기존 문서 수정/업데이트
+2. 새 포트폴리오 문서 생성
+3. 사업계획서/제안서/착수보고서 작성
+4. 문서 검토 및 일관성 확인
+5. 기타 (설명해주세요)
+```
+
+**참고**: 
+- `@portfolio` 진입 시: `portfolio_docs` 폴더의 문서를 대상으로 작업합니다.
+- `@portfolio/portfolio_docs` 진입 시: 동일하게 `portfolio_docs` 폴더의 문서를 대상으로 작업합니다.
+
+**사업계획서/제안서/착수보고서 작성 선택 시**:
+- `business_document_generator/prompts/Business_Document_Chain_Prompt.md` 실행
+- 발주처 유형 선택 (정부/민간/공공기관/기타)
+- 문서 유형 선택 (제안서/사업계획서/착수보고서)
+- 요구조건 파일 및 Architecture 파일 파싱
+- 포트폴리오 스마트 매칭
+- 발주처 유형별 페르소나 적용
+
+> **중요**: 사용자가 명시적으로 작업을 요청하지 않은 경우, 폴더 진입 시 자동으로 이 질문을 제시해야 합니다.
+
+---
+
 ## ID 기반 문서 참조 전략
 
 ### 0. Human-in-the-Loop 검증 원칙 (필수)
@@ -322,12 +389,75 @@ page.portfolio.index:
 
 ---
 
+## 클로드 에이전트화 (Claude Agent Workflow)
+
+> [!NOTE] 클로드 에이전트 최적화
+> 포트폴리오 언급 시 자동으로 휴먼 루프가 트리거되어 클로드 에이전트화에 최적화되어 있습니다.
+
+### 자동 휴먼 루프 트리거
+
+포트폴리오 관련 키워드가 감지되면 **즉시** `Portfolio_Question_Entry_Prompt.md`가 실행되어 필수 휴먼 루프를 통해 작업 유형을 선택하게 합니다.
+
+**트리거 키워드**:
+- `@portfolio`, `@portfolio/portfolio_docs`, `portfolio`
+- "포트폴리오", "portfolio"
+- 포트폴리오 문서 파일명 언급
+
+**자동 실행 프로세스**:
+1. 포트폴리오 키워드 감지
+2. `Portfolio_Question_Entry_Prompt.md` 자동 실행
+3. Function Call을 통한 필수 휴먼 루프 (작업 유형 선택)
+4. 선택된 옵션에 따른 프롬프트 체인 실행
+
+### 메타데이터 구조
+
+각 프롬프트는 Extended Graph 호환 메타데이터를 포함하여 클로드 에이전트가 자동으로 실행 순서를 파악할 수 있습니다:
+
+```yaml
+---
+tags:
+  - portfolio-prompt
+  - [카테고리]
+relation_type: [관계 타입]
+category: [카테고리]
+relations:
+  - source: [소스]
+    relation: [관계]
+    target: [타겟]
+    type: [타입]
+    direction: [방향]
+---
+```
+
+### Function Call 스키마
+
+각 프롬프트는 명확한 Function Call 스키마를 정의하여 클로드 에이전트가 자동으로 파라미터를 수집하고 실행할 수 있습니다.
+
+**예시**: `Portfolio_Question_Entry_Prompt.md`의 Function Call
+- `portfolio_question_entry_selection`: 작업 유형 선택 (필수)
+- `selected_option`: 선택된 작업 유형
+- `workflow_mode`: 워크플로우 모드 (chain_workflow / custom_workflow)
+
+### 실행 순서 자동화
+
+프롬프트 실행 순서는 `prompts/README.md`에 정의되어 있으며, 클로드 에이전트가 자동으로 따라갈 수 있습니다:
+
+1. **진입점**: `Portfolio_Question_Entry_Prompt.md` (필수)
+2. **라우팅**: 선택된 작업 유형에 따라 적절한 프롬프트 체인 실행
+3. **체인 실행**: `Portfolio_Analysis_Chain_Prompt.md` (체인 워크플로우 선택 시)
+4. **최종 문서화**: `Portfolio_Documentation_Prompt.md`
+
+> **중요**: 클로드 에이전트는 `Portfolio_Question_Entry_Prompt.md`를 먼저 읽고, 필수 휴먼 루프를 건너뛰지 않고 실행해야 합니다.
+
+---
+
 ## 관련 문서
 
 - [[00_ID_System_Guide|ID 시스템 가이드]] - ID 명명 규칙 및 사용 방법
 - [[Phase_1_Foundation/Step_04_Modularization|모듈화 전략]] - 실제 프로젝트 적용 사례
 - [[00_Relationship_Map|관계 맵]] - 문서 간 관계 시각화
 - [[templates/Evaluation_Prompt_Template|평가 프롬프트 템플릿]] - AI 평가 프롬프트 예시
+- [[prompts/README|포트폴리오 질문 시스템 가이드]] - 클로드 에이전트화 상세 가이드
 
 ---
 
@@ -335,4 +465,5 @@ page.portfolio.index:
 > - **ID 기반 검색**: `page.portfolio.*` → 모든 포트폴리오 페이지
 > - **문서 참조**: 항상 ID 명시 (`page.portfolio.index`)
 > - **관계 맵**: 문서 생성/수정 시 자동 업데이트
+> - **클로드 에이전트**: 포트폴리오 언급 시 자동 휴먼 루프 트리거
 

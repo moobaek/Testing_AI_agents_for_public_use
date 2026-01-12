@@ -85,6 +85,7 @@
   - Sensors & IoT: `project.smart_sensors`, `project.ai_composite_sensor`, `project.virtual_sensor`, `project.seah.data_integration`
   - Safety & Energy: `project.cleanroom_energy`, `project.energy_pattern`, `project.power_prediction`, `project.digital_twin_safety`, `project.power_quality`
   - Healthcare: `project.medical_constitution`
+  - AI Workflow: `project.fmea_claude_agent`, `project.prompt_eval_claude_agent`, `project.pm_agent`, `project.virtual_company_creation_agent`, `project.ai_db_tester`, `project.factory_ontology_manager_ai_agent`
 - **관련 문서**: `page.portfolio.*`
 - **가이드 문서**: `guide.id.system`, `guide.ai.workflow`, `guide.team.roles`, `guide.pm.roles`
 - **템플릿**: `template.*`

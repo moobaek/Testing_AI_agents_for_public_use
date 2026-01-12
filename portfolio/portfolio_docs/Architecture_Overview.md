@@ -13,7 +13,8 @@
 
 **이름**: 권순룡  
 **소속**: 한솔코에버 연구소 대리 (2020.09 ~ 재직중)  
-**총 경력**: 5년 (2020~2025)
+**총 경력**: 5년 (2020~2025)  
+**이메일**: m920831@naver.com
 
 > [!QUOTE] 핵심 철학
 > **"모델보다 데이터, 데이터보다 정보, 지식구조를 정리하는 현장친화적 연구원"**
@@ -57,6 +58,7 @@
 10. [🤖 Cloud Sub-Agent & Governance](#ai-workflow--automation)
 11. [🚀 사무 자동화의 미래 비전](#사무-자동화의-미래-비전)
 12. [🌐 Platform All: 통합 플랫폼 생태계](#platform-all-통합-플랫폼-생태계)
+    - 7.1 Original_Development_Plan: LangGraph Chain 설계 방법론 및 LLM 트러블슈팅 시스템
 
 > [!TIP] 옵시디언 네비게이션
 > 옵시디언에서 자동으로 앵커 링크가 생성되므로, 목차의 링크를 클릭하면 해당 섹션으로 바로 이동할 수 있습니다.
@@ -1229,9 +1231,19 @@ graph TB
 
 **내부 구조의 촘촘함**:
 
-- **Workflow_Orchestrator**: 실행 순서 및 의존성 관리
+- **Workflow_Orchestrator & Status Tracker**: 실행 순서 및 의존성 관리, 워크플로우 상태 추적
 - **State_Management_System**: 정보 전달 최적화
 - **Session_Context_Manager**: 휘발성 정보 관리
+- **Adaptive Doc Generation Chain**: doc_generation tool (DG.1-DG.5 Chain Prompts)
+  - DG.1: 문서 구조 분석 및 템플릿 선택
+  - DG.2: 핵심 정보 추출 및 요약
+  - DG.3: Human Loop를 통한 사용자 확인
+  - DG.4: Schema 기반 문서 생성
+  - DG.5: 최종 문서 검증 및 포맷팅
+  - **Summarizers**: 문서 생성 프로세스의 핵심 정보 요약
+  - **Human Loops**: 사용자 확인 및 피드백 수집
+  - **Schemas**: 문서 구조 및 데이터 형식 정의
+  - **Templates**: 표준화된 문서 템플릿 제공
 - **21개 development 프롬프트**: 개발 단계의 정교한 관리
   - 개발 워크플로우: 사용자 요청을 개발 작업으로 변환, 코드 생성
   - 개발 완료 후 휴먼 루프: 연속 개발 지원 (진행/수정/browser 디버깅/트러블 관리)
@@ -1240,8 +1252,93 @@ graph TB
   - 단계별 뒷받침 설계 문서 생성: 변경 전파 규칙 통합
   - 단계별 체크리스트 생성: 검증 항목 및 완료 기준 설정
   - 브라우저 디버깅: 브라우저 기반 디버깅 지원
-  - 트러블 관리: 변경 전파 규칙 통합
+  - 트러블 관리: 변경 전파 규칙 통합, LLM 트러블슈팅 Mock 테스트 시스템
   - 변경 리포트 생성: 자동 변경 리포트 생성
+
+**LangGraph Chain 설계 방법론 (2026-01-10 업그레이드)**:
+
+Original_Development_Plan은 LangGraph/CrewAI 기반 복합 AI Agent 시스템을 체계적으로 설계하기 위한 **4단계 심화 설계 프로세스**를 제공합니다.
+
+**4단계 파이프라인**:
+
+```mermaid
+graph TD
+    subgraph "Phase 1: Parsing"
+        P1[RG_00 요구사항 파싱] --> P2[RG_01 코드베이스 분석]
+        P2 --> P3[RG_02 UI/화면 파싱]
+        P2 --> P4[RG_03 DB/컴포넌트 파싱]
+        P3 & P4 --> P5[RG_04 통합 분석]
+    end
+    
+    subgraph "Phase 2: Summarizing"
+        P5 --> S1[Summarizer UI]
+        P5 --> S2[Summarizer Logic]
+        P5 --> S3[Summarizer DB]
+        S1 & S2 & S3 --> HL1{Human Loop 1<br/>요약 검토}
+    end
+    
+    subgraph "Phase 3: Designing"
+        HL1 -->|승인| D1[RG_05 Blueprint]
+        D1 --> D2[RG_06 State 설계]
+        D1 --> D3[RG_07 Node Logic]
+        D2 & D3 --> D4[RG_08 UI Integration]
+        D4 --> HL2{Human Loop 2<br/>설계 검토}
+    end
+    
+    subgraph "Phase 4: Planning"
+        HL2 -->|승인| R1[RG_09 리팩토링 계획]
+    end
+    
+    R1 --> IMPL[코드 구현 진행]
+    
+    style HL1 fill:#f39c12
+    style HL2 fill:#f39c12
+    style IMPL fill:#27ae60
+```
+
+**주요 특징**:
+- **기존 자산 활용**: 화면, DB, 컴포넌트를 체계적으로 파싱하여 구조화
+- **전문가 페르소나**: UI/DB/Logic 전문가 관점에서 핵심 정보 요약
+- **Human-in-the-Loop**: 2회 승인 게이트로 품질 보장
+- **체계적 설계**: Blueprint → State → Node Logic → UI Integration 순차 설계
+- **실행 계획**: 리팩토링 계획 문서를 `04_planning/` 폴더에 생성하여 체계적 구현
+
+**출력물 구조**:
+- **파싱 단계**: `architecture/temp/rg_*.json` (중간 분석 결과)
+- **요약 단계**: `architecture/temp/rg_*_summary.md` (전문가 요약)
+- **설계 단계**: `architecture/RG_*.md` (Blueprint, State, Node Logic, UI Integration)
+- **계획 단계**: `chain/langgraph_chain/04_planning/RG_Refactoring_Plan.md` (실행 계획)
+
+**참고 문서 경로**: `platform_all/Original_Development_Plan/docs/obsidian_design_origin/specs/04_Prompts/development/chain/langgraph_chain/`
+
+**LLM 트러블슈팅 시스템 (2026-01-10 추가)**:
+
+LangChain/CrewAI 기반 시스템의 트러블슈팅을 위한 **Mock 테스트 시스템**이 구축되었습니다.
+
+**트러블슈팅 프로세스**:
+
+1. **문제 유형 분류**: Troubleshooting_Management_Prompt에서 "LLM 문제 (LangChain/CrewAI)"로 분류
+2. **Mock 테스트 시스템 사용**: `docs/development/test_LLM/` 폴더로 이동
+3. **체크리스트 생성**: 요구사항 기반으로 테스트 체크리스트 자동 생성
+   ```bash
+   python checklist_generator.py "요구사항 텍스트" -o checklist.json -f langchain
+   ```
+4. **Mock 테스트 실행**: 실제 LLM API 호출 없이 로직 검증
+   ```bash
+   python test_runner.py checklist.json
+   ```
+5. **결과 분석**: `outputs/` 폴더의 리포트 확인 및 문제 원인 파악
+6. **해결 방법 도출**: Mock 테스트 결과를 바탕으로 실제 코드 수정 및 재검증
+
+**Mock 테스트 시스템 구성**:
+- **LangChain/LangGraph Mock**: Chain, Graph 실행 시뮬레이션
+- **CrewAI Mock**: Agent, Task, Crew 실행 시뮬레이션
+- **체크리스트 자동 생성**: 사용자 요구사항을 기반으로 테스트 케이스 자동 생성
+- **입출력 파일 형식**: JSON 기반 테스트 결과 관리 및 리포트 생성
+
+**참고 문서 경로**: 
+- `platform_all/Original_Development_Plan/docs/obsidian_design_origin/docs/development/test_LLM/README.md`
+- `platform_all/Original_Development_Plan/docs/obsidian_design_origin/specs/04_Prompts/development/Troubleshooting_Management_Prompt.md`
 
 - **변경 관리 프로세스**: 문서 일관성 자동 유지
   - 변경 영향 매트릭스 기반 자동 영향 분석
@@ -1253,6 +1350,7 @@ graph TB
 - **2025년 10월~12월**: 핵심 개발 집중 (21개 development 프롬프트 구축)
 - **2025년 5월~7월**: 컨소들 모여서 연구 사업계획서 작성 및 아이디어 구체화
 - **2025년 8월~10월**: 배경 연구 및 테스트, 내용 보완
+- **2026년 1월 10일**: LangGraph Chain 설계 방법론 및 LLM 트러블슈팅 Mock 테스트 시스템 추가
 
 ### 7.2 factory_ontology_manager
 
@@ -1261,6 +1359,10 @@ graph TB
 - shapez.io 게임에서 영감을 받은 드래그 앤 드롭 인터페이스
 - 계층적 구조 관리 (공장 > 작업장 > 생산라인 > 공정)
 - 마스터 데이터 통합 (자재, 센서, PLC)
+- **DB 이전 완료**: factory_ontology_manager의 DB를 AI_DB_center로 이전 완료 (Virtual_company_creation_agent 기반)
+  - 이전 완료, 테스트 완료, 정상 작동 확인
+  - AI_DB_center JSON 파일 기반 데이터 저장소 사용 (`.vacts/enriched_info_company_SYON_*.json`)
+  - 데이터 저장 경로: `data.platform_ecosystem.platforms[].stored_data.factories[]`
 
 ### 7.3 pipeline_system_complete
 
@@ -1365,6 +1467,10 @@ graph TB
             VCCA --> |하이퍼디멘션| HDC[초차원 공간 정보 전달<br/>양자 얽힘-like 통신]
             VCCA --> |6개 Phase| PhaseChain[Phase 1-6 Chain Workflow<br/>기업 설계 자동화]
             VCCA --> |12개 시스템| Systems[12개 시스템 110개 Sub<br/>완전 자동화 기업]
+            VCCA --> |Chain Infrastructure| ChainInfra[Master Orchestrator<br/>Chain 00/01/02<br/>Human/AI Guides]
+            VCCA --> |Element Layer| ElementLayer[Schemas, Personas<br/>Templates Type D/E/F]
+            VCCA --> |Human Guides| HumanGuides[6개 가이드 생성 완료<br/>Deployment/Admin/Dev<br/>User/Setup/AI Operator]
+            VCCA --> |AI Agent Guides| AIGuides[6개 에이전트 가이드<br/>DEPLOY/ADMIN/DEV<br/>QUERY/SETUP/TUNING]
         end
     end
     
@@ -1419,6 +1525,90 @@ graph TB
   - [Grape_Cluster_Architecture.md](../../../platform_all/Virtual_company_creation_agent/docs/obsidian_design_origin/architecture/Grape_Cluster_Architecture.md) - Grape Cluster 저장 구조 (포도송이 구조 DB)
   - [API_Design.md](../../../platform_all/Virtual_company_creation_agent/docs/obsidian_design_origin/architecture/API_Design.md), [Database_Design.md](../../../platform_all/Virtual_company_creation_agent/docs/obsidian_design_origin/architecture/Database_Design.md), [State_Management_Design.md](../../../platform_all/Virtual_company_creation_agent/docs/obsidian_design_origin/architecture/State_Management_Design.md) 등
 
+**Chain Infrastructure 완료** (2026.1 업데이트):
+- **Master Orchestrator**: 문서 생성 전체 프로세스 조율 (`prompts/doc_chains/Doc_Master_Orchestrator.md`)
+- **Chain 00 (Structure)**: 문서 구조 정의 및 Type 매핑 (`prompts/doc_chains/Chain_00_Structure.md`)
+- **Chain 01 (Human Guide)**: 인간 독자를 위한 운영 가이드 생성 (`prompts/doc_chains/Chain_01_Human_Guide.md`)
+- **Chain 02 (AI Agent Guide)**: AI 에이전트를 위한 가이드 생성 (`prompts/doc_chains/Chain_02_AI_Agent.md`)
+
+**Element Layer** (Type D/E/F 완료):
+- **Schemas**: Type별 필수 정보 구조 정의 (`prompts/doc_chains/schemas/`)
+- **Personas**: Type별 사용자 페르소나 정의 (`prompts/doc_chains/personas/`)
+- **Templates**: Type별 문서 템플릿 (`prompts/doc_chains/elements/Element_TypeD.md`, `Element_TypeE.md`, `Element_TypeF.md`)
+
+**Human Guides 생성 완료** (6개):
+- `docs/operation_guides/Deployment_Guide.md` (Type A)
+- `docs/operation_guides/Admin_Operations_Manual.md` (Type B)
+- `docs/operation_guides/Developer_Maintenance_Guide.md` (Type C)
+- `docs/operation_guides/End_User_Guide.md` (Type D)
+- `docs/operation_guides/Initial_Setup_Guide.md` (Type E)
+- `docs/operation_guides/AI_Operator_Guide.md` (Type F)
+
+**AI Agent Guides 생성 완료** (6개):
+- `prompts/agents/DEPLOY_AGENT.md` (Type A')
+- `prompts/agents/ADMIN_AGENT.md` (Type B')
+- `prompts/agents/DEV_AGENT.md` (Type C')
+- `prompts/agents/QUERY_AGENT.md` (Type D')
+- `prompts/agents/SETUP_AGENT.md` (Type E')
+- `prompts/agents/TUNING_AGENT.md` (Type F')
+
+### 8.1 AI_DB_tester (VACTS - Virtual AI Company Test Suite)
+
+**프로젝트 개요**:
+- **개발 시작**: 2026년 1월 7일
+- **상태**: 거의 완료 (설계 문서 23개, 구현 파일 24개 완료)
+- **목적**: Virtual Company Creation Agent의 전체 파이프라인을 자동으로 테스트하고 검증하는 AI 기반 QA 시스템
+
+**핵심 특징**:
+- **Cursor-Native**: 별도 UI 없이 IDE의 Chat/Composer 기능을 런타임으로 활용
+- **시뮬레이션 공장**: 실제처럼 보이는 시뮬레이션 실행
+- **자동 검증**: GFS (Grape File System), 온톨로지, 스키마 자동 검증
+- **자동 리포트**: 테스트 결과 자동 리포트 생성
+
+**5가지 실행 모드**:
+1. **Company Creation Full Test**: 회사 구축 전체 과정 테스트 (Chain 01~07)
+2. **Full Simulation**: Chain 01~07 전체 시뮬레이션
+3. **Single Chain**: 단일 Chain 시뮬레이션
+4. **Single System**: 단일 시스템 시뮬레이션
+5. **I/O Test**: 파일 시스템 I/O 테스트
+
+**자연어 쿼리 기능 (LangGraph 기반)**:
+- **QUERY_AGENT**: 사용자의 자연어 질문을 이해하고 테스트를 실행하는 AI Agent
+- **LangGraph 기반 질문-답변 구조화 워크플로우**: 질문 분석 → 데이터 추출 → 프롬프트 최적화 → AI 쿼리 → 답변 구조화 → 포맷팅
+- **자연어 인터페이스**: Cursor Chat에서 자연어로 테스트 요청 및 결과 조회
+  - 테스트 실행: "@QUERY_AGENT.md Chain 01 테스트 실행해줘", "@QUERY_AGENT.md Company Creation Full Test 실행해줘"
+  - 결과 조회: "@QUERY_AGENT.md 최신 리포트 보여줘", "@QUERY_AGENT.md Chain 04 결과 확인해줘"
+  - 자연어 질문: "@QUERY_AGENT.md SYON의 주요 제품은 무엇인가요?", "@QUERY_AGENT.md SYON Alchemy에 대해 자세히 알려주세요"
+- **의도 파악**: 사용자 질문을 분석하여 적절한 테스트 모드 선택 및 실행
+- **구조화된 답변**: 일반적인 데이터 조회 대비 구조화된 답변 제공, DB 구조 기반 카테고리화 및 포맷팅
+- **Instructor 통합**: Pydantic 모델을 사용한 구조화된 데이터 추출 및 검증, 타입 안전성 보장
+- **개선점**: LangGraph 워크플로우를 통한 질문-답변 구조화로 더 정확하고 맥락에 맞는 답변 생성
+
+**기술 스택**:
+- **Python**: 테스트 자동화 스크립트
+- **프롬프트 기반**: 모든 실행이 프롬프트 파일을 통해 이루어짐
+- **Cursor IDE 통합**: Cursor의 Chat/Composer 기능을 인터페이스로 활용
+- **시뮬레이션 엔진**: 실제 API 호출 없이 시뮬레이션 처리
+- **검증 엔진**: GFS 무결성, 온톨로지, 스키마, 좌표 정합성 검증
+
+**프로젝트 구조**:
+- **설계 문서**: 23개 (Phase 0~12 완료)
+- **프롬프트 파일**: 14개 (Master Workflow, Agent 프롬프트, 실행 모드, 검증 프롬프트)
+- **스키마 파일**: 3개 (agent_identity_schema_v2.json, validation_schema.json, checkpoint_schema.json)
+- **템플릿 파일**: 3개 (test_report_template.md, validation_report_template.md, gfs_health_template.md)
+
+**비즈니스 가치**:
+- **87.5% 시간 절감**: 수동 테스트 대비 대폭 시간 절감
+- **329% ROI**: 초기 투자 대비 높은 수익
+- **2.8개월 투자 회수**: 빠른 투자 회수
+
+**설계 문서 경로**: `platform_all/AI_DB_tester/docs/obsidian_design_origin/architecture/`
+- 주요 설계 문서: Initial_Situation_Report.md, Blue_Print.md, Process_Overview.md, API_Design.md, Database_Design.md, Business_Summary.md 등
+
+**관계**:
+- **AI_DB_tester → Virtual_Company_Creation_Agent**: Virtual Company Creation Agent의 전체 파이프라인 테스트 및 검증
+- **AI_DB_tester → Platform All**: Platform All 생태계의 품질 보장 도구로 활용
+
 **생태계의 핵심 가치**:
 
 - **자동화된 워크플로우**: 설계부터 평가, 관리, 분석까지 전체 프로세스 자동화
@@ -1427,11 +1617,62 @@ graph TB
 
 ---
 
+### 8.2 Factory Ontology Manager AI Agent
+
+**프로젝트 개요**:
+- **개발 시작**: 2026년 1월 8일 (설계 완료)
+- **개발 완료 예정**: 2026년 1월 9일
+- **목적**: Factory Ontology Manager에 AI 에이전트 기능을 추가하여 자연어로 기술된 공정 문서를 파싱하고, 실제 공장 데이터(DB)와 매핑하여 공장 모니터링 캔버스 레이아웃을 자동 생성
+
+**핵심 기능**:
+1. **자연어 공정 문서 파싱**: 공정 엔지니어가 자연어로 작성한 공정 문서를 자동으로 파싱하여 구조화된 정보 추출
+2. **DB Grounding**: 사용자의 추상적 요청을 실제 DB의 설비/센서 ID로 자동 매핑
+   - 예시: "용접기 온도 보여줘" → DB에서 WELD_ROBOT_01 (ID: EQ_99) 및 TAG_TEMP_W01 찾기
+3. **Ontology Mapping**: 설비 간 관계 및 데이터 흐름을 분석하여 시각화 구조 생성
+4. **Spec-First Modification**: 수정 요청 시 바로 코드를 고치는 것이 아니라, '요구사항 명세서'를 먼저 작성 후 데이터 수정
+5. **캔버스 레이아웃 자동 생성**: 자연어 공정 문서 → 캔버스 JSON (dic) 자동 변환
+
+**자연어 쿼리 기능**:
+- **ODM/OED 대응**: 자연어로 설비/조직 연결, 생성/조정
+- **공정/조직 연결**: 자연어 요청을 통한 공정과 조직 간 자동 연결
+- **생성/조정**: 자연어로 캔버스 레이아웃 생성 및 수정
+
+**기술 스택**:
+- **Frontend**: React 18.3.1 + TypeScript 5.5.3 + Vite 7.1.12
+- **UI**: shadcn-ui (Radix UI) + Tailwind CSS 3.4.11
+- **상태 관리**: Zustand 5.0.9 + React Query 5.56.2
+- **Backend**: Flask (Python)
+- **LLM 통합**: Instructor (Pydantic 기반 LLM 검증)
+- **DB**: AI_DB_center JSON 파일 기반 (`.vacts/enriched_info_company_SYON_*.json`)
+
+**아키텍처**:
+- **Component-based Architecture**: React 컴포넌트 기반 구조
+- **AI Agent Window**: 새 창(모달/사이드바)로 AI 인터페이스 제공
+- **코드 모드 사이드바 통합**: 기존 Factory Ontology Manager 캔버스에 자연스럽게 통합
+- **API Layer**: RESTful API (AI_DB_center JSON 파일 기반)
+- **Instructor 통합**: LLM 응답을 Pydantic 스키마로 검증
+
+**비즈니스 가치**:
+- **레이아웃 생성 시간 80% 단축**: 기존 2-3시간 → 개선 20-30분
+- **수정 요청 처리 시간 50% 단축**: Spec-First Modification으로 명확한 변경 계획
+- **유지보수 시간 30% 단축**: 요구사항 명세서 자동 생성으로 변경 이력 추적 용이
+- **학습 곡선 단축**: 기존 시스템 학습 시간 1-2주 → AI 에이전트 사용 즉시 사용 가능 (자연어)
+
+**설계 문서 경로**: `platform_all/factory_ontology_manager/AI_manager/docs/obsidian_design_origin/architecture/`
+- 주요 설계 문서: Initial_Situation_Report.md, Blue_Print.md, Business_Summary.md, API_Design.md, Database_Design.md, Component_Interfaces_Design.md 등
+
+**관계**:
+- **Factory Ontology Manager AI Agent → factory_ontology_manager**: 기존 Factory Ontology Manager에 AI 기능 통합
+- **Factory Ontology Manager AI Agent → AI_DB_center**: AI_DB_center JSON 파일 기반 데이터 저장소 사용
+- **Factory Ontology Manager AI Agent → Virtual_Company_Creation_Agent**: Virtual_company_creation_agent 기반 DB 구조 활용
+
+---
+
 ## ID 참조
 
 - **문서 ID**: `page.portfolio.architecture`
 - **관련 Phase**: `phase.foundation.*`
-- **관련 프로젝트**: `project.ams`, `project.dps`, `project.coctk` 등
+- **관련 프로젝트**: `project.ams`, `project.dps`, `project.coctk`, `project.ai_db_tester`, `project.factory_ontology_manager_ai_agent` 등
 - **관련 문서**: `page.portfolio.*`
 
 ---

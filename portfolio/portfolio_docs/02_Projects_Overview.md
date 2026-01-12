@@ -29,26 +29,27 @@ PDF 포트폴리오 분석을 통해 확인된 30개 이상의 주요 프로젝�
 |:---|:---|:---|:---|
 | **보급형 스마트센서 3종** (`project.smart_sensors`) | 2022~2024 | 모듈화 센서, Modbus/OPC-UA | 소규모 제조기업 보급 최적화, **논문(2024)** |
 | **AI 복합 센서** (`project.ai_composite_sensor`) | 2021~2023 | 에지 컴퓨팅(Edge AI), 가상 센서 | 데이터 전송량 감소, 실시간 이상 검출, **논문(2025)** |
-| **고가센서 대체 가상센서** (`project.virtual_sensor`) | 2021.05~2021.10<br/>한국에너지기술평가원 | ML 기반 가상 센서, 저비용 대체 솔루션 | 압축 사출 업체 고가센서 대체 가상센서 설계 및 구축, 다수의 저가 센서를 통해 고가 가상 센서 인증 진행완료, 비용 절감 |
+| **고가센서 대체 가상센서** (`project.virtual_sensor`) | 2021.05~2021.10<br/>한국에너지기술평가원 | ML 기반 가상 센서, 저비용 대체 솔루션 | 압축 사출 업체 고가센서 대체 가상센서 설계 및 구축, 인증 완료, 비용 절감 |
 | **세아특수강 데이터 통합** (`project.seah.data_integration`) | 2025 | RS232C-LAN 변환, Lot 매칭 | 실시간 검사 자동화 구축 |
 
 ## 4. Industrial Safety & Energy Optimization (`section.projects.safety_energy`)
 | 프로젝트명 | 기간 / 발주처 | 핵심 기술 | 역할 & 성과 |
 |:---|:---|:---|:---|
-| **산업용 클린룸 에너지 최적화** (`project.cleanroom_energy`) | 2021.04~2021.10<br/>한국에너지기술평가원 | 송풍기 최적 제어, 에너지 소비 패턴 분석 | **AI 엔진 개발 총괄 PM**, 송풍기 최적 제어에 대한 엔진 개발 및 해당 내용을 토대로 논문 작성 및 발표 진행 (PM으로 수행), 효율 20% 향상, **논문(2023)** |
+| **산업용 클린룸 에너지 최적화** (`project.cleanroom_energy`) | 2021.04~2021.10<br/>한국에너지기술평가원 | 송풍기 최적 제어, 에너지 소비 패턴 분석 | **AI 엔진 개발 총괄 PM**, 효율 20% 향상, **논문(2023)** |
 | **생산공정 에너지 데이터 패턴 분석** (`project.energy_pattern`) | 2023<br/>연구과제 | 설비 상태 데이터 패턴 분석, 라벨링 시스템 | **메인 수행**, 에너지 효율화 기반 구축 |
-| **전력 데이터 예측** (`project.power_prediction`) | 2021.04~2021.11<br/>정보통신산업진흥원 | 전력 소비 패턴 ML 예측, 시계열 분석 | 사출 업체 전력 데이터 예측 AI 엔진 개발, PLC(작동)변화에 따른 문제 요인 발견 및 패턴에 대한 복합 룰 베이스 적용 |
+| **전력 데이터 예측** (`project.power_prediction`) | 2021.04~2021.11<br/>정보통신산업진흥원 | 전력 소비 패턴 ML 예측, 시계열 분석 | 사출 업체 전력 데이터 예측 AI 엔진 개발, PLC 변화 기반 패턴 분석 |
 | **EV/ESS 디지털트윈 안전** (`project.digital_twin_safety`) | 2023~2024 | 가상 모델 매핑, 위험 식별 | 제조 공정 안전성 확보 및 사고 예방 |
 | **전력품질 에너지 효율 플랫폼** (`project.power_quality`) | 2022~2023 | 전력 파라미터 실시간 분석 | 에너지 효율화 시장 확산 및 실증, **논문(2023)** |
 
 ## 5. Healthcare & Medical AI (`section.projects.healthcare`)
 | 프로젝트명 | 기간 / 발주처 | 핵심 기술 | 역할 & 성과 |
 |:---|:---|:---|:---|
-| **진료기록 체질 분석 시스템** (`project.medical_constitution`) | 2022.06~2022.10<br/>한국데이터산업진흥원 | 진료기록 데이터 분석, 체질 패턴 ML 모델 | 누베베 한의원 진료 기록을 통해 체질 예측 수행, 해당 데이터를 정보화 하여 분석 진행, 체질 관리 AI 시스템 개발, 헬스케어 AI 적용 |
+| **진료기록 체질 분석 시스템** (`project.medical_constitution`) | 2022.06~2022.10<br/>한국데이터산업진흥원 | 진료기록 데이터 분석, 체질 패턴 ML 모델 | 한의원 진료 기록 기반 체질 예측 AI 시스템 개발, 헬스케어 AI 적용 |
 
 ## 6. AI Workflow & Automation Tools (`section.projects.ai_workflow`)
 | 프로젝트명 | 기간 / 발주처 | 핵심 기술 | 역할 & 성과 |
 |:---|:---|:---|:---|
+<<<<<<< HEAD
 | **Original_Development_Plan (Obsidian Design Origin)** (`project.obsidian_design_origin`) | 2020~2025<br/>(집중 개발: 2025.5~7, 2025.8~10, 2025.10~12)<br/>내부 개발 | ID 기반 온톨로지 맵, Phase 0-13 워크플로우, State 기반 정보 전달, 코드 에이전트 통합, 전문가 요약 시스템, 21개 development 프롬프트, **LangGraph/CrewAI 방식 워크플로우 오케스트레이션**, **상태 기반 진행 모니터링 및 완료 조건 판단 시스템** | **전체 에이전트 시스템 설계 (PM 활동에서 문서, 개발 진행 관리에 활용)**, 코드 에이전트 + 문서 확인 + 프롬프트 보완 통합, 298개+ 설계 문서, 25개+ AI 프롬프트 체인, 21개 development 프롬프트(수정 관리 시스템 포함), 개발 에이전트 실시간 평가 시스템, **워크플로우 상태 모니터링 및 자동 복귀 로직**, **품질 관리 오케스트레이션**, 연속 개발 워크플로우 |
 | **FMEA 자동화 생성 시스템 (Claude Sub-Agent)** (`project.fmea_claude_agent`) | 2025.6~<br/>내부 개발 | Claude Code Task tool, Multi-Agent Workflow, 8개 Sub-Agent 협업 | **Master Orchestrator 설계**, 코딩 에이전트의 역설계 시스템 구조 적용, AIAG & VDA FMEA 표준 기반 범용 리스크 분석 시스템, Phase 0~5 자동화 워크플로우, **코드 에이전트에서 영감을 받은 전체 공장/회사/사무 자동화의 백정보 핵심**, **논문(2025)** |
 | **Evaluation_Framework** (`project.evaluation_framework`) | 2025.10~<br/>내부 개발 | Python, FastAPI, LangGraph, React, Docker | **System-Wide Quality Assurance Layer**: 49개 Python 모듈과 298개 문서 전체를 전수 검사하는 거대 평가 엔진 (6가지 관점 평가 수행), 단순 프로젝트가 아닌 전체 아키텍처의 건전성을 책임짐 |
@@ -56,6 +57,16 @@ PDF 포트폴리오 분석을 통해 확인된 30개 이상의 주요 프로젝�
 | **PM Agent (Business Management Sub-Agent)** (`project.pm_agent`) | 2025.10~<br/>내부 개발 | MCP (Model Context Protocol), Docker, Claude Agent, HWP 파서 | **Execution Manager & Governance**: 사업 관리의 '전체 라이프사이클'을 관장.<br/>1. **Risk Management**: 계약서/과업지시서 내 독소 조항 자동 추출 및 리스크 평가<br/>2. **Schedule Tracking**: 회의록 분석을 통한 타임라인 자동 현행화<br/>3. **Integrity Check**: 누락된 문서나 데이터 파편화를 방지하는 무결성 검증 |
 | **Virtual Company Creation Agent** (`project.virtual_company_creation_agent`) | 2026.1.4~<br/>내부 개발 | Claude Agent, HQONS (Hyper-Quantum Omni-Net Structure), 하이퍼디멘션(HDC), MCP, Vector DB, GFS (Grape File System), Dual-Tier AI, PostgreSQL-Inspired Architecture, Decoupled Intelligence Architecture | **AI 에이전트로만 구성된 가상 기업 생성 시스템**: **"직원 225명 대신 빈 책상 225개 + 천재 직원 1명"** - **Decoupled Intelligence Architecture (지능과 상태의 분리)**: 225개의 빈 책상(포도송이/Grape Cluster)은 평소 Dormant 상태로 유지비 0원, 1명의 슈퍼 AI(거대 에이전트)가 필요한 순간 특정 책상으로 순간이동(Docking)하여 **O(1) 리소스로 O(N) 스케일링** 달성, **7단계 Chain Workflow** (Chain 01~07: Foundation → Organization → Agents → System Orchestrator → Protocol → Assembly → Crystallization), **15 Systems × 15 Sub-Agents = 225개 서브시스템**, **14 Layer 온톨로지 좌표 체계** (Strategic/Structural/Functional/Operational/Protocol), **🍇 GFS (Grape File System)**: AI 없이도 데이터 접근 가능한 파일 기반 NoSQL 구조로 **비용 87% 절감** (단순 조회 $0.01/요청 → $0), **🔐 Dual-Tier AI 아키텍처**: High-Spec AI (추론)와 Low-Spec AI (조회) 분리로 **최대 87% 비용 절감**, **🐘 PostgreSQL-Inspired 기능**: WAL (Write-Ahead Log), MVCC (Multi-Version Concurrency Control), Index, Vacuum으로 엔터프라이즈급 데이터 무결성 보장, **🎛️ Docking Protocol**: 거대 에이전트의 도킹 주기/모드 관리로 리소스 최적화, **🔧 Modular Execution Engine**: Full/Partial/Single/Resume 모드 지원으로 유연한 워크플로우 실행, **"Intelligence as a Service" Serverless Agent Orchestration**, **20개 이상 설계 문서 완료** (architecture 폴더: Blue_Print, Business_Summary, Process_Overview, Ontology_Overview, Grape_Cluster_Architecture, API_Design, Database_Design 등), **설계 단계 완료, 구현 기초 단계 진행 중**, **Platform All 통합 플랫폼 생태계 핵심 구성요소** |
 | **Business Document Generator** (`project.business_document_generator`) | 2025.12~<br/>내부 개발 | Claude Agent, Multi-Step Chain Workflow, Role-based Expert Personas, Mermaid Diagram Generation, PDF Conversion | **사업계획서/제안서/착수보고서 자동 생성 시스템**: 요구조건 문서 및 Architecture 파일 파싱, 포트폴리오 스마트 매칭, 발주처 유형별 페르소나 적용(정부/민간/공공기관), 청크 기반 생성 및 PM 통합 검증, WBS 세부화, PDF 자동 변환, **사무 에이전트 핵심 도구** |
+=======
+| **Original_Development_Plan (Obsidian Design Origin)** (`project.obsidian_design_origin`) | 2020~2025<br/>내부 개발 | ID 기반 온톨로지 맵, Phase 0-13 워크플로우, State 기반 정보 전달, 코드 에이전트 통합, Adaptive Doc Generation Chain | **전체 에이전트 시스템 설계**: PM 활동에서 문서/개발 진행 관리 활용, 298개+ 설계 문서, 25개+ AI 프롬프트 체인, 21개 development 프롬프트, 개발 에이전트 실시간 평가, Adaptive Doc Generation Chain (DG.1-DG.5) 자동화 |
+| **FMEA 자동화 생성 시스템 (Claude Sub-Agent)** (`project.fmea_claude_agent`) | 2025.6~<br/>내부 개발 | Claude Code Task, Multi-Agent Workflow, 8개 Sub-Agent 협업 | **Master Orchestrator 설계**, AIAG & VDA FMEA 표준 기반 범용 리스크 분석, Phase 0~5 자동화 워크플로우, **논문(2025)** |
+| **Evaluation_Framework** (`project.evaluation_framework`) | 2025.10~<br/>내부 개발 | Python, FastAPI, LangGraph, React, Docker | **System-Wide Quality Assurance**: 49개 Python 모듈과 298개 문서 전수 검사, 6가지 관점 평가, 전체 아키텍처 건전성 책임 |
+| **프롬프트 평가 엔진 (Claude Sub-Agent)** (`project.prompt_eval_claude_agent`) | 2025.6~<br/>내부 개발 | 구조화된 평가 프레임워크, 역할 기반 가중치, Human-in-the-Loop, 병렬 평가 | **AI Gatekeeper**: AI 생성물의 입구 통제, 25개+ 프롬프트 전수 평가, 이중 검증 시스템, 3가지 차원 평가(Quality, Consistency, Cost), MLOps Priority Matrix 기반 가중치, 17가지 역할별 동적 가중치 |
+| **PM Agent (Business Management Sub-Agent)** (`project.pm_agent`) | 2025.10~<br/>내부 개발 | MCP (Model Context Protocol), Docker, Claude Agent, HWP 파서 | **Execution Manager & Governance**: 사업 관리의 '전체 라이프사이클'을 관장.<br/>1. **Risk Management**: 계약서/과업지시서 내 독소 조항 자동 추출 및 리스크 평가<br/>2. **Schedule Tracking**: 회의록 분석을 통한 타임라인 자동 현행화<br/>3. **Integrity Check**: 누락된 문서나 데이터 파편화를 방지하는 무결성 검증 |
+| **Virtual Company Creation Agent** (`project.virtual_company_creation_agent`) | 2026.1~<br/>내부 개발 | Claude Agent, HQONS, 하이퍼디멘션(HDC), MCP, Vector DB, Chain Infrastructure, Element Layer | **AI 에이전트 기반 가상 기업 생성**: 6개 Phase Chain, 12개 시스템 110개 Sub 시스템, HQONS 기반 초차원 정보 전달, **완료**: Chain Infrastructure (Orchestrator, Human/AI Guides), Element Layer (Schemas, Personas, Templates), Human/AI Guides 각 6개, **Platform All 통합 플랫폼 핵심 구성요소** |
+| **AI_DB_tester (VACTS)** (`project.ai_db_tester`) | 2026.1.7~<br/>내부 개발 | Python, 프롬프트 기반 테스트 자동화, Cursor IDE 통합, GFS 검증, LangGraph 기반 자연어 쿼리 | **Virtual Company Creation Agent 테스트 자동화**: 5가지 실행 모드 (Full Test, Simulation, Single Chain/System, I/O Test), **QUERY_AGENT**: 자연어 인터페이스로 테스트 실행 및 결과 조회, 자동 검증(GFS, 온톨로지, 스키마), 자동 리포트 생성, Cursor IDE 통합 |
+| **Factory Ontology Manager AI Agent** (`project.factory_ontology_manager_ai_agent`) | 2026.1.8~<br/>내부 개발 | React, TypeScript, Flask, LangGraph, Instructor, AI_DB_center, 자연어 처리, DB Grounding, Ontology Mapping, Human-in-the-Loop | **자연어 기반 공정 문서 파싱 및 캔버스 레이아웃 자동 생성**: 공정 문서를 파싱하여 공장 데이터와 매핑, 캔버스 레이아웃 자동 생성, **핵심 기능**: 자연어 파싱, DB Grounding, Ontology Mapping, Spec-First Modification, **LangGraph V2**: 공정 재사용 로직, 자재 할당 개선, materialId 검증, factory_loader.py 개발, **비즈니스 가치**: 레이아웃 생성 시간 80% 단축, 데이터 일관성 향상 |
+>>>>>>> e7cb324750242b6c42d017d4279658168ad68f34
 
 ## 7. 컨설팅 및 데이터 분석 프로젝트 (`section.projects.consulting`)
 | 프로젝트명 | 기간 / 발주처 | 핵심 기술 | 역할 & 성과 |
@@ -120,8 +131,12 @@ PDF 포트폴리오 분석을 통해 확인된 30개 이상의 주요 프로젝�
   - Sensors & IoT: `project.smart_sensors`, `project.ai_composite_sensor`, `project.virtual_sensor`, `project.seah.data_integration`
   - Safety & Energy: `project.cleanroom_energy`, `project.energy_pattern`, `project.power_prediction`, `project.digital_twin_safety`, `project.power_quality`
   - Healthcare: `project.medical_constitution`
+<<<<<<< HEAD
   - AI Workflow: `project.obsidian_design_origin`, `project.fmea_claude_agent`, `project.evaluation_framework`, `project.prompt_eval_claude_agent`, `project.pm_agent`, `project.virtual_company_creation_agent`, `project.business_document_generator`
   - Consulting: `project.techwell_ams_consulting`, `project.shinsung_ams_consulting`, `project.techwell_databoucher`, `project.daesung_databoucher`, `project.podas_variable_generation`
   - Certification: `project.pds_gs_certification`, `project.tta_certification`, `project.smart_manufacturing_contest`
   - Participated: `project.hfr_aivoucher`, `project.dusol_iot`, `project.nextr_digitaltwin`, `project.infact_ai`, `project.wnk_safety`, `project.dongjin_safety`
+=======
+  - AI Workflow: `project.fmea_claude_agent`, `project.prompt_eval_claude_agent`, `project.pm_agent`, `project.virtual_company_creation_agent`, `project.ai_db_tester`, `project.factory_ontology_manager_ai_agent`
+>>>>>>> e7cb324750242b6c42d017d4279658168ad68f34
   - Future: `project.office_automation_upgrade`

@@ -13,7 +13,8 @@
 
 **이름**: 권순룡  
 **소속**: 한솔코에버 연구소 대리 (2020.09 ~ 재직중)  
-**총 경력**: 5년 (2020~2025)
+**총 경력**: 5년 (2020~2025)  
+**이메일**: m920831@naver.com
 
 ---
 
@@ -220,7 +221,7 @@
 
 **Platform All 통합 플랫폼 생태계 구축**:
 - **Original_Development_Plan**: 코드 에이전트 + 문서 확인 + 프롬프트 보완의 전체 에이전트 시스템
-- **factory_ontology_manager**: 시각적 팩토리 온톨로지 관리
+- **factory_ontology_manager**: 시각적 팩토리 온톨로지 관리 (AI_DB_center로 DB 이전 완료, AI Agent 기능 추가 중 - 자연어 기반 공정 문서 파싱 및 캔버스 레이아웃 자동 생성)
 - **pipeline_system_complete**: 시계열 데이터 파이프라인
 - **TAM_Hub**: 기술 자산 관리 + MCP 서버 통합
 - **Evaluation_Framework**: AI 에이전트 평가 프레임워크
