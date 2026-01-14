@@ -375,6 +375,26 @@ graph TB
 - **범위**: 계약서, 회의록, 과업지시서 등 비정형 문서
 - **권한**: 누락된 산출물 식별 및 경고 (Integrity Check)
 
+### Continuity & Safety Pipeline
+
+시스템의 **연속성**과 **안전성**을 보장하기 위한 전용 파이프라인이 구축되어 있습니다.
+
+```mermaid
+graph LR
+    Dev[Development Loop] -->|Code Gen| Risk[AI Risk Check<br/>(8 Categories)]
+    Risk -->|Fail| Dev
+    Risk -->|Pass| Deploy[Deployment]
+    
+    Sleep[Inactive State] -->|Resume| Context[Previous Work Analysis<br/>(Context Restore)]
+    Context --> Dev
+    
+    style Risk fill:#ffecb3,stroke:#ff6f00
+    style Context fill:#e3f2fd,stroke:#1565c0
+```
+
+- **Previous Work Analysis**: 개발 중단 후 복귀 시 '인지 부하(Cognitive Load)'를 제로화하는 **컨텍스트 복원 엔진**.
+- **AI Risk Check**: AI가 생성한 코드의 보안/로직/데이터 등 8가지 잠재 위험을 사전에 차단하는 **Safety Net**.
+
 ---
 
 ## 🏗️ 솔루션 도메인별 아키텍처

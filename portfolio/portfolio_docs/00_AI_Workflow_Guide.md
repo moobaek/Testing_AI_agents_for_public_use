@@ -247,7 +247,10 @@ class AMSPipeline:
 | Phase 문서 생성 | `Phase_1_Foundation/Step_01_Repetitive_Work.md` | `00_ID_System_Guide.md` | Phase 문서 |
 | 아키텍처 설명 | `Architecture_Overview.md` | `Phase_1_Foundation/Step_04_Modularization.md` | 아키텍처 문서 |
 | 평가 리포트 생성 | `templates/Evaluation_Prompt_Template.md` | 평가 프레임워크 문서 | 평가 리포트 |
+| 평가 리포트 생성 | `templates/Evaluation_Prompt_Template.md` | 평가 프레임워크 문서 | 평가 리포트 |
 | 템플릿 생성 | `templates/Project_Summary_Template.md` | `00_ID_System_Guide.md` | 새 템플릿 |
+| **개발 재개** | `Previous_Work_Analysis/README.md` | `Previous_Work_Context_Report.md` | 컨텍스트 복원 |
+| **코드 생성 검증** | `AI_Risk_Check/README.md` | `AI_Risk_Check_Report.md` | 위험 요소 리포트 |
 
 ### 2. 문서 참조 체크리스트
 

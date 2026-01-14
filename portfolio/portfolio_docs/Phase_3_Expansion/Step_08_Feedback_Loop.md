@@ -1,5 +1,8 @@
 # Step 8: 피드백 루프 (Feedback Loop)
 
+> [!TIP] 네비게이션
+> ← [[Phase_2_Assets/Step_07_Visuals|PREV: Step 7 시각적 자산]] | [[00_Portfolio_Index|🏠 메인]] | [[Phase_3_Expansion/Step_09_Continuous_Update|NEXT: Step 9 지속적 업데이트]] →
+
 **Phase**: 🟧 Phase 3: Expansion (무한 확장)
 **핵심**: 동료, 커뮤니티, 그리고 AI로부터 피드백을 수렴하여 시스템을 고도화
 

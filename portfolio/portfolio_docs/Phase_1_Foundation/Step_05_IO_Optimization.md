@@ -1,5 +1,8 @@
 # Step 5: 데이터 입출력 최적화 (Data I/O Optimization)
 
+> [!TIP] 네비게이션
+> ← [[Phase_1_Foundation/Step_04_Modularization|PREV: Step 4 모듈화 전략]] | [[00_Portfolio_Index|🏠 메인]] | [[Phase_2_Assets/Step_06_Daily_Log|NEXT: Step 6 데일리 로그]] →
+
 **Phase**: 🟦 Phase 1: Foundation (Small Wins)
 **핵심**: `Input File → AI Process → Output File` 흐름 유지
 

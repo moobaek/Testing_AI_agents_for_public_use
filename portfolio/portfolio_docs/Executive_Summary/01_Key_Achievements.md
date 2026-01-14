@@ -1,5 +1,8 @@
 # 핵심 성과 요약 (Key Achievements)
 
+> [!TIP] 네비게이션
+> ← [[00_Overview_For_Non_Technical|PREV: 개요]] | [[00_Portfolio_Index|🏠 메인]] | [[02_Business_Value|NEXT: 비즈니스 가치]] →
+
 > [!INFO] 숫자로 말하는 5년간의 성과
 > 2020년부터 2025년까지, 권순룡이 달성한 핵심 성과를 숫자와 사실 중심으로 정리한 문서입니다.
 
@@ -78,6 +81,7 @@ graph TB
 | **문서 템플릿** | 11개+ | 표준화된 개발 프로세스 |
 | **AI Workflow 자동화 도구** | 2개 | FMEA 자동화 생성 시스템, 프롬프트 평가 엔진 (Claude Sub-Agent) |
 | **Multi-Agent Architecture 구현** | 2개 | 8개 Sub-Agent 협업 구조, 5단계 평가 프로세스 |
+| **Continuity & Safety Pipeline** | 2개 | Previous Work Analysis (컨텍스트 복원), AI Risk Check (8대 위험 검증) |
 
 ### 학술 성과
 | 지표 | 수치 | 세부 내용 |
@@ -515,16 +519,17 @@ graph LR
 
 ## 🔗 관련 문서
 
-### 상세 정보
-- [[00_Personal_Profile|개인 프로필 및 기술 철학]]
-- [[02_Projects_Overview|20개 이상 프로젝트 상세 설명]]
-- [[04_Academic_Publications|10편 논문 전체 목록]]
-- [[Testing_Context|실증 사례 상세 (세아특수강, 포미아, 일본 오웰社)]]
-- [[Architecture_Overview|기술 아키텍처 (AMS, CoCTK, FBS, DPS)]]
+### 상위 문서
+- [[00_Portfolio_Index|포트폴리오 인덱스]] (`page.portfolio.index`)
 
-### 비전문가용
-- [[Executive_Summary/00_Overview_For_Non_Technical|비전문가용 개요]]
-- [[Executive_Summary/02_Business_Value|비즈니스 가치 분석]]
+### 이전/다음 단계
+- [[Executive_Summary/00_Overview_For_Non_Technical|비전문가용 개요]] (`page.portfolio.overview`)
+- [[Executive_Summary/02_Business_Value|비즈니스 가치 분석]] (`page.portfolio.business_value`)
+
+### 근거 자료
+- [[00_Personal_Profile|개인 프로필]] (`page.portfolio.profile`)
+- [[04_Academic_Publications|학술 논문]] (`page.portfolio.academic`)
+- [[02_Projects_Overview|프로젝트 개요]] (`page.portfolio.projects`)
 
 ---
 

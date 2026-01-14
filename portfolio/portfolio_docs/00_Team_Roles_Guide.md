@@ -156,11 +156,17 @@ graph LR
 
 ---
 
-## 관련 문서
+## 🔗 관련 문서
 
+### 상위 문서
+- [[00_Portfolio_Index|포트폴리오 인덱스]] (`page.portfolio.index`)
+
+### 함께 활용하는 가이드
 - [[00_PM_Roles_Guide|PM 역할 가이드]] (`guide.pm.roles`)
 - [[00_ID_System_Guide|ID 시스템 가이드]] (`guide.id.system`)
-- 평가 리포트: `docs/evaluation/results/2025-12-25/05_팀별_평가/Team_Evaluation_Report.md`
+
+### 평가 결과 (예시)
+- `docs/evaluation/results/2025-12-25/05_팀별_평가/Team_Evaluation_Report.md`
 
 ---
 

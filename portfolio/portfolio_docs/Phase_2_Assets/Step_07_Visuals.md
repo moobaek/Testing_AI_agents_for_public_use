@@ -1,5 +1,8 @@
 # Step 7: 시각적 자산 생성 (Visual Assets)
 
+> [!TIP] 네비게이션
+> ← [[Phase_2_Assets/Step_06_Daily_Log|PREV: Step 6 데일리 로그]] | [[00_Portfolio_Index|🏠 메인]] | [[Phase_3_Expansion/Step_08_Feedback_Loop|NEXT: Step 8 피드백 루프]] →
+
 **Phase**: 🟩 Phase 2: Assets (지식 자산화)
 **핵심**: 텍스트 로그를 카드 뉴스, 영상, 흐름도 등 시각적 콘텐츠로 변환
 

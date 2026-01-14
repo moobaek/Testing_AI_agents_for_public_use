@@ -1,5 +1,8 @@
 # 기술을 쉽게 설명하면? (Technology Simplified)
 
+> [!TIP] 네비게이션
+> ← [[02_Business_Value|PREV: 비즈니스 가치]] | [[00_Portfolio_Index|🏠 메인]] | [[04_Visual_Portfolio|NEXT: 시각적 요약]] →
+
 > [!INFO] 이 문서의 목적
 > 복잡한 기술 용어 없이, 비유와 스토리텔링으로 **"이 사람이 만든 기술이 무엇이고, 어떻게 작동하는지"**를 쉽게 이해할 수 있도록 설명합니다.
 
@@ -418,16 +421,18 @@ graph TD
 
 ---
 
-## 🔗 더 알아보기
+## 🔗 관련 문서
 
-### 기술 상세 (전문가용)
-- [[Architecture_Overview|기술 아키텍처 상세]]
-- [[02_Projects_Overview|13개 프로젝트 설명]]
+### 상위 문서
+- [[00_Portfolio_Index|포트폴리오 인덱스]] (`page.portfolio.index`)
 
-### 비전문가용
-- [[Executive_Summary/00_Overview_For_Non_Technical|전체 개요]]
-- [[Executive_Summary/01_Key_Achievements|핵심 성과]]
-- [[Executive_Summary/02_Business_Value|비즈니스 가치]]
+### 이전/다음 단계
+- [[Executive_Summary/02_Business_Value|비즈니스 가치 분석]] (`page.portfolio.business_value`)
+- [[Executive_Summary/04_Visual_Portfolio|시각적 포트폴리오]] (`page.portfolio.visual`)
+
+### 기술 상세
+- [[Architecture_Overview|아키텍처 개요]] (`page.portfolio.architecture`)
+- [[02_Projects_Overview|프로젝트 개요]] (`page.portfolio.projects`)
 
 ---
 

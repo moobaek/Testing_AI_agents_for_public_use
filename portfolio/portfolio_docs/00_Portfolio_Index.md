@@ -38,6 +38,7 @@
 - **[[02_Projects_Overview#Evaluation_Framework|Evaluation Agent]]**: 시스템 전수 검사 및 품질 보증 (System-wide Validator)
 - **[[02_Projects_Overview#프롬프트_평가_엔진_Claude_Sub_Agent|Prompt Eval Agent]]**: AI 프롬프트 품질 게이트키퍼 (AI Gatekeeper)
 - **[[02_Projects_Overview#PM_Agent_Business_Management_Sub_Agent|PM Agent]]**: 사업 리스크 및 일정 무결성 관리 (Execution Manager)
+- **Continuity & Safety Pipeline**: 개발 연속성(Previous Work Analysis) 및 AI 코드 안전성(AI Risk Check) 보장
 
 ---
 

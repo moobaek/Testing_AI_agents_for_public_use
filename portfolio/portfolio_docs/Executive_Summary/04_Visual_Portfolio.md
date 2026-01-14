@@ -1,5 +1,8 @@
 # 시각적 포트폴리오 (Visual Portfolio)
 
+> [!TIP] 네비게이션
+> ← [[03_Technology_Simplified|PREV: 쉬운 기술 설명]] | [[00_Portfolio_Index|🏠 메인]] | [[00_Personal_Profile|NEXT: 개인 프로필]] →
+
 > [!INFO] 한눈에 보는 5년간의 여정
 > 타임라인, 인포그래픽, 프로젝트 맵으로 구성된 시각 중심 포트폴리오입니다.
 
@@ -411,19 +414,15 @@ graph TB
 
 ## 🔗 관련 문서
 
-### 상세 정보
-- [[02_Projects_Overview|20개 이상 프로젝트 상세]]
-- [[04_Academic_Publications|9편 논문 목록]]
-- [[Architecture_Overview|기술 아키텍처 (AMS, CoCTK, FBS, DPS)]]
-- [[Testing_Context|실증 사례 (세아특수강, 포미아, 일본 오웰社)]]
+### 상위 문서
+- [[00_Portfolio_Index|포트폴리오 인덱스]] (`page.portfolio.index`)
 
-### 비전문가용
-- [[Executive_Summary/00_Overview_For_Non_Technical|전체 개요]]
-- [[Executive_Summary/01_Key_Achievements|핵심 성과]]
-- [[Executive_Summary/02_Business_Value|비즈니스 가치]]
-- [[Executive_Summary/03_Technology_Simplified|기술 쉽게 설명]]
+### 이전 단계
+- [[Executive_Summary/03_Technology_Simplified|기술 쉽게 설명]] (`page.portfolio.tech_simplified`)
 
----
+### 연결 문서
+- [[00_Personal_Profile|개인 프로필]] (`page.portfolio.profile`)
+- [[02_Projects_Overview|프로젝트 개요]] (`page.portfolio.projects`)
 
 > [!SUCCESS] 시각적 요약
 > **"한눈에 보는 5년간의 성과"**

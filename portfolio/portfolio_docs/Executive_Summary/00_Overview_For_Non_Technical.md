@@ -3,6 +3,9 @@
 > [!NOTE] 이 문서는 누구를 위한 것인가요?
 > CEO, 투자자, HR 담당자, 그리고 기술 배경이 없지만 **"이 사람이 무엇을 했고, 왜 중요한지"**를 빠르게 파악하고 싶은 모든 분들을 위한 문서입니다.
 
+> [!TIP] 네비게이션
+> [[00_Portfolio_Index|🏠 메인]] | [[01_Key_Achievements|NEXT: 핵심 성과]] →
+
 ---
 
 ## 🎯 한 문장 요약
@@ -43,7 +46,8 @@ graph LR
 - **품질 예측 AI 엔진**: 사출/도정/금형 공정 품질 예측
 - **가상센서 시스템**: 고가 센서를 ML로 대체
 - **진료기록 체질 분석**: 헬스케어 AI 적용
-- **기타 12개 이상**: 디지털 트윈, FMEA 자동화, 일본 DX 프로젝트 등
+- **개발 연속성/안전성 도구**: AI 코드 위험 자동 검증 및 개발 컨텍스트 복원
+- **기타 11개 이상**: 디지털 트윈, FMEA 자동화, 일본 DX 프로젝트 등
 
 ### 2. 학술 연구 (9편 논문)
 - 2020~2025년 동안 매년 평균 1.5편 이상 발표
@@ -208,12 +212,18 @@ mindmap
 4. **기술 아키텍처**: [[Architecture_Overview|시스템 구조 상세 (AMS, CoCTK, FBS, DPS 등)]]
 5. **실증 사례**: [[Testing_Context|세아특수강, 포미아, 일본 오웰社 등]]
 
-### 비전문가용 추가 자료
-- [[Executive_Summary/01_Key_Achievements|핵심 성과 요약]]
-- [[Executive_Summary/02_Business_Value|비즈니스 가치 분석]]
-- [[Executive_Summary/04_Visual_Portfolio|시각적 포트폴리오]]
+## 🔗 관련 문서
 
----
+### 상위 문서
+- [[00_Portfolio_Index|포트폴리오 인덱스]] (`page.portfolio.index`)
+
+### 다음 단계
+- [[Executive_Summary/01_Key_Achievements|핵심 성과 요약]] (`page.portfolio.achievements`)
+- [[Executive_Summary/02_Business_Value|비즈니스 가치 분석]] (`page.portfolio.business_value`)
+
+### 기술 상세
+- [[02_Projects_Overview|프로젝트 개요]] (`page.portfolio.projects`)
+- [[Architecture_Overview|아키텍처 개요]] (`page.portfolio.architecture`)
 
 > [!SUCCESS] 기억해야 할 핵심 메시지
 > **"이론과 실전을 모두 갖춘, 검증된 AI 엔지니어"**

@@ -264,10 +264,16 @@ sequenceDiagram
 
 ## 🔗 관련 문서
 
-- [[Phase_1_Foundation/Step_01_Repetitive_Work|Step 1: 반복적 업무 식별]] (`phase.foundation.step01`) - AMS 프로젝트 전체 개요
-- [[Architecture_Overview|아키텍처 개요]] (`page.portfolio.architecture`) - AMS 시스템 아키텍처
-- [[02_Projects_Overview|프로젝트 개요]] (`page.portfolio.projects`) - 13개 프로젝트 상세
-- [[00_Portfolio_Index|포트폴리오 인덱스]] (`page.portfolio.index`) - 프로젝트 전체 개요
+### 상위 문서
+- [[00_Portfolio_Index|포트폴리오 인덱스]] (`page.portfolio.index`)
+
+### 연관 허브 문서
+- [[02_Projects_Overview|프로젝트 개요]] (`page.portfolio.projects`)
+- [[Architecture_Overview|아키텍처 개요]] (`page.portfolio.architecture`)
+- [[04_Academic_Publications|학술 논문]] (`page.portfolio.academic`)
+
+### 관련 Phase
+- [[Phase_1_Foundation/Step_01_Repetitive_Work|Step 1: 반복적 업무 식별]] (`phase.foundation.step01`)
 
 ---
 

@@ -1,5 +1,8 @@
 # 비즈니스 가치 분석 (Business Value)
 
+> [!TIP] 네비게이션
+> ← [[01_Key_Achievements|PREV: 핵심 성과]] | [[00_Portfolio_Index|🏠 메인]] | [[03_Technology_Simplified|NEXT: 기술 분석]] →
+
 > [!TIP] 이 문서는 누구를 위한 것인가요?
 > CFO, 투자 심사역, 사업 기획자 등 **"이 기술이 얼마나 돈이 되는가?"**를 판단해야 하는 분들을 위한 문서입니다.
 
@@ -387,16 +390,16 @@ graph TD
 
 ## 🔗 관련 문서
 
-### 기술 상세
-- [[02_Projects_Overview|20개 이상 프로젝트 상세]]
-- [[Architecture_Overview|기술 아키텍처 (AMS, CoCTK, FBS, DPS)]]
-- [[Testing_Context|실증 사례 (세아특수강, 포미아, 일본 오웰社)]]
+### 상위 문서
+- [[00_Portfolio_Index|포트폴리오 인덱스]] (`page.portfolio.index`)
 
-### 비전문가용
-- [[Executive_Summary/00_Overview_For_Non_Technical|전체 개요]]
-- [[Executive_Summary/01_Key_Achievements|핵심 성과]]
+### 이전/다음 단계
+- [[Executive_Summary/01_Key_Achievements|핵심 성과 요약]] (`page.portfolio.achievements`)
+- [[Executive_Summary/03_Technology_Simplified|기술 쉽게 설명]] (`page.portfolio.tech_simplified`)
 
----
+### 근거 자료
+- [[02_Projects_Overview|프로젝트 개요]] (`page.portfolio.projects`)
+- [[Testing_Context|테스트 컨텍스트]] (`page.portfolio.testing`)
 
 > [!SUCCESS] 투자 가치 요약
 > **"검증된 기술 × 확장 가능한 시장 × 다각화된 수익 모델"**

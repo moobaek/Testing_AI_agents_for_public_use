@@ -1,5 +1,8 @@
 # Step 1: 반복적 업무 식별 (Repetitive Work Identification)
 
+> [!TIP] 네비게이션
+> ← [[00_Portfolio_Index|🏠 메인]] | [[Phase_1_Foundation/Step_02_Expertise_Targeting|NEXT: Step 2 전문성 타겟팅]] →
+
 **Phase**: 🟦 Phase 1: Foundation (Small Wins)
 **핵심**: 매일/매주 반복하는 단순하고 규칙적인 작업을 리스트업
 

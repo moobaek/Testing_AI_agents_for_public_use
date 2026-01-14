@@ -169,11 +169,18 @@
 
 ---
 
-## 관련 문서
+## 🔗 관련 문서
 
+### 상위 문서
+- [[00_Portfolio_Index|포트폴리오 인덱스]] (`page.portfolio.index`)
+
+### 함께 활용하는 가이드
 - [[00_Team_Roles_Guide|팀 역할 가이드]] (`guide.team.roles`)
-- [[templates/Project_Timeline_Template|프로젝트 타임라인 템플릿]] (`template.project.timeline`)
+- [[00_ID_System_Guide|ID 시스템 가이드]] (`guide.id.system`)
+
+### 관련 성과 및 템플릿
 - [[Executive_Summary/01_Key_Achievements|핵심 성과]] (`page.portfolio.achievements`)
+- [[templates/Project_Timeline_Template|프로젝트 타임라인 템플릿]] (`template.project.timeline`)
 
 ---
 

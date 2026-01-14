@@ -15,6 +15,7 @@ graph TB
         EVAL["Evaluation Framework<br/>(System-wide Validator)"]
         PROMPT["Prompt Eval Engine<br/>(AI Gatekeeper)"]
         PM["PM Agent<br/>(Execution Manager)"]
+        SAFE["Continuity & Safety<br/>(Risk Check + Context Restore)"]
     end
 
     subgraph "9단계 실행 가이드"
@@ -46,6 +47,7 @@ graph TB
     EVAL == "Validates All" ==> AMS & DPS & CoCTK & SENSOR & ENERGY
     PROMPT == "Optimizes Inputs" ==> S1 & S4
     PM == "Manages Lifecycle" ==> S1 & S6 & S8
+    SAFE == "Ensures Safety" ==> AMS & DPS & CoCTK
     
     %% Standard Project Relations
     S1 -. "implements" .-> AMS
@@ -65,6 +67,7 @@ graph TB
     style EVAL fill:#ffcdd2,stroke:#d32f2f,stroke-width:3px
     style PROMPT fill:#e1bee7,stroke:#7b1fa2,stroke-width:3px
     style PM fill:#bbdefb,stroke:#1976d2,stroke-width:3px
+    style SAFE fill:#c8e6c9,stroke:#388e3c,stroke-width:3px
 ```
 
 ---

@@ -1,5 +1,8 @@
 # Step 3: 초소형 단위의 시작 (Micro Starts)
 
+> [!TIP] 네비게이션
+> ← [[Phase_1_Foundation/Step_02_Expertise_Targeting|PREV: Step 2 전문성 타겟팅]] | [[00_Portfolio_Index|🏠 메인]] | [[Phase_1_Foundation/Step_04_Modularization|NEXT: Step 4 모듈화 전략]] →
+
 **Phase**: 🟦 Phase 1: Foundation (Small Wins)
 **핵심**: 1~2시간 내에 결과물이 나오는 아주 작은 기능부터 구현
 

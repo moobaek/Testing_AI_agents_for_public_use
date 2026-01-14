@@ -1,5 +1,8 @@
 # Step 9: 지속적 업데이트 (Continuous Update)
 
+> [!TIP] 네비게이션
+> ← [[Phase_3_Expansion/Step_08_Feedback_Loop|PREV: Step 8 피드백 루프]] | [[00_Portfolio_Index|🏠 메인]] | [[00_Portfolio_Index|NEXT: 포트폴리오 완료]] →
+
 **Phase**: 🟧 Phase 3: Expansion (무한 확장)
 **핵심**: 기술 트렌드를 상시 모니터링하고, 도메인 지식을 확장하여 시스템을 무한히 진화시킴
 

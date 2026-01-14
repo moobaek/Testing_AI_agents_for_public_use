@@ -121,12 +121,18 @@ graph TB
 
 ---
 
-## 관련 문서
+## 🔗 관련 문서
 
-- [[02_Projects_Overview|프로젝트 개요]] (`page.portfolio.projects`) - 논문과 연계된 프로젝트 상세 정보
-- [[Architecture_Overview|아키텍처 개요]] (`page.portfolio.architecture`) - 논문에서 다룬 기술의 아키텍처 상세
-- [[Testing_Context|테스트 컨텍스트]] (`page.portfolio.testing`) - 논문의 실증 사례
-- [[00_Portfolio_Index|포트폴리오 인덱스]] (`page.portfolio.index`) - 전체 포트폴리오 개요
+### 상위 문서
+- [[00_Portfolio_Index|포트폴리오 인덱스]] (`page.portfolio.index`)
+
+### 연관 허브 문서
+- [[02_Projects_Overview|프로젝트 개요]] (`page.portfolio.projects`)
+- [[Architecture_Overview|아키텍처 개요]] (`page.portfolio.architecture`)
+- [[Testing_Context|테스트 컨텍스트]] (`page.portfolio.testing`)
+
+### 상세 성과
+- [[Executive_Summary/01_Key_Achievements|핵심 성과 요약]] (`page.portfolio.achievements`)
 
 ---
 

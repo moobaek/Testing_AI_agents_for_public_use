@@ -1,5 +1,8 @@
 # Step 4: 모듈화 전략 (Modularization Strategy)
 
+> [!TIP] 네비게이션
+> ← [[Phase_1_Foundation/Step_03_Micro_Starts|PREV: Step 3 초소형 시작]] | [[00_Portfolio_Index|🏠 메인]] | [[Phase_1_Foundation/Step_05_IO_Optimization|NEXT: Step 5 I/O 최적화]] →
+
 **Phase**: 🟦 Phase 1: Foundation (Small Wins)
 **핵심**: 작은 기능들을 독립적인 모듈(코드 또는 프롬프트)로 분리
 
@@ -112,7 +115,9 @@ specs/04_Prompts/chain/
 ├── 1_Analyze_UI_Structure.md
 ├── 2_Analyze_Backend_Structure.md
 ├── 3_Map_Relationships.md
-└── Development_Analysis_Chain_Prompt.md
+├── Development_Analysis_Chain_Prompt.md
+├── previous_work/               # 개발 연속성 보장
+└── ai_risk_check/               # AI 코드 안전성 검증
 ```
 
 **핵심 개념**: **순차 실행 프롬프트**

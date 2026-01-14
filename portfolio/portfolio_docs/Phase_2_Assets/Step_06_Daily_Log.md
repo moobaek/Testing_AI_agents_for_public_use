@@ -1,5 +1,8 @@
 # Step 6: 데일리 로그 기록 (Daily Logging)
 
+> [!TIP] 네비게이션
+> ← [[Phase_1_Foundation/Step_05_IO_Optimization|PREV: Step 5 I/O 최적화]] | [[00_Portfolio_Index|🏠 메인]] | [[Phase_2_Assets/Step_07_Visuals|NEXT: Step 7 시각적 자산]] →
+
 **Phase**: 🟩 Phase 2: Assets (지식 자산화)
 **핵심**: 실행 과정에서 발생하는 모든 시행착오, 성공, 오류를 자산으로 기록
 

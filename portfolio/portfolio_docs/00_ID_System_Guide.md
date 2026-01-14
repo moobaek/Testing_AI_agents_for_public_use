@@ -243,11 +243,19 @@ graph TB
 
 ---
 
-## 관련 문서
+## 🔗 관련 문서
 
-- [[00_AI_Workflow_Guide|AI 워크플로우 가이드]] - ID 시스템을 활용한 AI 워크플로우
-- [[Phase_1_Foundation/Step_04_Modularization|모듈화 전략]] - 실제 프로젝트에서의 ID 시스템 적용 사례
-- [[00_Relationship_Map|관계 맵]] - ID 기반 문서 관계 시각화
+### 상위 문서
+- [[00_Portfolio_Index|포트폴리오 인덱스]] (`page.portfolio.index`)
+
+### 함께 활용하는 가이드
+- [[00_AI_Workflow_Guide|AI 워크플로우 가이드]] (`guide.ai.workflow`)
+- [[00_PM_Roles_Guide|PM 역할 가이드]] (`guide.pm.roles`)
+- [[00_Team_Roles_Guide|팀 역할 가이드]] (`guide.team.roles`)
+
+### 적용 사례
+- [[Phase_1_Foundation/Step_04_Modularization|모듈화 전략]] (`phase.foundation.step04`)
+- [[00_Relationship_Map|관계 맵]] (`page.portfolio.relationship_map`)
 
 ---
 

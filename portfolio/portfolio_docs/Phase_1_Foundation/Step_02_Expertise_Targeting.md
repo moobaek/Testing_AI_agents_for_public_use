@@ -1,5 +1,8 @@
 # Step 2: 전문성 중심 타겟팅 (Expertise Targeting)
 
+> [!TIP] 네비게이션
+> ← [[Phase_1_Foundation/Step_01_Repetitive_Work|PREV: Step 1 반복적 업무]] | [[00_Portfolio_Index|🏠 메인]] | [[Phase_1_Foundation/Step_03_Micro_Starts|NEXT: Step 3 초소형 시작]] →
+
 **Phase**: 🟦 Phase 1: Foundation (Small Wins)
 **핵심**: AI에게 맡기기 전, 내가 결과의 옳고 그름을 100% 판단할 수 있는 영역 선택
 
