@@ -4,6 +4,71 @@
 
 PDF 포트폴리오 분석을 통해 확인된 30개 이상의 주요 프로젝트와 솔루션 요약입니다.
 
+## 📋 주요 수행 과제 및 기간
+
+| 과제명 (프로젝트) | 수행 기간 | 지원/주관 기관 |
+|:---|:---|:---|
+| **고가센서 대체 가상센서** | 2021.05. ~ 2021.10. | 한국에너지기술평가원 |
+| **클린룸 송풍기 제어** | 2021.04. ~ 2021.10. | 한국에너지기술평가원 |
+| **전력 데이터 예측** | 2021.04. ~ 2021.11. | 정보통신산업진흥원 |
+| **품질 이상 예측** | 2021.04. ~ 2021.11. | 정보통신산업진흥원 |
+| **공정 불량 예측** | 2023.04. ~ 2023.10. | 정보통신산업진흥원 |
+| **FBS (Fishbone Structure)** | 2020.09. ~ 2021.10. | 한국에너지기술평가원 |
+| **한솔코에버 내부 프로그램 개발 (CoCTK)** | 2022.03. ~ 2023.09. | 중소기업기술정보진흥원 |
+| **진료기록을 통한 체질 관리 시스템** | 2022.06. ~ 2022.10. | 한국데이터산업진흥원 |
+| **AI 종합 플랫폼 개발 (AMS)** | 2024.07. ~ 2025.03. | 한국산업기술진흥원 |
+| **리파코 컨설팅** | 2023.04. ~ 2023.12. | 충북과학기술원 (산업 디지털 전환 지원체계 구축사업) |
+| **코아아이티 자연어 처리 & 챗봇 컨설팅** | 2023.04. ~ 2023.12. | 충북과학기술원 (산업 디지털 전환 지원체계 구축사업) |
+| **해태가루비 AI 솔루션 실증지원사업** | 2023. ~ 2024.02. | 해태가루비/더블유앤이케이 |
+
+### 카테고리별 상세 설명
+
+#### [가상 센서 및 제어 최적화]
+
+**압축 사출 업체 고가센서 대체 가상센서 설계 및 구축** (2021)
+- ML 기반 가상 센서 개발로 고가 센서를 저비용으로 대체
+- 인증 완료, 비용 절감 성과 달성
+
+**클린룸 송풍기 최적 제어 프로젝트 AI 엔진 개발 PM 및 논문 발표** (2021)
+- 송풍기 최적 제어, 에너지 소비 패턴 분석
+- 효율 20% 향상, 논문 발표 (2023)
+
+#### [AI 예측 모델 개발]
+
+**사출 업체 전력 데이터 및 품질 예측 AI 엔진 개발** (2021)
+- 전력 소비 패턴 ML 예측, 시계열 분석
+- PLC 변화 기반 패턴 분석
+
+**다수 업체(사출, 도정, 금형 등) 품질 예측 AI 엔진 개발 및 고도화** (2021~2023)
+- 사출/도정/금형 공정 품질 예측 모델 개발
+- 불량률 감소 성과 달성
+
+**진료기록을 통한 체질 분석** (2022)
+- 한의원 진료 기록 기반 체질 예측 AI 시스템 개발
+- 헬스케어 AI 적용
+
+#### [데이터 분석 및 플랫폼 개발]
+
+**오웰(일본)社 자동차 도정 공정 데이터 기반 인과 관계 다이어그램 AI 엔진 개발** (2020~2024)
+- 패턴 최적 선택(정보량)과 계층 클러스터링 종합한 관계구조 생성
+- 전사적 DX 가속화, 완료보고 및 산출물 작성, 논문 발표 (2022)
+
+**한솔코에버 CoCTK 엔진 총괄 설계 및 화면설계 개발 PM 및 GS 1등급 취득** (2022~2024)
+- 데이터 전처리, 상관관계 분석, 비용 최적화 엔진 개발
+- GS 1등급 취득 (2024), 논문 발표 (2023)
+
+**생산공정 에너지 및 설비 상태 데이터 패턴 분석 기반 라벨링 연구과제 메인 수행** (2023)
+- 설비 상태 데이터 패턴 분석, 라벨링 시스템
+- 에너지 효율화 기반 구축
+
+**AI 종합 플랫폼 개발 총괄 PM 및 GS 1등급 취득** (2024~2025)
+- 베이지안 네트워크 기반 이상 탐지 모델 개발, 이상탐지율 93.7% 달성
+- GS 1등급 취득 (PDS 명칭), 특허 등록
+- 세아특수강 포미아 DX 실증센터 구축 (PM), 테크웰/신성오토텍 AMS 컨설팅
+- 2025년 솔루션 개발 완료, 논문 발표 (2025, 2024)
+
+---
+
 ## 1. AI & Analytics Solutions (`section.projects.ai_analytics`)
 | 프로젝트명 | 기간 / 발주처 | 핵심 기술 | 역할 & 성과 |
 |:---|:---|:---|:---|
@@ -67,6 +132,9 @@ PDF 포트폴리오 분석을 통해 확인된 30개 이상의 주요 프로젝�
 | **테크웰 데이터바우처** (`project.techwell_databoucher`) | 2025.04~2025.11<br/>밸리언트데이터 용역 | 전력 데이터 분석, 데이터 라벨링 | **PM**, 계획서 작성, 외주 관리, 완료서 작성 |
 | **대성금형 데이터바우처** (`project.daesung_databoucher`) | 2025.04~2025.11<br/>밸리언트데이터 용역 | 사출 데이터 분석, 데이터 라벨링 | **2차 PM**, 완료 관리 |
 | **포다스 유의변수/가상변수 생성** (`project.podas_variable_generation`) | 2025.12~2026.01<br/>(진행중, 2026.01.12 기준)<br/>포다스 용역 | 유의변수 및 가상변수 생성, 드론 고장탐구 | 컨설팅 보고서 작성 |
+| **리파코 컨설팅** (`project.ripaco_consulting`) | 2023.04~2023.12<br/>충북과학기술원 주관<br/>산업 디지털 전환 지원체계 구축사업<br/>리파코 | 컨설팅 및 최종보고서 작성 | 산업 디지털 전환 지원체계 구축사업 일환으로 컨설팅 진행 및 최종보고서 작성 (2023.11.03 컨설팅 시작, 2023.12.26 최종보고서 완료) |
+| **코아아이티 자연어 처리 & 챗봇 컨설팅** (`project.coaaiti_nlp_chatbot`) | 2023.04~2023.12<br/>충북과학기술원 주관<br/>산업 디지털 전환 지원체계 구축사업<br/>코아아이티 | 자연어 처리, 챗봇 개발, 한약재/건강식품 데이터 분석, BERT 모델 생성, 공정 데이터 자연어 처리 | 산업 디지털 전환 지원체계 구축사업 일환으로 자연어 분석 및 챗봇 개발 컨설팅, 한약재 효과 및 주의사항 데이터 처리 (자연어처리_예제_231212_코아아이티.csv 기반 파이프라인), 공정 데이터 자연어 처리 (공정데이터.ipynb: 공정 기능 추출, 토큰화, 벡터화), BERT 기반 자연어 처리 모델 생성 및 학습 (자연어버트_모델_생성.ipynb: BertForSequenceClassification, DistilBERT 등 다양한 모델 실험) |
+| **해태가루비 AI 솔루션 실증지원사업** (`project.haetae_ai_solution`) | 2023~2024.02<br/>해태가루비/더블유앤이케이 | AI 솔루션 실증지원사업 | 2023년 AI 솔루션 실증지원사업 수행, 2024.02.02 완료보고서 작성 |
 
 ## 8. 인증 및 공모전 (`section.projects.certification`)
 | 프로젝트명 | 기간 / 발주처 | 핵심 기술 | 역할 & 성과 |
@@ -78,7 +146,7 @@ PDF 포트폴리오 분석을 통해 확인된 30개 이상의 주요 프로젝�
 ## 9. 참여 프로젝트 (탈락 포함) (`section.projects.participated`)
 | 프로젝트명 | 기간 / 발주처 | 수행 내용 | 결과 |
 |:---|:---|:---|:---|
-| **AI바우처 - HFR** (`project.hfr_aivoucher`) | 2025.03~<br/>HFR | 공장 내부 통신 업체, PM(예정) | 발표 탈락 |
+| **AI바우처 - HFR** (`project.hfr_aivoucher`) | 2024.03~2025.03<br/>HFR (에치에프알) | 공장 내부 통신 업체, AI바우처 지원사업, PM(예정) | 2024.03.13~2024.03.14 사업계획서 작성 시작, 2025.03 발표 탈락 |
 | **지능형 IoT 적용 확산 사업** (`project.dusol_iot`) | 2025.04~2025.12<br/>두솔 | 한솔코에버측 대표 진행, 기술 발표 대응 | 발표 탈락 |
 | **디지털 트윈 혁신서비스 선도** (`project.nextr_digitaltwin`) | 2025.05~2025.12<br/>넥스터 | - | 서류 탈락 |
 | **산업AI솔루션 실증확산지원사업** (`project.infact_ai`) | 2025.08~<br/>인팩이엠텍 | PM, 계획서 작성 | 초기 종료 (업체 사정) |
@@ -123,7 +191,7 @@ PDF 포트폴리오 분석을 통해 확인된 30개 이상의 주요 프로젝�
   - Safety & Energy: `project.cleanroom_energy`, `project.energy_pattern`, `project.power_prediction`, `project.digital_twin_safety`, `project.power_quality`
   - Healthcare: `project.medical_constitution`
   - AI Workflow: `project.obsidian_design_origin`, `project.fmea_claude_agent`, `project.evaluation_framework`, `project.prompt_eval_claude_agent`, `project.pm_agent`, `project.virtual_company_creation_agent`, `project.business_document_generator`, `project.ai_db_tester`, `project.factory_ontology_manager_ai_agent`
-  - Consulting: `project.techwell_ams_consulting`, `project.shinsung_ams_consulting`, `project.techwell_databoucher`, `project.daesung_databoucher`, `project.podas_variable_generation`
+  - Consulting: `project.ripaco_consulting`, `project.coaaiti_nlp_chatbot`, `project.haetae_ai_solution`, `project.techwell_ams_consulting`, `project.shinsung_ams_consulting`, `project.techwell_databoucher`, `project.daesung_databoucher`, `project.podas_variable_generation`
   - Certification: `project.pds_gs_certification`, `project.tta_certification`, `project.smart_manufacturing_contest`
   - Participated: `project.hfr_aivoucher`, `project.dusol_iot`, `project.nextr_digitaltwin`, `project.infact_ai`, `project.wnk_safety`, `project.dongjin_safety`
   - Future: `project.office_automation_upgrade`
