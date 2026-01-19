@@ -96,6 +96,15 @@ project.sensor: "스마트센서 3종"
 project.energy: "에너지 최적화 시스템"
 project.fmea: "FMEA 자동화 시스템"
 project.digital_twin: "디지털 트윈 안전 시스템"
+
+# 스마트공장 프로젝트 (project.sf.* 패턴)
+project.sf.jinyoung: "진영정기 스마트공장"
+project.sf.shint_2024: "에스에이치아이엔티 2024"
+project.sf.shint_2020: "에스에이치아이엔티 2020"
+project.sf.teypas: "테이패스 새만금"
+project.sf.lotte_2024: "롯데알루미늄 2024"
+project.sf.lotte_2022: "롯데알루미늄 2022"
+# ... 총 23개 스마트공장 프로젝트
 ```
 
 ---

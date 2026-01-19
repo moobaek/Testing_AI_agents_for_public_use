@@ -381,11 +381,11 @@ graph TB
 
 ```mermaid
 graph LR
-    Dev[Development Loop] -->|Code Gen| Risk[AI Risk Check<br/>(8 Categories)]
+    Dev[Development Loop] -->|Code Gen| Risk["AI Risk Check<br/>(8 Categories)"]
     Risk -->|Fail| Dev
     Risk -->|Pass| Deploy[Deployment]
     
-    Sleep[Inactive State] -->|Resume| Context[Previous Work Analysis<br/>(Context Restore)]
+    Sleep[Inactive State] -->|Resume| Context["Previous Work Analysis<br/>(Context Restore)"]
     Context --> Dev
     
     style Risk fill:#ffecb3,stroke:#ff6f00
@@ -454,7 +454,21 @@ graph TD
 - **성과**: 에너지 소비 패턴 분석을 통한 효율 20% 향상.
 
 ### 4. Smart Sensors & IoT: 지능형 복합 센서
-고가의 센서를 대체하는 **저비용-보급형 스마트센서** 및 **Edge AI 복합 센서** 구조입니다.
+고가의 센서를 대체하는 **저비용-보급형 스마트센서** 및 **가상 센서(Virtual Sensor)** 구조입니다.
+
+**3-Type Virtual Sensors (Pattern/Calculation/Prediction)**:
+```mermaid
+graph LR
+    VS[Virtual Sensor]
+    
+    VS --> T1["Type 1: Pattern-based<br/>패턴 분석 결과 자체를 센서값으로 활용<br/>(예: 전력 패턴 → 가동 상태)"]
+    VS --> T2["Type 2: Calculation-based<br/>이종 데이터 결합 계산<br/>(예: V*I = P)"]
+    VS --> T3["Type 3: Prediction-based<br/>백그라운드 정보/시뮬레이션 기반 예측<br/>(예: 물리 센서 부재 시 AI 추론)"]
+    
+    style T1 fill:#e3f2fd
+    style T2 fill:#f3e5f5
+    style T3 fill:#e8f5e9
+```
 
 - **Edge Computing**: 센서 레벨에서 데이터 전처리 및 이상 검출을 수행하여 서버 부하 감소.
 - **모듈화 디자인**: 온도, 습도, 진동, 전류 등 필요한 측정항목을 자유롭게 결합 가능.
@@ -586,6 +600,44 @@ graph TB
     style C1 fill:#e8f5e9
     style C2 fill:#fce4ec
 ```
+
+### 🧬 핵심 알고리즘 진화 (Core Algorithm Evolution)
+
+AMS의 AI 엔진은 2020년 일본 O-WELL 프로젝트에서 시작되어, 4년간의 현장 검증을 통해 **계층적 클러스터링**과 **패턴 민주주의**라는 독자적인 알고리즘으로 진화했습니다.
+
+#### AMS Origin & Evolution Steps
+
+```mermaid
+graph TD
+    subgraph "Phase 1: Origin (2020-2022)"
+        OWELL["🇯🇵 O-WELL Japan Project<br/>AMS Origin"] --> HC["계층적 클러스터링<br/>(Hierarchical Clustering)"]
+        HC -->|하드코딩 한계 극복| PV["초기 패턴 분석"]
+    end
+
+    subgraph "Phase 2: Experiment (2022-2023)"
+        SWC["SWC<br/>(Sliding Window Correlation)"] -.->|기능 중복/제외| PV
+        PV -->|앙상블 고도화| Voting["패턴 민주주의<br/>(Pattern Voting)"]
+    end
+
+    subgraph "Phase 3: Completion (2024-2025)"
+        Voting --> AMS["AMS 3.0 Engine<br/>(System Integration)"]
+    end
+
+    style OWELL fill:#fff3e0,stroke:#ff9800
+    style SWC fill:#ffebee,stroke:#f44336,stroke-dasharray: 5 5
+    style Voting fill:#e8f5e9,stroke:#4caf50
+```
+
+#### 패턴 민주주의 (Pattern Voting Mechanism)
+
+다양한 알고리즘이 각각의 관점에서 이상을 탐지하고, 투표를 통해 최종 결정을 내리는 **앙상블(Ensemble)** 구조입니다.
+
+| 단계 | 알고리즘 | 역할 |
+|:---|:---|:---|
+| 1 | **FBS (Fishbone)** | 인과관계 기반의 논리적 이상 탐지 |
+| 2 | **RMS (Range)** | 통계적 범위 기반의 정량적 이상 탐지 |
+| 3 | **PDS (Pattern)** | 시계열 패턴 유사도 기반의 정성적 이상 탐지 |
+| **결정** | **Voting** | 3개 엔진의 가중치 합산 → 최종 안심/주의/경보 판정 |
 
 ### 기술 스택
 

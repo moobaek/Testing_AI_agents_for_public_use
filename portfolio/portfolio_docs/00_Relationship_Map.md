@@ -74,6 +74,48 @@ graph TB
 
 ## 🔗 프로젝트별 상세 관계
 
+### 🧬 AMS 기술 진화 계보 (Technology Lineage)
+
+> [!NOTE] **인터뷰 기반 기술 진화 스토리**
+> 2020년 O-WELL(일본) 프로젝트에서 시작된 알고리즘이 4년간 진화하여 AMS의 핵심 엔진이 되었습니다.
+
+```mermaid
+graph TD
+    subgraph "🇯🇵 기원 (2020-2024)"
+        OWELL["O-WELL Japan<br/>AMS Origin<br/>4년간 총괄 PM"]
+    end
+    
+    subgraph "🔬 기술 진화 (2020-2023)"
+        HC["계층적 클러스터링<br/>Hierarchical Clustering<br/>하드코딩 한계 극복"]
+        PV["패턴 민주주의<br/>Pattern Voting<br/>앙상블 기법"]
+        SWC["SWC<br/>Sliding Window Correlation<br/>❌ 패턴 분석과 중복으로 제외"]
+    end
+    
+    subgraph "📦 솔루션 결실 (2024-2025)"
+        AMS["AMS<br/>이상탐지 시스템<br/>GS 1등급"]
+        COCTK["CoCTK<br/>컨설팅 툴킷<br/>GS 1등급"]
+    end
+    
+    OWELL --> HC
+    HC --> PV
+    SWC -.->|"기능 중복"| PV
+    PV --> AMS
+    OWELL --> COCTK
+    
+    style OWELL fill:#fff3e0,stroke:#ff9800,stroke-width:3px
+    style AMS fill:#e8f5e9,stroke:#4caf50,stroke-width:3px
+    style COCTK fill:#e3f2fd,stroke:#2196f3,stroke-width:3px
+    style SWC fill:#ffebee,stroke:#f44336,stroke-dasharray: 5 5
+```
+
+**핵심 인사이트:**
+- **O-WELL Japan (2020-2024)**: 초기 백엔드 개발 → 풀스택 개발 및 총괄 PM으로 확장
+- **계층적 클러스터링**: 데이터 심도에 따른 가지치기로 하드코딩 한계 극복
+- **패턴 민주주의(Pattern Voting)**: 패턴별 피쉬본 생성 후 투표로 종합하는 앙상블 기법
+- **SWC 제외**: 초기 도입했으나 패턴 분석과 기능 중복으로 최적화 과정에서 제거
+
+---
+
 ### 1️⃣ AMS (Analysis Management System)
 
 ```mermaid
@@ -277,6 +319,51 @@ graph TB
 
 **관련 문서**:
 - [[Testing_Context|실증 및 검증 사례 전체]]
+
+---
+
+## 🏭 스마트공장 및 컨설팅 프로젝트 상세 (2020-2026) - 29개
+
+### 연도별 프로젝트 현황
+
+| 연도 | 구축/컨설팅 수 | 주요 발주처 | 핵심 솔루션 |
+|:---|:---:|:---|:---|
+| **2020** | 3 | O-WELL(일본), 에스에이치, 에이치피엔씨 | **AMS Origin**, FBS |
+| **2021** | 7 | 한중엔시에스, 알티스트, 대성금형 등 | AI 백엔드, FBS |
+| **2022** | 6 | 롯데알루미늄, 송월타올, 이튼 등 | SWC, 전력 패턴 분석 |
+| **2023** | 6 | 해태가루비, 코스모폴, 리파코, 코아아이티 등 | CoCTK, NLP, 로봇 분석 |
+| **2024** | 6 | 에스에이치(풀 플랫폼), 테크웰, 신성오토텍 등 | **AMS 플랫폼**, FMEA |
+| **2025-26** | 1 | 테이패스 새만금 | **CoCTK 시험 적용** |
+
+### 솔루션 적용 현황
+
+```mermaid
+graph LR
+    subgraph "핵심 솔루션"
+        AMS["🔍 AMS<br/>이상탐지 93.7%"]
+        FBS["📊 FBS<br/>품질 중요도"]
+        CoCTK["🛠️ CoCTK<br/>데이터 분석"]
+        ARIMA["📈 ARIMA+AI<br/>시계열 예측"]
+    end
+    
+    AMS --- |"4개 업체"| A1["자동차 부품"]
+    FBS --- |"8개 업체"| A2["금형/섬유/금속"]
+    CoCTK --- |"5개 업체"| A3["식품/건축자재"]
+    ARIMA --- |"3개 업체"| A4["철강/인쇄"]
+    
+    style AMS fill:#fff4e1,stroke:#f39c12,stroke-width:3px
+    style FBS fill:#e8f5e9,stroke:#27ae60,stroke-width:3px
+    style CoCTK fill:#e1f5ff,stroke:#3498db,stroke-width:3px
+    style ARIMA fill:#fce4ec,stroke:#e91e63,stroke-width:3px
+```
+
+### 주요 성과
+- **AMS 납품**: 에스에이치아이엔티 (2024)
+- **CoCTK 납품**: 테이패스 새만금 (2025-2026)
+- **GS 1등급 취득**: AMS/PDS, CoCTK
+
+**관련 문서**:
+- [[02_Projects_Overview#스마트공장|스마트공장 구축 프로젝트 상세]]
 
 ---
 
