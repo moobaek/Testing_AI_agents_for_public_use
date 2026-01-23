@@ -104,7 +104,25 @@ project.sf.shint_2020: "에스에이치아이엔티 2020"
 project.sf.teypas: "테이패스 새만금"
 project.sf.lotte_2024: "롯데알루미늄 2024"
 project.sf.lotte_2022: "롯데알루미늄 2022"
-# ... 총 23개 스마트공장 프로젝트
+# ... 총 18개 스마트공장 프로젝트 (중복 제거 후)
+```
+
+### 섹션 ID (02_Projects_Overview.md)
+
+```yaml
+# 프로젝트 섹션 (section.projects.* 패턴)
+section.projects.tech_evolution: "기술 진화 계보 (Technology Evolution Lineage)"
+section.projects.ai_analytics: "AI & Analytics Solutions"
+section.projects.digital_platforms: "Digital Transformation Platforms"
+section.projects.sensors_iot: "Smart Sensors & IoT"
+section.projects.safety_energy: "Industrial Safety & Energy Optimization"
+section.projects.healthcare: "Healthcare & Medical AI"
+section.projects.ai_workflow: "AI Workflow & Automation Tools"
+section.projects.consulting: "컨설팅 및 데이터 분석 프로젝트"
+section.projects.certification: "인증 및 공모전"
+section.projects.participated: "참여 프로젝트 (탈락 포함)"
+section.projects.smart_factory: "스마트공장 구축 프로젝트 (18개, 중복 제거 후)"
+section.projects.future: "미래 프로젝트: 사무 자동화 업그레이드"
 ```
 
 ---

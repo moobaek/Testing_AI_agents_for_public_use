@@ -22,7 +22,7 @@
 ### 주요 성과
 
 - **GS 인증 2개**: CoCTK, AMS(PDS) 소프트웨어 품질 인증 1등급
-- **20개 이상 프로젝트**: 4대 전문 영역에서 다양한 솔루션 구축
+- **12개 섹션, 47개+ 프로젝트**: 기술 진화 계보부터 미래 프로젝트까지 다양한 솔루션 구축
 - **9편 논문**: 학술 연구 및 논문 발표
 - **특허 출원/등록**: 피쉬본 관리 시스템 등
 
@@ -198,7 +198,7 @@ graph LR
 
 #### 프로젝트 문서
 
-- **[[02_Projects_Overview|02_Projects_Overview.md]]**: 20개 이상 프로젝트 상세 요약
+- **[[02_Projects_Overview|02_Projects_Overview.md]]**: 12개 섹션, 47개+ 프로젝트 상세 요약
 - **Architecture_Overview.md** (현재 문서): 통합 시스템 아키텍처 및 기술 스택
 - **[[04_Academic_Publications|04_Academic_Publications.md]]**: 학술 연구 및 논문 성과
 - **[[Testing_Context|Testing_Context.md]]**: 실증 및 검증 사례
@@ -257,7 +257,7 @@ graph LR
 
 ### 📊 프로젝트 정보
 
-- [[02_Projects_Overview|프로젝트 개요]] (`page.portfolio.projects`) - 20개 이상 프로젝트 상세
+- [[02_Projects_Overview|프로젝트 개요]] (`page.portfolio.projects`) - 12개 섹션, 47개+ 프로젝트 상세
 - [[04_Academic_Publications|학술 논문]] (`page.portfolio.academic`) - 9편 논문 목록
 - [[Testing_Context|테스트 컨텍스트]] (`page.portfolio.testing`) - 실증 사례
 
@@ -912,6 +912,9 @@ obsidian_design_origin/
 
 ### FMEA 자동화 생성 시스템 (Claude Sub-Agent)
 
+> [!NOTE] 진화 스토리
+> FMEA 자동화 에이전트는 테크웰/신성오토텍에서 FBS, 패턴 분석, 확률 네트워크가 너무 난해해서 공장 관리자가 이해하지 못하는 문제를 해결하기 위해 탄생했습니다. 상세한 스토리는 [[02_Projects_Overview#022-fmea-자동화-에이전트-진화-스토리-난해한-기술을-현장이-이해하는-언어로|0.2.2 FMEA 자동화 에이전트 진화 스토리]]를 참조하세요.
+
 **핵심 구조**: 코딩 에이전트의 역설계 시스템 구조 적용
 - 복잡한 FMEA 프로세스를 역으로 분석하여 Sub-Agent로 분해
 - 각 Sub-Agent가 전문 영역(R&D, Mfg, QA)을 담당하는 구조
@@ -1256,7 +1259,7 @@ graph TB
 ### 핵심 문서
 - [[00_Portfolio_Index|포트폴리오 인덱스]] (`page.portfolio.index`) - 전체 포트폴리오 개요
 - [[00_Personal_Profile|개인 프로필]] (`page.portfolio.personal_profile`) - 개인 정보 및 기술 철학
-- [[02_Projects_Overview|프로젝트 개요]] (`page.portfolio.projects`) - 20개 이상 프로젝트 상세
+- [[02_Projects_Overview|프로젝트 개요]] (`page.portfolio.projects`) - 12개 섹션, 47개+ 프로젝트 상세
 - [[04_Academic_Publications|학술 논문]] (`page.portfolio.academic`) - 기술의 학술적 근거
 - [[Testing_Context|테스트 컨텍스트]] (`page.portfolio.testing`) - 테스트 및 시연 사례
 
@@ -1587,6 +1590,9 @@ graph TB
 11. **Virtual_Company_Creation_Agent → Platform All**: HQONS 기반 초차원 공간 정보 전달 시스템으로 Platform All 생태계의 확장성과 효율성 극대화, 양자 얽힘-like 통신으로 무한 확장성 달성
 12. **Platform All → Virtual_Company_Creation_Agent**: 기존 플랫폼들의 경험과 구조를 가상 기업 생성에 활용하여 실증된 아키텍처 기반 기업 설계 자동화
 
+> [!NOTE] 진화 스토리
+> Virtual Company Creation Agent와 AI_DB_tester (VACTS)는 LLM 활용하다보니 온톨로지를 잘 못알아먹고 벡터도 부족하다는 것을 깨달고, 특화 중간 DB를 만들어서 LLM을 서포트하기 위해 탄생했습니다. "어차피 AI LLM은 앞뒤 주는 것만 잘하면 되니까" 특화 중간 DB(GFS)를 만들어서 LLM 비용을 87% 절감했습니다. 상세한 스토리는 [[02_Projects_Overview#024-virtual-company-creation-agent--ai_db_tester-vacts-진화-스토리-llm을-서포트하기-위한-특화-중간-db|0.2.4 Virtual Company Creation Agent & AI_DB_tester (VACTS) 진화 스토리]]를 참조하세요.
+
 **Virtual Company Creation Agent 설계 문서** (2026.1.4 시작, 설계 단계 완료):
 - 설계 문서 경로: `platform_all/Virtual_company_creation_agent/docs/obsidian_design_origin/architecture/`
 - 주요 설계 문서 (20개 이상):
@@ -1690,6 +1696,9 @@ graph TB
 ---
 
 ### 8.2 Factory Ontology Manager AI Agent
+
+> [!NOTE] 진화 스토리
+> Factory Ontology Manager AI Agent는 2020년 전무님의 비전(공정 라인 쉽게 수정)과 2025년 김이사님의 니즈(OEM ODM 대응)가 만나서 탄생했습니다. 세아특수강 프로젝트에서 Cursor(AI agent)를 활용하여 실제로 구현 가능하다는 것을 확인했습니다. 상세한 스토리는 [[02_Projects_Overview#023-factory-ontology-manager-ai-agent-진화-스토리-5년간의-비전과-현실의-만남|0.2.3 Factory Ontology Manager AI Agent 진화 스토리]]를 참조하세요.
 
 **프로젝트 개요**:
 - **개발 시작**: 2026년 1월 8일 (설계 완료)

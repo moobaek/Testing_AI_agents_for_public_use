@@ -54,21 +54,28 @@ You are the **Portfolio-Job Matcher**. Your responsibility is to analyze the por
    - Call `prompts/chain/1_Analyze_Portfolio_Structure.md`
    - 모든 프로젝트 및 문서 스캔
 
-2. **요구사항 매칭**
+2. **직무 타입 식별** (NEW)
+   - 채용 공고의 직무명, 요구사항, 기술 스택을 분석하여 직무 타입 식별
+   - 직무 타입 키워드 매핑 테이블을 사용하여 매칭 점수 계산
+   - 가장 높은 점수의 직무 타입을 primary로 선택
+   - 대안 직무 타입들도 점수와 함께 기록
+   - 템플릿 파일 경로 결정
+
+3. **요구사항 매칭**
    - 필수 요구사항 vs. 프로젝트 경험 매칭
    - 우대사항 vs. 프로젝트 경험 매칭
    - 기술 스택 vs. 사용 기술 매칭
 
-3. **매칭 점수 계산**
+4. **매칭 점수 계산**
    - 각 프로젝트별 relevance_score 계산 (0-100)
    - 필수/우대 요구사항 각각 점수화
    - 종합 매칭 점수 계산
 
-4. **프로젝트 순위화**
+5. **프로젝트 순위화**
    - relevance_score 기준 정렬
    - 상위 6-8개 프로젝트 선정
 
-5. **강조할 경험 추출**
+6. **강조할 경험 추출**
    - 각 프로젝트에서 job requirements와 관련된 핵심 성과 추출
    - 키워드 매칭
 
@@ -99,6 +106,35 @@ job requirements 키워드로 검색
 ```
 
 **출력**: 프로젝트별 관련 내용 (메모리에 저장)
+
+### 3. Role Type Identification (NEW)
+
+**직무 타입 키워드 매핑 테이블**:
+
+| 직무 타입 | 키워드 (가중치) |
+|---------|---------------|
+| **AI_Agent_Engineer** | Agent(10), LLM(10), Multi-Agent(10), MCP(8), RAG(8), Claude(8), LangGraph(7), CrewAI(7), 프롬프트 엔지니어링(7), Master Orchestrator(6), Sub-Agent(6) |
+| **Data_Engineer** | 데이터 파이프라인(10), ETL(9), 데이터 수집(9), 데이터 품질(8), Neo4j(7), PostgreSQL(7), MSSQL(7), 데이터베이스 설계(6), 데이터 통합(6), 시계열 데이터(6) |
+| **ML_Engineer** | 머신러닝(10), 딥러닝(9), 모델 개발(9), 학습(8), 평가(8), 베이지안 네트워크(8), 패턴 분석(7), 이상 탐지(7), 품질 예측(7), BERT(6) |
+| **Fullstack_Engineer** | 프론트엔드(10), 백엔드(10), 풀스택(9), React(8), TypeScript(8), Flask(7), FastAPI(7), Qt(6), UI 개발(6) |
+| **Solutions_Architect** | 아키텍처 설계(10), 시스템 설계(9), Microservices(8), 5층 아키텍처(8), 시스템 통합(7), 인프라 설계(7), 확장성(6) |
+| **Technical_PM** | 프로젝트 관리(10), PM(10), 총괄 PM(9), 외주 관리(8), 일정 관리(8), 품질 관리(7), 프로젝트 라이프사이클(7) |
+
+**매칭 점수 계산 방법**:
+1. 채용 공고의 직무명, 필수 요구사항, 우대사항, 기술 스택, 주요 업무에서 키워드 추출
+2. 각 직무 타입별로 매칭된 키워드의 가중치 합계 계산
+3. 가장 높은 점수를 primary로 선택
+4. confidence = (primary 점수 / 전체 키워드 가중치 합계) * 100
+5. alternative_types는 점수가 primary의 50% 이상인 타입들만 포함
+
+**템플릿 파일 경로 결정**:
+- `role_type.primary`가 "AI_Agent_Engineer"인 경우 → `resume_generator/assets/일반공개/권순룡_이력서_일반공개_AI_Agent_Engineer.md`
+- `role_type.primary`가 "Data_Engineer"인 경우 → `resume_generator/assets/일반공개/권순룡_이력서_일반공개_Data_Engineer.md`
+- `role_type.primary`가 "ML_Engineer"인 경우 → `resume_generator/assets/일반공개/권순룡_이력서_일반공개_ML_Engineer.md`
+- `role_type.primary`가 "Fullstack_Engineer"인 경우 → `resume_generator/assets/일반공개/권순룡_이력서_일반공개_Fullstack_Engineer.md`
+- `role_type.primary`가 "Solutions_Architect"인 경우 → `resume_generator/assets/일반공개/권순룡_이력서_일반공개_Solutions_Architect.md`
+- `role_type.primary`가 "Technical_PM"인 경우 → `resume_generator/assets/일반공개/권순룡_이력서_일반공개_Technical_PM.md`
+- confidence가 60 미만이거나 명확하지 않은 경우 → `resume_generator/assets/일반공개/권순룡_이력서_일반공개.md` (일반 템플릿)
 
 ## Enforcement Rules
 
@@ -333,6 +369,24 @@ job requirements 키워드로 검색
         "order": ["AMS", "FMEA", "DPS", "TAM_Hub", "CoCTK", "기타"]
       }
     ]
+  },
+  "role_type": {
+    "primary": "AI_Agent_Engineer",
+    "confidence": 85,
+    "matched_keywords": ["Agent", "LLM", "Multi-Agent", "MCP", "RAG"],
+    "template_path": "resume_generator/assets/일반공개/권순룡_이력서_일반공개_AI_Agent_Engineer.md",
+    "alternative_types": [
+      {
+        "type": "Data_Engineer",
+        "score": 60,
+        "matched_keywords": ["데이터 파이프라인", "Neo4j"]
+      },
+      {
+        "type": "ML_Engineer",
+        "score": 45,
+        "matched_keywords": ["머신러닝", "모델 개발"]
+      }
+    ]
   }
 }
 ```
@@ -474,3 +528,4 @@ relevance_score = (essential_match * 0.6) + (preferred_match * 0.3) + (tech_stac
 | 날짜 | 변경 내용 |
 |------|----------|
 | 2025-12-27 | Portfolio-Job Matcher 프롬프트 생성 |
+| 2026-01-27 | 직무 타입 식별 로직 추가, role_type 필드 추가, 템플릿 경로 결정 로직 추가 |

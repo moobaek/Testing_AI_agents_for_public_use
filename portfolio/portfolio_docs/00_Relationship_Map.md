@@ -77,7 +77,7 @@ graph TB
 ### 🧬 AMS 기술 진화 계보 (Technology Lineage)
 
 > [!NOTE] **인터뷰 기반 기술 진화 스토리**
-> 2020년 O-WELL(일본) 프로젝트에서 시작된 알고리즘이 4년간 진화하여 AMS의 핵심 엔진이 되었습니다.
+> 2020년 O-WELL(일본) 프로젝트에서 시작된 알고리즘이 4년간 진화하여 AMS의 핵심 엔진이 되었고, 동시에 각 프로젝트의 경험이 LLM 에이전트 설계의 토대가 되었습니다.
 
 ```mermaid
 graph TD
@@ -113,6 +113,167 @@ graph TD
 - **계층적 클러스터링**: 데이터 심도에 따른 가지치기로 하드코딩 한계 극복
 - **패턴 민주주의(Pattern Voting)**: 패턴별 피쉬본 생성 후 투표로 종합하는 앙상블 기법
 - **SWC 제외**: 초기 도입했으나 패턴 분석과 기능 중복으로 최적화 과정에서 제거
+
+---
+
+### 🤖 LLM 에이전트 설계 토대 관계
+
+> [!NOTE] **프로젝트 경험 → LLM 에이전트 설계**
+> 각 프로젝트에서 쌓은 경험이 LLM 에이전트 설계의 토대가 되었습니다.
+
+```mermaid
+graph TD
+    subgraph "프로젝트 경험"
+        CoaAITI["코아아이티<br/>Python+Qt 풀스택<br/>BERT 실험<br/>한약재 검색 시스템"]
+        Techwell["테크웰/신성오토텍<br/>FMEA 문서화<br/>고객 인터뷰<br/>전력/사출 데이터 분석"]
+        PM_Exp["다수 PM 경험<br/>제안서~완료<br/>외주 관리<br/>포미아 DX 등"]
+        Doc_Exp["문서 작성 경험<br/>사업계획서<br/>착수보고서<br/>감리 문서"]
+        Seah_Data["세아특수강<br/>데이터 통합<br/>POP/SPC<br/>RS232C-LAN 변환"]
+        Ripaco_Exp["리파코<br/>시간 구간 분석<br/>룰 기반 탐지<br/>박스 이송 로봇"]
+        CoCTK_AMS["CoCTK/AMS<br/>모듈화 체계화<br/>평가 시스템<br/>GS 인증 경험"]
+        Dev_Plan["Original Development Plan<br/>PM 활동<br/>문서/개발 관리<br/>298개+ 설계 문서"]
+    end
+    
+    subgraph "LLM 에이전트"
+        Agent_Design["AI Agent<br/>설계 기초<br/>풀스택 개발 경험"]
+        FMEA_Agent["FMEA 자동화<br/>에이전트<br/>8개 Sub-Agent 협업"]
+        PM_Agent["PM Agent<br/>사업 관리<br/>Risk/Schedule/Integrity"]
+        Doc_Generator["Business Document<br/>Generator<br/>사업계획서 자동 생성"]
+        Factory_Ontology["Factory Ontology<br/>Manager<br/>공정 문서 파싱"]
+        Pattern_Agent["패턴 분석<br/>에이전트<br/>시간 구간 클러스터링"]
+        Eval_Agent["Evaluation Framework<br/>프롬프트 평가<br/>49개 모듈 전수 검사"]
+        System_Design["전체 에이전트<br/>시스템 설계<br/>워크플로우 오케스트레이션"]
+    end
+    
+    CoaAITI --> Agent_Design
+    Techwell --> FMEA_Agent
+    PM_Exp --> PM_Agent
+    Doc_Exp --> Doc_Generator
+    Seah_Data --> Factory_Ontology
+    Ripaco_Exp --> Pattern_Agent
+    CoCTK_AMS --> Eval_Agent
+    Dev_Plan --> System_Design
+    
+    style CoaAITI fill:#fff3e0,stroke:#ff9800
+    style Techwell fill:#e3f2fd,stroke:#2196f3
+    style PM_Exp fill:#e8f5e9,stroke:#4caf50
+    style Agent_Design fill:#fce4ec,stroke:#e91e63,stroke-width:2px
+    style FMEA_Agent fill:#fce4ec,stroke:#e91e63,stroke-width:2px
+    style PM_Agent fill:#fce4ec,stroke:#e91e63,stroke-width:2px
+```
+
+**핵심 인사이트:**
+- **코아아이티**: Python+Qt 풀스택 개발 및 BERT 실험 경험을 쌓아 AI Agent 설계 및 개발의 기초가 됨
+- **테크웰/신성오토텍**: FMEA 문서화 및 고객 인터뷰 경험을 쌓아 FMEA 자동화 에이전트 설계의 토대 마련 → [[02_Projects_Overview#022-fmea-자동화-에이전트-진화-스토리-난해한-기술을-현장이-이해하는-언어로|FMEA 자동화 에이전트 진화 스토리]]
+- **다수 PM 경험**: 제안서 작성, 외주 관리, 완료서 작성 등 PM 경험을 통해 PM Agent 설계의 토대 마련
+- **문서 작성 경험**: 사업계획서, 제안서, 착수보고서, 감리 문서 작성 경험을 통해 Business Document Generator 설계의 토대 마련 → [[02_Projects_Overview#025-business-document-generator-진화-스토리-사업계획서를-하도-만들다-보니-만든-자동화-시스템|Business Document Generator 진화 스토리]]
+- **세아특수강**: 데이터 통합, POP/SPC 개발 경험을 쌓아 Factory Ontology Manager AI Agent 설계의 토대 마련 → [[02_Projects_Overview#023-factory-ontology-manager-ai-agent-진화-스토리-5년간의-비전과-현실의-만남|Factory Ontology Manager 진화 스토리]]
+- **리파코**: 시간 구간 분석 및 룰 기반 탐지 경험을 쌓아 패턴 분석 에이전트 설계의 토대 마련
+- **CoCTK/AMS**: 모듈화 및 체계화 경험, GS 인증 프로세스 경험을 쌓아 Evaluation Framework와 프롬프트 평가 엔진 설계의 토대 마련
+- **Original Development Plan**: 다수 PM 경험(제안서~완료, 외주 관리)을 통해 전체 에이전트 시스템 설계의 토대 마련 → [[02_Projects_Overview#021-코딩-에이전트-진화-스토리-외주-개발자-관리의-한계를-넘어서|코딩 에이전트 진화 스토리]]
+
+---
+
+### 🤖 AI Agent 진화 스토리 흐름
+
+> [!NOTE] 스토리텔링 접근
+> 각 프로젝트에서 겪은 실제 문제와 해결 과정이 AI Agent 개발로 이어지는 자연스러운 진화 흐름을 보여줍니다. 상세한 스토리는 [[02_Projects_Overview#02-llm-에이전트-설계-토대-관계|02_Projects_Overview.md의 LLM 에이전트 설계 토대 관계 섹션]]을 참조하세요.
+
+```mermaid
+graph LR
+    subgraph "프로젝트 경험"
+        Dev_Plan_Exp["Original Development Plan<br/>외주 개발자 관리<br/>산출물 관리 부재<br/>프론트엔드 한계"]
+        Techwell_Exp["테크웰/신성오토텍<br/>FBS 난해함<br/>패턴 추천 복잡<br/>확률 네트워크 추상"]
+        Seah_Exp["세아특수강<br/>2020년 비전<br/>2025년 니즈<br/>OEM/ODM 대응"]
+        DPS_Exp["DPS<br/>LLM 온톨로지 이해 부족<br/>벡터 부족<br/>리소스 소모"]
+        Doc_Exp_Detail["문서 작성 경험<br/>2023년부터<br/>AI 쪽 사업계획 전담<br/>끝없는 문서 작성"]
+    end
+    
+    subgraph "문제 발견"
+        Problem1["외주 개발자<br/>산출물 관리 부재"]
+        Problem2["기술과 현장<br/>언어 불일치"]
+        Problem3["5년간의 비전<br/>+ 현실적 니즈"]
+        Problem4["LLM의 한계<br/>온톨로지/벡터 부족"]
+        Problem5["끝없는<br/>문서 작성"]
+    end
+    
+    subgraph "해결 시도"
+        Solution1["코딩 에이전트<br/>ID 기반 온톨로지<br/>Phase 0-13 워크플로우"]
+        Solution2["FMEA 형식<br/>도메인별 용어<br/>8개 Sub-Agent"]
+        Solution3["자연어 파싱<br/>DB Grounding<br/>Ontology Mapping"]
+        Solution4["GFS 특화 중간 DB<br/>Dual-Tier AI<br/>기업 풀 정보"]
+        Solution5["자동 생성 시스템<br/>포트폴리오 매칭<br/>페르소나 적용"]
+    end
+    
+    subgraph "AI Agent 진화"
+        Coding_Agent["코딩 에이전트<br/>Original Development Plan"]
+        FMEA_Agent_Story["FMEA 자동화<br/>에이전트"]
+        Factory_Ontology_Story["Factory Ontology<br/>Manager"]
+        Virtual_Company_Story["Virtual Company<br/>Creation Agent<br/>& AI_DB_tester"]
+        Doc_Generator_Story["Business Document<br/>Generator"]
+    end
+    
+    Dev_Plan_Exp --> Problem1
+    Techwell_Exp --> Problem2
+    Seah_Exp --> Problem3
+    DPS_Exp --> Problem4
+    Doc_Exp_Detail --> Problem5
+    
+    Problem1 --> Solution1
+    Problem2 --> Solution2
+    Problem3 --> Solution3
+    Problem4 --> Solution4
+    Problem5 --> Solution5
+    
+    Solution1 --> Coding_Agent
+    Solution2 --> FMEA_Agent_Story
+    Solution3 --> Factory_Ontology_Story
+    Solution4 --> Virtual_Company_Story
+    Solution5 --> Doc_Generator_Story
+    
+    style Problem1 fill:#ffebee,stroke:#f44336
+    style Problem2 fill:#ffebee,stroke:#f44336
+    style Problem3 fill:#ffebee,stroke:#f44336
+    style Problem4 fill:#ffebee,stroke:#f44336
+    style Problem5 fill:#ffebee,stroke:#f44336
+    style Solution1 fill:#fff3e0,stroke:#ff9800
+    style Solution2 fill:#fff3e0,stroke:#ff9800
+    style Solution3 fill:#fff3e0,stroke:#ff9800
+    style Solution4 fill:#fff3e0,stroke:#ff9800
+    style Solution5 fill:#fff3e0,stroke:#ff9800
+    style Coding_Agent fill:#e1f5ff,stroke:#2196f3,stroke-width:2px
+    style FMEA_Agent_Story fill:#e1f5ff,stroke:#2196f3,stroke-width:2px
+    style Factory_Ontology_Story fill:#e1f5ff,stroke:#2196f3,stroke-width:2px
+    style Virtual_Company_Story fill:#e1f5ff,stroke:#2196f3,stroke-width:2px
+    style Doc_Generator_Story fill:#e1f5ff,stroke:#2196f3,stroke-width:2px
+```
+
+**스토리텔링 섹션 링크:**
+- [[02_Projects_Overview#021-코딩-에이전트-진화-스토리-외주-개발자-관리의-한계를-넘어서|0.2.1 코딩 에이전트 진화 스토리]]: 외주 개발자 관리의 한계를 넘어서
+- [[02_Projects_Overview#022-fmea-자동화-에이전트-진화-스토리-난해한-기술을-현장이-이해하는-언어로|0.2.2 FMEA 자동화 에이전트 진화 스토리]]: 난해한 기술을 현장이 이해하는 언어로
+- [[02_Projects_Overview#023-factory-ontology-manager-ai-agent-진화-스토리-5년간의-비전과-현실의-만남|0.2.3 Factory Ontology Manager AI Agent 진화 스토리]]: 5년간의 비전과 현실의 만남
+- [[02_Projects_Overview#024-virtual-company-creation-agent--ai_db_tester-vacts-진화-스토리-llm을-서포트하기-위한-특화-중간-db|0.2.4 Virtual Company Creation Agent & AI_DB_tester (VACTS) 진화 스토리]]: LLM을 서포트하기 위한 특화 중간 DB
+- [[02_Projects_Overview#025-business-document-generator-진화-스토리-사업계획서를-하도-만들다-보니-만든-자동화-시스템|0.2.5 Business Document Generator 진화 스토리]]: 사업계획서를 하도 만들다 보니 만든 자동화 시스템
+
+---
+
+### 📊 주요 기술 기여도 매트릭스
+
+| 프로젝트 | AMS 모듈 기여 | LLM 에이전트 토대 |
+|:---|:---|:---|
+| **O-WELL Japan** | FBS 모듈 (피쉬본 개념, 중요도 앙상블) | - |
+| **FBS** | FBS 모듈 (계층 구조, 중요도 소팅) | - |
+| **에너지 패턴 분석** | Pattern 모듈 (계층적 클러스터링, 패턴 민주주의) | - |
+| **EEMS** | RMS 모듈 (룰 생성 기법) | - |
+| **클린룸 에너지 최적화** | RMS 모듈 (AI RMS 뿌리) | - |
+| **리파코** | Pattern 모듈 (시간 구간 클러스터링) | 리파코에서 시간 구간 분석 및 룰 기반 탐지 경험을 쌓아 패턴 분석 에이전트 설계의 토대 마련 |
+| **CoCTK** | AMS Core (모듈화/체계화) | CoCTK에서 모듈화·체계화 경험을 쌓아 Evaluation Framework 설계의 토대 마련 |
+| **코아아이티** | - | 코아아이티에서 Python+Qt 풀스택 개발 및 BERT 실험 경험을 쌓아 AI Agent 설계 및 개발의 기초가 됨 |
+| **테크웰/신성오토텍** | FMEA 모듈 (문서화 경험) | 테크웰/신성오토텍에서 FMEA 문서화 및 고객 인터뷰 경험을 쌓아 FMEA 자동화 에이전트 설계의 토대 마련 |
+| **포미아 DX/세아특수강** | - | 포미아 DX에서 PM 경험, 세아특수강에서 데이터 통합 및 POP/SPC 개발 경험을 쌓아 Factory Ontology Manager와 PM Agent 설계의 토대 마련 |
+| **다수 PM 경험** | - | 다수 PM 경험(제안서 작성, 외주 관리, 완료서 작성 등)을 통해 PM Agent 설계의 토대 마련 |
+| **문서 작성 경험** | - | 다수 문서 작성 경험(사업계획서, 제안서, 착수보고서, 감리 문서 등)을 통해 Business Document Generator 설계의 토대 마련 |
+| **Original Development Plan** | - | 다수 PM 경험(제안서~완료, 외주 관리)을 통해 전체 에이전트 시스템 설계의 토대 마련 |
 
 ---
 

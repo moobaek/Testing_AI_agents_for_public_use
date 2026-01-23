@@ -12,6 +12,10 @@
     "pdf:kakao:selfintro": "node convert-to-pdf.js 권순룡_자기소개서_카카오_Agentic_AI_Platform.md 권순룡_자기소개서_카카오_Agentic_AI_Platform.pdf",
     "pdf:kakao:projects": "node convert-to-pdf.js 카카오_프로젝트_수행이력.md 카카오_프로젝트_수행이력.pdf",
     "pdf:kakao:all": "npm run pdf:kakao:portfolio && npm run pdf:kakao:resume && npm run pdf:kakao:selfintro && npm run pdf:kakao:projects",
+    "pdf:nexon:portfolio": "node convert-to-pdf.js ../resume_generator/assets/넥슨코리아/권순룡_포트폴리오_넥슨코리아_AI_Hub실_데이터_엔지니어.md ../resume_generator/assets/넥슨코리아/권순룡_포트폴리오_넥슨코리아_AI_Hub실_데이터_엔지니어.pdf",
+    "pdf:nexon:resume": "node convert-to-pdf.js ../resume_generator/assets/넥슨코리아/권순룡_이력서_넥슨코리아_AI_Hub실_데이터_엔지니어.md ../resume_generator/assets/넥슨코리아/권순룡_이력서_넥슨코리아_AI_Hub실_데이터_엔지니어.pdf",
+    "pdf:nexon:selfintro": "node convert-to-pdf.js ../resume_generator/assets/넥슨코리아/권순룡_자기소개서_넥슨코리아_AI_Hub실_데이터_엔지니어.md ../resume_generator/assets/넥슨코리아/권순룡_자기소개서_넥슨코리아_AI_Hub실_데이터_엔지니어.pdf",
+    "pdf:nexon:all": "npm run pdf:nexon:portfolio && npm run pdf:nexon:resume && npm run pdf:nexon:selfintro",
     "hwp:business-plan": "node convert-business-plan-to-hwp.js ../사업계획서_전처리_라벨링_기술.md ../사업계획서_전처리_라벨링_기술.docx",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

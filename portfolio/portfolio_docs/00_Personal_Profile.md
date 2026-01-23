@@ -316,11 +316,39 @@
 ### Claude Sub-Agent 시스템 개발 경험
 
 **Multi-Agent Architecture의 실제 적용** (2025.6~):
-- FMEA 자동화 생성 시스템: 코딩 에이전트의 역설계 시스템 구조 적용
+
+> [!NOTE] 진화 스토리
+> 각 AI Agent의 개발 배경과 진화 과정은 [[02_Projects_Overview#02-llm-에이전트-설계-토대-관계|02_Projects_Overview.md의 LLM 에이전트 진화 스토리 섹션]]에서 상세히 확인할 수 있습니다.
+
+- **코딩 에이전트 (Original Development Plan)**: 외주 개발자 관리의 한계를 넘어서
+  - 47개 프로젝트를 수행하면서 겪은 외주 개발자 산출물 관리 문제를 해결하기 위해 개발
+  - ID 기반 온톨로지 맵, Phase 0-13 워크플로우, LangGraph/CrewAI 오케스트레이션 구현
+  - 상세 스토리: [[02_Projects_Overview#021-코딩-에이전트-진화-스토리-외주-개발자-관리의-한계를-넘어서|0.2.1 코딩 에이전트 진화 스토리]]
+
+- **FMEA 자동화 생성 시스템**: 코딩 에이전트의 역설계 시스템 구조 적용
   - 복잡한 FMEA 프로세스를 역으로 분석하여 8개 Sub-Agent로 분해
   - 각 Sub-Agent가 전문 영역(R&D, Mfg, QA)을 담당하는 구조
   - Claude Code Task tool 기반 Master Orchestrator 설계
-- 프롬프트 평가 엔진: 프롬프트 저지(Prompt Judging) 시스템 설계
+  - **진화 스토리**: 테크웰/신성오토텍에서 FBS, 패턴 분석, 확률 네트워크가 너무 난해해서 공장 관리자가 이해하지 못하는 문제를 FMEA 형식으로 변환하여 해결
+  - 상세 스토리: [[02_Projects_Overview#022-fmea-자동화-에이전트-진화-스토리-난해한-기술을-현장이-이해하는-언어로|0.2.2 FMEA 자동화 에이전트 진화 스토리]]
+
+- **Factory Ontology Manager AI Agent**: 5년간의 비전과 현실의 만남
+  - 2020년 전무님의 비전(공정 라인 쉽게 수정)과 2025년 김이사님의 니즈(OEM ODM 대응)가 만나서 해결책 필요
+  - 자연어 기반 공정 문서 파싱, DB Grounding, Ontology Mapping 구현
+  - 세아특수강 프로젝트에서 Cursor(AI agent) 활용하여 실제로 구현 가능하다는 것을 확인
+  - 상세 스토리: [[02_Projects_Overview#023-factory-ontology-manager-ai-agent-진화-스토리-5년간의-비전과-현실의-만남|0.2.3 Factory Ontology Manager AI Agent 진화 스토리]]
+
+- **Virtual Company Creation Agent & AI_DB_tester (VACTS)**: LLM을 서포트하기 위한 특화 중간 DB
+  - LLM 활용하다보니 온톨로지도 잘 못알아먹고 벡터도 부족하다는 것을 깨달고 특화 중간 DB 개발
+  - GFS (Grape File System), Dual-Tier AI 아키텍처로 LLM 비용 87% 절감
+  - 상세 스토리: [[02_Projects_Overview#024-virtual-company-creation-agent--ai_db_tester-vacts-진화-스토리-llm을-서포트하기-위한-특화-중간-db|0.2.4 Virtual Company Creation Agent & AI_DB_tester (VACTS) 진화 스토리]]
+
+- **Business Document Generator**: 사업계획서를 하도 만들다 보니 만든 자동화 시스템
+  - 2023년부터 한솔코에버 AI 쪽 사업계획은 사용자의 손을 안 거친 게 없을 정도로 많은 문서 작성
+  - 요구조건 문서 파싱, 포트폴리오 스마트 매칭, 발주처 유형별 페르소나 적용으로 문서 작성 시간 70% 절감
+  - 상세 스토리: [[02_Projects_Overview#025-business-document-generator-진화-스토리-사업계획서를-하도-만들다-보니-만든-자동화-시스템|0.2.5 Business Document Generator 진화 스토리]]
+
+- **프롬프트 평가 엔진**: 프롬프트 저지(Prompt Judging) 시스템 설계
   - **AI Gatekeeper**: 모든 AI 생성물의 '입구'를 통제하는 심사관, **전체 프롬프트를 전수 평가**하는 완전 자동화 시스템
   - AI가 생성한 프롬프트를 다른 AI가 평가하는 이중 검증(Double-Check) 구조
   - 생성 AI와 평가 AI의 분리로 환각(Hallucination) 방지
@@ -412,7 +440,7 @@
 
 ### 포트폴리오 문서
 - [[00_Portfolio_Index|포트폴리오 인덱스]] (`page.portfolio.index`) - 전체 포트폴리오 개요
-- [[02_Projects_Overview|프로젝트 개요]] (`page.portfolio.projects`) - 20개 이상 프로젝트 상세
+- [[02_Projects_Overview|프로젝트 개요]] (`page.portfolio.projects`) - 12개 섹션, 47개+ 프로젝트 상세
 - [[Executive_Summary/01_Key_Achievements|핵심 성과]] (`page.portfolio.achievements`) - 5년간의 성과 요약
 - [[04_Academic_Publications|학술 논문]] (`page.portfolio.academic`) - 10편 논문 목록
 

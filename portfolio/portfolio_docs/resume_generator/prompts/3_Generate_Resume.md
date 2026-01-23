@@ -12,43 +12,44 @@
 
 ```mermaid
 graph TD
-    START[Job Match Data] --> TEMPLATE[Load Resume Template]
-    TEMPLATE --> BASIC[기본 정보 섹션]
-    BASIC --> TIMELINE[한눈에 보는 경력]
-    TIMELINE --> MOTIVATION[지원 동기 작성]
-
-    MOTIVATION --> SOONRYONG[Soonryong 프롬프트 호출]
-    SOONRYONG --> COMPETENCY[핵심 역량 작성]
-
-    COMPETENCY --> MINDMAP[핵심 역량 맵]
-    MINDMAP --> PROJECTS[프로젝트 경험]
-    PROJECTS --> RELATION[프로젝트 관계도]
-
-    RELATION --> TECH[기술 스택]
-    TECH --> DASHBOARD[성과 대시보드]
-    DASHBOARD --> EDUCATION[학력 및 자격증]
-
-    EDUCATION --> CHECK{자기소개서<br/>필요?}
-    CHECK -->|Yes| COVER[자기소개서 생성]
-    CHECK -->|No| VALIDATE[Markdown 검증]
+    START[Job Match Data] --> SELECT[Select Template]
+    SELECT --> PHASE1[Phase 1: 맞춤화된 내용 작성]
     
-    COVER --> COVER1[지원동기 생성]
-    COVER --> COVER2[경력기술 생성]
-    COVER --> COVER3[기여방안 생성]
+    PHASE1 --> P1_BASIC[기본 정보 매칭]
+    P1_BASIC --> P1_TIMELINE[타임라인 프로젝트 매칭]
+    P1_TIMELINE --> P1_MOTIVATION[지원 동기 작성]
     
-    COVER1 --> SOONRYONG2[순룡 페르소나<br/>프롬프트 호출]
-    COVER2 --> SOONRYONG2
-    COVER3 --> SOONRYONG2
+    P1_MOTIVATION --> P1_SOONRYONG[Soonryong 프롬프트 호출]
+    P1_SOONRYONG --> P1_COMPETENCY[핵심 역량 매칭]
     
-    SOONRYONG2 --> LENGTH[글자 수 검증<br/>1000자 이내]
-    LENGTH --> VALIDATE
-
-    VALIDATE --> END[Save to temp/]
+    P1_COMPETENCY --> P1_MINDMAP[역량 맵 구조화]
+    P1_MINDMAP --> P1_PROJECTS[프로젝트 경험 매칭]
+    P1_PROJECTS --> P1_RELATION[프로젝트 관계 구조화]
+    
+    P1_RELATION --> P1_TECH[기술 스택 매칭]
+    P1_TECH --> P1_DASHBOARD[성과 대시보드 구조화]
+    P1_DASHBOARD --> P1_COVER{자기소개서<br/>필요?}
+    
+    P1_COVER -->|Yes| P1_COVER_GEN[자기소개서 생성]
+    P1_COVER -->|No| P1_JSON[Save JSON]
+    P1_COVER_GEN --> P1_COVER_SOONRYONG[순룡 페르소나 호출]
+    P1_COVER_SOONRYONG --> P1_COVER_LENGTH[글자 수 검증]
+    P1_COVER_LENGTH --> P1_JSON
+    
+    P1_JSON --> PHASE2[Phase 2: 템플릿 통합]
+    PHASE2 --> P2_COPY[템플릿 복사]
+    P2_COPY --> P2_MAP[맞춤화된 내용 매핑]
+    P2_MAP --> P2_INTEGRATE[템플릿 구조에 통합]
+    P2_INTEGRATE --> VALIDATE[Markdown 검증]
+    
+    VALIDATE --> END[Save resume_content.md]
 
     style START fill:#2a9d8f,color:#fff
-    style SOONRYONG fill:#9b59b6,color:#fff
-    style SOONRYONG2 fill:#9b59b6,color:#fff
-    style LENGTH fill:#e67e22,color:#fff
+    style PHASE1 fill:#3498db,color:#fff
+    style PHASE2 fill:#9b59b6,color:#fff
+    style P1_SOONRYONG fill:#e67e22,color:#fff
+    style P1_COVER_SOONRYONG fill:#e67e22,color:#fff
+    style P1_JSON fill:#27ae60,color:#fff
     style VALIDATE fill:#e67e22,color:#fff
     style END fill:#27ae60,color:#fff
 ```
@@ -61,28 +62,152 @@ You are the **Resume Generator**. Your responsibility is to create a customized,
 
 - **입력 1**: `resume_generator/data/temp/job_description_analysis.json` (Step 1 출력)
 - **입력 2**: `resume_generator/data/temp/portfolio_job_matching.json` (Step 2 출력)
-- **입력 3**: `resume_generator/templates/Resume_Structure_Template.md` (이력서 템플릿)
+- **입력 3**: `resume_generator/templates/Resume_Structure_Template.md` (기본 이력서 템플릿)
 - **입력 4**: `00_Personal_Profile.md` (개인 정보)
+- **입력 5**: `resume_generator/assets/일반공개/권순룡_이력서_일반공개_[RoleType].md` (직무별 템플릿, Step 2에서 결정)
 
 ## Task
 
-1. **Load Template**: Resume structure template 로드
-2. **Fill Sections**: 각 섹션 내용 작성
-   - 기본 정보
-   - 한눈에 보는 경력 (Timeline Mermaid)
-   - 지원 동기 (Soonryong 스타일)
-   - 핵심 역량 맵 (Mindmap Mermaid)
-   - 핵심 역량 (상세 설명)
-   - 프로젝트 관계도 (Graph Mermaid)
-   - 주요 프로젝트 경험 (relevance_score 높은 순)
-   - 기술 스택
-   - 성과 대시보드 (Graph Mermaid)
-   - 학력 및 자격증
-   - **자기소개서 (조건부)**: `job_description_analysis.json`의 `cover_letter_sections.required`가 `true`인 경우에만 생성
+### Step 0: Template Selection
 
-3. **Apply Soonryong Style**: 지원 동기, 핵심 역량, 자기소개서 항목에 Soonryong 페르소나 적용
-4. **Validate**: Markdown 및 Mermaid 다이어그램 유효성 검증, 자기소개서 글자 수 검증 (각 항목 max_length 이내)
-5. **Save**: `resume_generator/data/temp/resume_content.md`
+**Select Template**: `portfolio_job_matching.json`의 `role_type.primary`를 기반으로 템플릿 선택
+- `role_type.template_path`에서 템플릿 파일 경로 확인
+- 템플릿 파일이 존재하는지 확인
+- 존재하지 않으면 일반 템플릿(`권순룡_이력서_일반공개.md`) 사용
+- **중요**: 이 단계에서는 템플릿 파일 경로만 확인하고, 복사는 Phase 2에서 수행
+
+---
+
+### Phase 1: Customized Content Generation (맞춤화된 내용 작성)
+
+**목적**: 채용 공고와 포트폴리오 매칭 결과를 기반으로 정확하게 맞춤화된 내용을 먼저 작성
+
+**⚠️ 중요**: Phase 1 작업 전에 템플릿 파일을 먼저 읽어서 다이어그램 구조(graph 방향, subgraph 구조, 노드 스타일, 연결 방식, 스타일 정의)를 확인하고, 동일한 구조로 생성해야 합니다.
+
+**작업 순서**:
+
+1. **기본 정보 매칭**
+   - `job_description_analysis.json`의 `keywords`와 `matched_skills`의 `essential`을 기반으로 핵심 역량 추출
+   - 채용 공고 맞춤 요약 작성 (1-2문장)
+
+2. **타임라인 프로젝트 매칭**
+   - `matched_projects`를 `relevance_score` 순으로 정렬
+   - 연도별로 프로젝트 그룹화 (2020-2025)
+   - 각 연도별 상위 2-3개 프로젝트 선택
+
+3. **지원 동기 작성** (Soonryong 스타일)
+   - 회사/팀 목표와 본인 경험 연결
+   - `matched_projects` 상위 3개 프로젝트 구체적 언급
+   - 기술 스택 매칭 강조
+   - Soonryong 프롬프트 호출하여 작성
+
+4. **핵심 역량 맵 구조화**
+   - `job_description_analysis.json`의 `tech_stack` 카테고리를 주요 브랜치로 사용
+   - `matched_skills`의 `essential`과 `preferred`를 세부 기술로 매핑
+   - 각 기술에 대한 프로젝트 예시 연결
+
+5. **핵심 역량 상세 작성** (Soonryong 스타일)
+   - `matched_skills`의 `essential` 중심 (3-5개 역량)
+   - 각 역량마다:
+     - Soonryong 스타일 소개 (2-3문장)
+     - 구체적 프로젝트 예시
+     - 정량적 성과
+   - Soonryong 프롬프트 호출하여 작성
+
+6. **프로젝트 관계 구조화**
+   - **템플릿 구조 확인**: 템플릿 파일의 프로젝트 관계도 섹션을 읽어서 다음을 확인:
+     - graph 방향 (`graph TB`, `graph LR` 등)
+     - subgraph 구조 및 이름
+     - 노드 ID 형식 및 라벨 형식 (`[프로젝트명<br/>설명]`)
+     - 연결 방식 (`-->|"설명"|` 형식)
+     - 스타일 정의 (`style` 블록)
+   - `matched_projects` 상위 6-8개 프로젝트를 노드로 생성
+   - 각 프로젝트의 `relevance_score`와 핵심 특징을 라벨에 포함 (템플릿의 라벨 형식 유지)
+   - 프로젝트 간 관계 정의 (기술 공유, 연속성, 의존성 등)
+   - `job_description`의 핵심 기술을 별도 서브그래프로 구성 (템플릿의 서브그래프 구조 유지)
+   - **템플릿 구조를 그대로 유지하면서 노드와 연결만 교체하여 Mermaid 코드 생성**
+   - `project_relations.mermaid_code` 필드에 완성된 Mermaid 코드 저장
+
+7. **프로젝트 경험 상세 매칭**
+   - `matched_projects`의 `relevance_score` 순으로 정렬 (상위 6-8개)
+   - 각 프로젝트의 `key_highlights`를 채용 공고에 맞게 재구성
+   - 기술 스택 매칭 강조
+   - 비즈니스 가치 연결
+
+8. **기술 스택 매칭**
+   - `job_description_analysis.json`의 `tech_stack` 카테고리 순으로 구성
+   - `matched_skills`의 `essential`과 `preferred`를 각 카테고리에 매핑
+   - 각 기술마다 경력, 프로젝트 예시, evidence 포함
+
+9. **성과 대시보드 구조화**
+   - `job_description`과 관련된 성과 강조
+   - GS 인증, 납품, 논문, 특허 등을 노드로 구성
+   - 정량적 성과 요약 테이블 생성
+
+10. **자기소개서 생성** (조건부, Soonryong 스타일)
+    - `job_description_analysis.json`의 `cover_letter_sections.required`가 `true`인 경우에만 생성
+    - 각 항목(`cover_letter_sections.sections`)마다:
+      - Soonryong 프롬프트 호출하여 작성
+      - `max_length` 이내로 작성 (기본 1000자)
+      - 글자 수 검증
+
+**출력**: `resume_generator/data/temp/resume_customized_content.json`
+
+**JSON 스키마**: 아래 "Phase 1: Customized Content Generation 상세" 섹션 참조
+
+---
+
+### Phase 2: Template Integration (템플릿 구조로 통합)
+
+**목적**: 템플릿의 구조와 스타일을 유지하면서 Phase 1에서 작성한 맞춤화된 내용으로 교체
+
+**⚠️ 중요 규칙**:
+- **원본 템플릿 파일은 절대 직접 수정하지 않음**
+- 템플릿 파일을 읽어서 `resume_generator/data/temp/resume_content.md`에 새 파일로 생성
+- 원본 템플릿 파일 경로: `resume_generator/assets/일반공개/권순룡_이력서_일반공개_[RoleType].md` (읽기 전용)
+- 최종 출력 파일 경로: `resume_generator/data/temp/resume_content.md` (새 파일 생성)
+
+**작업 순서**:
+
+1. **템플릿 파일 읽기 (읽기 전용)**
+   - Step 0에서 선택한 템플릿 파일 경로 확인 (`portfolio_job_matching.json`의 `role_type.template_path`)
+   - `read_file` 도구를 사용하여 템플릿 파일 전체 내용 읽기 (수정하지 않음)
+   - 템플릿의 모든 섹션, 다이어그램 구조, 포맷을 그대로 유지
+
+2. **새 파일 생성 (템플릿 복사)**
+   - `write` 도구를 사용하여 `resume_generator/data/temp/resume_content.md` 파일 생성
+   - 읽은 템플릿 파일의 전체 내용을 그대로 새 파일에 작성 (복사-붙여넣기)
+   - 이 단계에서는 내용 수정 없이 템플릿 전체를 복사만 함
+
+3. **맞춤화된 내용으로 섹션 교체**
+   - Phase 1의 `resume_customized_content.json`을 `read_file`로 읽기
+   - `search_replace` 도구를 사용하여 새 파일(`resume_content.md`)의 각 섹션을 맞춤화된 내용으로 교체
+   - 템플릿의 구조와 스타일은 그대로 유지, 내용만 교체
+   - 각 섹션은 아래 "섹션별 통합 규칙"에 따라 순차적으로 교체
+   - **중요**: Python 스크립트나 자동화 도구를 사용하지 않고, 직접 `read_file` → `write` → `search_replace` 도구만 사용
+
+4. **섹션별 통합 규칙** (아래 "Phase 2: Template Integration 상세" 섹션 참조)
+   - **기본 정보**: `basic_info.core_competencies`로 교체
+   - **한눈에 보는 경력**: 템플릿 timeline 구조 유지, `timeline.projects_by_year` 내용으로 교체
+   - **지원 동기**: 템플릿 문체 유지, `motivation.content`로 교체
+   - **핵심 역량 맵**: 템플릿 mindmap 구조 유지, `competency_map` 내용으로 교체
+   - **핵심 역량**: 템플릿 설명 형식 유지, `competencies` 배열로 교체
+   - **프로젝트 관계도**: 
+     - 템플릿의 graph 구조(`graph TB`, subgraph 구조, 연결 방식, 스타일 정의) 그대로 유지
+     - Phase 1의 `project_relations.mermaid_code`가 있으면 그대로 사용
+     - 없으면 `project_relations.nodes`, `connections`, `subgraphs`를 템플릿 구조에 맞게 매핑하여 Mermaid 코드 생성
+     - 템플릿의 노드 ID 형식, 라벨 형식, 연결 라벨 형식을 그대로 유지
+   - **경력 개요**: 템플릿 구조 유지, `career_overview` 내용으로 교체
+   - **주요 프로젝트 경험**: 템플릿 프로젝트 설명 형식 유지, `projects` 배열로 교체 (relevance_score 순)
+   - **기술 스택**: 템플릿 카테고리 구조 유지, `tech_stack.categories` 내용으로 교체
+   - **성과 대시보드**: 템플릿 graph 구조 유지, `achievements_dashboard` 노드 내용으로 교체
+   - **학력 및 자격증**: 템플릿 내용 그대로 유지 (변경 불필요)
+   - **핵심 철학**: 템플릿 내용 그대로 유지 (변경 불필요)
+   - **자기소개서**: 템플릿 구조 유지, `cover_letter.sections` 내용으로 교체 (조건부)
+
+5. **Validate**: Markdown 및 Mermaid 다이어그램 유효성 검증, 자기소개서 글자 수 검증
+
+6. **최종 저장**: `resume_generator/data/temp/resume_content.md` 파일이 최종 결과물
 
 ## 재사용 프롬프트
 
@@ -136,13 +261,48 @@ You are the **Resume Generator**. Your responsibility is to create a customized,
 > 프로젝트는 반드시 relevance_score 순으로 배치.
 
 > [!CRITICAL]
+> **TWO-PHASE APPROACH**
+> Phase 1에서 먼저 맞춤화된 내용을 작성하고, Phase 2에서 템플릿 구조로 통합합니다.
+> Phase 1에서는 기술 스택 매칭과 프로젝트 매칭을 정확하게 수행하여 JSON으로 저장합니다.
+> Phase 2에서는 템플릿 파일을 복사하여 시작하고, Phase 1의 맞춤화된 내용으로 각 섹션의 내용만 수정합니다.
+> 템플릿의 구조, 섹션 순서, 다이어그램 스타일, 포맷은 절대 변경하지 않습니다.
+> 템플릿의 Mermaid 다이어그램 구조(노드 스타일, 연결 방식, 색상 등)는 그대로 유지하고 내용만 교체합니다.
+> 템플릿의 프로젝트 설명 형식(relevance_score 표기 위치, 핵심 성과 체크박스 형식 등)은 그대로 유지합니다.
+
+> [!CRITICAL]
 > **NO STRIKETHROUGH**
 > 취소선(`~~텍스트~~`) 문법 사용 금지. 모든 텍스트는 정상적으로 표시되어야 함.
 > 삭제된 내용이나 수정 전 내용을 표현할 때 취소선을 사용하지 말고, 최종 버전만 작성.
 
+> [!CRITICAL]
+> **TEMPLATE FILE PROTECTION**
+> Phase 2에서는 원본 템플릿 파일을 절대 직접 수정하지 않습니다.
+> - 템플릿 파일은 읽기 전용으로만 사용
+> - 템플릿 내용을 읽어서 `resume_generator/data/temp/resume_content.md`에 새 파일로 생성
+> - 원본 템플릿 파일 경로: `resume_generator/assets/일반공개/권순룡_이력서_일반공개_[RoleType].md`
+> - 최종 출력 파일 경로: `resume_generator/data/temp/resume_content.md`
+> - 원본 템플릿 파일을 수정하는 것은 절대 금지
+
+> [!CRITICAL]
+> **DIRECT FILE OPERATIONS ONLY**
+> Phase 2에서는 Python 스크립트나 자동화 도구를 사용하지 않고, 직접 파일 작업만 수행합니다.
+> - `read_file` 도구로 템플릿 파일 읽기
+> - `write` 도구로 새 파일에 템플릿 전체 내용 복사
+> - `search_replace` 도구로 각 섹션을 순차적으로 맞춤화된 내용으로 교체
+> - Python 스크립트 작성 금지, 자동화 도구 사용 금지
+> - Cursor/Antigravity 같은 에이전트가 직접 복사-붙여넣기 방식으로 작업
+
 ## Output Schema
 
-**File**: `resume_generator/data/temp/resume_content.md`
+**Phase 1 Output**: `resume_generator/data/temp/resume_customized_content.json`
+**Phase 2 Output**: `resume_generator/data/temp/resume_content.md`
+
+**⚠️ 최종 저장 단계 (자동 실행)**:
+Phase 2 완료 후 자동으로 다음 단계를 실행합니다:
+1. `job_description_analysis.json`에서 회사명(`metadata.company`)과 직무(`metadata.position`) 추출
+2. `assets/[회사명]/` 폴더 생성 (없으면 생성)
+3. `resume_content.md`를 `assets/[회사명]/권순룡_이력서_[회사명]_[직무].md`로 복사
+   - 직무명은 공백을 언더스코어로 변환 (예: "LLM Engineer" → "LLM_Engineer")
 
 ### 구조
 
@@ -321,6 +481,300 @@ graph TB
 [순룡 페르소나 스타일로 작성, max_length 이내]
 ```
 
+## Phase 1: Customized Content Generation 상세
+
+### 출력 스키마: `resume_customized_content.json`
+
+```json
+{
+  "metadata": {
+    "job_company": "회사명",
+    "job_position": "직무명",
+    "role_type": "AI_Agent_Engineer",
+    "template_path": "resume_generator/assets/일반공개/권순룡_이력서_일반공개_AI_Agent_Engineer.md",
+    "generation_date": "YYYY-MM-DD"
+  },
+  "basic_info": {
+    "core_competencies": [
+      "job_description_analysis.json의 keywords 기반",
+      "matched_skills의 essential 기반"
+    ],
+    "customized_summary": "채용 공고 맞춤 요약 (1-2문장)"
+  },
+  "timeline": {
+    "title": "5년간의 [직무 타입] 여정",
+    "projects_by_year": {
+      "2020": ["matched_projects 기반 프로젝트명"],
+      "2021": ["matched_projects 기반 프로젝트명"],
+      "2022": ["matched_projects 기반 프로젝트명"],
+      "2023": ["matched_projects 기반 프로젝트명"],
+      "2024": ["matched_projects 기반 프로젝트명"],
+      "2025": ["matched_projects 기반 프로젝트명"]
+    }
+  },
+  "motivation": {
+    "content": "채용 공고 맞춤 지원 동기 (Soonryong 스타일, 300-500자)",
+    "matched_projects_references": ["상위 3개 프로젝트명"],
+    "tech_stack_match_highlights": ["매칭된 기술 스택"],
+    "company_values_connection": "회사 가치와의 연결점"
+  },
+  "competency_map": {
+    "root": "[직무 타입] [경력]",
+    "categories": [
+      {
+        "name": "job_description의 tech_stack 카테고리",
+        "skills": ["matched_skills 기반 기술 목록"],
+        "evidence": ["프로젝트 예시"]
+      }
+    ]
+  },
+  "competencies": [
+    {
+      "name": "matched_skills의 essential 역량명",
+      "description": "matched_skills 기반 상세 설명 (Soonryong 스타일, 150-200자)",
+      "projects": ["관련 프로젝트 ID 또는 이름"],
+      "achievements": ["정량적 성과"],
+      "tech_stack": ["사용된 기술"]
+    }
+  ],
+  "project_relations": {
+    "graph_direction": "TB",
+    "nodes": [
+      {
+        "id": "project_id",
+        "name": "프로젝트명",
+        "relevance_score": 95,
+        "label": "프로젝트명<br/>relevance_score: 95<br/>핵심 특징",
+        "subgraph": "핵심 프로젝트 (Job Relevance 높은 순)"
+      }
+    ],
+    "connections": [
+      {
+        "from": "project_id1",
+        "to": "project_id2",
+        "label": "관계 설명"
+      }
+    ],
+    "subgraphs": [
+      {
+        "name": "핵심 프로젝트 (Job Relevance 높은 순)",
+        "nodes": ["project_ids"]
+      },
+      {
+        "name": "기반 기술",
+        "nodes": ["기술_id"]
+      }
+    ],
+    "mermaid_code": "```mermaid\ngraph TB\n    subgraph \"핵심 프로젝트 (Job Relevance 높은 순)\"\n        [노드 정의]\n    end\n    \n    subgraph \"기반 기술\"\n        [기술 노드 정의]\n    end\n    \n    %% 연결 관계\n    [연결 정의]\n```"
+  },
+  "career_overview": {
+    "company": "회사명",
+    "period": "기간",
+    "position": "직급",
+    "responsibilities": [
+      "job requirements 기반 주요 업무"
+    ],
+    "achievements": [
+      "matched_projects 기반 성과"
+    ],
+    "business_impact": [
+      "비즈니스 임팩트"
+    ]
+  },
+  "projects": [
+    {
+      "order": 1,
+      "name": "프로젝트명",
+      "relevance_score": 95,
+      "period": "기간",
+      "client": "발주처",
+      "role": "역할",
+      "key_highlights": [
+        {
+          "title": "key_highlight 제목",
+          "description": "matched_projects의 key_highlights 기반 설명"
+        }
+      ],
+      "tech_stack": ["매칭된 기술"],
+      "customized_description": "채용 공고 맞춤 상세 설명",
+      "business_value": "비즈니스 가치"
+    }
+  ],
+  "tech_stack": {
+    "categories": [
+      {
+        "name": "job_description의 tech_stack 카테고리",
+        "technologies": [
+          {
+            "name": "기술명",
+            "experience": "경력",
+            "description": "matched_skills 기반 설명",
+            "projects": ["프로젝트 ID 또는 이름"]
+          }
+        ]
+      }
+    ]
+  },
+  "achievements_dashboard": {
+    "graph_structure": {
+      "subgraphs": [
+        {
+          "name": "성과 카테고리",
+          "nodes": ["성과 항목"]
+        }
+      ],
+      "nodes": [
+        {
+          "id": "achievement_id",
+          "label": "성과 설명",
+          "style": "템플릿의 스타일 유지"
+        }
+      ],
+      "connections": []
+    },
+    "quantitative_summary": {
+      "certifications": ["GS 인증 등"],
+      "patents": ["특허"],
+      "papers": ["논문"],
+      "deliveries": ["납품 실적"],
+      "projects_count": 47,
+      "pm_projects": ["PM 프로젝트"]
+    }
+  },
+  "cover_letter": {
+    "required": true,
+    "sections": [
+      {
+        "name": "지원동기",
+        "content": "채용 공고 맞춤 내용 (Soonryong 스타일, max_length 이내)",
+        "length": 850
+      },
+      {
+        "name": "경력기술",
+        "content": "채용 공고 맞춤 내용 (Soonryong 스타일, max_length 이내)",
+        "length": 920
+      },
+      {
+        "name": "입사 후 기여방안",
+        "content": "채용 공고 맞춤 내용 (Soonryong 스타일, max_length 이내)",
+        "length": 880
+      }
+    ]
+  }
+}
+```
+
+### Phase 1 작성 가이드
+
+**핵심 원칙**:
+1. **정확한 매칭**: `job_description_analysis.json`과 `portfolio_job_matching.json`을 기반으로 정확하게 매칭
+2. **강한 맞춤화**: 채용 공고의 키워드, 기술 스택, 요구사항을 반영
+3. **구조화된 데이터**: JSON 형식으로 구조화하여 Phase 2에서 쉽게 매핑 가능하도록 작성
+4. **Soonryong 스타일**: 지원 동기, 핵심 역량, 자기소개서는 Soonryong 프롬프트 호출 필수
+
+**검증 규칙**:
+- 모든 필수 필드가 채워져 있는지 확인
+- `relevance_score` 순으로 프로젝트 정렬 확인
+- 자기소개서 글자 수가 `max_length` 이내인지 확인
+- 기술 스택 매칭이 정확한지 확인
+
+---
+
+## Phase 2: Template Integration 상세
+
+### 템플릿 복사 및 통합 절차
+
+**⚠️ 중요: 직접 파일 작업만 사용**
+- Python 스크립트나 자동화 도구를 사용하지 않음
+- Cursor/Antigravity 같은 에이전트가 직접 `read_file`, `write`, `search_replace` 도구만 사용
+- 템플릿 파일을 읽어서 새 파일에 복사한 후, 각 섹션을 순차적으로 교체
+
+1. **템플릿 파일 읽기 및 새 파일 생성**
+   - `read_file` 도구로 `metadata.template_path`에서 지정된 템플릿 파일 전체 읽기
+   - `write` 도구로 `resume_generator/data/temp/resume_content.md` 파일 생성
+   - 읽은 템플릿 파일의 전체 내용을 그대로 새 파일에 작성 (복사-붙여넣기)
+   - 이 단계에서는 내용 수정 없이 템플릿 전체를 복사만 함
+   - 템플릿의 모든 구조, 포맷, 스타일을 그대로 유지
+
+2. **맞춤화된 내용으로 섹션 교체**
+   - `read_file` 도구로 `resume_customized_content.json` 읽기
+   - `search_replace` 도구를 사용하여 새 파일(`resume_content.md`)의 각 섹션을 순차적으로 교체
+   - 아래 매핑 규칙에 따라 각 섹션을 하나씩 교체
+
+   **매핑 규칙**:
+
+   | 템플릿 섹션 | Phase 1 JSON 필드 | 수정 범위 |
+   |------------|-----------------|----------|
+   | 기본 정보 - 핵심 역량 | `basic_info.core_competencies` | 내용만 교체 |
+   | 한눈에 보는 경력 | `timeline.projects_by_year` | 다이어그램 구조 유지, 프로젝트 내용만 교체 |
+   | 지원 동기 | `motivation.content` | 문체와 구조 유지, 내용만 교체 |
+   | 핵심 역량 맵 | `competency_map` | mindmap 구조 유지, 카테고리와 내용만 교체 |
+   | 핵심 역량 | `competencies` 배열 | 설명 형식 유지, 내용만 교체 |
+   | 프로젝트 관계도 | `project_relations.mermaid_code` 또는 `project_relations` (nodes/connections/subgraphs) | 템플릿의 graph 구조(`graph TB`, subgraph, 연결 방식, 스타일) 그대로 유지, 노드 내용과 연결만 교체 |
+   | 경력 개요 | `career_overview` | 구조 유지, 업무와 성과 내용만 교체 |
+   | 주요 프로젝트 경험 | `projects` 배열 | 프로젝트 설명 형식 유지, 내용만 교체 (relevance_score 순) |
+   | 기술 스택 | `tech_stack.categories` | 카테고리 구조 유지, 기술 목록만 교체 |
+   | 성과 대시보드 | `achievements_dashboard` | graph 구조와 스타일 유지, 노드 내용만 교체 |
+   | 학력 및 자격증 | - | 템플릿 내용 그대로 유지 (변경 불필요) |
+   | 핵심 철학 | - | 템플릿 내용 그대로 유지 (변경 불필요) |
+   | 자기소개서 | `cover_letter.sections` | 구조 유지, 내용만 교체 (조건부) |
+
+3. **섹션별 교체 작업 예시**
+
+   **예시 1: 기본 정보 - 핵심 역량 교체**
+   ```
+   1. read_file로 resume_content.md의 "핵심 역량" 라인 찾기
+   2. search_replace로 기존 핵심 역량 내용을 basic_info.core_competencies로 교체
+   ```
+
+   **예시 2: 한눈에 보는 경력 (Timeline) 교체**
+   ```
+   1. read_file로 resume_content.md의 timeline 다이어그램 섹션 찾기
+   2. search_replace로 timeline 내용을 timeline.projects_by_year로 교체
+   3. 다이어그램 구조(```mermaid timeline ... ```)는 그대로 유지
+   ```
+
+   **예시 3: 지원 동기 교체**
+   ```
+   1. read_file로 resume_content.md의 "## 지원 동기" 섹션 찾기
+   2. search_replace로 기존 지원 동기 내용을 motivation.content로 교체
+   ```
+
+   **예시 4: 프로젝트 관계도 교체**
+   ```
+   1. read_file로 resume_content.md의 프로젝트 관계도 다이어그램 섹션 찾기
+   2. project_relations.mermaid_code가 있으면 그대로 사용
+   3. 없으면 project_relations.nodes/connections/subgraphs를 템플릿 구조에 맞게 매핑
+   4. 템플릿의 graph TB, subgraph 구조, style 정의는 그대로 유지
+   ```
+
+4. **수정하지 않을 부분** (템플릿 그대로 유지):
+   - 섹션 제목 및 순서
+   - 섹션 계층 구조 (##, ### 등)
+   - Mermaid 다이어그램 구조 (노드 스타일, 연결 방식, 색상 등)
+   - 프로젝트 설명 형식 (relevance_score 표기 위치, 핵심 성과 체크박스 형식 등)
+   - 학력 및 자격증 섹션 (개인 정보이므로 변경 불필요)
+   - 핵심 철학 섹션 (변경 불필요)
+
+5. **수정 원칙**:
+   - **구조 보존**: 템플릿의 모든 구조적 요소(섹션 순서, 계층, 다이어그램 구조)는 절대 변경하지 않음
+   - **스타일 보존**: 템플릿의 포맷, 스타일, 다이어그램 스타일은 그대로 유지
+   - **내용만 교체**: 각 섹션의 내용만 Phase 1의 맞춤화된 정보로 교체
+   - **일관성 유지**: 템플릿의 프로젝트 설명 형식, relevance_score 표기 방식 등을 그대로 유지
+
+### Phase 2 검증 규칙
+
+1. **Template Structure Preserved**: 템플릿의 섹션 순서, 계층 구조, 다이어그램 구조가 그대로 유지되었는지 확인
+2. **Mermaid Diagrams**: 템플릿과 동일한 다이어그램 구조 유지 (최소 4개)
+3. **Project Relations Diagram Structure**: 프로젝트 관계도의 graph 방향, subgraph 구조, 노드 스타일, 연결 방식, 스타일 정의가 템플릿과 동일한지 확인
+4. **Project Format Consistency**: 템플릿의 프로젝트 설명 형식(relevance_score 표기, 핵심 성과 형식 등)이 그대로 유지되었는지 확인
+5. **Content Mapping**: Phase 1의 모든 맞춤화된 내용이 정확하게 매핑되었는지 확인
+6. **Project Count**: 6-8개 프로젝트 (템플릿과 동일한 개수 유지)
+7. **Customization**: job requirements 키워드 5회 이상 언급
+8. **Length**: 템플릿과 유사한 길이 유지 (템플릿 기준 ±20%)
+
+---
+
 ## Section Details
 
 ### 1. 기본 정보
@@ -420,24 +874,77 @@ mindmap
 
 ### 6. 프로젝트 관계도 (Graph)
 
-**Mermaid Graph**:
-- 핵심 프로젝트 (matched_projects 상위 6개)
-- 핵심 기술 (job tech_stack)
-- 성과 (GS 인증, 납품 등)
-- 연결 관계
+**Phase 1 작업**:
+1. `matched_projects` 상위 6-8개 프로젝트를 노드로 생성
+2. 각 프로젝트의 `relevance_score`와 핵심 특징을 라벨에 포함
+3. 프로젝트 간 관계 정의 (기술 공유, 연속성, 의존성 등)
+4. `job_description`의 핵심 기술을 별도 서브그래프로 구성
+5. 템플릿의 graph 구조(`graph TB`, subgraph 구조, 연결 방식)를 참조하여 Mermaid 코드 생성
 
-**예시**:
+**JSON 구조**:
+```json
+{
+  "project_relations": {
+    "graph_direction": "TB",
+    "nodes": [
+      {
+        "id": "FMEA",
+        "name": "FMEA 자동화 생성 시스템",
+        "relevance_score": 98,
+        "label": "FMEA 자동화 생성 시스템<br/>relevance_score: 98<br/>Multi-Agent 시스템<br/>8개 Sub-Agent 협업",
+        "subgraph": "핵심 프로젝트 (Job Relevance 높은 순)"
+      }
+    ],
+    "connections": [
+      {
+        "from": "ORIGIN",
+        "to": "FMEA",
+        "label": "역설계 시스템 구조 적용"
+      }
+    ],
+    "subgraphs": [
+      {
+        "name": "핵심 프로젝트 (Job Relevance 높은 순)",
+        "nodes": ["FMEA", "PROMPT", "ORIGIN"]
+      },
+      {
+        "name": "기반 기술",
+        "nodes": ["AMS", "DPS", "CoCTK"]
+      }
+    ],
+    "mermaid_code": "템플릿 구조를 참조하여 생성된 Mermaid 코드"
+  }
+}
+```
+
+**Mermaid Graph 생성 규칙**:
+- 템플릿의 graph 방향(`graph TB`) 유지
+- 템플릿의 subgraph 구조 유지 (핵심 프로젝트, 기반 기술)
+- 템플릿의 노드 스타일 유지 (`[프로젝트명<br/>설명]`)
+- 템플릿의 연결 방식 유지 (`-->|"설명"|`)
+- 템플릿의 스타일 정의 유지 (`style`)
+
+**Phase 2 통합**:
+- 템플릿의 프로젝트 관계도 섹션을 찾아서
+- 템플릿의 graph 구조(`graph TB`, subgraph, 연결 방식, 스타일)는 그대로 유지
+- Phase 1의 `project_relations.mermaid_code`를 사용하거나, `nodes`, `connections`, `subgraphs`를 템플릿 구조에 맞게 매핑
+
+**예시** (템플릿 구조 참조):
 ```mermaid
 graph TB
-    subgraph "핵심 프로젝트"
-        AMS[AMS<br/>GS 1등급]
-        DPS[DPS<br/>Neo4j]
+    subgraph "핵심 프로젝트 (Job Relevance 높은 순)"
+        FMEA[FMEA 자동화 생성 시스템<br/>relevance_score: 98<br/>Multi-Agent 시스템<br/>8개 Sub-Agent 협업]
+        PROMPT[프롬프트 평가 엔진<br/>relevance_score: 95<br/>AI Gatekeeper<br/>25개+ 프롬프트 전수 평가]
     end
-    subgraph "핵심 기술"
-        Neo4j[Neo4j<br/>그래프 DB]
+    
+    subgraph "기반 기술"
+        AMS[AMS<br/>relevance_score: 70<br/>베이지안 네트워크<br/>이상 탐지 93.7%]
+        DPS[DPS<br/>relevance_score: 65<br/>5층 아키텍처<br/>Neo4j GraphDB]
     end
-    AMS --> Neo4j
-    DPS --> Neo4j
+    
+    %% 연결 관계
+    PROMPT -->|"품질 보증"| FMEA
+    AMS -->|"기반 기술"| FMEA
 ```
 
 ### 7. 주요 프로젝트 경험
@@ -547,18 +1054,59 @@ graph TB
 
 ## Validation Rules
 
-1. **Mermaid Diagrams**: 최소 4개 포함
-2. **Soonryong Style**: 지원 동기, 핵심 역량 소개, 자기소개서 항목에 적용
-3. **Project Count**: 6-8개 프로젝트
-4. **Customization**: job requirements 키워드 5회 이상 언급
-5. **Length**: 총 2000-3000줄
-6. **Cover Letter Length**: 각 자기소개서 항목이 `max_length` 이내 (기본 1000자)
-7. **Cover Letter Required**: `cover_letter_sections.required`가 `true`인 경우에만 자기소개서 섹션 생성
-8. **No Strikethrough**: 취소선(`~~텍스트~~`) 문법이 포함되지 않았는지 확인. 발견 시 제거
+1. **Template Structure Preserved**: 템플릿의 섹션 순서, 계층 구조, 다이어그램 구조가 그대로 유지되었는지 확인
+2. **Mermaid Diagrams**: 템플릿과 동일한 다이어그램 구조 유지 (최소 4개)
+3. **Project Format Consistency**: 템플릿의 프로젝트 설명 형식(relevance_score 표기, 핵심 성과 형식 등)이 그대로 유지되었는지 확인
+4. **Soonryong Style**: 지원 동기, 핵심 역량 소개, 자기소개서 항목에 적용
+5. **Project Count**: 6-8개 프로젝트 (템플릿과 동일한 개수 유지)
+6. **Customization**: job requirements 키워드 5회 이상 언급
+7. **Length**: 템플릿과 유사한 길이 유지 (템플릿 기준 ±20%)
+8. **Cover Letter Length**: 각 자기소개서 항목이 `max_length` 이내 (기본 1000자)
+9. **Cover Letter Required**: `cover_letter_sections.required`가 `true`인 경우에만 자기소개서 섹션 생성
+10. **No Strikethrough**: 취소선(`~~텍스트~~`) 문법이 포함되지 않았는지 확인. 발견 시 제거
+
+## Template Copy & Modify Guide
+
+> [!NOTE]
+> 이 가이드는 Phase 2에서 사용됩니다. Phase 1에서 맞춤화된 내용을 작성한 후, Phase 2에서 템플릿 구조로 통합할 때 참조하세요.
+
+### Phase 2 템플릿 통합 절차
+
+**전체 절차**: 위의 "Phase 2: Template Integration 상세" 섹션을 참조하세요.
+
+**핵심 원칙**:
+1. **구조 보존**: 템플릿의 모든 구조적 요소(섹션 순서, 계층, 다이어그램 구조)는 절대 변경하지 않음
+2. **스타일 보존**: 템플릿의 포맷, 스타일, 다이어그램 스타일은 그대로 유지
+3. **내용만 교체**: 각 섹션의 내용만 Phase 1의 맞춤화된 정보로 교체
+4. **일관성 유지**: 템플릿의 프로젝트 설명 형식, relevance_score 표기 방식 등을 그대로 유지
 
 ## Error Handling
 
-### Template 없음
+### Template 파일 없음 (NEW)
+
+**에러 메시지**:
+```
+"Warning: Template file not found at [템플릿 경로]. Falling back to general template."
+```
+
+**처리 방법**:
+1. `resume_generator/assets/일반공개/권순룡_이력서_일반공개.md` (일반 템플릿) 사용
+2. 일반 템플릿도 없으면 `resume_generator/templates/Resume_Structure_Template.md` 사용
+3. 사용자에게 알림 (Warning 레벨, 계속 진행)
+
+### Template 파일 읽기 실패
+
+**에러 메시지**:
+```
+"Warning: Could not read template file at [템플릿 경로]. Falling back to general template."
+```
+
+**처리 방법**:
+1. 일반 템플릿(`권순룡_이력서_일반공개.md`) 사용 시도
+2. 일반 템플릿도 없으면 기본 구조(`Resume_Structure_Template.md`)로 진행
+3. 계속 진행 (에러가 아닌 Warning)
+
+### 기본 Template 없음
 
 **에러 메시지**:
 ```
@@ -624,3 +1172,5 @@ graph TB
 |------|----------|
 | 2025-12-27 | Resume Generator 프롬프트 생성 |
 | 2025-01-27 | 자기소개서 섹션 생성 로직 추가, 순룡 페르소나 프롬프트 호출, 글자 수 검증 추가 |
+| 2026-01-27 | 템플릿 선택 및 참조 로직 추가, 템플릿 구조 분석 기능 추가, fallback 로직 추가 |
+| 2026-01-27 | 2단계 통합 방식 도입: Phase 1(맞춤화된 내용 작성) → Phase 2(템플릿 통합), 기술 스택 매칭 정확도 향상 |
