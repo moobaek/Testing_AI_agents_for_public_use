@@ -1,0 +1,86 @@
+As the world leader in serving science, we solve the world’s toughest problems, like giving cancer patients hope, ensuring water and food are safe, helping law enforcement solve cases through forensics and most recently, serving as the largest provider of COVID-19 solutions. Our Data Science, Digital and IT careers are a unique opportunity to apply your specialized skills and advanced experience in analytics, statistics, data science, programming, information technology and more to drive our Mission of enabling our customers to make the world healthier, cleaner and safer. It’s truly a career where your work makes a positive impact in our world. When you join Thermo Fisher Scientific, you’ll make an impact inside and outside the company on work that matters. #TechWithPurpose
+Work Schedule
+
+Standard (Mon-Fri)
+Environmental Conditions
+
+Office
+Job Description
+
+Digital Transformation with AI & Operations Specialist
+Position Summary
+Operations-focused specialist supporting Thermo Fisher’s E-commerce website, Sales App and Genesys contact-center platforms. Owns day-to-day issue triage via ServiceNow, coordinates global tech teams for fixes/enhancements, and leads major-incident communication to protect customer experience. Monitors RPA/automation, contributes to AI use-case pilots, and builds Power BI dashboards to drive continuous improvement, localization quality, and operational stability.
+
+This position focuses on issue management, system improvements, AI based use case development, automation initiatives, and coordination across multiple business and technology stakeholders. The ideal candidate will bring strong analytical capabilities, customer centric thinking, and hands on experience in application operations and digital solution enablement.
+
+Responsibilities
+1. AI and Digital Innovation
+• Participate in AI related initiatives including identifying use cases, conducting pilots, and applying AI solutions to business workflows
+• Support the adoption of AI based tools that enhance operational efficiency and customer experience
+• Document and share best practices for AI adoption across teams
+
+2. Project Delivery and Cross Functional Collaboration
+• Support requirement gathering, analysis, testing, and UAT as part of global and regional IT projects
+• Collaborate with internal and external stakeholders to manage scope, timelines, and quality
+• Assist in risk identification, mitigation planning, and project communication
+
+3. E commerce Operations
+• Handle day to day E commerce operational issues including defect coordination, case analysis, and global communication
+• Work with business partners to identify improvement opportunities and enhance customer experience
+• Maintain operational stability through detailed documentation and structured issue management
+
+4. Website Customer Facing Content and Localization
+• Manage translation, localization, and content quality for customer facing website menus
+• Review customer messages and UI terms to ensure clarity, consistency, and usability
+
+5. Contact Center Platform Support
+• Support Genesys Cloud or similar platforms including queue setup, routing logic, and call flow adjustments
+• Coordinate technical issues with global support teams and ensure timely resolution
+• Monitor performance and identify improvement areas
+
+6. Sales App Operational Support
+• Provide user support, troubleshooting, and coordination for Sales application issues
+• Communicate with global teams on feature rollouts, enhancements, and issue resolution
+• Understand commercial processes to recommend system improvements
+
+7. RPA and Automation
+• Monitor RPA bot performance, analyze failures, and drive resolution
+• Support identification of automation opportunities and contribute to process analysis
+• Participate in automation solution testing and deployment activities
+
+8. Data and Reporting
+• Develop and maintain operational dashboards and reports using Power BI
+• Analyze data to generate insights that support business and operational decisions
+
+9. ITSM and Change Management
+• Manage Change Requests, Incident tickets, and service workflows through ServiceNow
+• Support MIM processes by coordinating communication during major incidents
+• Document root causes and preventive actions following incidents
+
+Qualifications
+Required
+Bachelor’s degree in Business, IT, Engineering, or related field
+Over 2 years of experience in IT operations, application support, or digital systems management
+SI Project experience is highly preferred.
+Business-level English proficiency (able to communicate effectively with international stakeholders)
+Knowledge of E commerce, customer service systems, or sales systems
+Ability to collaborate with global teams, analyze issues, and coordinate resolutions
+Strong communication skills and customer centric problem solving approach
+Ability to manage multiple priorities in a structured and organized way
+Travel may be required (5% or under depending on role)
+Preferred
+Experience with Genesys Cloud or other Contact Center technologies
+Experience with CRM or Sales App platforms
+RPA solution experience (UiPath, Automation Anywhere, Power Automate)
+Power BI or similar BI tool experience
+ServiceNow or similar ITSM platform experience
+Experience with AI initiatives or AI driven business processes
+Project methodology understanding including Agile, Scrum, or Waterfall
+Experience working in global or multinational environments
+Competencies
+Customer first mindset
+Strong analytical and problem solving ability
+Effective communication and collaboration across teams
+Self driven execution and continuous learning
+Attention to detail and disciplined operational mindset
+Ability to adapt to new technologies such as AI and RPA

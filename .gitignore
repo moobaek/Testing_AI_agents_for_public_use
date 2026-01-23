@@ -1,0 +1,7 @@
+# Requirements_Transformation_of_project_cost_calculation/docs 폴더 제외
+Requirements_Transformation_of_project_cost_calculation/docs/
+
+# PM_agent/background 폴더 제외 (임시 해제)
+# PM_agent/background/
+
+nul
