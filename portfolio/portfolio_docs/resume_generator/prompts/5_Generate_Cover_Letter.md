@@ -24,25 +24,34 @@ graph TD
     SECTION2 --> SOONRYONG2[순룡 페르소나<br/>프롬프트 호출]
     SECTION3 --> SOONRYONG3[순룡 페르소나<br/>프롬프트 호출]
     
-    SOONRYONG1 --> LENGTH1[글자 수 검증<br/>max_length 이내]
-    SOONRYONG2 --> LENGTH2[글자 수 검증<br/>max_length 이내]
-    SOONRYONG3 --> LENGTH3[글자 수 검증<br/>max_length 이내]
+    SOONRYONG1 --> VALIDATE1[순룡 페르소나<br/>검증 - 항목1]
+    SOONRYONG2 --> VALIDATE2[순룡 페르소나<br/>검증 - 항목2]
+    SOONRYONG3 --> VALIDATE3[순룡 페르소나<br/>검증 - 항목3]
     
-    LENGTH1 --> VALIDATE[Markdown 검증]
-    LENGTH2 --> VALIDATE
-    LENGTH3 --> VALIDATE
+    VALIDATE1 --> LENGTH1[글자 수 검증<br/>max_length 이내]
+    VALIDATE2 --> LENGTH2[글자 수 검증<br/>max_length 이내]
+    VALIDATE3 --> LENGTH3[글자 수 검증<br/>max_length 이내]
     
-    VALIDATE --> CLEANUP[취소선 제거]
+    LENGTH1 --> INTEGRATE[항목 통합]
+    LENGTH2 --> INTEGRATE
+    LENGTH3 --> INTEGRATE
+    
+    INTEGRATE --> FINAL_VALIDATE[순룡 페르소나<br/>최종 검증]
+    FINAL_VALIDATE --> CLEANUP[취소선 제거]
     CLEANUP --> END[Save to temp/]
     
     style START fill:#2a9d8f,color:#fff
     style SOONRYONG1 fill:#9b59b6,color:#fff
     style SOONRYONG2 fill:#9b59b6,color:#fff
     style SOONRYONG3 fill:#9b59b6,color:#fff
+    style VALIDATE1 fill:#e67e22,color:#fff
+    style VALIDATE2 fill:#e67e22,color:#fff
+    style VALIDATE3 fill:#e67e22,color:#fff
     style LENGTH1 fill:#e67e22,color:#fff
     style LENGTH2 fill:#e67e22,color:#fff
     style LENGTH3 fill:#e67e22,color:#fff
-    style VALIDATE fill:#e67e22,color:#fff
+    style INTEGRATE fill:#3498db,color:#fff
+    style FINAL_VALIDATE fill:#e67e22,color:#fff
     style CLEANUP fill:#e67e22,color:#fff
     style END fill:#27ae60,color:#fff
 ```
@@ -71,6 +80,13 @@ You are the **Cover Letter Generator**. Your responsibility is to create a profe
      - 항목명 (예: "지원동기", "경력기술", "입사 후 기여방안")
      - `max_length` 확인
      - 순룡 페르소나 스타일로 작성
+     - **순룡 페르소나 검증 (각 항목 생성 후)**:
+       - 문법 검증 (어미, 조사, 접속사 반복 체크)
+       - 글 품질 검증 (의미적 중복 문장 체크)
+       - 순룡 페르소나 스타일 일관성 검증
+       - 마크다운 강조 공백 규칙 검증 (iOS 리치 렌더링 안정화)
+       - 자동 서식 호환성 검증 (물결표 취소선 트리거 방지)
+       - 문제 발견 시 수정 후 재검증 (최대 3회까지 시도)
 
 4. **Apply Soonryong Style**: 모든 항목에 Soonryong 페르소나 적용
 
@@ -80,9 +96,33 @@ You are the **Cover Letter Generator**. Your responsibility is to create a profe
 
 6. **Remove Strikethrough**: 취소선(`~~텍스트~~`) 문법 제거
 
-7. **Validate Output**: 작성 가이드 섹션이 포함되지 않았는지 확인
+7. **순룡 페르소나 최종 검증 (전체 통합 후)**
+   - `cover_letter_content.md` 저장 직전 수행
+   - 검증 대상:
+     - 전체 자기소개서 문서 내용
+     - 모든 항목의 순룡 페르소나 스타일 일관성
+     - 마크다운 강조 공백 규칙 (iOS 리치 렌더링 안정화)
+     - 자동 서식 호환성 (물결표 취소선 트리거 방지)
+   - 검증 항목:
+     - 문법 검증 (어미, 조사, 접속사 반복 체크)
+     - 글 품질 검증 (의미적 중복 문장 체크)
+     - 순룡 페르소나 스타일 일관성 검증
+     - 마크다운 강조 공백 규칙 검증:
+       - 강조를 닫는 기호(*, _, **, __) 바로 뒤에 ASCII 공백 1칸 확인
+       - 제로폭 공백(U+200B 등) 사용 금지 확인
+       - 인라인 코드/코드블록/수식/HTML 태그 내부는 제외
+       - 자의적 예외 금지 ("조사 붙을 때만 공백" 같은 기준 없음)
+     - 자동 서식 호환성 검증:
+       - 물결표(~)를 유니코드 물결표(∼ 또는 ～)로 교체 확인
+       - 인라인 코드/코드블록/수식/HTML 태그 내부는 제외
+   - 검증 방법:
+     - 순룡 페르소나 프롬프트(`Soonryong_Answer_Generator_Prompt.md`) 호출하여 문서 전체 검증
+     - 문제 발견 시 `search_replace`로 수정 후 재검증 (최대 3회까지 시도)
+     - 3회 실패 시 Warning 메시지와 함께 진행
 
-8. **Save**: `resume_generator/data/temp/cover_letter_content.md`
+8. **Validate Output**: 작성 가이드 섹션이 포함되지 않았는지 확인
+
+9. **Save**: `resume_generator/data/temp/cover_letter_content.md`
 
 ## 재사용 프롬프트
 
@@ -131,6 +171,15 @@ You are the **Cover Letter Generator**. Your responsibility is to create a profe
 > [!IMPORTANT]
 > **SECTION ORDER**
 > `cover_letter_sections.sections` 배열의 순서대로 작성.
+
+> [!IMPORTANT]
+> **순룡 페르소나 검증 필수**
+> 각 항목 생성 후 및 최종 통합 후 반드시 순룡 페르소나 검증을 수행해야 합니다.
+> - 문법 검증 (어미, 조사, 접속사 반복 체크)
+> - 글 품질 검증 (의미적 중복 문장 체크)
+> - 순룡 페르소나 스타일 일관성 검증
+> - 마크다운 강조 공백 규칙 검증 (iOS 리치 렌더링 안정화)
+> - 자동 서식 호환성 검증 (물결표 취소선 트리거 방지)
 
 > [!CRITICAL]
 > **NO METADATA IN OUTPUT**
@@ -244,6 +293,23 @@ You are the **Cover Letter Generator**. Your responsibility is to create a profe
 3. **No Strikethrough**: 취소선 문법이 포함되지 않았는지 확인
 4. **Section Count**: `cover_letter_sections.sections` 배열의 모든 항목 포함
 5. **Section Order**: 배열 순서대로 작성
+6. **순룡 페르소나 검증 (각 항목 생성 후)**: 각 항목 생성 후 반드시 검증 수행
+   - 문법 검증 (어미, 조사, 접속사 반복 체크)
+   - 글 품질 검증 (의미적 중복 문장 체크)
+   - 순룡 페르소나 스타일 일관성 검증
+   - 마크다운 강조 공백 규칙 검증 (iOS 리치 렌더링 안정화)
+   - 자동 서식 호환성 검증 (물결표 취소선 트리거 방지)
+7. **순룡 페르소나 최종 검증 (전체 통합 후)**: 모든 항목 통합 후 최종 검증 수행
+   - 전체 문서의 문법/글 품질 검증
+   - 순룡 페르소나 스타일 일관성 검증
+   - 마크다운 강조 공백 규칙 검증:
+     - 강조를 닫는 기호(*, _, **, __) 바로 뒤에 ASCII 공백 1칸 확인
+     - 제로폭 공백(U+200B 등) 사용 금지 확인
+     - 인라인 코드/코드블록/수식/HTML 태그 내부는 제외
+     - 자의적 예외 금지 ("조사 붙을 때만 공백" 같은 기준 없음)
+   - 자동 서식 호환성 검증:
+     - 물결표(~)를 유니코드 물결표(∼ 또는 ～)로 교체 확인
+     - 인라인 코드/코드블록/수식/HTML 태그 내부는 제외
 
 ## Error Handling
 

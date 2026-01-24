@@ -32,7 +32,7 @@
 
 본 포트폴리오는 **9단계 AI 업무 혁신 & 성장 실행 가이드**를 실무에 적용하여, 단순한 기술 개발을 넘어 산업 현장의 실질적인 문제를 해결하고 DX(Digital Transformation)를 이끌어낸 과정을 기록한 문서입니다.
 
-단일 사업이 아닌 **12개 영역(기술 진화 계보, AI & Analytics, Digital Platforms, Sensors & IoT, Safety & Energy, Healthcare, AI Workflow, Consulting, Certification, 참여 프로젝트, 스마트공장 구축, 미래 프로젝트)에서 47개 이상의 독립된 프로젝트와 솔루션**을 성공적으로 수행한 성과를 담고 있습니다.
+단일 사업이 아닌 **12개 영역(기술 진화 계보, AI & Analytics, Digital Platforms, Sensors & IoT, Safety & Energy, Healthcare, AI Workflow, Consulting, Certification, 참여 프로젝트, 스마트공장 구축, 미래 프로젝트)에서 53개 이상의 독립된 프로젝트와 솔루션**을 성공적으로 수행한 성과를 담고 있습니다. **국가 R&D 및 정부과제 제안 경험 6건+** (2억~42억 규모, 총 100억+ 규모)를 포함하여, 기술 기획서 작성, 사업화 전략 수립, PT 및 발표 수행 등 8~10년차급 경험 수준의 사업 기획 역량을 보유하고 있습니다.
 
 ## 🏛️ Governance Agents (The Overseers)
 **전체 포트폴리오의 품질과 방향성을 책임지는 3대 핵심 에이전트**
@@ -50,7 +50,7 @@
 - [00_Portfolio_Index.md](00_Portfolio_Index.md) (`page.portfolio.index`) - 현재 문서
 - [00_Personal_Profile.md](00_Personal_Profile.md) (`page.portfolio.personal_profile`) - **개인 프로필 및 기술 철학** 👤
 - [00_Relationship_Map.md](00_Relationship_Map.md) (`page.portfolio.relationship_map`) - 프로젝트 간 관계 시각화
-- [02_Projects_Overview.md](02_Projects_Overview.md) (`page.portfolio.projects`) - **12개 영역 47개+ 프로젝트 & 솔루션 요약** ⚡
+- [02_Projects_Overview.md](02_Projects_Overview.md) (`page.portfolio.projects`) - **12개 영역 53개+ 프로젝트 & 솔루션 요약** (국가 R&D 과제 제안 6건+ 포함) ⚡
 - [04_Academic_Publications.md](04_Academic_Publications.md) (`page.portfolio.academic`) - **학술 연구 및 논문 성과 (2020-2025)** 🎓
 - [Architecture_Overview.md](Architecture_Overview.md) (`page.portfolio.architecture`) - 통합 시스템 아키텍처 (AMS, CoCTK, FBS, DPS 등)
 - [Testing_Context.md](Testing_Context.md) (`page.portfolio.testing`) - 실증 및 검증 사례 (세아특수강, 포미아 등)
@@ -72,7 +72,7 @@
 ### 🤖 LLM 에이전트 진화 스토리 (AI Agent Evolution Stories)
 
 > [!NOTE] 스토리텔링 접근
-> 47개 프로젝트를 수행하면서 겪은 실제 문제와 해결 과정을 통해 AI Agent 개발의 필요성을 깨달았고, 실제로 구현하여 성공한 스토리들입니다. 각 스토리는 **문제 발견 → 해결 시도 → 결과 → 진화**의 구조로 구성되어 있습니다.
+> 53개 프로젝트를 수행하면서 겪은 실제 문제와 해결 과정을 통해 AI Agent 개발의 필요성을 깨달았고, 실제로 구현하여 성공한 스토리들입니다. 각 스토리는 **문제 발견 → 해결 시도 → 결과 → 진화**의 구조로 구성되어 있습니다.
 
 **전체 스토리**: [[02_Projects_Overview#02-llm-에이전트-설계-토대-관계|02_Projects_Overview.md의 LLM 에이전트 설계 토대 관계 섹션]]
 

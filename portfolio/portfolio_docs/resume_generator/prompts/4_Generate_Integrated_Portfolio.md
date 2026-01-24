@@ -47,7 +47,7 @@ You are the **Integrated Portfolio Generator**. Create a comprehensive portfolio
 
 **작업 내용**:
 
-1. **📊 전체 프로젝트 타임라인 (2020-2026) - 47개 프로젝트** ⚠️ **필수**
+1. **📊 전체 프로젝트 타임라인 (2020-2026) - 53개 프로젝트** ⚠️ **필수**
    - `02_Projects_Overview.md`에서 전체 프로젝트 Gantt 차트를 가져와 기본 정보 바로 다음에 배치
    - 이 섹션은 **반드시** 포함되어야 함 (생략 불가)
    - `search_replace`로 템플릿의 Gantt 차트를 `02_Projects_Overview.md`의 실제 Gantt 차트로 교체
@@ -87,6 +87,35 @@ You are the **Integrated Portfolio Generator**. Create a comprehensive portfolio
     - `personal_info.json`에서 GitHub 정보를 읽어서 실제 URL로 작성
     - `search_replace`로 템플릿의 플레이스홀더([GitHub URL], [사용자명] 등)를 `personal_info.json`의 실제 값으로 치환
 
+11. **순룡 페르소나 검증**
+    - `integrated_portfolio_content.md` 저장 직후 수행
+    - 검증 대상:
+      - 전체 Markdown 파일 내용
+      - 모든 머메이드 다이어그램 (최소 5개)
+      - 순룡 페르소나 스타일 일관성
+      - 마크다운 강조 공백 규칙 (iOS 리치 렌더링 안정화)
+      - 자동 서식 호환성 (물결표 취소선 트리거 방지)
+    - 검증 항목:
+      - 문법 검증 (어미, 조사, 접속사 반복 체크)
+      - 글 품질 검증 (의미적 중복 문장 체크)
+      - 머메이드 다이어그램 검증 (문법 오류, 노드 ID, 특수문자 등)
+      - 순룡 페르소나 스타일 일관성 검증
+      - 마크다운 강조 공백 규칙 검증:
+        - 강조를 닫는 기호(*, _, **, __) 바로 뒤에 ASCII 공백 1칸 확인
+        - 제로폭 공백(U+200B 등) 사용 금지 확인
+        - 인라인 코드/코드블록/수식/HTML 태그 내부는 제외
+        - 자의적 예외 금지 ("조사 붙을 때만 공백" 같은 기준 없음)
+      - 자동 서식 호환성 검증:
+        - 물결표(~)를 유니코드 물결표(∼ 또는 ～)로 교체 확인
+        - 인라인 코드/코드블록/수식/HTML 태그 내부는 제외
+    - 검증 방법:
+      - 순룡 페르소나 프롬프트(`Soonryong_Answer_Generator_Prompt.md`) 호출하여 문서 전체 검증
+      - 머메이드 다이어그램 8가지 체크리스트 적용
+      - 문법/글 품질 검증
+      - 마크다운 강조 공백 규칙 검증
+      - 문제 발견 시 `search_replace`로 수정 후 재검증 (최대 3회까지 시도)
+      - 3회 실패 시 Warning 메시지와 함께 진행
+
 ## Output
 
 **File**: `resume_generator/data/temp/integrated_portfolio_content.md`
@@ -108,7 +137,7 @@ You are the **Integrated Portfolio Generator**. Create a comprehensive portfolio
 ## 📌 기본 정보
 [이름, GitHub, 연락처 등]
 
-## 📊 전체 프로젝트 타임라인 (2020-2026) - 47개 프로젝트  ⚠️ 필수
+## 📊 전체 프로젝트 타임라인 (2020-2026) - 57개 프로젝트  ⚠️ 필수
 [02_Projects_Overview.md의 Gantt 차트 - 반드시 포함]
 
 ## 📊 포트폴리오 구조 (한눈에 보기)
@@ -149,9 +178,21 @@ You are the **Integrated Portfolio Generator**. Create a comprehensive portfolio
 
 ## Enforcement Rules
 
+> [!IMPORTANT]
+> **순룡 페르소나 검증 필수**
+> 포트폴리오 생성 후 반드시 순룡 페르소나 검증을 수행해야 합니다.
+> - 문법 검증 (어미, 조사, 접속사 반복 체크)
+> - 글 품질 검증 (의미적 중복 문장 체크)
+> - 머메이드 다이어그램 검증 (최소 5개)
+> - 순룡 페르소나 스타일 일관성 검증
+> - 마크다운 강조 공백 규칙 검증 (iOS 리치 렌더링 안정화)
+> - 자동 서식 호환성 검증 (물결표 취소선 트리거 방지)
+
+## Enforcement Rules (기존)
+
 > [!CRITICAL]
 > **📊 전체 프로젝트 타임라인 필수 포함**
-> 포트폴리오 생성 시 "📊 전체 프로젝트 타임라인 (2020-2026) - 47개 프로젝트" 섹션을 **반드시** 기본 정보 바로 다음에 포함해야 합니다.
+> 포트폴리오 생성 시 "📊 전체 프로젝트 타임라인 (2020-2026) - 53개 프로젝트" 섹션을 **반드시** 기본 정보 바로 다음에 포함해야 합니다.
 > `02_Projects_Overview.md`에서 해당 Gantt 차트를 가져와 그대로 삽입합니다.
 > 이 섹션은 생략할 수 없으며, 모든 포트폴리오에 필수로 들어갑니다.
 

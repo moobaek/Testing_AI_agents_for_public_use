@@ -43,21 +43,21 @@ timeline
 
 ## 지원 동기
 
-AI Agent를 개발하고 LLM을 활용하는 AI Agent Engineer 역할에 기여하고자 지원합니다.
+현대오토에버 인공지능기술실의 AI Agent 엔지니어 역할에 기여하고자 지원합니다.
 
-5년 5개월간의 경험을 통해 다양한 AI Agent를 개발하고 Multi-Agent 시스템을 설계할 수 있는 AI Agent Engineer로 성장했습니다. 특히 **코딩 에이전트**, **FMEA 자동화 Multi-Agent 시스템**, **Factory Ontology Manager AI Agent**, **Virtual Company Creation Agent**, **Business Document Generator** 등 9개 이상의 AI Agent를 개발했으며, **LangGraph/CrewAI 워크플로우 오케스트레이션**, **Dual-Tier AI 아키텍처**, **프롬프트 평가 엔진** 등을 설계했습니다.
+현대오토에버 인공지능기술실은 AI 신기술을 바탕으로 전사 AI 주제를 리드하며 '살아있는 AI' 기술을 만들어 사내 주요 서비스 및 제품이 더욱 경쟁력 있도록 만드는 것을 목표로 하고 있습니다. 5년 5개월간의 경험을 통해 다양한 AI Agent를 개발하고 Multi-Agent 시스템을 설계할 수 있는 AI Agent Engineer로 성장했으며, 특히 **FMEA 자동화 Multi-Agent 시스템**, **Factory Ontology Manager AI Agent**, **PM Agent (MCP 기반)**, **Virtual Company Creation Agent** 등 9개 이상의 AI Agent를 개발했고, **AI Agent 아키텍처 설계 및 Orchestration 구현**, **MCP 기반 채널 연동 아키텍처 설계**, **지식그래프/온톨로지 관련 개발** 경험을 보유하고 있습니다.
 
-**AI Agent 개발 역량**을 구체적으로 설명하면, Original Development Plan에서 **코딩 에이전트**를 개발하여 외주 개발자 산출물 관리 문제를 해결했습니다. 백엔드 AI 개발자였지만 코딩 툴을 만들어서 말도 안 되는 시간에 말도 안 되는 개발 개수를 성공적으로 완료했습니다. 이 경험이 FMEA 자동화 에이전트, PM Agent, Factory Ontology Manager 등 다른 AI Agent 설계의 기초가 되었습니다.
+**AI Agent 아키텍처 설계 및 Orchestration 구현 역량**을 구체적으로 설명하면, FMEA 자동화 시스템에서 **Master Orchestrator 기반 8개 독립 Sub-Agent 협업 구조**를 설계했습니다. Claude Sub-Agent 기반으로 R&D, Mfg, QA 등 8개의 독립 Sub-Agent가 협업하는 구조를 설계했으며, Phase 0~5 자동화 워크플로우를 통해 전체 프로세스를 자동화했습니다. 또한 LangGraph/CrewAI를 활용하여 복잡한 개발 프로세스를 자동화했으며, Phase 0-13 워크플로우를 설계하여 개발 프로세스의 각 단계를 자동화했습니다.
 
-**Multi-Agent 시스템 설계 역량**으로는 FMEA 자동화 시스템에서 **Master Orchestrator 기반 8개 독립 Sub-Agent 협업 구조**를 설계했습니다. Claude Sub-Agent 기반으로 R&D, Mfg, QA 등 8개의 독립 Sub-Agent가 협업하는 구조를 설계했으며, Phase 0~5 자동화 워크플로우를 통해 전체 프로세스를 자동화했습니다.
+**MCP 기반 채널 연동 아키텍처 설계 및 구현 역량**으로는 PM Agent에서 **32개 Python MCP 서버를 개발**하여 비정형 문서(HWP, DOCX, XLSX)를 자동 파싱하는 Docker 기반 파서 서버를 구축했습니다. MCP (Model Context Protocol)를 통해 에이전트 간 통신을 구현하여 유기적 네트워크를 구축했으며, 내·외부 에이전트 연동이 가능한 구조를 설계했습니다.
 
-**LLM 활용 역량**으로는 Claude Agent를 활용하여 다양한 AI Agent를 개발했습니다. 프롬프트 엔지니어링을 통해 복잡한 작업을 자동화했으며, RAG 시스템을 개발하여 LLM의 지식 기반을 확장했습니다. MCP 서버를 개발하여 LLM과 외부 시스템을 연동했습니다.
+**다양한 Agentic AI 라이브러리, 서비스, 플랫폼에 대한 경험**으로는 Claude Agent, LangGraph, CrewAI 등을 활용하여 다양한 AI Agent를 개발했습니다. 프롬프트 엔지니어링을 통해 복잡한 작업을 자동화했으며, RAG 시스템을 개발하여 LLM의 지식 기반을 확장했습니다.
 
-**워크플로우 오케스트레이션 역량**으로는 LangGraph/CrewAI를 활용하여 복잡한 개발 프로세스를 자동화했습니다. Phase 0-13 워크플로우를 설계하여 개발 프로세스의 각 단계를 자동화했으며, 상태 기반 진행 모니터링 및 완료 조건 판단 시스템을 설계했습니다.
+**지식그래프, 온톨로지 관련 개발 경험**으로는 Neo4j 기반 지식 그래프 RAG 시스템을 개발했으며, Factory Ontology Manager AI Agent에서 자연어 기반 공정 문서 파싱 및 DB Grounding, Ontology Mapping을 구현했습니다. 4M2E 관계 온톨로지를 정의하여 공장의 복잡한 관계를 관리하며, OEM/ODM 대응을 자동화하는 시스템을 개발했습니다.
 
-**Dual-Tier AI 아키텍처 설계 역량**으로는 Virtual Company Creation Agent에서 High-Spec AI (추론)와 Low-Spec AI (조회)를 분리하여 최대 87%의 LLM 비용을 절감했습니다. LLM 활용하다보니 온톨로지도 잘 못알아먹고 벡터도 부족하다는 것을 깨달고 특화 중간 DB(GFS)를 설계하여 LLM을 서포트하도록 했습니다.
+**AI 에이전트를 활용한 업무 자동화 및 효율화 솔루션 개발 및 적용** 경험으로는 FMEA 자동화 시스템을 통해 리스크 분석 시간을 대폭 단축했으며, Factory Ontology Manager AI Agent를 통해 레이아웃 생성 시간을 80% 단축했습니다. Business Document Generator를 통해 문서 작성 시간을 70% 절감했으며, 코딩 에이전트를 통해 외주 개발자 관리 시간을 80% 이상 절감했습니다.
 
-이러한 경험을 바탕으로 AI Agent를 개발하고 LLM을 활용하는 AI Agent Engineer로 기여하고자 합니다.
+이러한 경험을 바탕으로 현대오토에버 인공지능기술실의 AI Agent 엔지니어로 기여하여 '살아있는 AI' 기술 개발에 참여하고, 미래 모빌리티 및 유관 분야의 주인공이 되고자 합니다.
 
 ---
 
@@ -230,7 +230,7 @@ graph TB
 - ✅ **MCP 서버 개발**: 32개 Python MCP 서버 개발 (PM Agent 기반)
 - ✅ **Dual-Tier AI 아키텍처 설계**: High-Spec AI와 Low-Spec AI 분리로 LLM 비용 87% 절감
 - ✅ **GS 인증 1등급 2개 취득**: CoCTK (2024), AMS-PDS (2025)
-- ✅ **특허 등록**: 피쉬본 관리 시스템 특허 등록
+- ✅ **특허 출원/등록**: 5건 (2건 등록결정 완료, 3건 심사 진행 중, 총 청구항 39개)
 - ✅ **학술 논문 발표 10편**: 2020-2025년, AI/에너지/데이터 분석/제조 DX 분야
 - ✅ **설계 문서 298개+ 작성**: ID 기반 온톨로지 맵 시스템, Original Development Plan
 - ✅ **Python 모듈 49개 개발**: MLS, CoCTK, FBS, RMS, AMS 등 핵심 엔진
@@ -720,8 +720,19 @@ graph TB
 - **GS 인증 1등급 (CoCTK)**: 2024년 소프트웨어 품질 인증 획득
 - **GS 인증 1등급 (AMS-PDS)**: 2025년 소프트웨어 품질 인증 획득
 
-### 특허
-- **피쉬본 관리 시스템 특허 등록**: 이상 탐지 및 분석 시스템 특허
+## 특허 출원/등록 현황
+
+### 특허 현황 요약 (5건)
+
+| 출원일 | 특허명 | 상태 | 발명자 | AI Agent 연계 |
+| :--- | :--- | :--- | :--- | :--- |
+| 2025.08.13 | 인공지능을 활용한 공정 최적화 관리를 위한 공정 관리 방법 및 그 시스템 | 출원완료<br/>심사청구완료 | **권순룡**, 최수영, 강용태, 안상윤 | FMEA 자동화 에이전트, Factory Ontology Manager 기반, LLM 연계 가능성 |
+| 2025.03.28 | 공정 최적화를 위한 공정 관리 방법 및 그 시스템 | 등록결정<br/>(2025.12.09) | 강용태, **권순룡**, 김혜주 | Factory Ontology Manager 기반 |
+| 2023.12.26 | 생산공정 에너지 및 설비상태 데이터 처리를 위한 전력 사용 패턴 분석 및 상태 분석 방법 | 공개<br/>심사청구완료 | 최수영, 강용태, **권순룡**, 이상훈 | 패턴 분석 에이전트, AMS Pattern Module |
+| 2023.12.26 | 주기 데이터 분석 기반의 전력 추이 상황적 불량 이상 검증 방법 | 공개<br/>심사청구완료 | 최수영, 강용태, **권순룡**, 이상훈 | 패턴 분석 에이전트, 시계열 분석 기법 |
+| 2021.12.07 | 설비 제어 특성 로그 데이터와 에너지 소비패턴 모델을 활용한 인공지능 기반의 이상 탐지 방법 및 장치 | 등록결정<br/>(2025.10.28) | 강용태, 김정호, **권순룡**, 김동기 | 패턴 분석 에이전트, AMS Pattern Module 기초 |
+
+**국가연구개발사업 지원**: 특허 1, 3, 4는 에너지수요관리핵심기술개발사업 지원을 받아 수행된 연구 성과입니다.
 
 ---
 

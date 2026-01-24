@@ -10,7 +10,7 @@ PDF 포트폴리오 분석을 통해 확인된 30개 이상의 주요 프로젝�
 
 ```mermaid
 gantt
-    title 📊 전체 프로젝트 타임라인 & 포트폴리오 (2020-2026) - 47개 프로젝트
+    title 📊 전체 프로젝트 타임라인 & 포트폴리오 (2020-2026) - 53개 프로젝트
     dateFormat  YYYY-MM
     axisFormat  %Y-%m
     tickInterval 6month
@@ -194,7 +194,7 @@ graph TD
 ```mermaid
 graph TB
     subgraph "프로젝트 경험 (2020-2025)"
-        Proj1["Original Development Plan<br/>외주 개발자 관리<br/>47개 프로젝트 PM 경험"]
+        Proj1["Original Development Plan<br/>외주 개발자 관리<br/>53개 프로젝트 PM 경험"]
         Proj2["테크웰/신성오토텍<br/>FBS, 패턴 분석<br/>확률 네트워크 개발"]
         Proj3["세아특수강/포미아 DX<br/>데이터 통합<br/>POP/SPC 개발<br/>PM 경험"]
         Proj4["DPS<br/>5층 아키텍처<br/>LLM 활용 경험"]
@@ -339,7 +339,7 @@ graph TD
 ### 0.2.1 코딩 에이전트 진화 스토리: 외주 개발자 관리의 한계를 넘어서
 
 > [!NOTE] 스토리텔링
-> 47개 프로젝트를 수행하면서 겪은 실제 문제와 해결 과정을 통해 AI Agent 개발의 필요성을 깨달았고, 실제로 구현하여 성공한 스토리입니다.
+> 53개 프로젝트를 수행하면서 겪은 실제 문제와 해결 과정을 통해 AI Agent 개발의 필요성을 깨달았고, 실제로 구현하여 성공한 스토리입니다.
 
 #### 문제 발견: 외주 개발자 관리의 한계 (2020-2024)
 
@@ -355,7 +355,7 @@ graph TD
    - Qt는 할 줄 알지만 잘하는 건 아님
    - 프론트엔드/시각화 부분이 막막함
 
-**47개 프로젝트에서 축적된 경험**:
+**53개 프로젝트에서 축적된 경험**:
 - 다수 PM 경험(제안서 작성, 외주 관리, 완료서 작성 등)을 통해 외주 개발자 관리의 어려움을 체감
 - 문서 관리 및 개발 진행 관리의 필요성을 절감
 - 사업계획서, 제안서, 착수보고서, 감리 문서 등 다수 문서 작성 경험을 통해 문서화의 중요성 인식
@@ -468,7 +468,7 @@ graph LR
 
 **핵심 인사이트**:
 - **문제 해결의 연속성**: 외주 개발자 관리 문제 → 코딩 에이전트 개발 → 다른 AI Agent로 확장
-- **기술의 축적**: 47개 프로젝트 경험 → 코딩 에이전트 → 전체 에이전트 시스템
+- **기술의 축적**: 53개 프로젝트 경험 → 코딩 에이전트 → 전체 에이전트 시스템
 - **현장 경험의 가치**: 이론이 아닌 실제 프로젝트에서 나온 인사이트가 AI Agent 설계에 직접 반영
 
 ### 0.2.2 FMEA 자동화 에이전트 진화 스토리: 난해한 기술을 현장이 이해하는 언어로
@@ -497,7 +497,7 @@ graph LR
    - 베이지안 네트워크, 확률적 최적화 경로 등 기술적 개념
    - 현장 관리자가 이해하기 어려운 추상적 표현
 
-**47개 프로젝트에서 축적된 경험**:
+**53개 프로젝트에서 축적된 경험**:
 - 테크웰/신성오토텍 AMS 컨설팅에서 고객 인터뷰 및 고객 관점(View) 파악 경험
 - 공장 관리자들이 실제로 사용하는 문서 형식과 용어 파악
 - **"고객 커뮤니케이션 3원칙"**: 기술 용어를 쓰지 않는다, 현장 관리자가 이해할 수 있는 언어로 소통
@@ -560,7 +560,7 @@ graph LR
 2. **OEM/ODM 대응의 복잡성**: 각각 위 업체(발주처 등등) 문서를 받으면 수동으로 연결해야 함
 3. **자재/제품/반제품 경로 관리**: 자재나 제품 반제품 경로, PLC 센서를 자동으로 연결해야 함
 
-**47개 프로젝트에서 축적된 경험**:
+**53개 프로젝트에서 축적된 경험**:
 - 세아특수강 데이터 통합 프로젝트: POP/SPC 개발, RS232C-LAN 변환, Lot 매칭 경험
 - 공장 데이터 통합의 복잡성과 어려움을 체감
 - 공정 문서와 실제 공장 데이터 간의 매핑 필요성 인식
@@ -752,7 +752,7 @@ graph LR
    - 실제 공장 정보가 아니라 암묵적으로 더 방대한 차원의 정보가 필요 (기업 풀)
    - 공장/산업/기업에서 관리하는 문서도 결국 다양한 지식 정보의 흐름에서 파싱해서 종합하는 형태
 
-**47개 프로젝트에서 축적된 경험**:
+**53개 프로젝트에서 축적된 경험**:
 - DPS에서 5층 아키텍처 설계 경험
 - Factory Ontology Manager에서 공장 관계 설정 경험
 - FMEA 자동화에서 공정 문서 파싱 경험
@@ -901,7 +901,7 @@ graph LR
 4. **감리 문서 작성**: 프로젝트 감리 시 문서 작성 필요
 5. **반복적인 작업**: 비슷한 내용을 매번 새로 작성해야 하는 반복 작업
 
-**47개 프로젝트에서 축적된 경험**:
+**53개 프로젝트에서 축적된 경험**:
 - 2023년부터 한솔코에버 AI 쪽 사업계획 전담
 - 다수 PM 경험(제안서 작성, 외주 관리, 완료서 작성 등)
 - 사업계획서, 제안서, 착수보고서, 감리 문서 등 다수 문서 작성 경험
@@ -1196,6 +1196,7 @@ graph LR
 | **리파코 컨설팅** (`project.ripaco_consulting`) | 2023.04~2023.12<br/>충북과학기술원 주관<br/>산업 디지털 전환 지원체계 구축사업<br/>리파코 | **시간 구간 기반 클러스터링**, 로봇 동작 패턴 분석, 룰 기반 이상 탐지 | **박스 이송 로봇 데이터 분석**: 동작 구간별 클러스터링을 통해 이상 상황(박스 놓침 등) 탐지 룰 개발. 값 편차와 룰 일치 검증으로 현장 관리자 경험을 데이터로 입증. **AMS 패턴 분석 및 룰 기반 이상 탐지 시스템의 초석 마련** (2023.11.03 컨설팅 시작, 2023.12.26 최종보고서 완료). **AMS 영향**: Pattern Module의 시간 구간 클러스터링 기법 기여. **LLM 에이전트 토대**: 리파코에서 시간 구간 분석 및 룰 기반 탐지 경험을 쌓아 패턴 분석 에이전트 설계의 토대 마련 |
 | **코아아이티 자연어 처리 & 챗봇 컨설팅** (`project.coaaiti_nlp_chatbot`) | 2023.04~2023.12<br/>충북과학기술원 주관<br/>산업 디지털 전환 지원체계 구축사업<br/>코아아이티 | 자연어 처리, BERT 모델, **Python + Qt (프론트/백엔드)**, 한약재/건강식품 검색 시스템 | **수출업 대상 한약재 검색 시스템 개발 컨설팅**: BERT 기반 자연어 처리 모델 실험 (영어→한글 변환 및 배경 지식 주입으로 성능 개선 확인, 당시 LLM 한계 경험). Python+Qt 풀스택 개발. **LLM 에이전트 토대**: 코아아이티에서 Python+Qt 풀스택 개발 및 BERT 실험 경험을 쌓아 AI Agent 설계 및 개발의 기초가 됨 |
 | **해태가루비 AI 솔루션 실증지원사업** (`project.haetae_ai_solution`) | 2023~2024.02<br/>해태가루비/더블유앤이케이 | Frying 공정 분석 (패들, 컨베이어 속도, 온도, 습도, Fry 온도), 패턴 기반 룰 알람 | **AI 백엔드 PL**: 감자 칩 품질 예측을 위한 공정 변수 분석 및 패턴 기반 룰 알람 시스템 구축. **교훈**: 공정 변수(특히 패들) 영향 확인했으나, 원재료(감자) 품질이 핵심 요인임을 발견 → **복합 AI(원재료+공정 통합)** 필요성 인식. (2024.02.02 완료보고서 작성). **AMS 영향**: 패턴 기반 룰 알람 경험 → AMS Pattern Module 기여 |
+| **뿌리기업 제조데이터 활용 컨설팅 (로드원)** (`project.roadone_consulting`) | 2024.05~2025.03<br/>한국능률협회컨설팅(KMAC)<br/>로드원(Road One) | **프로젝트 총괄(PM) 및 핵심 기술 개발**: 제조 공정(사출) 진단, 데이터 활용 전략 모델 정의, 실행 계획 수립 및 최종 완료 보고서 작성 주도. LS PLC 데이터 수집 미들웨어 설계 및 구현, 데이터 정합성 검증 및 현장 적용 총괄. Direct Memory Access(LS PLC DINT/UDINT), Type Conversion Logic, Edge Middleware(C# WinForm, SQLite Store & Forward), 모니터링 대시보드 설계 및 구현. **컨설팅 문서 완료** | 완료 |
 
 ## 8. 인증 및 공모전 (`section.projects.certification`)
 | 프로젝트명 | 기간 / 발주처 | 핵심 기술 | 역할 & 성과 |
@@ -1207,12 +1208,16 @@ graph LR
 ## 9. 참여 프로젝트 (탈락 포함) (`section.projects.participated`)
 | 프로젝트명 | 기간 / 발주처 | 수행 내용 | 결과 |
 |:---|:---|:---|:---|
-| **AI바우처 - HFR** (`project.hfr_aivoucher`) | 2024.03~2025.03<br/>HFR (에치에프알) | 공장 내부 통신 업체, AI바우처 지원사업, PM(예정) | 2024.03.13~2024.03.14 사업계획서 작성 시작, 2025.03 발표 탈락 |
-| **지능형 IoT 적용 확산 사업** (`project.dusol_iot`) | 2025.04~2025.12<br/>두솔 | 한솔코에버측 대표 진행, 기술 발표 대응 | 발표 탈락 |
-| **디지털 트윈 혁신서비스 선도** (`project.nextr_digitaltwin`) | 2025.05~2025.12<br/>넥스터 | - | 서류 탈락 |
+| **AI바우처 - HFR** (`project.hfr_aivoucher`) | 2024.03~2025.03<br/>HFR (에치에프알)<br/>정보통신산업진흥원(NIPA) | **프로젝트 총괄**: 5G 프론트홀 EMS 장애 예측 AI 시스템. 사업계획서 작성, PT 자료 작성, 발표 준비 협업 (발표는 수요기업 HFR 진행). Facebook Prophet/LSTM 기반 광 모듈 Tx/Rx Power 감쇠 트렌드 예측, Autoencoder 기반 Anomaly Detection, RESTful API 연동, Health Score 알고리즘. **2024년 제안 (발표 탈락) → 2025년 재제안 (발표 탈락, 사유: HFR 규모가 커서 AI 바우처 부적절) → PoC 진행하여 기술 검증 완료**. **AI 바우처 제약사항**: 일부 기업만 가능하여 하나씩만 진행, 다른 기업들과는 PoC를 진행 | 2024년 제안 발표 탈락, 2025년 재제안 발표 탈락, PoC 진행 완료 |
 | **산업AI솔루션 실증확산지원사업** (`project.infact_ai`) | 2025.08~<br/>인팩이엠텍 | PM, 계획서 작성 | 초기 종료 (업체 사정) |
-| **디지털기반 중소제조 산재예방 기술개발 지원사업** (`project.wnk_safety`) | 2025.09~<br/>더블유엔케이 | - | 발표 탈락 |
-| **제조안전고도화기술개발** (`project.dongjin_safety`) | 2025.03~<br/>동진기업 | 기술 개발쪽 발표자료 작성, 기술 발표 대응 | 발표 탈락 |
+| **자동차부품 자율제조 기술개발** (`project.autonomous_manufacturing`) | 2025.06~2028.12<br/>산업통상자원부/KEIT<br/>42억 원 | **기술 기획서 메인 작성, PT 기술 지원**: 자동차 부품 용접·성형 공정의 유연생산 및 자율제조 기술 개발. Vision AI(CNN) 기반 용접 비드 결함 검출(정확도 95% 목표), 예지보전(FFT+Autoencoder), 로봇 자동화(Spot/TWB 용접, AGV/AMR 연동), OPC-UA Middleware, Digital Twin(Unity/Three.js). 진행 시 AI 개발 총괄 예정이었음 | 발표 탈락 |
+| **배터리 화재 특성 분석 AI 조기 감지** (`project.battery_fire_detection`) | 2025.04~2027.12<br/>산업통상자원부<br/>30억 원 | **기술 기획서 작성 (초반 일부 지원 → 발표 직전 전체 정리 완료), PT 기술 부분 지원**: 배터리 화재 조기 감지 및 예방 시뮬레이션 기술. Virtual Factor Generation(시뮬레이션→학습 데이터), Sensor Fusion(열화상+가스 센서 멀티모달 딥러닝), LSTM/GRU 시계열 분석, FDS(Fire Dynamics Simulator), Edge Intelligence | 서류 통과, 발표 탈락 |
+| **서울 테스트베드 환경오염 빅데이터 AI 예측** (`project.seoul_air_quality`) | 2024.07~2024.12<br/>SBA/서울시 금천구청<br/>4억 원 | **프로젝트 총괄(PM), 기술 기획서 메인 작성, PT 메인 및 발표 진행**: 환경오염 빅데이터 AI 예측 시스템 실증. IoT 기반 미세먼지 측정망, Hybrid Ensemble 모델(기상청+IoT 센서), MAPE/RMSE 기반 성능 최적화(정확도 80~90%), LTE-Cat.M1/LoRa 통신, GIS Visualization(OpenLayers/Leaflet) | 발표 탈락 |
+| **폐수처리장 탄소중립 AIoT** (`project.wastewater_carbon_neutral`) | 2025.05~2025.12<br/>NIPA<br/>16.5억 원<br/>㈜더블유앤이케이 주관 | **AI 기술 부분 전부 작성, PT 자료 작성** (발표는 전무님 참석): AIoT 기술 기반 폐수처리장 한국형 탄소중립 서비스 모델 확산. Reinforcement Learning 기반 AI-DO Control, Virtual Sensor(Soft Sensor) BOD/COD 실시간 추정, OPC-UA(IEC 62541) 양방향 제어, FEMS | 발표 탈락 |
+| **자동차 부품 사출 산업 DX 플랫폼** (`project.injection_dx_platform`) | 2024.01~2024.12<br/>한국산업기술진흥원/포항소재산업진흥원 | **기술 부분 작성, AI 부분 작성**: 자동차 부품 사출 산업의 디지털 혁신을 위한 AI 기반 사출 공정 DX 플랫폼 개발. LS PLC(XGT/XGB) 및 Euromap 63/77 프로토콜 분석, C# WinForm Edge Client, Store & Forward 메커니즘, Pearson 상관계수 분석. 진행 시 본인이 전체 대응 예정이었음 | 진행 상태 불명 |
+| **멀티모달 센서 산업재해 예방 (P.R.E.V.E.N.T)** (`project.prevent_safety`) | 2025.09~<br/>더블유앤이케이 (WNEK) | **AI 기술 부분 작성 (멀티모달 센서 융합), LLM 기반 안전 분석 프레임워크 작성**: 작업장 안전강화를 위한 멀티모달 센서 융합 기반 산업재해 예방 및 자동 대응 솔루션. UWB/LiDAR/RGB 카메라/환경센서 융합, Safety Ontology 및 RAG, CAN Protocol(J1939) 지게차 제어, TTC 알고리즘+Kalman Filter. 비전 쪽은 타 업체, PT는 타 업체 | 탈락 (서류/발표 단계 불명) |
+| **제조 디지털트윈 시스템 실증** (`project.digital_twin_manufacturing`) | 2024.04~2028.12<br/>산업통상자원부/KEIT<br/>57개월 | **기술 부분 작성 (DT 개발자 정보 부족으로 본인이 직접 조사하여 작성), AI 부분 작성, PT 자료 기술 부분 작성**: 제조기업 산업문제 특화형 제조 디지털트윈 시스템 실증. Physics-based Modeling(유체역학, 열역학), Virtual Commissioning(VIB), What-if Analysis, ms 단위 실시간 데이터 동기화 | 발표 탈락 |
+| **자율제조로봇 실증사업** (`project.autonomous_robot`) | 2025~<br/>KIRIA<br/>에스에이치아이앤티 (SH INT) | **기술 내용 작성, 전체 다이어그램 작성, PT 자료 기술 부분 작성**: 2025년 자율제조로봇 실증사업. Motion Planning(로봇 이동 경로 최적화), Peripheral Interface(그리퍼, 지그, 컨베이어 연동), Safety PLC(ISO 10218), Feasibility Study(ROI 분석). 발표는 본인이 진행하지 않음 | 발표 탈락 |
 
 ## 10. 스마트공장 구축 프로젝트 상세 (2020-2026) (`section.projects.smart_factory`)
 
@@ -1443,6 +1448,6 @@ pie title 스마트공장 구축 프로젝트 업종 분포 (18개)
   - AI Workflow: `project.obsidian_design_origin`, `project.fmea_claude_agent`, `project.evaluation_framework`, `project.prompt_eval_claude_agent`, `project.pm_agent`, `project.virtual_company_creation_agent`, `project.business_document_generator`, `project.ai_db_tester`, `project.factory_ontology_manager_ai_agent`
   - Consulting: `project.ripaco_consulting`, `project.coaaiti_nlp_chatbot`, `project.haetae_ai_solution`, `project.techwell_ams_consulting`, `project.shinsung_ams_consulting`, `project.techwell_databoucher`, `project.daesung_databoucher`, `project.podas_variable_generation`
   - Certification: `project.pds_gs_certification`, `project.tta_certification`, `project.smart_manufacturing_contest`
-  - Participated: `project.hfr_aivoucher`, `project.dusol_iot`, `project.nextr_digitaltwin`, `project.infact_ai`, `project.wnk_safety`, `project.dongjin_safety`
+  - Participated: `project.hfr_aivoucher`, `project.infact_ai`
   - **Smart Factory** (18개, 중복 제거 후): `project.sf.jinyoung`, `project.sf.shint_2024`, `project.sf.teypas`, `project.sf.eaton`, `project.sf.damayo`, `project.sf.songwol`, `project.sf.flycoupe`, `project.sf.jjtools`, `project.sf.hpnc_2021`, `project.sf.hanjung`, `project.sf.altist`, `project.sf.daesung`, `project.sf.enaivi`, `project.sf.shint_2020`, `project.sf.hpnc_2020`, `project.sf.lotte_2024`, `project.sf.komax`, `project.sf.lotte_2022`, `project.sf.cosmopol`, `project.sf.wooil`, `project.sf.haetae`, `project.sf.hansol_homedeco`, `project.sf.hansol_logis`
   - Future: `project.office_automation_upgrade`

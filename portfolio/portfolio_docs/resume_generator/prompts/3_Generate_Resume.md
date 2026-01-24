@@ -36,13 +36,14 @@ graph TD
     P1_COVER_SOONRYONG --> P1_COVER_LENGTH[글자 수 검증]
     P1_COVER_LENGTH --> P1_JSON
     
-    P1_JSON --> PHASE2[Phase 2: 템플릿 통합]
+    P1_JSON --> P1_SOONRYONG_VALIDATE[순룡 페르소나 검증<br/>Phase 1]
+    P1_SOONRYONG_VALIDATE --> PHASE2[Phase 2: 템플릿 통합]
     PHASE2 --> P2_COPY[템플릿 복사]
     P2_COPY --> P2_MAP[맞춤화된 내용 매핑]
     P2_MAP --> P2_INTEGRATE[템플릿 구조에 통합]
-    P2_INTEGRATE --> VALIDATE[Markdown 검증]
+    P2_INTEGRATE --> P2_SOONRYONG_VALIDATE[순룡 페르소나 검증<br/>Phase 2]
     
-    VALIDATE --> END[Save resume_content.md]
+    P2_SOONRYONG_VALIDATE --> END[Save resume_content.md]
 
     style START fill:#2a9d8f,color:#fff
     style PHASE1 fill:#3498db,color:#fff
@@ -50,7 +51,8 @@ graph TD
     style P1_SOONRYONG fill:#e67e22,color:#fff
     style P1_COVER_SOONRYONG fill:#e67e22,color:#fff
     style P1_JSON fill:#27ae60,color:#fff
-    style VALIDATE fill:#e67e22,color:#fff
+    style P1_SOONRYONG_VALIDATE fill:#e67e22,color:#fff
+    style P2_SOONRYONG_VALIDATE fill:#e67e22,color:#fff
     style END fill:#27ae60,color:#fff
 ```
 
@@ -151,6 +153,24 @@ You are the **Resume Generator**. Your responsibility is to create a customized,
       - `max_length` 이내로 작성 (기본 1000자)
       - 글자 수 검증
 
+11. **순룡 페르소나 검증 (Phase 1)**
+    - `resume_customized_content.json` 저장 직후 수행
+    - 검증 대상:
+      - `motivation.content` (지원 동기)
+      - `competencies[].description` (핵심 역량 설명)
+      - `projects[].description` (프로젝트 설명)
+      - `cover_letter.sections[].content` (자기소개서 항목, 조건부)
+    - 검증 항목:
+      - 문법 검증 (어미, 조사, 접속사 반복 체크)
+      - 글 품질 검증 (의미적 중복 문장 체크)
+      - 순룡 페르소나 스타일 일관성 검증
+      - 마크다운 강조 공백 규칙 검증 (JSON 내 텍스트 필드에 마크다운 강조가 포함된 경우)
+      - 자동 서식 호환성 검증 (물결표 취소선 트리거 방지)
+    - 검증 방법:
+      - 순룡 페르소나 프롬프트(`Soonryong_Answer_Generator_Prompt.md`) 호출하여 각 텍스트 필드 검증
+      - 문제 발견 시 수정 후 재검증 (최대 3회까지 시도)
+      - 3회 실패 시 Warning 메시지와 함께 진행
+
 **출력**: `resume_generator/data/temp/resume_customized_content.json`
 
 **JSON 스키마**: 아래 "Phase 1: Customized Content Generation 상세" 섹션 참조
@@ -205,7 +225,35 @@ You are the **Resume Generator**. Your responsibility is to create a customized,
    - **핵심 철학**: 템플릿 내용 그대로 유지 (변경 불필요)
    - **자기소개서**: 템플릿 구조 유지, `cover_letter.sections` 내용으로 교체 (조건부)
 
-5. **Validate**: Markdown 및 Mermaid 다이어그램 유효성 검증, 자기소개서 글자 수 검증
+5. **순룡 페르소나 검증 (Phase 2)**
+    - `resume_content.md` 저장 직후 수행
+    - 검증 대상:
+      - 전체 Markdown 파일 내용
+      - 모든 머메이드 다이어그램 (최소 4개)
+      - 순룡 페르소나 스타일 일관성
+      - 마크다운 강조 공백 규칙 (iOS 리치 렌더링 안정화)
+      - 자동 서식 호환성 (물결표 취소선 트리거 방지)
+    - 검증 항목:
+      - 문법 검증 (어미, 조사, 접속사 반복 체크)
+      - 글 품질 검증 (의미적 중복 문장 체크)
+      - 머메이드 다이어그램 검증 (문법 오류, 노드 ID, 특수문자 등)
+      - 순룡 페르소나 스타일 일관성 검증
+      - 템플릿 구조 보존 확인 (순룡 페르소나가 확인)
+      - 마크다운 강조 공백 규칙 검증:
+        - 강조를 닫는 기호(*, _, **, __) 바로 뒤에 ASCII 공백 1칸 확인
+        - 제로폭 공백(U+200B 등) 사용 금지 확인
+        - 인라인 코드/코드블록/수식/HTML 태그 내부는 제외
+        - 자의적 예외 금지 ("조사 붙을 때만 공백" 같은 기준 없음)
+      - 자동 서식 호환성 검증:
+        - 물결표(~)를 유니코드 물결표(∼ 또는 ～)로 교체 확인
+        - 인라인 코드/코드블록/수식/HTML 태그 내부는 제외
+    - 검증 방법:
+      - 순룡 페르소나 프롬프트(`Soonryong_Answer_Generator_Prompt.md`) 호출하여 문서 전체 검증
+      - 머메이드 다이어그램 8가지 체크리스트 적용
+      - 문법/글 품질 검증
+      - 마크다운 강조 공백 규칙 검증
+      - 문제 발견 시 `search_replace`로 수정 후 재검증 (최대 3회까지 시도)
+      - 3회 실패 시 Warning 메시지와 함께 진행
 
 6. **최종 저장**: `resume_generator/data/temp/resume_content.md` 파일이 최종 결과물
 
@@ -1064,6 +1112,26 @@ graph TB
 8. **Cover Letter Length**: 각 자기소개서 항목이 `max_length` 이내 (기본 1000자)
 9. **Cover Letter Required**: `cover_letter_sections.required`가 `true`인 경우에만 자기소개서 섹션 생성
 10. **No Strikethrough**: 취소선(`~~텍스트~~`) 문법이 포함되지 않았는지 확인. 발견 시 제거
+11. **순룡 페르소나 검증 (Phase 1)**: JSON 내 텍스트 필드의 문법/글 품질 검증 필수
+    - 어미, 조사, 접속사 반복 체크
+    - 의미적 중복 문장 체크
+    - 순룡 페르소나 스타일 일관성 검증
+    - 마크다운 강조 공백 규칙 검증 (텍스트 필드에 마크다운 강조가 포함된 경우)
+    - 자동 서식 호환성 검증 (물결표 취소선 트리거 방지)
+12. **순룡 페르소나 검증 (Phase 2)**: 최종 Markdown 파일의 문법/글 품질 및 머메이드 다이어그램 검증 필수
+    - 문법 검증 (어미, 조사, 접속사 반복 체크)
+    - 글 품질 검증 (의미적 중복 문장 체크)
+    - 머메이드 다이어그램 검증 (문법 오류, 노드 ID, 특수문자 등)
+    - 순룡 페르소나 스타일 일관성 검증
+    - 템플릿 구조 보존 확인
+    - 마크다운 강조 공백 규칙 검증 (iOS 리치 렌더링 안정화):
+      - 강조를 닫는 기호(*, _, **, __) 바로 뒤에 ASCII 공백 1칸 확인
+      - 제로폭 공백(U+200B 등) 사용 금지 확인
+      - 인라인 코드/코드블록/수식/HTML 태그 내부는 제외
+      - 자의적 예외 금지 ("조사 붙을 때만 공백" 같은 기준 없음)
+    - 자동 서식 호환성 검증:
+      - 물결표(~)를 유니코드 물결표(∼ 또는 ～)로 교체 확인
+      - 인라인 코드/코드블록/수식/HTML 태그 내부는 제외
 
 ## Template Copy & Modify Guide
 

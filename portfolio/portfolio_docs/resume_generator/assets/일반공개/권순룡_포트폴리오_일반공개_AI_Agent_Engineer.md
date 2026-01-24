@@ -751,6 +751,304 @@ Evaluation Framework는 코딩 에이전트의 모듈화·체계화 경험과 Co
 
 ---
 
+## 🌱 AI Agent 기술 진화 계보
+
+> [!NOTE] **AI Agent 진화의 전체 흐름**
+> 2020년 O-WELL Japan에서 시작된 알고리즘이 4년간 진화하여 AMS의 핵심 엔진이 되었고, 각 프로젝트 경험이 LLM 에이전트 설계의 토대가 되었습니다.
+
+### LLM 에이전트 설계 토대 관계
+
+> [!NOTE] 인터뷰 기반 기술 진화 스토리
+> 각 프로젝트에서 쌓은 경험이 LLM 에이전트 설계의 토대가 되었습니다.
+
+#### 프로젝트 경험 → 개발 → 스토리 → AI Agent 상호 연결 네트워크
+
+```mermaid
+graph TB
+    subgraph "프로젝트 경험 (2020-2025)"
+        Proj1["Original Development Plan<br/>외주 개발자 관리<br/>47개 프로젝트 PM 경험"]
+        Proj2["테크웰/신성오토텍<br/>FBS, 패턴 분석<br/>확률 네트워크 개발"]
+        Proj3["세아특수강/포미아 DX<br/>데이터 통합<br/>POP/SPC 개발<br/>PM 경험"]
+        Proj4["DPS<br/>5층 아키텍처<br/>LLM 활용 경험"]
+        Proj5["문서 작성 경험<br/>2023년부터<br/>AI 쪽 사업계획 전담"]
+        Proj6["CoCTK/AMS<br/>모듈화 체계화<br/>GS 인증 경험"]
+    end
+    
+    subgraph "AI Agent (최종 결과)"
+        Agent1["코딩 에이전트<br/>Original Development Plan<br/>298개+ 설계 문서<br/>LangGraph/CrewAI"]
+        Agent2["FMEA 자동화<br/>에이전트<br/>8개 Sub-Agent 협업<br/>Phase 0~5 자동화"]
+        Agent3["Factory Ontology<br/>Manager AI Agent<br/>자연어 파싱<br/>캔버스 자동 생성"]
+        Agent4["Virtual Company<br/>Creation Agent<br/>& AI_DB_tester<br/>GFS, Dual-Tier AI"]
+        Agent5["Business Document<br/>Generator<br/>사업계획서 자동 생성<br/>이력 포폴 자동 생성"]
+        Agent6["PM Agent<br/>사업 관리<br/>Risk/Schedule/Integrity"]
+        Agent7["Evaluation Framework<br/>프롬프트 평가<br/>49개 모듈 전수 검사"]
+    end
+    
+    %% 프로젝트 → AI Agent 직접 영향
+    Proj1 --> Agent1
+    Proj2 --> Agent2
+    Proj3 --> Agent3
+    Proj3 --> Agent6
+    Proj4 --> Agent4
+    Proj5 --> Agent5
+    Proj6 --> Agent7
+    
+    %% 코딩 에이전트가 다른 AI Agent들에 영향 (핵심 기초)
+    Agent1 -.->|"역설계 시스템 구조 적용"| Agent2
+    Agent1 -.->|"ID 기반 온톨로지<br/>Phase 워크플로우"| Agent3
+    Agent1 -.->|"PM 경험<br/>문서 관리"| Agent6
+    Agent1 -.->|"문서 자동화 경험"| Agent5
+    Agent1 -.->|"모듈화 체계화"| Agent7
+    
+    %% FMEA 자동화가 다른 Agent에 영향
+    Agent2 -.->|"도메인별 용어<br/>자동 조정 경험"| Agent5
+    Agent2 -.->|"공정 문서 파싱 경험"| Agent3
+    
+    %% Factory Ontology Manager가 다른 Agent에 영향
+    Agent3 -.->|"공장 관계 설정<br/>OEM/ODM 문서 연결"| Agent4
+    Agent3 -.->|"문서 자동 파싱"| Agent5
+    
+    %% Virtual Company Creation Agent가 다른 Agent에 영향
+    Agent4 -.->|"GFS 특화 중간 DB<br/>기업 풀 정보"| Agent3
+    
+    %% PM Agent가 다른 Agent에 영향
+    Agent6 -.->|"문서 무결성 검증"| Agent5
+    Agent6 -.->|"사업 관리 경험"| Agent1
+    
+    %% Evaluation Framework가 다른 Agent에 영향
+    Agent7 -.->|"품질 평가 경험"| Agent1
+    Agent7 -.->|"모듈화 경험"| Agent2
+    
+    style Proj1 fill:#fff3e0,stroke:#ff9800
+    style Proj2 fill:#fff3e0,stroke:#ff9800
+    style Proj3 fill:#fff3e0,stroke:#ff9800
+    style Proj4 fill:#fff3e0,stroke:#ff9800
+    style Proj5 fill:#fff3e0,stroke:#ff9800
+    style Proj6 fill:#fff3e0,stroke:#ff9800
+    style Agent1 fill:#e8f5e9,stroke:#4caf50,stroke-width:4px
+    style Agent2 fill:#e8f5e9,stroke:#4caf50,stroke-width:3px
+    style Agent3 fill:#e8f5e9,stroke:#4caf50,stroke-width:3px
+    style Agent4 fill:#e8f5e9,stroke:#4caf50,stroke-width:3px
+    style Agent5 fill:#e8f5e9,stroke:#4caf50,stroke-width:3px
+    style Agent6 fill:#e8f5e9,stroke:#4caf50,stroke-width:3px
+    style Agent7 fill:#e8f5e9,stroke:#4caf50,stroke-width:3px
+```
+
+**주요 상호 영향 관계**:
+
+1. **코딩 에이전트 (핵심 기초)**: 다른 모든 AI Agent의 설계 기초가 됨
+   - FMEA 자동화: 역설계 시스템 구조 적용
+   - Factory Ontology Manager: ID 기반 온톨로지, Phase 워크플로우
+   - PM Agent: PM 경험, 문서 관리
+   - Business Document Generator: 문서 자동화 경험
+   - Evaluation Framework: 모듈화 체계화
+
+2. **복합 프로젝트 영향**: 여러 프로젝트가 하나의 AI Agent에 복합적으로 영향
+   - PM Agent: Original Development Plan + 포미아 DX PM 경험 통합
+   - Business Document Generator: 문서 작성 경험 + PM 경험 통합
+   - FMEA 자동화: 테크웰/신성오토텍 FMEA 문서화 + 코딩 에이전트 구조
+   - Factory Ontology Manager: 세아특수강 데이터 통합 + 코딩 에이전트
+   - Virtual Company Creation Agent: DPS 5층 아키텍처 + 코딩 에이전트
+
+3. **AI Agent 간 상호 영향**: AI Agent들이 서로 영향을 주고받음
+   - FMEA 자동화 → Business Document Generator: 도메인별 용어 자동 조정 경험
+   - FMEA 자동화 → Factory Ontology Manager: 공정 문서 파싱 경험
+   - Factory Ontology Manager → Virtual Company Creation Agent: 공장 관계 설정, OEM/ODM 문서 연결
+   - PM Agent → Business Document Generator: 문서 무결성 검증
+   - Evaluation Framework → 코딩 에이전트: 품질 평가 경험
+
+### 전체 온톨로지 구조 (AI Agent 관점)
+
+> [!NOTE] **온톨로지 기반 AI Agent 구조화**
+> 모든 AI Agent는 온톨로지 구조로 체계화되어 있으며, Governance & Quality Assurance Layer가 전체 시스템을 관리합니다.
+
+```mermaid
+graph TB
+    subgraph "Governance & Quality Assurance Layer"
+        EVAL["Evaluation Framework<br/>System-wide Validator<br/>49개 모듈 전수 검사"]
+        PROMPT["Prompt Eval Engine<br/>AI Gatekeeper<br/>전체 프롬프트 전수 평가"]
+        PM["PM Agent<br/>Execution Manager<br/>Risk/Schedule/Integrity"]
+        SAFE["Continuity & Safety<br/>Risk Check + Context Restore"]
+    end
+    
+    subgraph "핵심 AI Agent Implementation"
+        CodingAgent_ONT["코딩 에이전트<br/>298개 설계 문서<br/>Phase 0-13 워크플로우"]
+        FMEA_ONT["FMEA 자동화<br/>8개 Sub-Agent<br/>Phase 0-5 워크플로우"]
+        FactoryOntology_ONT["Factory Ontology<br/>Manager<br/>자연어 파싱"]
+        VirtualCompany_ONT["Virtual Company<br/>Creation Agent<br/>GFS, Dual-Tier AI"]
+        BusinessDoc_ONT["Business Document<br/>Generator<br/>문서 자동 생성"]
+        VACTS_ONT["AI_DB_tester<br/>VACTS<br/>DB Grounding"]
+    end
+    
+    subgraph "학술 검증"
+        P1["FMEA 자동화 논문<br/>2025.12"]
+        PATENT["특허 5건<br/>AI Agent 기반<br/>2건 등록결정 완료"]
+    end
+    
+    subgraph "실증 사례"
+        T1["세아특수강<br/>포미아 DX 실증센터<br/>2025년"]
+        T2["테크웰/신성오토텍<br/>FMEA 자동화<br/>2025년"]
+    end
+    
+    %% Governance Relations
+    EVAL == "Validates All" ==> CodingAgent_ONT & FMEA_ONT & FactoryOntology_ONT & VirtualCompany_ONT
+    PROMPT == "Optimizes Inputs" ==> CodingAgent_ONT & FMEA_ONT
+    PM == "Manages Lifecycle" ==> CodingAgent_ONT & FMEA_ONT & BusinessDoc_ONT
+    SAFE == "Ensures Safety" ==> CodingAgent_ONT & FMEA_ONT & VirtualCompany_ONT
+    
+    %% Project Relations
+    FMEA_ONT -. "validates" .-> P1
+    CodingAgent_ONT -. "proves" .-> PATENT
+    
+    %% Real-world Application
+    FMEA_ONT -. "proves" .-> T2
+    FactoryOntology_ONT -. "proves" .-> T1
+    VirtualCompany_ONT -. "proves" .-> T1
+    
+    style EVAL fill:#ffcdd2,stroke:#d32f2f,stroke-width:3px
+    style PROMPT fill:#e1bee7,stroke:#7b1fa2,stroke-width:3px
+    style PM fill:#bbdefb,stroke:#1976d2,stroke-width:3px
+    style SAFE fill:#c8e6c9,stroke:#388e3c,stroke-width:3px
+    style CodingAgent_ONT fill:#e8f5e9,stroke:#4caf50,stroke-width:2px
+    style FMEA_ONT fill:#e3f2fd,stroke:#2196f3,stroke-width:2px
+    style FactoryOntology_ONT fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+```
+
+**온톨로지 구조의 핵심 (AI Agent 관점)**:
+- **Governance & Quality Assurance Layer**: Evaluation Framework, Prompt Eval Engine, PM Agent가 전체 AI Agent 시스템의 품질과 안정성을 보장
+- **핵심 AI Agent**: 코딩 에이전트, FMEA 자동화, Factory Ontology Manager 등 실제 구현된 AI Agent들이 온톨로지 구조로 연결됨
+- **학술 검증**: 논문과 특허를 통해 AI Agent 기술의 신뢰성과 독창성 입증
+- **실증 사례**: 세아특수강, 테크웰/신성오토텍 등 실제 현장에서 AI Agent가 검증됨
+
+---
+
+## 🛤️ 쌓아온 길 (AI Agent 진화 여정)
+
+> [!NOTE] **AI Agent 진화의 전체 흐름**
+> 2020년 O-WELL Japan에서 시작된 알고리즘이 4년간 진화하여 AMS의 핵심 엔진이 되었고, 각 프로젝트 경험이 LLM 에이전트 설계의 토대가 되었습니다.
+
+### AI Agent 진화의 전체 흐름
+
+**2020-2021년: 기초 기술 개발**
+- **O-WELL Japan**: 피쉬본 개념 학습 및 품질 데이터 관리 경험
+- **FBS (Fishbone Structure)**: 구조 계층 방식 고안 → 이후 AI Agent의 온톨로지 구조 설계 기초
+- **가상 센서 & 제어**: 3-Type 가상센서 개발 → 이후 AI Agent의 데이터 처리 기법 기초
+
+**2021-2023년: 패턴 분석 및 데이터 처리 기법 발전**
+- **에너지 패턴 분석**: 계층적 클러스터링 및 패턴 민주주의 고안 → 이후 AI Agent의 패턴 분석 기법 기초
+- **특허 출원**: 에너지 패턴 분석 기술 특허화 (특허 3, 4, 5) → AI Agent의 기술적 기반 확보
+
+**2022-2024년: 컨설팅 도구 및 시스템 아키텍처 개발**
+- **CoCTK**: 소량 데이터 판별, 구간 룰 생성 → 이후 AI Agent의 데이터 분석 기법 기초
+- **DPS**: 5층 아키텍처 설계 → 이후 Virtual Company Creation Agent의 아키텍처 설계 기초
+- **GS 인증**: CoCTK (2024) → 이후 AI Agent의 품질 관리 체계 기초
+
+**2024-2025년: 통합 솔루션 및 AI Agent 개발 시작**
+- **AMS**: FBS + RMS + Pattern 통합 플랫폼 → AI Agent의 기술적 통합 경험
+- **GS 인증**: AMS (PDS 명칭, 2025) → AI Agent의 품질 관리 체계 완성
+- **특허 출원**: AMS 공정 관리 기술 특허화 (특허 1, 2) → AI Agent의 기술적 기반 확보
+
+**2025년: AI Agent 개발의 시작**
+- **코딩 에이전트 (Obsidian Design Origin)**: 
+  - 47개 프로젝트 PM 경험에서 외주 개발자 관리의 한계 발견
+  - ID 기반 온톨로지 맵, Phase 0-13 워크플로우, LangGraph/CrewAI 오케스트레이션 정리
+  - 298개 설계 문서 체계화
+  - **→ 다른 모든 AI Agent의 설계 기초가 됨**
+
+**2025년: AI Agent 확장**
+- **FMEA 자동화 에이전트**: 코딩 에이전트의 역설계 시스템 구조를 FMEA 분석에 적용
+- **PM Agent**: 외주 관리 경험을 사업 관리 자동화에 적용
+- **Business Document Generator**: 문서 작성 경험을 문서 생성 자동화에 적용
+- **Factory Ontology Manager**: 세아특수강 데이터 통합 경험을 자연어 기반 공정 문서 파싱에 적용
+- **Evaluation Framework**: CoCTK/AMS 모듈화·체계화 경험을 전수 검사 시스템에 적용
+- **프롬프트 평가 엔진**: 코딩 에이전트의 품질 관리 경험을 프롬프트 품질 보장에 적용
+
+**2026년: LLM 서포트 시스템**
+- **Virtual Company Creation Agent**: DPS 5층 아키텍처 경험을 바탕으로 LLM을 서포트하기 위한 특화 중간 DB (GFS) 개발
+- **AI_DB_tester (VACTS)**: Virtual Company Creation Agent의 테스트 자동화 시스템
+- **Dual-Tier AI 아키텍처**: High-Spec AI와 Low-Spec AI 분리로 최대 87% 비용 절감
+
+### AI Agent 진화의 핵심 인사이트
+
+- **"데이터보다 정보, 정보보다 지식구조"**: 모든 AI Agent가 온톨로지 구조로 체계화되어 지식 재사용과 확장이 가능
+- **현장 친화적 연구**: 모든 AI Agent는 실제 제조 현장의 문제를 해결하기 위해 개발되어 즉각적인 산업 적용 가능
+- **지속적인 혁신**: 2020년부터 2026년까지 매년 새로운 AI Agent와 방법론을 개발하며 지속적으로 진화
+- **학술적 검증**: 논문 10편, 특허 5건 (2건 등록결정 완료)을 통해 AI Agent 기술의 신뢰성과 독창성 입증
+- **실무 적용**: 세아특수강, 테크웰/신성오토텍 등 실제 현장에서 AI Agent가 검증됨
+
+---
+
+## 🔬 특허 출원/등록 현황 (AI Agent 관련 특허 강조)
+
+> [!NOTE] **AI Agent 설계의 기술적 기반**
+> 아래 특허들은 AI Agent 설계의 기술적 토대가 되는 핵심 알고리즘과 방법론을 특허로 보호한 것입니다. 특히 **특허 1**은 AI 기반 공정 최적화 관리 방법으로, FMEA 자동화 에이전트와 Factory Ontology Manager의 기술적 기반이 됩니다.
+
+### 특허 출원/등록 현황 (5건)
+
+| 출원일 | 특허명 | 출원번호 | 청구항 | 상태 | 발명자 | AI Agent 연계 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 2025.08.13 | **인공지능을 활용한 공정 최적화 관리를 위한 공정 관리 방법 및 그 시스템** | 10-2025-0040488<br/>(예정) | 10개 | 출원완료<br/>심사청구완료 | **권순룡**, 최수영, 강용태, 안상윤 | **FMEA 자동화 에이전트**: 특성요인도 자동 생성 → 관리 룰 생성 → 경로 탐색 기술이 FMEA 자동화의 핵심<br/>**Factory Ontology Manager**: 온톨로지 구조화/정보화의 통합 실현<br/>**AMS 프로젝트**: FBS Module, RMS Module, 확률 네트워크 기반 원인 분석 |
+| 2025.03.28 | **공정 최적화를 위한 공정 관리 방법 및 그 시스템** | 10-2025-0040488 | 8개 | 등록결정<br/>(2025.12.09) | 강용태, **권순룡**, 김혜주 | **Factory Ontology Manager**: 공정 관리 기술이 온톨로지 구조로 설계되어 통합<br/>**등록결정 완료** |
+| 2023.12.26 | **생산공정 에너지 및 설비상태 데이터 처리를 위한 전력 사용 패턴 분석 및 상태 분석 방법** | 1020230191965 | 6개 | 공개<br/>심사청구완료 | 최수영, 강용태, **권순룡**, 이상훈 | **패턴 분석 에이전트**: 에너지 패턴 분석 기술이 구조화된 온톨로지 형태로 설계됨<br/>**AMS Pattern Module**: 설비 SoH 상태 분석 모델 생성 및 실시간 판단 |
+| 2023.12.26 | **주기 데이터 분석 기반의 전력 추이 상황적 불량 이상 검증 방법** | 1020230191969 | 5개 | 공개<br/>심사청구완료 | 최수영, 강용태, **권순룡**, 이상훈 | **패턴 분석 에이전트**: 시계열 분해 방식으로 주기 데이터 추출 → 주파수 스펙트럼 기반 패턴 분석<br/>**AMS Pattern Module**: 시계열 예측 기반 불량/이상 감지 |
+| 2021.12.07 | **설비 제어 특성 로그 데이터와 에너지 소비패턴 모델을 활용한 인공지능 기반의 이상 탐지 방법 및 장치** | 1020210174274 | 10개 | 등록결정<br/>(2025.10.28) | 강용태, 김정호, **권순룡**, 김동기 | **패턴 분석 에이전트**: 에너지 소비 패턴 모델이 온톨로지 구조의 기초<br/>**AMS Pattern Module**: 제어기 로그 데이터 + 전류 소비 데이터 결합 → 이상 탐지 모델<br/>**등록결정 완료** |
+
+### AI Agent와 특허 기술의 연계
+
+**특허 1 (2025.08.13) - AI Agent 설계의 핵심 기술**:
+- **FMEA 자동화 에이전트**: 특성요인도 자동 생성(피쉬본 = 구조화된 인과관계) → 관리 룰 생성(구조화된 규칙) → 경로 탐색(확률 네트워크 = 구조화된 확률 관계)이 온톨로지 구조로 설계됨
+- **Factory Ontology Manager**: 공정 관리 기술이 온톨로지 구조로 설계되어 자연어 기반 공정 문서 파싱의 기술적 기반이 됨
+- **LLM 연계 가능성**: 확률 관계 그래프를 토큰화하여 LLM에 입력하는 기술로, FMEA 자동화 에이전트의 LLM 활용 기반이 됨
+
+**특허 3, 4, 5 (에너지 패턴 분석) - 패턴 분석 에이전트의 기술적 기반**:
+- **패턴 분석 에이전트**: 에너지 패턴 분석 기술이 구조화된 온톨로지 형태로 설계되어, AMS Pattern Module의 핵심 알고리즘이 됨
+- **시계열 분석 기법**: 주기 데이터 추출, 주파수 스펙트럼 분석, 시계열 예측을 통합한 이상 검증 방법이 패턴 분석 에이전트의 기술적 기반
+
+### 특허 기술 발전 흐름 (AI Agent 관점)
+
+```mermaid
+graph TB
+    subgraph "온톨로지/구조화/정보화"
+        ONT["온톨로지/구조화/정보화<br/>AI Agent 설계 기초<br/>(2020.09~)"]
+    end
+    
+    subgraph "AI Agent 설계 토대"
+        Patent1_2025["특허 1<br/>2025.08.13<br/>AI 공정 최적화<br/>관리 방법 및 시스템<br/>FMEA 자동화 기반<br/>Factory Ontology 기반"]
+        Patent2_2025["특허 2<br/>2025.03.28<br/>공정 최적화<br/>공정 관리 방법<br/>Factory Ontology 기반<br/>등록결정 완료"]
+        AMS["AMS 통합 플랫폼<br/>2024-2025<br/>FBS + RMS + Pattern<br/>베이지안 네트워크"]
+    end
+    
+    subgraph "패턴 분석 에이전트 기반"
+        Patent3_2021["특허 5<br/>2021.12.07<br/>에너지 소비 패턴<br/>이상 탐지<br/>등록결정 완료<br/>패턴 정보화 기초"]
+        Patent1_2023["특허 3<br/>2023.12.26<br/>전력 사용 패턴 분석<br/>설비 SoH 분석<br/>패턴 정보화"]
+        Patent2_2023["특허 4<br/>2023.12.26<br/>주기 데이터 분석<br/>전력 추이 이상 검증<br/>패턴 정보화"]
+        AMSPattern["AMS Pattern Module<br/>2024-2025<br/>통합 이상 탐지"]
+    end
+    
+    ONT -->|"구조화/정보화 통합"| Patent1_2025
+    ONT -->|"구조화 접근법"| Patent2_2025
+    ONT -->|"정보화 접근법"| Patent3_2021
+    
+    Patent1_2025 -->|"FMEA 자동화<br/>Factory Ontology"| AMS
+    Patent2_2025 -->|"공정 관리 기법"| AMS
+    Patent3_2021 -->|"에너지 소비 패턴 기초"| Patent1_2023
+    Patent3_2021 -->|"이상 탐지 기법"| Patent2_2023
+    Patent1_2023 -->|"SoH 분석 통합"| AMSPattern
+    Patent2_2023 -->|"주기 분석 통합"| AMSPattern
+    AMSPattern -->|"통합"| AMS
+    
+    style ONT fill:#e3f2fd,stroke:#1976d2,stroke-width:3px
+    style Patent1_2025 fill:#e1f5ff,stroke:#2196f3,stroke-width:3px
+    style Patent2_2025 fill:#e1f5ff,stroke:#2196f3,stroke-width:2px
+    style Patent3_2021 fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+    style Patent1_2023 fill:#e8f5e9,stroke:#4caf50
+    style Patent2_2023 fill:#e8f5e9,stroke:#4caf50
+    style AMSPattern fill:#f3e5f5,stroke:#9c27b0
+    style AMS fill:#e74c3c,stroke:#c0392b,stroke-width:3px
+```
+
+---
+
 ## 💼 비즈니스 가치 창출
 
 ### AI Agent 개발 성과
