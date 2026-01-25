@@ -121,6 +121,15 @@
 **해결**: 요구조건 문서 파싱, 포트폴리오 스마트 매칭, 발주처 유형별 페르소나 적용  
 **결과**: 문서 작성 시간 70% 이상 절감, 문서 일관성 100% 보장
 
+#### 6. OntoFlow & Low-Spec Agent 진화 스토리: 고비용 AI의 한계를 넘는 최적화 & Obsidian 내재화
+**위치**: [[02_Projects_Overview#026-ontoflow--low-spec-agent-진화-스토리-고비용-ai의-한계를-넘는-최적화--obsidian-내재화|0.2.6 OntoFlow & Low-Spec Agent 진화 스토리]]
+
+**핵심 스토리**: OntoFlow는 단순한 뷰어가 아닙니다. **Obsidian의 강력한 문서 관리 체계(Markdown + Frontmatter)를 내재화(Internalization)**하여, 다른 프로젝트와의 **언어 체계 통일성(Language System Unification)**을 확보하고, 저사양 환경에서도 대용량 지식 그래프를 다룰 수 있도록 최적화한 **표준화된 지식 관리 인터페이스**입니다.
+
+**문제**: 언어 체계 파편화, 도구 종속성, 고비용 구조  
+**해결**: Obsidian 내재화(Markdown 표준화), 언어 체계 통일, 극한의 최적화  
+**결과**: 표준화된 저비용 지식 관리 시스템 완성, 도입 비용 90% 절감
+
 ### [[Phase_3_Expansion/Step_08_Feedback_Loop|🟧 Phase 3: Expansion (무한 확장)]]
 **핵심**: 내부 역량을 외부와 공유하고, 피드백을 수렴하여 시스템을 고도화하는 단계.
 - **주요 프로젝트**: `저장된업그레이드방안`, `Evaluation_Framework` (AI 평가 엔진).
