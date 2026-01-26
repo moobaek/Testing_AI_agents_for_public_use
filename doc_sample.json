@@ -1,0 +1,64 @@
+{
+  "id": "doc-0",
+  "file_path": "00_AI_Workflow_Guide.md",
+  "relative_path": "00_AI_Workflow_Guide",
+  "metadata": {
+    "title": "00_AI_Workflow_Guide.md",
+    "file_name": "00_AI_Workflow_Guide",
+    "created_at": "2026-01-26T13:18:50.464113",
+    "updated_at": "2026-01-26T13:18:50.464113",
+    "file_size": 0,
+    "line_count": 0
+  },
+  "content_analysis": {
+    "keywords": [],
+    "simple_summary": null,
+    "detailed_summary": null,
+    "extracted_by": null,
+    "extracted_at": null,
+    "status": "pending"
+  },
+  "page_index": {
+    "headings": [],
+    "sections": []
+  },
+  "relationships": {
+    "outgoing": [
+      "@{target_id=doc-11; type=wiki}",
+      "@{target_id=doc-821; type=wiki}",
+      "@{target_id=doc-6; type=wiki}",
+      "@{target_id=doc-821; type=wiki}",
+      "@{target_id=doc-15; type=wiki}",
+      "@{target_id=doc-868; type=wiki}",
+      "@{target_id=doc-835; type=wiki}",
+      "@{target_id=doc-1; type=tag}",
+      "@{target_id=doc-2; type=tag}",
+      "@{target_id=doc-3; type=tag}",
+      "@{target_id=doc-4; type=tag}",
+      "@{target_id=doc-5; type=tag}",
+      "@{target_id=doc-3; type=tag}",
+      "@{target_id=doc-2; type=tag}"
+    ],
+    "incoming": [
+      "@{source_id=doc-6; type=wiki}",
+      "@{source_id=doc-15; type=wiki}",
+      "@{source_id=doc-36; type=wiki}",
+      "@{source_id=doc-36; type=wiki}",
+      "@{source_id=doc-36; type=wiki}",
+      "@{source_id=doc-36; type=wiki}",
+      "@{source_id=doc-36; type=wiki}",
+      "@{source_id=doc-817; type=wiki}",
+      "@{source_id=doc-818; type=wiki}",
+      "@{source_id=doc-820; type=wiki}",
+      "@{source_id=doc-821; type=wiki}",
+      "@{source_id=doc-822; type=wiki}",
+      "@{source_id=doc-823; type=wiki}",
+      "@{source_id=doc-824; type=wiki}",
+      "@{source_id=doc-825; type=wiki}",
+      "@{source_id=doc-826; type=wiki}",
+      "@{source_id=doc-827; type=wiki}",
+      "@{source_id=doc-868; type=wiki}",
+      "@{source_id=doc-870; type=wiki}"
+    ]
+  }
+}
