@@ -106,11 +106,11 @@
 #### 4. Virtual Company Creation Agent & AI_DB_tester (VACTS) 진화 스토리: LLM을 서포트하기 위한 특화 중간 DB
 **위치**: [[02_Projects_Overview#024-virtual-company-creation-agent--ai_db_tester-vacts-진화-스토리-llm을-서포트하기-위한-특화-중간-db|0.2.4 Virtual Company Creation Agent & AI_DB_tester (VACTS) 진화 스토리]]
 
-**핵심 스토리**: LLM 활용하다보니 온톨로지도 잘 못알아먹고 벡터도 부족하다는 것을 깨달고, 특화 중간 DB를 만들어서 LLM을 서포트. "어차피 AI LLM은 앞뒤 주는 것만 잘하면 되니까" 특화 중간 DB(GFS)를 만들어서 LLM을 서포트. Virtual Company Creation Agent와 AI_DB_tester (VACTS)는 같은 뿌리.
+**핵심 스토리**: LLM 활용하다보니 온톨로지도 잘 못알아먹고 벡터도 부족하다는 것을 깨달고, 특화 중간 DB를 만들어서 LLM을 서포트. "어차피 AI LLM은 앞뒤 주는 것만 잘하면 되니까" 특화 중간 DB(GFS)를 만들어서 LLM을 서포트. Virtual Company Creation Agent와 AI_DB_tester (VACTS)는 같은 뿌리. **OntoFlow 통합**: AI_DB_tester가 OntoFlow Document Processing Chain Agent의 9단계 워크플로우 테스트 자동화, 문서 처리 파이프라인 검증, 온톨로지 추출 정확도 검증을 수행.
 
 **문제**: LLM의 온톨로지 이해 부족, 벡터 부족, 리소스 소모, 문제 추적 불가  
 **해결**: GFS (Grape File System), Dual-Tier AI 아키텍처, 기업 풀 수준의 정보 제공  
-**결과**: LLM 비용 87% 절감, 문제 추적 시간 90% 이상 단축
+**결과**: LLM 비용 87% 절감, 문제 추적 시간 90% 이상 단축, OntoFlow 통합 테스트 자동화
 
 #### 5. Business Document Generator 진화 스토리: 사업계획서를 하도 만들다 보니 만든 자동화 시스템
 **위치**: [[02_Projects_Overview#025-business-document-generator-진화-스토리-사업계획서를-하도-만들다-보니-만든-자동화-시스템|0.2.5 Business Document Generator 진화 스토리]]
@@ -124,11 +124,11 @@
 #### 6. OntoFlow & Low-Spec Agent 진화 스토리: 고비용 AI의 한계를 넘는 최적화 & Obsidian 내재화
 **위치**: [[02_Projects_Overview#026-ontoflow--low-spec-agent-진화-스토리-고비용-ai의-한계를-넘는-최적화--obsidian-내재화|0.2.6 OntoFlow & Low-Spec Agent 진화 스토리]]
 
-**핵심 스토리**: OntoFlow는 단순한 뷰어가 아닙니다. **Obsidian의 강력한 문서 관리 체계(Markdown + Frontmatter)를 내재화(Internalization)**하여, 다른 프로젝트와의 **언어 체계 통일성(Language System Unification)**을 확보하고, 저사양 환경에서도 대용량 지식 그래프를 다룰 수 있도록 최적화한 **표준화된 지식 관리 인터페이스**입니다.
+**핵심 스토리**: OntoFlow는 단순한 뷰어가 아닙니다. **Obsidian의 강력한 문서 관리 체계(Markdown + Frontmatter)를 내재화(Internalization)**하여, 다른 프로젝트와의 **언어 체계 통일성(Language System Unification)**을 확보하고, 저사양 환경에서도 대용량 지식 그래프를 다룰 수 있도록 최적화한 **표준화된 지식 관리 인터페이스**입니다. **AI_DB_tester 통합**: OntoFlow Document Processing Chain Agent의 9단계 워크플로우를 AI_DB_tester로 자동화된 테스트 파이프라인 구축, 문서 처리 워크플로우 검증, 온톨로지 추출 정확도 자동 검증, API 엔드포인트 통합 테스트 수행.
 
 **문제**: 언어 체계 파편화, 도구 종속성, 고비용 구조  
-**해결**: Obsidian 내재화(Markdown 표준화), 언어 체계 통일, 극한의 최적화  
-**결과**: 표준화된 저비용 지식 관리 시스템 완성, 도입 비용 90% 절감
+**해결**: Obsidian 내재화(Markdown 표준화), 언어 체계 통일, 극한의 최적화, AI_DB_tester 통합 테스트  
+**결과**: 표준화된 저비용 지식 관리 시스템 완성, 도입 비용 90% 절감, 자동화된 테스트 파이프라인 구축
 
 ### [[Phase_3_Expansion/Step_08_Feedback_Loop|🟧 Phase 3: Expansion (무한 확장)]]
 **핵심**: 내부 역량을 외부와 공유하고, 피드백을 수렴하여 시스템을 고도화하는 단계.
@@ -149,7 +149,7 @@
   - Sensors & IoT: `project.smart_sensors`, `project.ai_composite_sensor`, `project.virtual_sensor`, `project.seah.data_integration`
   - Safety & Energy: `project.cleanroom_energy`, `project.energy_pattern`, `project.power_prediction`, `project.digital_twin_safety`, `project.power_quality`
   - Healthcare: `project.medical_constitution`
-  - AI Workflow: `project.fmea_claude_agent`, `project.prompt_eval_claude_agent`, `project.pm_agent`, `project.virtual_company_creation_agent`, `project.ai_db_tester`, `project.factory_ontology_manager_ai_agent`
+  - AI Workflow: `project.fmea_claude_agent`, `project.prompt_eval_claude_agent`, `project.pm_agent`, `project.virtual_company_creation_agent`, `project.ai_db_tester`, `project.ontoflow_doc_processor`, `project.factory_ontology_manager_ai_agent`
 - **관련 문서**: `page.portfolio.*`
 - **가이드 문서**: `guide.id.system`, `guide.ai.workflow`, `guide.team.roles`, `guide.pm.roles`
 - **템플릿**: `template.*`

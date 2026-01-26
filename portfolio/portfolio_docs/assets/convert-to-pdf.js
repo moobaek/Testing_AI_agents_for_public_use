@@ -112,7 +112,14 @@ ${html}
     // Launch browser and create PDF
     const browser = await puppeteer.launch({
         headless: 'new',
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
+        args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-accelerated-2d-canvas',
+            '--disable-gpu'
+        ],
+        executablePath: process.platform === 'win32' ? undefined : undefined
     });
 
     const page = await browser.newPage();

@@ -341,7 +341,14 @@
 - **Virtual Company Creation Agent & AI_DB_tester (VACTS)**: LLM을 서포트하기 위한 특화 중간 DB
   - LLM 활용하다보니 온톨로지도 잘 못알아먹고 벡터도 부족하다는 것을 깨달고 특화 중간 DB 개발
   - GFS (Grape File System), Dual-Tier AI 아키텍처로 LLM 비용 87% 절감
+  - **OntoFlow 통합**: AI_DB_tester가 OntoFlow Document Processing Chain Agent의 9단계 워크플로우 테스트 자동화, 문서 처리 파이프라인 검증, 온톨로지 추출 정확도 검증 수행
   - 상세 스토리: [[02_Projects_Overview#024-virtual-company-creation-agent--ai_db_tester-vacts-진화-스토리-llm을-서포트하기-위한-특화-중간-db|0.2.4 Virtual Company Creation Agent & AI_DB_tester (VACTS) 진화 스토리]]
+
+- **OntoFlow Document Processing Chain Agent**: 문서 색인화 및 구조화 자동화 시스템
+  - Obsidian 기반 마크다운 문서를 9단계 워크플로우로 처리하여 온톨로지 자동 추출 및 지식그래프 구축
+  - **AI_DB_tester 통합**: 자동화된 테스트 파이프라인, 문서 처리 워크플로우 검증, 온톨로지 추출 정확도 자동 검증, API 엔드포인트 통합 테스트
+  - 문서 처리 시간 70% 절감, 온톨로지 추출 자동화로 298개+ 문서 관리
+  - 상세 스토리: [[02_Projects_Overview#026-ontoflow--low-spec-agent-진화-스토리-고비용-ai의-한계를-넘는-최적화--obsidian-내재화|0.2.6 OntoFlow & Low-Spec Agent 진화 스토리]]
 
 - **Business Document Generator**: 사업계획서를 하도 만들다 보니 만든 자동화 시스템
   - 2023년부터 한솔코에버 AI 쪽 사업계획은 사용자의 손을 안 거친 게 없을 정도로 많은 문서 작성

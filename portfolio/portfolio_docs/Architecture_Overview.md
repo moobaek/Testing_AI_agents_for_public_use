@@ -1632,12 +1632,13 @@ graph TB
 - `prompts/agents/SETUP_AGENT.md` (Type E')
 - `prompts/agents/TUNING_AGENT.md` (Type F')
 
-### 8.1 AI_DB_tester (VACTS - Virtual AI Company Test Suite)
+### 8.1 AI_DB_tester (VACTS - Virtual AI Company Test Suite) & OntoFlow 통합
 
 **프로젝트 개요**:
 - **개발 시작**: 2026년 1월 7일
 - **상태**: 거의 완료 (설계 문서 23개, 구현 파일 24개 완료)
 - **목적**: Virtual Company Creation Agent의 전체 파이프라인을 자동으로 테스트하고 검증하는 AI 기반 QA 시스템
+- **OntoFlow 통합**: OntoFlow Document Processing Chain Agent의 9단계 워크플로우 테스트 자동화, 문서 처리 파이프라인 검증, 온톨로지 추출 정확도 검증, API 엔드포인트 통합 테스트
 
 **핵심 특징**:
 - **Cursor-Native**: 별도 UI 없이 IDE의 Chat/Composer 기능을 런타임으로 활용
@@ -1687,6 +1688,7 @@ graph TB
 
 **관계**:
 - **AI_DB_tester → Virtual_Company_Creation_Agent**: Virtual Company Creation Agent의 전체 파이프라인 테스트 및 검증
+- **AI_DB_tester → OntoFlow Document Processing Chain Agent**: OntoFlow의 9단계 워크플로우 테스트 자동화, 문서 처리 파이프라인 검증, 온톨로지 추출 정확도 검증, API 엔드포인트 통합 테스트
 - **AI_DB_tester → Platform All**: Platform All 생태계의 품질 보장 도구로 활용
 
 **생태계의 핵심 가치**:
@@ -1755,7 +1757,7 @@ graph TB
 
 - **문서 ID**: `page.portfolio.architecture`
 - **관련 Phase**: `phase.foundation.*`
-- **관련 프로젝트**: `project.ams`, `project.dps`, `project.coctk`, `project.ai_db_tester`, `project.factory_ontology_manager_ai_agent` 등
+- **관련 프로젝트**: `project.ams`, `project.dps`, `project.coctk`, `project.ai_db_tester`, `project.ontoflow_doc_processor`, `project.factory_ontology_manager_ai_agent` 등
 - **관련 문서**: `page.portfolio.*`
 
 ---

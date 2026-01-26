@@ -31,6 +31,12 @@ graph TB
         ENERGY["에너지 최적화"]
     end
     
+    subgraph "AI Agent & 지식 관리"
+        ONTOFLOW["OntoFlow Document<br/>Processing Chain Agent<br/>문서 색인화/구조화"]
+        AI_DB_TESTER["AI_DB_tester<br/>VACTS<br/>테스트 자동화"]
+        VIRTUAL_COMPANY["Virtual Company<br/>Creation Agent<br/>GFS, Dual-Tier AI"]
+    end
+    
     subgraph "학술 검증"
         P1["피쉬본 자동화 논문"]
         P2["에너지 효율 논문"]
@@ -44,10 +50,16 @@ graph TB
     end
     
     %% Governance Relations - The Overseers
-    EVAL == "Validates All" ==> AMS & DPS & CoCTK & SENSOR & ENERGY
+    EVAL == "Validates All" ==> AMS & DPS & CoCTK & SENSOR & ENERGY & ONTOFLOW
     PROMPT == "Optimizes Inputs" ==> S1 & S4
     PM == "Manages Lifecycle" ==> S1 & S6 & S8
     SAFE == "Ensures Safety" ==> AMS & DPS & CoCTK
+    
+    %% AI Agent Relations
+    ONTOFLOW -. "통합 테스트" .-> AI_DB_TESTER
+    AI_DB_TESTER -. "테스트 자동화" .-> ONTOFLOW
+    AI_DB_TESTER -. "테스트 자동화" .-> VIRTUAL_COMPANY
+    VIRTUAL_COMPANY -. "GFS 기반" .-> ONTOFLOW
     
     %% Standard Project Relations
     S1 -. "implements" .-> AMS
@@ -68,6 +80,9 @@ graph TB
     style PROMPT fill:#e1bee7,stroke:#7b1fa2,stroke-width:3px
     style PM fill:#bbdefb,stroke:#1976d2,stroke-width:3px
     style SAFE fill:#c8e6c9,stroke:#388e3c,stroke-width:3px
+    style ONTOFLOW fill:#fff3e0,stroke:#ff9800,stroke-width:2px
+    style AI_DB_TESTER fill:#e1f5ff,stroke:#2196f3,stroke-width:2px
+    style VIRTUAL_COMPANY fill:#f3e5f5,stroke:#9c27b0,stroke-width:2px
 ```
 
 ---
@@ -132,6 +147,7 @@ graph TD
         Ripaco_Exp["리파코<br/>시간 구간 분석<br/>룰 기반 탐지<br/>박스 이송 로봇"]
         CoCTK_AMS["CoCTK/AMS<br/>모듈화 체계화<br/>평가 시스템<br/>GS 인증 경험"]
         Dev_Plan["Original Development Plan<br/>PM 활동<br/>문서/개발 관리<br/>298개+ 설계 문서"]
+        OntoFlow_Exp["OntoFlow 개발<br/>문서 색인화/구조화<br/>9단계 워크플로우<br/>온톨로지 자동 추출"]
     end
     
     subgraph "LLM 에이전트"
@@ -143,6 +159,8 @@ graph TD
         Pattern_Agent["패턴 분석<br/>에이전트<br/>시간 구간 클러스터링"]
         Eval_Agent["Evaluation Framework<br/>프롬프트 평가<br/>49개 모듈 전수 검사"]
         System_Design["전체 에이전트<br/>시스템 설계<br/>워크플로우 오케스트레이션"]
+        OntoFlow_Agent["OntoFlow Document<br/>Processing Chain Agent<br/>문서 색인화/구조화<br/>9단계 워크플로우"]
+        AI_DB_Tester["AI_DB_tester<br/>VACTS<br/>테스트 자동화<br/>OntoFlow 통합 테스트"]
     end
     
     CoaAITI --> Agent_Design
@@ -153,6 +171,9 @@ graph TD
     Ripaco_Exp --> Pattern_Agent
     CoCTK_AMS --> Eval_Agent
     Dev_Plan --> System_Design
+    OntoFlow_Exp --> OntoFlow_Agent
+    OntoFlow_Agent --> AI_DB_Tester
+    AI_DB_Tester --> OntoFlow_Agent
     
     style CoaAITI fill:#fff3e0,stroke:#ff9800
     style Techwell fill:#e3f2fd,stroke:#2196f3
@@ -171,6 +192,7 @@ graph TD
 - **리파코**: 시간 구간 분석 및 룰 기반 탐지 경험을 쌓아 패턴 분석 에이전트 설계의 토대 마련
 - **CoCTK/AMS**: 모듈화 및 체계화 경험, GS 인증 프로세스 경험을 쌓아 Evaluation Framework와 프롬프트 평가 엔진 설계의 토대 마련
 - **Original Development Plan**: 다수 PM 경험(제안서~완료, 외주 관리)을 통해 전체 에이전트 시스템 설계의 토대 마련 → [[02_Projects_Overview#021-코딩-에이전트-진화-스토리-외주-개발자-관리의-한계를-넘어서|코딩 에이전트 진화 스토리]]
+- **OntoFlow 개발**: 문서 색인화/구조화 경험, 9단계 워크플로우 설계, 온톨로지 자동 추출 경험을 쌓아 OntoFlow Document Processing Chain Agent 설계의 토대 마련. **AI_DB_tester 통합**: OntoFlow의 9단계 워크플로우 테스트 자동화, 문서 처리 파이프라인 검증, 온톨로지 추출 정확도 검증을 통해 AI_DB_tester와 통합 테스트 시스템 구축 → [[02_Projects_Overview#026-ontoflow--low-spec-agent-진화-스토리-고비용-ai의-한계를-넘는-최적화--obsidian-내재화|OntoFlow & Low-Spec Agent 진화 스토리]]
 
 ---
 
@@ -187,6 +209,7 @@ graph LR
         Seah_Exp["세아특수강<br/>2020년 비전<br/>2025년 니즈<br/>OEM/ODM 대응"]
         DPS_Exp["DPS<br/>LLM 온톨로지 이해 부족<br/>벡터 부족<br/>리소스 소모"]
         Doc_Exp_Detail["문서 작성 경험<br/>2023년부터<br/>AI 쪽 사업계획 전담<br/>끝없는 문서 작성"]
+        OntoFlow_Exp_Detail["OntoFlow 개발<br/>파편화된 문서 관리<br/>고비용 구조<br/>Obsidian 종속성"]
     end
     
     subgraph "문제 발견"
@@ -195,6 +218,7 @@ graph LR
         Problem3["5년간의 비전<br/>+ 현실적 니즈"]
         Problem4["LLM의 한계<br/>온톨로지/벡터 부족"]
         Problem5["끝없는<br/>문서 작성"]
+        Problem6["파편화된 문서 관리<br/>언어 체계 불일치<br/>도구 종속성"]
     end
     
     subgraph "해결 시도"
@@ -203,6 +227,7 @@ graph LR
         Solution3["자연어 파싱<br/>DB Grounding<br/>Ontology Mapping"]
         Solution4["GFS 특화 중간 DB<br/>Dual-Tier AI<br/>기업 풀 정보"]
         Solution5["자동 생성 시스템<br/>포트폴리오 매칭<br/>페르소나 적용"]
+        Solution6["Obsidian 내재화<br/>표준화된 지식 관리<br/>저사양 최적화"]
     end
     
     subgraph "AI Agent 진화"
@@ -211,6 +236,7 @@ graph LR
         Factory_Ontology_Story["Factory Ontology<br/>Manager"]
         Virtual_Company_Story["Virtual Company<br/>Creation Agent<br/>& AI_DB_tester"]
         Doc_Generator_Story["Business Document<br/>Generator"]
+        OntoFlow_Story["OntoFlow Document<br/>Processing Chain Agent<br/>& AI_DB_tester 통합"]
     end
     
     Dev_Plan_Exp --> Problem1
@@ -218,18 +244,22 @@ graph LR
     Seah_Exp --> Problem3
     DPS_Exp --> Problem4
     Doc_Exp_Detail --> Problem5
+    OntoFlow_Exp_Detail --> Problem6
     
     Problem1 --> Solution1
     Problem2 --> Solution2
     Problem3 --> Solution3
     Problem4 --> Solution4
     Problem5 --> Solution5
+    Problem6 --> Solution6
     
     Solution1 --> Coding_Agent
     Solution2 --> FMEA_Agent_Story
     Solution3 --> Factory_Ontology_Story
     Solution4 --> Virtual_Company_Story
     Solution5 --> Doc_Generator_Story
+    Solution6 --> OntoFlow_Story
+    OntoFlow_Story --> Virtual_Company_Story
     
     style Problem1 fill:#ffebee,stroke:#f44336
     style Problem2 fill:#ffebee,stroke:#f44336
@@ -241,11 +271,14 @@ graph LR
     style Solution3 fill:#fff3e0,stroke:#ff9800
     style Solution4 fill:#fff3e0,stroke:#ff9800
     style Solution5 fill:#fff3e0,stroke:#ff9800
+    style Problem6 fill:#ffebee,stroke:#f44336
+    style Solution6 fill:#fff3e0,stroke:#ff9800
     style Coding_Agent fill:#e1f5ff,stroke:#2196f3,stroke-width:2px
     style FMEA_Agent_Story fill:#e1f5ff,stroke:#2196f3,stroke-width:2px
     style Factory_Ontology_Story fill:#e1f5ff,stroke:#2196f3,stroke-width:2px
     style Virtual_Company_Story fill:#e1f5ff,stroke:#2196f3,stroke-width:2px
     style Doc_Generator_Story fill:#e1f5ff,stroke:#2196f3,stroke-width:2px
+    style OntoFlow_Story fill:#e1f5ff,stroke:#2196f3,stroke-width:2px
 ```
 
 **스토리텔링 섹션 링크:**
@@ -254,6 +287,7 @@ graph LR
 - [[02_Projects_Overview#023-factory-ontology-manager-ai-agent-진화-스토리-5년간의-비전과-현실의-만남|0.2.3 Factory Ontology Manager AI Agent 진화 스토리]]: 5년간의 비전과 현실의 만남
 - [[02_Projects_Overview#024-virtual-company-creation-agent--ai_db_tester-vacts-진화-스토리-llm을-서포트하기-위한-특화-중간-db|0.2.4 Virtual Company Creation Agent & AI_DB_tester (VACTS) 진화 스토리]]: LLM을 서포트하기 위한 특화 중간 DB
 - [[02_Projects_Overview#025-business-document-generator-진화-스토리-사업계획서를-하도-만들다-보니-만든-자동화-시스템|0.2.5 Business Document Generator 진화 스토리]]: 사업계획서를 하도 만들다 보니 만든 자동화 시스템
+- [[02_Projects_Overview#026-ontoflow--low-spec-agent-진화-스토리-고비용-ai의-한계를-넘는-최적화--obsidian-내재화|0.2.6 OntoFlow & Low-Spec Agent 진화 스토리]]: 고비용 AI의 한계를 넘는 최적화 & Obsidian 내재화
 
 ---
 
@@ -652,7 +686,8 @@ graph TB
 - `phase.foundation.step01` - Step 1 문서
 - `project.ams` - AMS 프로젝트
 - `project.pm_agent` - PM Agent (사업 관리)
-- `project.ai_db_tester` - AI_DB_tester (VACTS) - Virtual Company Creation Agent 테스트 자동화 시스템 (LangGraph 기반 자연어 쿼리 포함)
+- `project.ai_db_tester` - AI_DB_tester (VACTS) - Virtual Company Creation Agent 테스트 자동화 시스템 (LangGraph 기반 자연어 쿼리 포함), OntoFlow 통합 테스트
+- `project.ontoflow_doc_processor` - OntoFlow Document Processing Chain Agent - 문서 색인화 및 구조화 자동화 시스템 (9단계 워크플로우, AI_DB_tester 통합)
 - `project.factory_ontology_manager_ai_agent` - Factory Ontology Manager AI Agent - 자연어 기반 공정 문서 파싱 및 캔버스 레이아웃 자동 생성
 
 **관련 문서**: [[00_ID_System_Guide|ID 시스템 가이드]] (`guide.id.system`)
