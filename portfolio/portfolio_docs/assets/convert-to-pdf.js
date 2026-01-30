@@ -109,17 +109,35 @@ ${html}
 </html>
     `;
 
-    // Launch browser and create PDF
+    // Launch browser and create PDF (Windows: try system Chrome/Edge if bundled not found)
+    let executablePath = undefined;
+    if (process.platform === 'win32') {
+        const candidates = [
+            process.env.PUPPETEER_EXECUTABLE_PATH,
+            process.env.CHROME_PATH,
+            'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+            'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+            process.env.LOCALAPPDATA + '\\Google\\Chrome\\Application\\chrome.exe',
+            'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
+            process.env.LOCALAPPDATA + '\\Microsoft\\Edge\\Application\\msedge.exe'
+        ].filter(Boolean);
+        for (const p of candidates) {
+            if (p && fs.existsSync(p)) {
+                executablePath = p;
+                break;
+            }
+        }
+    }
     const browser = await puppeteer.launch({
         headless: 'new',
+        executablePath,
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
             '--disable-dev-shm-usage',
             '--disable-accelerated-2d-canvas',
             '--disable-gpu'
-        ],
-        executablePath: process.platform === 'win32' ? undefined : undefined
+        ]
     });
 
     const page = await browser.newPage();

@@ -2,7 +2,7 @@
 
 **문서 ID**: `page.portfolio.projects`
 
-PDF 포트폴리오 분석을 통해 확인된 30개 이상의 주요 프로젝트와 솔루션 요약입니다.
+PDF 포트폴리오 분석을 통해 확인된 30개 이상의 주요 프로젝트와 솔루션 요약입니다. (총 56개 이상의 프로젝트 포함)
 
 ---
 
@@ -10,7 +10,7 @@ PDF 포트폴리오 분석을 통해 확인된 30개 이상의 주요 프로젝�
 
 ```mermaid
 gantt
-    title 📊 전체 프로젝트 타임라인 & 포트폴리오 (2020-2026) - 53개 프로젝트
+    title 📊 전체 프로젝트 타임라인 & 포트폴리오 (2020-2026) - 56개 프로젝트
     dateFormat  YYYY-MM
     axisFormat  %Y-%m
     tickInterval 6month
@@ -194,7 +194,7 @@ graph TD
 ```mermaid
 graph TB
     subgraph "프로젝트 경험 (2020-2025)"
-        Proj1["Original Development Plan<br/>외주 개발자 관리<br/>53개 프로젝트 PM 경험"]
+        Proj1["Original Development Plan<br/>외주 개발자 관리<br/>56개 프로젝트 PM 경험"]
         Proj2["테크웰/신성오토텍<br/>FBS, 패턴 분석<br/>확률 네트워크 개발"]
         Proj3["세아특수강/포미아 DX<br/>데이터 통합<br/>POP/SPC 개발<br/>PM 경험"]
         Proj4["DPS<br/>5층 아키텍처<br/>LLM 활용 경험"]
@@ -1233,6 +1233,35 @@ graph LR
 | **AI_DB_tester (VACTS)** (`project.ai_db_tester`) | 2026.1.7~<br/>내부 개발 | Python, 프롬프트 기반 테스트 자동화, Cursor IDE 통합, GFS 검증, LangGraph 기반 자연어 쿼리 | **Virtual Company Creation Agent 테스트 자동화**: 5가지 실행 모드 (Full Test, Simulation, Single Chain/System, I/O Test), **QUERY_AGENT**: 자연어 인터페이스로 테스트 실행 및 결과 조회, 자동 검증(GFS, 온톨로지, 스키마), 자동 리포트 생성, Cursor IDE 통합. **OntoFlow 통합 테스트**: OntoFlow Document Processing Chain Agent의 9단계 워크플로우 테스트 자동화, 문서 처리 파이프라인 검증, 온톨로지 추출 정확도 검증, API 엔드포인트 통합 테스트 |
 | **OntoFlow Document Processing Chain Agent** (`project.ontoflow_doc_processor`) | 2025.12~<br/>내부 개발 | Claude Agent, FastAPI, React, TypeScript, vis-network, IndexedDB, LangChain/LangGraph, 9-Step Chain Workflow, API 기반 자동화 | **문서 색인화 및 구조화 자동화 시스템**: Obsidian 기반 마크다운 문서를 9단계 워크플로우로 처리하여 온톨로지 자동 추출 및 지식그래프 구축. **Phase 1: 문서 등록 (Step 1-5)**: 요청 분석 → 관련 문서 조회 → 문서 존재 확인 → 관계 매핑(wiki/md 링크) → DB 업데이트. **Phase 2: 문서 분석 (Step 6-9)**: 키워드 추출(10-20개) → 세부요약 생성(200-500단어) → 간단요약 생성(50-150단어) → 관계 추론(semantic_meaning). **프롬프트 체인 기반 처리**: 9개 프롬프트 파일로 각 단계별 처리 로직 체계화, 배치 처리 지원(6-9_Batch_Execution_Guide). **온톨로지 뷰어 & 자연어 연결 관리**: GraphCanvas에서 semantic_meaning 기반 자연어 관계 표시, 백엔드 graph_service.py에서 semantic_meaning 자동 추출 및 제공, 하드코딩 제거로 유연한 관계 표현. **API 기반 자동화**: RESTful API로 문서 처리 자동화, 데이터 보존 규칙(Step 7-8에서 이전 데이터 포함 필수), 비동기 그래프 재생성 지원. **AI_DB_tester 통합**: AI_DB_tester를 통한 자동화된 테스트 파이프라인, 문서 처리 워크플로우 검증, 온톨로지 추출 정확도 자동 검증, API 엔드포인트 통합 테스트. **비즈니스 가치**: 문서 처리 시간 70% 절감, 온톨로지 추출 자동화로 298개+ 문서 관리, 자연어 기반 관계 표시로 사용자 이해도 향상. **LLM 에이전트 토대**: 문서 색인화/구조화 경험을 쌓아 지식 관리 시스템 설계의 토대 마련 |
 | **Factory Ontology Manager AI Agent** (`project.factory_ontology_manager_ai_agent`) | 2026.1.8~<br/>내부 개발 | React, TypeScript, Flask, LangGraph, Instructor, AI_DB_center, 자연어 처리, DB Grounding, Ontology Mapping, Human-in-the-Loop | **자연어 기반 공정 문서 파싱 및 캔버스 레이아웃 자동 생성**: 공정 문서를 파싱하여 공장 데이터와 매핑, 캔버스 레이아웃 자동 생성, **핵심 기능**: 자연어 파싱, DB Grounding, Ontology Mapping, Spec-First Modification, **LangGraph V2**: 공정 재사용 로직, 자재 할당 개선, materialId 검증, factory_loader.py 개발, **비즈니스 가치**: 레이아웃 생성 시간 80% 단축, 데이터 일관성 향상. **LLM 에이전트 토대**: 세아특수강에서 데이터 통합(POP/SPC, RS232C-LAN 변환, Lot 매칭) 경험을 쌓아 Factory Ontology Manager AI Agent 프론트 및 기본 기능 설계의 토대 마련 |
+| **Insight_Ops** (`project.insight_ops`) | 2026.1~<br/>(개발 중)<br/>내부 개발 | React + TypeScript + Express + Prisma, Feature-based Architecture, Hybrid Database (SQLite + AI_DB_center + 파일 시스템), RAG (Retrieval-Augmented Generation), 벡터 DB (LanceDB, Pinecone, Chroma 등) | **기업용 AI 기반 문서 분석 및 채팅 플랫폼**: anything-llm 기반으로 설계 완료 후 개발 진행 중. 문서 업로드 및 분석(PDF, TXT, DOCX, 마크다운), 문서 기반 RAG 채팅, 실시간 스트리밍 응답, 30개 이상 AI 모델 지원(OpenAI, Anthropic, Ollama 등), 멀티유저 및 역할 기반 권한 관리(Admin, Manager, Default), No-code 방식 커스텀 AI 에이전트 생성, 워크스페이스별 문서 및 채팅 컨텍스트 분리 관리. **Platform All 생태계 연결**: OntoFlow_doc와 온톨로지 기반 문서 구조화 연동(Ontology-Enhanced RAG), AI_DB_center 통합으로 Hybrid Database 전략 구현, OpsClaw 메시징 게이트웨이와 RAG 엔진 공유 가능, Virtual Company Creation Agent의 기업 풀 정보 확장. **기술 스택**: React 18.3.1+ + TypeScript 5.5.3+ + Vite 7.1.12+, Node.js + Express + Prisma, Zustand + React Query. **아키텍처**: Feature-based Architecture, RESTful API + WebSocket, Hybrid Database Strategy. **상태**: 설계 완료, 개발 진행 중 |
+| **OpsClaw** (`project.opsclaw`) | 2026.1~<br/>(설계 단계)<br/>내부 개발 | TypeScript, Gateway Server, MCP (Model Context Protocol), Multi-Channel Support (WhatsApp, Telegram, Slack, Discord), OntoFlow_doc 통합, AI_DB_center 통합, Lit 기반 Control UI | **AI 기반 메시징 게이트웨이 및 개발 플랫폼**: 다양한 채널(WhatsApp, Telegram, Slack, Discord 등)을 지원하는 메시징 게이트웨이. OntoFlow_doc 및 AI_DB_center와 통합되어 문서 기반 AI 응답 제공. Gateway Server(포트 18789), Control UI(통합 및 개발 서버), 벡터 검색 및 메모리 인덱스 관리, Pi Agent 런타임 지원. **Platform All 생태계 연결**: AI_DB_center 파일 시스템 직접 접근 통합 완료(REF-001), OntoFlow_doc HTTP API 통합 진행 중, Insight_Ops RAG 엔진 활용 가능, Virtual Company Creation Agent의 기업 풀 정보를 메시징 채널로 접근 가능. **아키텍처**: Gateway 서버 기반 HTTP/WebSocket, 채널 플러그인 구조, AI_DB_center 클라이언트 통합. **상태**: 설계 단계 (설계 문서 완료, 개발 준비 중) |
+| **Goose Architecture Analysis** (`project.goose_architecture_analysis`) | 2026.1~<br/>(파악 단계)<br/>내부 분석 | Electron + React + Rust, Component-based Architecture, MCP (Model Context Protocol), 로컬 AI 에이전트 데스크톱 앱 | **로컬 AI 에이전트 데스크톱 애플리케이션 아키텍처 파악**: Block, Inc.의 goose 프로젝트(버전 1.20.0) 아키텍처 분석 중. Electron 프론트엔드와 Rust 백엔드(goosed)로 구성된 로컬 실행 AI 에이전트. 주요 구성 요소: Hub/Pair 페이지(AI 채팅 인터페이스), 세션 관리, 확장 기능(MCP 서버 통합), 레시피/스케줄 자동화, 로컬 실행으로 데이터 프라이버시 보장. **Platform All 생태계 연결**: Component-based Architecture 및 MCP 활용 방식 학습, 로컬 실행 전략 참고(데이터 프라이버시 보장), MCP 기반 확장 기능 구조를 Platform All 생태계에 적용 가능, 설계 문서 파악을 통한 설계 패턴 학습. **아키텍처 문서 분석**: Blue_Print, Business_Summary, Project_Structure_Design, API_Design, Database_Design 등 설계 문서 파악 진행 중. **목적**: 확장 가능한 오픈소스 AI 에이전트 아키텍처 학습 및 Platform All 생태계 설계 참고. **상태**: 아키텍처 파악 단계 |
+
+### Platform All 생태계 통합 프로젝트
+
+#### Insight_Ops: 문서 중심 AI 플랫폼
+**역할**: 기업용 문서 분석 및 RAG 채팅 플랫폼  
+**연결 관계**:
+- **OntoFlow_doc**: 온톨로지 기반 문서 구조화 연동 (Ontology-Enhanced RAG)
+- **AI_DB_center**: Hybrid Database 전략으로 통합 (SQLite + AI_DB_center + 파일 시스템)
+- **OpsClaw**: RAG 엔진 공유 및 메시징 채널 연동 가능
+- **Virtual Company Creation Agent**: 기업 풀 수준의 정보를 Insight_Ops의 문서 분석으로 확장 가능
+
+#### OpsClaw: 메시징 게이트웨이
+**역할**: 멀티 채널 메시징 및 AI 응답 게이트웨이  
+**연결 관계**:
+- **AI_DB_center**: 파일 시스템 직접 접근 통합 완료 (REF-001)
+- **OntoFlow_doc**: HTTP API 통합 진행 중 (`http://localhost:8020/api/ontoflow/*`)
+- **Insight_Ops**: RAG 엔진 활용 가능 (메시징 채널을 통한 문서 기반 AI 응답 제공)
+- **Virtual Company Creation Agent**: 기업 풀 수준의 정보를 메시징 채널을 통해 접근 가능
+
+#### Goose Architecture Analysis: 아키텍처 학습
+**역할**: 오픈소스 AI 에이전트 아키텍처 분석 및 설계 패턴 학습  
+**연결 관계**:
+- **Platform All 생태계**: 설계 패턴 참고 및 적용 (Component-based Architecture, MCP 활용 방식)
+- **MCP 활용**: 확장 기능 구조 학습 (MCP 서버 통합 패턴)
+- **로컬 실행 전략**: 데이터 프라이버시 보장 방식 참고 (Electron + Rust 아키텍처)
+- **설계 문서 분석**: Blue_Print, Business_Summary, Project_Structure_Design 등 설계 문서 파악을 통한 설계 패턴 학습
 
 ## 7. 컨설팅 및 데이터 분석 프로젝트 (`section.projects.consulting`)
 | 프로젝트명 | 기간 / 발주처 | 핵심 기술 | 역할 & 성과 |
@@ -1494,7 +1523,7 @@ pie title 스마트공장 구축 프로젝트 업종 분포 (18개)
   - Sensors & IoT: `project.smart_sensors`, `project.ai_composite_sensor`, `project.virtual_sensor`, `project.seah.data_integration`
   - Safety & Energy: `project.cleanroom_energy`, `project.energy_pattern`, `project.power_prediction`, `project.digital_twin_safety`, `project.power_quality`
   - Healthcare: `project.medical_constitution`
-  - AI Workflow: `project.obsidian_design_origin`, `project.fmea_claude_agent`, `project.evaluation_framework`, `project.prompt_eval_claude_agent`, `project.pm_agent`, `project.virtual_company_creation_agent`, `project.business_document_generator`, `project.ai_db_tester`, `project.ontoflow_doc_processor`, `project.factory_ontology_manager_ai_agent`
+  - AI Workflow: `project.obsidian_design_origin`, `project.fmea_claude_agent`, `project.evaluation_framework`, `project.prompt_eval_claude_agent`, `project.pm_agent`, `project.virtual_company_creation_agent`, `project.business_document_generator`, `project.ai_db_tester`, `project.ontoflow_doc_processor`, `project.factory_ontology_manager_ai_agent`, `project.insight_ops`, `project.opsclaw`, `project.goose_architecture_analysis`
   - Consulting: `project.ripaco_consulting`, `project.coaaiti_nlp_chatbot`, `project.haetae_ai_solution`, `project.techwell_ams_consulting`, `project.shinsung_ams_consulting`, `project.techwell_databoucher`, `project.daesung_databoucher`, `project.podas_variable_generation`
   - Certification: `project.pds_gs_certification`, `project.tta_certification`, `project.smart_manufacturing_contest`
   - Participated: `project.hfr_aivoucher`, `project.infact_ai`

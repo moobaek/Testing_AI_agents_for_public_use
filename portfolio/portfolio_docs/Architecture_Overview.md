@@ -1757,7 +1757,7 @@ graph TB
 
 - **문서 ID**: `page.portfolio.architecture`
 - **관련 Phase**: `phase.foundation.*`
-- **관련 프로젝트**: `project.ams`, `project.dps`, `project.coctk`, `project.ai_db_tester`, `project.ontoflow_doc_processor`, `project.factory_ontology_manager_ai_agent` 등
+- **관련 프로젝트**: `project.ams`, `project.dps`, `project.coctk`, `project.ai_db_tester`, `project.ontoflow_doc_processor`, `project.factory_ontology_manager_ai_agent`, `project.insight_ops`, `project.opsclaw`, `project.goose_architecture_analysis` 등
 - **관련 문서**: `page.portfolio.*`
 
 ---

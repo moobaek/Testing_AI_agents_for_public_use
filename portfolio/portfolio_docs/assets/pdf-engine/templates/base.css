@@ -193,6 +193,19 @@ hr {
     padding: 1em;
     background: var(--bg-secondary);
     border-radius: 8px;
+    max-height: 250mm;  /* A4 페이지 높이(297mm) - 여백(20mm*2) 고려 */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mermaid svg {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
 }
 
 /* Strong/Bold */
@@ -224,6 +237,88 @@ strong {
 
 .keep-together {
     page-break-inside: avoid;
+}
+
+/* 목차 다음 페이지 브레이크는 HTML 후처리에서 .page-break div로 처리하므로 CSS는 제거 */
+
+/* Mermaid 다이어그램과 앞 내용 함께 유지 */
+.keep-with-mermaid {
+    page-break-after: avoid;
+}
+
+/* 소제목(h2, h3)이 Mermaid 바로 앞에 오는 경우 함께 유지 */
+h2.keep-with-mermaid,
+h3.keep-with-mermaid {
+    page-break-after: avoid;
+    break-after: avoid;
+}
+
+/* 소제목과 Mermaid를 함께 묶는 wrapper */
+.subsection-with-mermaid {
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.mermaid {
+    page-break-inside: avoid;
+    page-break-before: avoid;
+    break-inside: avoid;
+    break-before: avoid;
+}
+
+/* Mermaid 다이어그램 뒤 내용도 함께 유지 */
+.mermaid + p,
+.mermaid + h2,
+.mermaid + h3 {
+    page-break-before: avoid;
+    break-before: avoid;
+}
+
+/* Mermaid wrapper - 다이어그램과 앞/뒤 내용을 함께 묶음 */
+.mermaid-wrapper {
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+/* 큰 Mermaid 다이어그램 - 독립 페이지 배치 */
+.large-mermaid {
+    page-break-before: always;
+    page-break-after: always;
+    break-before: page;
+    break-after: page;
+}
+
+.large-mermaid .mermaid {
+    max-height: 257mm;  /* 페이지 높이에서 여백 제외한 전체 높이 */
+    margin: 0;
+    padding: 0;
+}
+
+/* subsection-with-mermaid가 큰 다이어그램인 경우도 독립 페이지 배치 */
+.subsection-with-mermaid.large-mermaid {
+    page-break-before: always;
+    page-break-after: always;
+    break-before: page;
+    break-after: page;
+}
+
+/* 목차 섹션 다음 강제 페이지 브레이크 */
+.toc-section + * {
+    page-break-before: always;
+}
+
+/* 각 주요 섹션 제목(# 1, # 2 등)이 새 페이지에서 시작 */
+/* 단, 목차 다음 첫 번째 섹션은 제외 (이미 .page-break div로 처리됨) */
+h1.section-title {
+    page-break-before: always;
+    break-before: page;
+}
+
+/* 목차 다음 첫 번째 섹션은 페이지 브레이크 제외 */
+.page-break + h1[data-first-section="true"],
+.page-break + h1.section-title {
+    page-break-before: auto;
+    break-before: auto;
 }
 
 /* Print Optimizations */
