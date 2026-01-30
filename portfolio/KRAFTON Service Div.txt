@@ -1,0 +1,67 @@
+[AI Service Div.] AI Agent Engineer (5년 이상)
+Seoul
+ 
+크래프톤은 차별화된 크리에이티브를 가진 글로벌 제작 스튜디오들과 고유한 즐거움이 있는 게임을 발굴하여 전 세계에 퍼블리싱합니다.
+우리는 지속적인 도전과 새로운 기술로 게임의 즐거움을 혁신하고, 더 많은 팬들에게 사랑받을 수 있도록 플랫폼과 서비스를 확장합니다.
+우리는 열정과 의지를 지닌 동료들과 함께 성장하며, 글로벌 시장에서 인정받는 게임의 명가로 나아가고 있습니다.
+ 
+KRAFTON is dedicated to identifying and publishing games worldwide that offer a uniquely enjoyable experience, crafted by our globally recognized production studios known for their distinctive creativity.
+We continuously push the boundaries of gaming enjoyment by embracing new challenges and technologies, expanding our platforms and services to captivate an even larger fan base.
+In collaboration with our passionate and driven team, we strive to establish ourselves as a renowned creator of masterpieces in the global gaming market.
+ 
+우리 팀(프로젝트)을 소개합니다.
+크래프톤은 우리가 가진 게임 제작역량을 새롭게 확장할 수 있는 영역이자 새로운 도전을 지속할 분야로 AI를 제시하고 해당 분야 연구에 집중하고 있으며, 본격화를 위하여 핵심 인재 영입 등 적극적인 투자를 진행하고 있습니다.
+
+[AI Service 본부]
+크래프톤 AI Service 본부는 사내외 여러 분야와 협업하여 다양한 문제에 대한 AI 솔루션을 제공하며, 자체 연구를 통해 우리만의 서비스를 개발합니다.
+
+[AI Agent Dev Team]
+저희는 Agentic AI를 개발하는 팀입니다.
+AI가 단순한 도구를 넘어 팀의 동료로서 새로운 방식으로 협업할 수 있는 가능성을 연구하고 실현합니다.
+사람들이 일하는 방식을 완전히 바꾸고, 개개인의 생산성을 극대화하는 미래를 만드는 팀입니다.
+
+[Culture Fit]
+KRAFTON AI 인원들은 다양한 프로젝트를 통하여 여러 분야의 팀원들과 교류하고 협업하며 다양한 문제에 창의적인 아이디어를 제시할 수 있습니다. 나이 및 직급에 관계없이 자유롭게 의견을 개진하는 분위기가 장려됩니다.
+다양한 문화적 배경을 가진 인원들이 모여 팀을 이루고 있으며 활발한 소통을 위해 통·번역 등 언어적 장벽을 해소할 수 있는 방법들을 적극 지원하고 있습니다.
+
+ 
+
+우리 팀과 함께할 미션을 소개합니다.
+딥러닝 기술을 활용해 업무의 생산성과 편의성을 향상시키고, 새로운 크리에이티브를 만들 수 있는 플랫폼 서비스를 개발 및 운영합니다.
+사내 다양한 유관 부서와의 협업을 통해 실제 업무 문맥에 맞는 AI 서비스 기획 및 개발을 주도합니다.
+딥러닝 기술의 빠른 발전 속도에 맞춰 새로운 기술 트렌드를 파악하고 공유하며, 업무 생산성에 기여할 수 있는 방법을 고민합니다.
+PM 팀과 서비스 개발/운영 주기 내에서의 일정 및 전달물 관련한 커뮤니케이션을 담당합니다.
+서비스 개발 방향과 진행 상황에 대해 상위권자와 잘 공유될 수 있도록 커뮤니케이션을 담당합니다.
+ 
+
+이런 경험을 가진 분과 함께 성장하고 싶습니다! (필수요건)
+개발 경력 5년 이상
+Python 언어 능력자
+다양한 목적의 프롬프트를 제작하고, 테스트해본 경험이 있으신 분
+Prompt Engeineering, RAG, Agent Framework(LlamaIndex, LangGraph) 등 AI Agent 스택에 대한 이해와 이를 활용한 제품 개발 경험이 있으신 분
+주도적으로 문제를 분석하고 해결책을 제시하며, 실제로 실행할 수 있으신 분
+맡겨진 업무를 끝까지 완수해 내는 책임감을 가지신 분
+해외 출장에 결격 사유가 없는 분
+ 
+
+이런 경험들이 있다면 저희가 찾는 그 분입니다! (우대요건)
+FastAPI 개발 경험이 있으신 분
+MCP Server 개발 경험이 있으신 분
+Agent Orchestration 개발 경험이 있으신 분
+프롬프트 최적화 관련 경험 (Few-shot, Chain-of-Thought 등)이 있으신 분
+스스로 개발한 AI를 통해 본인의 업무의 효율이 향상됨을 직접 경험해보신 분
+문제를 빠르게 정의하고 풀 수 있는 사고 능력 
+변화하는 환경에 빠르게 맞출 수 있는 분 
+딥러닝 기술의 개념을 이해하고 설명할 수 있는 분 
+게임을 좋아하는 분 
+영어 업무 가능자
+ 
+
+크래프톤의 도전에 함께 하기 위해 아래의 전형 과정이 필요합니다.
+서류 전형> 사전 인터뷰 (Phone Interview) > *직무 테스트 (Pre-Test) > 직무 면접 (Technical Fit Interview) > 종합 면접 (Culture Fit Interview) > 학/경력, 평판조회 > 처우협의 > 최종 합격 및 입사
+*해당 전형은 포지션에 따라 변동될 수 있습니다.
+각 전형의 세부 진행 방식은 개별 안내드립니다.
+필요 시 직무 테스트 또는 면접 전형이 추가될 수 있으며, 이에 대한 상세 내용은 개별 안내드립니다.
+전형 결과는 지원서에 기재된 이메일로 2주 이내 발송되며, 내부 일정에 따라 다소 지연될 경우 별도 안내드립니다.
+본 공고는 상시채용으로 진행되며, 우수 인재 채용 시 조기 마감될 수 있습니다.
+ 
