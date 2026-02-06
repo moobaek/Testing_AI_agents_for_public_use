@@ -3,8 +3,8 @@
 ## 기본 정보
 
 **이름**: 권순룡  
-**현 소속**: 한솔코에버 연구소 대리 (2020.09 ~ 재직중)  
-**총 경력**: 5년 (2020~2025)  
+**전 직장**: 한솔코에버 연구소 대리 (2020.09.01 ~ 2026.01.31 퇴사)  
+**총 경력**: 5년 5개월 (2020.09.01~2026.01.31)  
 **핵심 역량**: LLM 기반 에이전트 개발, Multi-Agent Workflow 설계, MCP 기반 인터페이스 구축, 데이터 파이프라인 엔지니어링, Python 개발
 
 ---
@@ -31,6 +31,8 @@ timeline
          : PM Agent 개발
          : Virtual Company Creation Agent
          : Business Document Generator
+    2026 : Factory Ontology Manager (자연어 쿼리·AI_DB_center)
+         : OntoFlow_doc (문서 파이프라인·온톨로지 수정/연결)
 ```
 
 ---
@@ -60,6 +62,9 @@ mindmap
       Claude Agent
         Business Document Generator
         프롬프트 평가 엔진
+      자연어 쿼리·메타정보
+        Factory Ontology: 의도 분류·부분 탐색·검증/근거
+        OntoFlow_doc: 문서 파이프라인·온톨로지 수정/연결
     데이터 파이프라인
       Python 5년
         49개 모듈 자체 개발
@@ -130,6 +135,8 @@ graph TB
         PM[PM Agent<br/>MCP 기반 사업 관리]
         Virtual[Virtual Company<br/>MCP, Vector DB]
         Business[Business Document<br/>Claude Agent]
+        Factory[Factory Ontology<br/>자연어 쿼리·AI_DB_center]
+        OntoFlow[OntoFlow_doc<br/>문서 파이프라인·온톨로지]
     end
     
     subgraph "데이터 파이프라인 프로젝트"
@@ -146,8 +153,12 @@ graph TB
     AMS --> FMEA
     DPS --> AMS
     CoCTK --> AMS
+    Virtual --> Factory
+    Business --> OntoFlow
     
     style FMEA fill:#e74c3c,color:#fff
+    style Factory fill:#1abc9c,color:#fff
+    style OntoFlow fill:#16a085,color:#fff
     style Eval fill:#3498db,color:#fff
     style PM fill:#9b59b6,color:#fff
     style Virtual fill:#e67e22,color:#fff
@@ -158,7 +169,7 @@ graph TB
 
 ## 경력 개요
 
-### 한솔코에버 연구소 (2020.09 ~ 재직중)
+### 한솔코에버 연구소 (2020.09.01 ~ 2026.01.31 퇴사)
 **직급**: 대리  
 **주요 업무**:
 - AI 종합 플랫폼 개발 및 총괄 PM
@@ -247,6 +258,30 @@ graph TB
 - ✅ **금속산업 5대 공정 AI 자동화**: 실시간 데이터 연계 및 분석
 - ✅ **논문 발표**: 2024
 
+### 7. Factory Ontology Manager AI Agent - 공정 파이프라인·자연어 쿼리
+
+**기간**: 2026.1.8 ~  
+**발주처**: 내부 개발  
+**역할**: AI 자연어 쿼리 및 메타정보 설계·연동
+
+**핵심 성과**:
+- ✅ **AI_DB_center 메타정보**: JSON 기반 저장소, 공정/자재/센서/PLC 분석 전용
+- ✅ **자연어 쿼리** (`/api/ai/chat-query`): 의도 분류(list_processes, flow_connections, process_assignments, general), 부분 탐색(Local/Flow/Assignments), DB 전체가 아닌 노드 경로만 탐색
+- ✅ **검증/근거 표시**: 근거 1개 이상 시 검증됨, UI 검증/근거 박스, 채팅은 분석 전용(캔버스 저장과 분리)
+- ✅ **레이아웃 생성 시간 80% 단축**, 자연어 파싱·DB Grounding·Ontology Mapping
+
+### 8. OntoFlow_doc - 문서 파이프라인·온톨로지 수정/연결
+
+**기간**: 2025.12 ~  
+**발주처**: 내부 개발  
+**역할**: 문서 기반 지식 그래프 및 AI 온톨로지 서비스
+
+**핵심 성과**:
+- ✅ **JSON DB 메타정보** (db.ontoflow_json, AI_DB_center 스타일): 문서/관계/태그/인덱스/AI 분석 결과
+- ✅ **AI 채팅**: Chat Dock(문서 파악·요구사항 정리), Evidence Box(검증/근거), 부분 탐색
+- ✅ **온톨로지 수정/연결**: Global/Local 범위, 키워드·요약·관계 생성, 1-hop 탐색 → Preview→승인→적용
+- ✅ **문서 처리 시간 70% 절감**, 298개+ 문서 온톨로지 자동 추출
+
 ---
 
 ## 기술 스택
@@ -314,7 +349,7 @@ graph TB
 ## 자격증
 
 **OPIc** (2019.03)
-- ACT FL (American Council on the Teaching of Foreign Languages)
+- IM2
 
 ---
 

@@ -33,6 +33,8 @@ graph TB
             PM[PM Agent<br/>MCP 기반]
             Virtual[Virtual Company<br/>MCP, Vector DB]
             Business[Business Document<br/>Claude Agent]
+            Factory[Factory Ontology<br/>자연어 쿼리·AI_DB_center]
+            OntoFlow[OntoFlow_doc<br/>문서 파이프라인·온톨로지]
         end
         
         subgraph "Sensors & IoT"
@@ -53,12 +55,16 @@ graph TB
     Root --> PM
     Root --> Virtual
     Root --> Business
+    Root --> Factory
+    Root --> OntoFlow
     
     style FMEA fill:#e74c3c,color:#fff
     style Eval fill:#3498db,color:#fff
     style PM fill:#9b59b6,color:#fff
     style Virtual fill:#e67e22,color:#fff
     style Business fill:#27ae60,color:#fff
+    style Factory fill:#1abc9c,color:#fff
+    style OntoFlow fill:#16a085,color:#fff
     style AMS fill:#f39c12,color:#fff
 ```
 
@@ -127,6 +133,8 @@ timeline
          : PM Agent 개발 (MCP 기반)
          : Virtual Company Creation Agent
          : Business Document Generator
+    2026 : Factory Ontology Manager (자연어 쿼리·AI_DB_center)
+         : OntoFlow_doc (문서 파이프라인·온톨로지 수정/연결)
 ```
 
 ---
@@ -143,6 +151,8 @@ graph TB
         PM[PM Agent<br/>MCP 기반 사업 관리<br/>relevance: 92]
         Virtual[Virtual Company<br/>MCP, Vector DB<br/>relevance: 90]
         Business[Business Document<br/>Claude Agent<br/>relevance: 88]
+        Factory[Factory Ontology<br/>자연어 쿼리·검증/근거<br/>relevance: 88]
+        OntoFlow[OntoFlow_doc<br/>문서 파이프라인·온톨로지<br/>relevance: 85]
     end
     
     subgraph "AI & Analytics"
@@ -159,6 +169,8 @@ graph TB
     Eval --> PM
     PM --> Virtual
     Virtual --> Business
+    Virtual --> Factory
+    Business --> OntoFlow
     
     AMS --> FMEA
     DPS --> AMS
@@ -170,6 +182,8 @@ graph TB
     style PM fill:#9b59b6,color:#fff
     style Virtual fill:#e67e22,color:#fff
     style Business fill:#27ae60,color:#fff
+    style Factory fill:#1abc9c,color:#fff
+    style OntoFlow fill:#16a085,color:#fff
 ```
 
 ### 1. FMEA 자동화 생성 시스템 (Claude Sub-Agent) - 총괄 PM
@@ -291,6 +305,37 @@ graph TB
 - ✅ 데이터 파이프라인 엔지니어링 역량
 - ✅ SQL 기반 데이터 탐색 능력 (Neo4j Cypher)
 
+### 8. Factory Ontology Manager AI Agent - 공정 파이프라인·자연어 쿼리
+
+**기간**: 2026.1.8 ~  
+**역할**: AI 자연어 쿼리 및 메타정보 설계·연동  
+**핵심 기술**: AI_DB_center JSON, 의도 분류, 부분 탐색, 검증/근거 박스
+
+**핵심 성과**:
+- ✅ **자연어 쿼리** (`/api/ai/chat-query`): 공정/자재/센서/PLC 분석 전용, 의도 분류·부분 탐색(Local/Flow/Assignments), 검증/근거 표시
+- ✅ **AI_DB_center 메타정보**: JSON 기반 저장소, 채팅 히스토리·분석 전용(캔버스 저장과 분리)
+- ✅ **레이아웃 생성 시간 80% 단축**, DB Grounding·Ontology Mapping
+
+**LG전자 채용 공고 매칭**:
+- ✅ 자연어 기반 데이터 조회·분석 경험
+- ✅ LLM 기반 에이전트 개발 (검증/근거 추적)
+
+### 9. OntoFlow_doc - 문서 파이프라인·온톨로지 수정/연결
+
+**기간**: 2025.12 ~  
+**역할**: 문서 기반 지식 그래프 및 AI 온톨로지 서비스  
+**핵심 기술**: JSON DB (db.ontoflow_json), AI 채팅, Ontology Update Panel, Global/Local
+
+**핵심 성과**:
+- ✅ **문서 메타정보**: JSON DB(AI_DB_center 스타일), 문서/관계/태그/인덱스/AI 분석 결과
+- ✅ **AI 채팅**: 문서 파악·요구사항 정리, Evidence Box(검증/근거), 부분 탐색
+- ✅ **온톨로지 수정/연결**: Global/Local, 키워드·요약·관계 생성, Preview→승인→적용
+- ✅ **문서 처리 시간 70% 절감**, 298개+ 문서 온톨로지 자동 추출
+
+**LG전자 채용 공고 매칭**:
+- ✅ 정형/비정형 데이터 AI-Readable화, 메타정보 기반 RAG
+- ✅ LLM 기반 문서 분석·온톨로지 관리 경험
+
 ---
 
 ## 💻 기술 스택 맵
@@ -410,6 +455,17 @@ mindmap
 - Multi-Step Chain Workflow
 - Role-based Expert Personas
 - PDF 자동 변환
+
+#### 6. 자연어 쿼리·문서 파이프라인 (Factory Ontology Manager · OntoFlow_doc)
+
+**Factory Ontology Manager**에서는 **공정 파이프라인**으로 AI_DB_center JSON 메타정보를 두고, `/api/ai/chat-query` 기반 **자연어 쿼리**를 구현했습니다. 의도 분류(list_processes, flow_connections, process_assignments, general) 후 부분 탐색(Local/Flow/Assignments)으로 노드 경로만 조회하고, **검증/근거 박스**로 신뢰도를 확보하며, 채팅은 분석 전용(캔버스 저장과 분리)으로 운영합니다.
+
+**OntoFlow_doc**에서는 **문서 파이프라인**으로 JSON DB(db.ontoflow_json)에 문서/관계/태그/메타정보를 저장하고, **AI 채팅**(문서 파악·요구사항 정리, Evidence Box)과 **온톨로지 수정/연결**(Global/Local, Preview→승인→적용) 서비스를 제공합니다.
+
+**기술적 특징**:
+- 자연어 쿼리: 의도 분류, 부분 탐색, 검증/근거 표시
+- 메타정보 중앙화: AI_DB_center 스타일 JSON DB
+- 문서 파이프라인: 298개+ 문서 온톨로지 자동 추출, 문서 처리 70% 절감
 
 ---
 

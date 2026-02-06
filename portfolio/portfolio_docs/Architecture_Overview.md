@@ -12,7 +12,7 @@
 ### 작성자 정보
 
 **이름**: 권순룡  
-**소속**: 한솔코에버 연구소 대리 (2020.09 ~ 재직중)  
+**소속**: 한솔코에버 연구소 대리 (2020.09.01 ~ 2026.01.31 퇴사)  
 **총 경력**: 5년 (2020~2025)  
 **이메일**: m920831@naver.com
 
@@ -1105,7 +1105,7 @@ sequenceDiagram
 #### 핵심 구조 요소
 
 1. **ID 기반 온톨로지 맵 문서 시스템** (입사부터 지속)
-   - 입사(2020.09)부터 모든 프로젝트의 기반이 된 핵심 역량
+   - 입사(2020.09.01)부터 모든 프로젝트의 기반이 된 핵심 역량
    - 모든 요소에 고유 ID 부여 (`page.*`, `comp.*`, `api.*`, `db.*`)
    - 문서 간 관계 추적 및 의존성 관리
    - 온톨로지 기반 영향 관계 분석
@@ -1281,7 +1281,7 @@ graph TB
 ## 🌐 Platform All: 통합 플랫폼 생태계 (`section.architecture.platform_all`)
 
 > [!NOTE] 섹션 개요
-> 본 섹션은 7개 통합 플랫폼 프로젝트(Original_Development_Plan, factory_ontology_manager, pipeline_system_complete, TAM_Hub, Evaluation_Framework, all_platform_center, FMEA_Automation_Generation_Technology)의 생태계 구성을 설명합니다.
+> 본 섹션은 8개 통합 플랫폼 프로젝트(Original_Development_Plan, factory_ontology_manager, **OntoFlow_doc**, pipeline_system_complete, TAM_Hub, Evaluation_Framework, all_platform_center, FMEA_Automation_Generation_Technology)의 생태계 구성을 설명합니다.
 > 
 > **관련 문서**:
 > - [[02_Projects_Overview|프로젝트 개요]] - Platform All 프로젝트 상세 정보
@@ -1431,7 +1431,7 @@ LangChain/CrewAI 기반 시스템의 트러블슈팅을 위한 **Mock 테스트 
 
 ### 7.2 factory_ontology_manager
 
-**시각적 팩토리 관리 시스템**:
+**시각적 팩토리 관리 시스템 (공정 파이프라인)**:
 
 - shapez.io 게임에서 영감을 받은 드래그 앤 드롭 인터페이스
 - 계층적 구조 관리 (공장 > 작업장 > 생산라인 > 공정)
@@ -1441,7 +1441,25 @@ LangChain/CrewAI 기반 시스템의 트러블슈팅을 위한 **Mock 테스트 
   - AI_DB_center JSON 파일 기반 데이터 저장소 사용 (`.vacts/enriched_info_company_SYON_*.json`)
   - 데이터 저장 경로: `data.platform_ecosystem.platforms[].stored_data.factories[]`
 
-### 7.3 pipeline_system_complete
+**AI 자연어 쿼리 및 메타정보 (AI_DB_center)**:
+- **자연어 쿼리**: `/api/ai/chat-query` — 공정/자재/센서/PLC를 **분석 전용**으로 질의, DB 전체가 아닌 **질의 의도에 맞는 노드 경로만 탐색**
+- **의도 분류(Intent)**: `list_processes`(공정 목록), `flow_connections`(공정 간 흐름), `process_assignments`(센서/PLC 할당), `general`(키워드 필터) — LLM 분류 우선, 실패 시 휴리스틱 폴백
+- **부분 탐색**: Local(라인/작업장 기준 공정만), Flow(BFS 연결 그래프, max_depth=3), Assignments(processNodes에서 센서/PLC만)
+- **검증/근거 표시**: 근거(sources) 1개 이상이면 `검증됨`, 없으면 `검토 필요` — UI에서 답변 하단 검증/근거 박스 표시
+- **채팅 히스토리**: `AI_DB_center/generated/chat_history.json` (session_id 기준, 최대 50개). **캔버스 변경/저장 흐름과 분리** (분석 전용)
+- **설계 참조**: `platform_all/factory_ontology_manager/docs/obsidian_design_origin/architecture` — AI_Chat_Query_Design.md, Blue_Print.md, AI_Role_Policy.md
+
+### 7.3 OntoFlow_doc (문서 파이프라인)
+
+**문서 기반 지식 그래프 및 AI 온톨로지 서비스**:
+
+- **메타정보 저장소**: JSON DB (`db.ontoflow_json`, AI_DB_center 스타일) — 문서/관계/태그/인덱스/AI 분석 결과. vault별 `ontoflow_doc_data_{vault_name}.json`
+- **AI 채팅 (문서 파악·요구사항 정리)**: 우측 하단 Chat Dock — **문서 파악 모드**(내용/연결/태그/요약 질의, 근거는 JSON DB 노드만), **요구사항 정리 모드**(Change Request 출력, 실제 변경은 Ontology Update로 위임). **Evidence Box**(검증됨/검토 필요 + 근거 목록)
+- **온톨로지 수정/연결**: 그래프 화면 Ontology Update Panel — **Global**(전체 vault) / **Local**(선택 노드 중심). 키워드/간단요약/세부요약 + 관계 생성. **1-hop 관계 탐색** → 요약·키워드 기반 근거 → 근거 부족 시 2-hop 확장 허락 → **Preview → 승인 → 적용**
+- **API**: `api.ai.chat.query`, `api.ai.ontology.preview` / `apply` / `status`, `api.db.documents` 등 — 외부 AI/프론트엔드에서 JSON DB 직접 조회·분석 결과 저장 가능
+- **설계 참조**: `platform_all/OntoFlow_doc/docs/obsidian_design_origin/architecture` — AI_UI_Spec.md, AI_Chat_Service_Design.md, Ontology_Update_Service_Design.md, Blue_Print.md
+
+### 7.4 pipeline_system_complete
 
 **시계열 데이터 파이프라인**:
 
@@ -1449,7 +1467,7 @@ LangChain/CrewAI 기반 시스템의 트러블슈팅을 위한 **Mock 테스트 
 - Supabase 기반 실시간 데이터 처리
 - 체계적인 문서화 (219개 Markdown)
 
-### 7.4 TAM_Hub
+### 7.5 TAM_Hub
 
 **기술 자산 관리 허브**:
 
@@ -1457,7 +1475,7 @@ LangChain/CrewAI 기반 시스템의 트러블슈팅을 위한 **Mock 테스트 
 - AMS 엔진, progressing_engine 통합
 - Obsidian Design Origin 기반 문서화
 
-### 7.5 Evaluation_Framework
+### 7.6 Evaluation_Framework
 
 **AI 에이전트 평가 프레임워크**:
 
@@ -1465,7 +1483,7 @@ LangChain/CrewAI 기반 시스템의 트러블슈팅을 위한 **Mock 테스트 
 - LangGraph 워크플로우 오케스트레이션
 - Docker 기반 배포
 
-### 7.6 all_platform_center
+### 7.7 all_platform_center
 
 **통합 플랫폼 센터**:
 
@@ -1473,7 +1491,7 @@ LangChain/CrewAI 기반 시스템의 트러블슈팅을 위한 **Mock 테스트 
 - 통합 대시보드
 - 사용자 인증 및 권한 관리
 
-### 7.7 FMEA_Automation_Generation_Technology (Claude Sub-Agent)
+### 7.8 FMEA_Automation_Generation_Technology (Claude Sub-Agent)
 
 **코드 에이전트에서 영감을 받은 전체 공장/회사/사무 자동화의 백정보 핵심**:
 
