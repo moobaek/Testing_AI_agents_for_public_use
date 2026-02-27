@@ -8,7 +8,7 @@
 ## 📌 기본 정보
 
 **이름**: 권순룡  
-**소속**: 한솔코에버 연구소 대리 (2020.09 ~ 재직중)  
+**전 소속**: 한솔코에버 연구소 대리 (2020.09.01 ~ 2026.01.31, 퇴직)
 **총 경력**: 5년 5개월 (2020.09~2026.01)  
 **핵심 역량**: 데이터 파이프라인 구축, ETL 프로세스 설계, 시계열 데이터 분석, 데이터 수집 및 처리, 데이터베이스 설계 및 관리, Neo4j 그래프 DB, 실시간 스트리밍 처리, 배치 처리, PLC/MES 인터페이스, RS232C-LAN 변환  
 **GitHub**: https://github.com/moobaek  
@@ -71,6 +71,13 @@ gantt
     리파코 (로봇) / 코아아이티 (NLP)      :done,    c3, 2023-04, 2023-12
     테크웰 (전력 FMEA)             :done,    c4, 2024-01, 2024-12
     신성오토텍 (사출)              :done,    c5, 2024-01, 2024-12
+
+    section 📊 v9.0 AI-DB 데이터 구조 (2026)
+    Virtual Company Agent v9.0        :active,  v1, 2025-10, 2026-02
+    pb.zst 이벤트 소싱 구조 설계       :active,  v2, 2025-12, 2026-02
+    Source / Projection 계층 분리      :active,  v3, 2026-01, 2026-02
+    projection_hash 무결성 검증        :active,  v4, 2026-01, 2026-02
+    artifact_path 참조 정책 확립       :active,  v5, 2026-02, 2026-02
 ```
 
 > [!INFO] **총 프로젝트 현황**
@@ -532,6 +539,34 @@ CoCTK와 이후 개념들이 모듈화/체계화되어 AMS AI 모듈의 기초�
 
 ### 데이터 통합
 - ✅ **다양한 데이터 소스 통합**: 세아특수강 등 다양한 데이터 소스를 통합하여 하나의 플랫폼에서 관리
+
+---
+
+## 🚀 v9.0 AI-DB 데이터 구조 성과 (2026)
+
+### pb.zst 이벤트 소싱 설계
+
+v9.0의 데이터 엔지니어링 핵심은 **`pb.zst` 이벤트 스트림을 유일한 Source of Truth로 선언**한 것입니다. Protobuf + Zstandard 압축 기반의 이벤트 스트림으로 모든 AI 실행 이력을 불변 로그로 기록하고, `md/json` 파일은 이 Source에서 파생된 Projection 전용 계층으로 명확히 역할을 분리했습니다.
+
+### v9.0 데이터 구조 핵심 성과
+
+| 성과 항목 | 내용 | 의의 |
+|:---|:---|:---|
+| **pb.zst Source of Truth** | Protobuf + Zstandard 이벤트 스트림 | 불변 실행 이력 보장 |
+| **Source / Projection 계층 분리** | pb.zst(소스) ↔ md/json(투영) | 단방향 데이터 흐름 |
+| **projection_hash 무결성** | 해시 기반 동기화 검증 | 드리프트 탐지 |
+| **artifact_path 참조 정책** | 대형 아티팩트 경로 참조 | 메타 데이터 경량화 |
+| **AI-DB 5-field 계약** | keyword/simple_summary/detail_summary/wiki_links/artifact_path | 전체 문서 표준화 |
+
+### 데이터 계층 아키텍처
+
+```
+Source Layer  : pb.zst (이벤트 스트림, 불변 로그)
+       ↓ 파생 (단방향)
+Projection    : md / json (읽기 전용 투영, projection_hash 검증)
+       ↓ 참조 (경로)
+Artifact      : artifact_path (대형 바이너리·보고서 참조)
+```
 
 ---
 

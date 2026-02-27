@@ -8,7 +8,7 @@
 ## 📌 기본 정보
 
 **이름**: 권순룡  
-**소속**: 한솔코에버 연구소 대리 (2020.09 ~ 재직중)  
+**전 소속**: 한솔코에버 연구소 대리 (2020.09.01 ~ 2026.01.31, 퇴직)
 **총 경력**: 5년 5개월 (2020.09~2026.01)  
 **핵심 역량**: 대규모 시스템 아키텍처 설계, Microservices 아키텍처, Multi-Agent 시스템 설계, 통합 플랫폼 생태계 구축, Neo4j 그래프 DB 설계, 5층 아키텍처 설계, Platform All 통합 플랫폼 설계, Dual-Tier AI 아키텍처 설계  
 **GitHub**: https://github.com/moobaek  
@@ -71,6 +71,13 @@ gantt
     리파코 (로봇) / 코아아이티 (NLP)      :done,    c3, 2023-04, 2023-12
     테크웰 (전력 FMEA)             :done,    c4, 2024-01, 2024-12
     신성오토텍 (사출)              :done,    c5, 2024-01, 2024-12
+
+    section 🏗️ v9.0 이벤트 소싱 아키텍처 (2026)
+    Virtual Company Agent v9.0        :active,  v1, 2025-10, 2026-02
+    이벤트 소싱 아키텍처 설계          :active,  v2, 2025-12, 2026-02
+    Codex OAuth 채널 동등성 검증       :active,  v3, 2026-01, 2026-02
+    Total Monitoring Gameboard 설계    :active,  v4, 2026-01, 2026-02
+    FinalGate 릴리즈 게이트 관리        :active,  v5, 2026-02, 2026-02
 ```
 
 > [!INFO] **총 프로젝트 현황**
@@ -856,6 +863,35 @@ Phase 기반 워크플로우 자동화를 통해 Phase 0-13까지의 단계별 �
 
 ### 통합 플랫폼
 - ✅ **Platform All 생태계**: 다양한 플랫폼을 통합한 생태계 구축
+
+---
+
+## 🚀 v9.0 이벤트 소싱 아키텍처 성과 (2026)
+
+### 이벤트 기반 아키텍처 전환
+
+v9.0에서 아키텍처의 핵심 전환은 **이벤트 소싱(Event Sourcing) 기반 AI-DB 운영 체계** 도입입니다. 기존 상태 기반(stateful) 저장 방식에서 **불변 이벤트 스트림(`pb.zst`) → Projection 파생 → Artifact 참조**의 단방향 아키텍처로 전환하여, 시스템 전체의 추적 가능성과 재현성을 확보했습니다.
+
+### v9.0 아키텍처 핵심 성과
+
+| 성과 항목 | 내용 | 의의 |
+|:---|:---|:---|
+| **이벤트 소싱 아키텍처** | pb.zst 불변 이벤트 스트림 | 전체 실행 이력 재현 가능 |
+| **채널 동등성 검증** | codex_oauth / claude / api_direct 비교 | 실행 환경 일관성 보장 |
+| **Total Monitoring Gameboard** | 게임형 리스크 점수 체계 | 실시간 시스템 상태 파악 |
+| **FinalGate 릴리즈 관리** | 6종 게이트 + 리스크 임계값 ≥10 블로커 | 안전한 배포 보장 |
+| **Human Loop 아키텍처** | 4개 트리거 조건 기반 인간 개입 | 자동화 + 안전성 균형 |
+
+### 이벤트 소싱 아키텍처 흐름
+
+```mermaid
+flowchart TD
+    E["⚡ AI 실행 이벤트"] --> S["📦 pb.zst Source\n(불변 이벤트 스트림)"]
+    S --> P["📄 Projection Layer\nmd/json (projection_hash 검증)"]
+    S --> A["🗂️ Artifact Layer\nartifact_path 참조"]
+    P --> M["📊 Monitoring Gameboard\n리스크 점수 집계"]
+    M --> G["🔐 FinalGate\n≥10점 릴리즈 블로커"]
+```
 
 ---
 

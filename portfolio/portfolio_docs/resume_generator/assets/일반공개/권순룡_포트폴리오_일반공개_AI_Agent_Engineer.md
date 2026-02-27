@@ -8,7 +8,7 @@
 ## 📌 기본 정보
 
 **이름**: 권순룡  
-**소속**: 한솔코에버 연구소 대리 (2020.09 ~ 재직중)  
+**전 소속**: 한솔코에버 연구소 대리 (2020.09.01 ~ 2026.01.31, 퇴직)
 **총 경력**: 5년 5개월 (2020.09~2026.01)  
 **핵심 역량**: Multi-Agent System 설계, LLM Agent 개발, 프롬프트 엔지니어링, LangGraph/CrewAI 오케스트레이션, RAG 시스템, MCP (Model Context Protocol), State-based Workflow, Evaluation Framework, Few-shot Rules System, AI Agent 아키텍처 설계  
 **GitHub**: https://github.com/moobaek  
@@ -71,6 +71,13 @@ gantt
     리파코 (로봇) / 코아아이티 (NLP)      :done,    c3, 2023-04, 2023-12
     테크웰 (전력 FMEA)             :done,    c4, 2024-01, 2024-12
     신성오토텍 (사출)              :done,    c5, 2024-01, 2024-12
+
+    section 🤖 v9.0 AI Agent 운영 체계 (2026)
+    Virtual Company Agent v9.0        :active,  v1, 2025-10, 2026-02
+    AI-DB 5-field Meta 계약 설계       :active,  v2, 2025-12, 2026-02
+    Codex OAuth 실행 체인 확립          :active,  v3, 2026-01, 2026-02
+    FinalGate 6종 릴리즈 게이트         :active,  v4, 2026-01, 2026-02
+    역량 맵 v9.0 (온톨로지 변경 제어)   :active,  v5, 2026-02, 2026-02
 ```
 
 > [!INFO] **총 프로젝트 현황**
@@ -1147,6 +1154,36 @@ graph LR
 | **공정 라인 수정 시간 절감** | 80%+ | Factory Ontology Manager |
 | **프롬프트 품질 보장** | 100% | 프롬프트 평가 엔진 전수 평가 |
 | **코드 품질 보장** | 100% | Evaluation Framework 전수 검사 |
+
+---
+
+## 🚀 v9.0 AI Agent 운영 체계 성과 (2026)
+
+### AI Agent 설계 철학 v9.0
+
+v9.0에서 AI Agent 운영의 핵심은 **실행 채널 신뢰성**과 **자기 기술 데이터베이스(AI-DB)**의 일관성 보장입니다. Codex OAuth 채널을 기본 실행 경로로 확정하고(`provider_router_policy_v3`), 모든 Agent 실행 결과는 `pb.zst` 이벤트 스트림에 기록되어 추적 가능성을 확보했습니다.
+
+### v9.0 AI Agent 핵심 성과
+
+| 성과 항목 | 수치 | 비고 |
+|:---|---:|:---|
+| **Codex OAuth FinalGate 통과** | 2026-02-27 PASS | `CODEX_OAUTH_RUNTIME_SMOKE_OK` |
+| **AI-DB 5-field 메타 계약 완성** | 5개 필드 | keyword / simple_summary / detail_summary / wiki_links / artifact_path |
+| **온톨로지 변경 제어 4단계** | 0 드리프트 | canonical/mirror 동기화 |
+| **FinalGate 릴리즈 게이트** | 6종 | 개발/단계/통합/성능/보안/배포 |
+| **Human Loop 승인 조건** | 4개 트리거 | 온톨로지 변경·artifact_path 등록·충돌·게이트 초과 |
+| **run_id 격리 아티팩트** | 5종 필수 | mermaid/체크리스트/변경보고서/일일보고서/문서업데이트로그 |
+
+### Codex OAuth 실행 체인
+
+```mermaid
+flowchart LR
+    A["👤 사용자 지시"] --> B["🔑 Codex OAuth\ncodex_oauth_only"]
+    B --> C["📚 AI-DB 조회\n(5-field 계약)"]
+    C --> D["🤖 Agent 실행\nrun_id 격리"]
+    D --> E["✅ Human Loop\n승인 게이트"]
+    E --> F["📦 pb.zst\n이벤트 기록"]
+```
 
 ---
 

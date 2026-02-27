@@ -3,7 +3,7 @@
 ## 기본 정보
 
 **이름**: 권순룡  
-**현 소속**: 한솔코에버 연구소 대리 (2020.09 ~ 재직중)  
+**전 소속**: 한솔코에버 연구소 대리 (2020.09.01 ~ 2026.01.31, 퇴직)  
 **총 경력**: 5년 5개월 (2020.09~2026.01)  
 **핵심 역량**: AI Agent 개발, Multi-Agent 시스템 설계, LLM 활용 (Claude), 프롬프트 엔지니어링, RAG 시스템 개발, 워크플로우 오케스트레이션 (LangGraph/CrewAI), MCP 서버 개발, Dual-Tier AI 아키텍처  
 **이메일**: m920831@naver.com  
@@ -36,7 +36,12 @@ timeline
          : Factory Ontology Manager AI Agent 개발
          : Dual-Tier AI 아키텍처 설계 (87% 비용 절감)
     2026 : Business Document Generator 개발
-         : AI Agent 생태계 완성
+         : Virtual Company Creation Agent v9.0 완성
+         : AI-DB 운영 모델 설계 (pb.zst 이벤트 소싱)
+         : Codex OAuth 실행 채널 확정 (FinalGate PASS)
+         : Human Loop 승인 게이트 구현 (proceed/modify/blocked)
+         : 문서 온톨로지 변경 공정 설계 (impact→승인→반영→검증)
+         : 토탈 모니터링 게임보드 설계 (미션/게이트/리스크 포인트)
 ```
 
 ---
@@ -56,6 +61,8 @@ timeline
 **지식그래프, 온톨로지 관련 개발 경험**으로는 Neo4j 기반 지식 그래프 RAG 시스템을 개발했으며, Factory Ontology Manager AI Agent에서 자연어 기반 공정 문서 파싱 및 DB Grounding, Ontology Mapping을 구현했습니다. 4M2E 관계 온톨로지를 정의하여 공장의 복잡한 관계를 관리하며, OEM/ODM 대응을 자동화하는 시스템을 개발했습니다.
 
 **AI 에이전트를 활용한 업무 자동화 및 효율화 솔루션 개발 및 적용** 경험으로는 FMEA 자동화 시스템을 통해 리스크 분석 시간을 대폭 단축했으며, Factory Ontology Manager AI Agent를 통해 레이아웃 생성 시간을 80% 단축했습니다. Business Document Generator를 통해 문서 작성 시간을 70% 절감했으며, 코딩 에이전트를 통해 외주 개발자 관리 시간을 80% 이상 절감했습니다.
+
+**v9.0 운영 체계 구축 성과 (2026)**: Virtual Company Creation Agent v9.0을 완성하며 AI-DB 운영 모델, Codex OAuth 실행 채널 고정, 문서 온톨로지 변경 공정, 토탈 모니터링 게임보드를 설계했습니다. `pb.zst` 이벤트 스트림을 진실 소스로 하는 저장 계층 구조를 설계하고, Human Loop 기반 승인 게이트를 구현하여 에이전트 실행의 안전성을 확보했습니다. 2026-02-27 FinalGate에서 `CODEX_OAUTH_RUNTIME_SMOKE_OK` 증적을 확보하며 Codex OAuth를 기본 운영 채널로 확정했습니다.
 
 이러한 경험을 바탕으로 현대오토에버 인공지능기술실의 AI Agent 엔지니어로 기여하여 '살아있는 AI' 기술 개발에 참여하고, 미래 모빌리티 및 유관 분야의 주인공이 되고자 합니다.
 
@@ -91,6 +98,13 @@ mindmap
       High-Spec AI Low-Spec AI 분리
       특화 중간 DB GFS 설계
       87% 비용 절감
+    v9.0 운영 체계 (신규)
+      AI-DB 문서 계약 설계
+      pb.zst 이벤트 기반 상태 관리
+      Codex OAuth 실행 채널 고정
+      Human Loop 승인 게이트 구현
+      온톨로지 변경 공정 (impact→검증)
+      토탈 모니터링 게임보드
 ```
 
 ---
@@ -704,6 +718,10 @@ graph TB
 | **워크플로우 오케스트레이션** | Phase 워크플로우 | Phase 0-13 | Original Development Plan |
 | | 자동화 워크플로우 | Phase 0~5 | FMEA 자동화 |
 | **Dual-Tier AI** | 비용 절감 | 87% | High-Spec AI와 Low-Spec AI 분리 |
+| **v9.0 운영 체계** | AI-DB 메타 계약 | 5종 필드 | keyword/simple_summary/detail_summary/wiki_links/artifact_path |
+| | Codex OAuth 채널 | PASS 증적 | 2026-02-27 FinalGate CODEX_OAUTH_RUNTIME_SMOKE_OK |
+| | 릴리즈 게이트 | 6종 통과 | R-01~R-06 전 항목 PASS |
+| | Human Loop 게이트 | proceed/modify/blocked | 에이전트 실행 전 필수 승인 구조 |
 | **비즈니스 가치** | 외주 관리 시간 절감 | 80%+ | 코딩 에이전트 시스템 |
 | | 문서 작성 시간 절감 | 70% | Business Document Generator |
 | | 레이아웃 생성 시간 절감 | 80% | Factory Ontology Manager AI Agent |

@@ -8,7 +8,7 @@
 ## 📌 기본 정보
 
 **이름**: 권순룡  
-**소속**: 한솔코에버 연구소 대리 (2020.09 ~ 재직중)  
+**전 소속**: 한솔코에버 연구소 대리 (2020.09.01 ~ 2026.01.31, 퇴직)
 **총 경력**: 5년 5개월 (2020.09~2026.01)  
 **핵심 역량**: Python 백엔드 개발, Qt 프론트엔드 개발, 풀스택 개발, API 설계 및 개발, AI/ML 플랫폼 개발, 코딩 에이전트 활용 프론트엔드 개발 확장, RESTful API 설계, 49개 Python 모듈 개발  
 **GitHub**: https://github.com/moobaek  
@@ -71,6 +71,12 @@ gantt
     리파코 (로봇) / 코아아이티 (NLP)      :done,    c3, 2023-04, 2023-12
     테크웰 (전력 FMEA)             :done,    c4, 2024-01, 2024-12
     신성오토텍 (사출)              :done,    c5, 2024-01, 2024-12
+
+    section 💻 v9.0 AI-DB API 연동 (2026)
+    Virtual Company Agent v9.0        :active,  v1, 2025-10, 2026-02
+    AI-DB 메타 계약 API 설계           :active,  v2, 2025-12, 2026-02
+    Codex OAuth 통합 연동             :active,  v3, 2026-01, 2026-02
+    온톨로지 변경 프로세스 UI           :active,  v4, 2026-02, 2026-02
 ```
 
 > [!INFO] **총 프로젝트 현황**
@@ -573,6 +579,23 @@ Factory Ontology Manager AI Agent는 2020년 전무님의 비전(공정 라인 �
 ### 시스템 구축
 - ✅ **풀스택 시스템 구축**: CoCTK, 코아아이티 등 풀스택 시스템 구축
 - ✅ **5층 아키텍처 백엔드**: Microservices 기반 백엔드 설계
+
+---
+
+## 🚀 v9.0 AI-DB API 연동 성과 (2026)
+
+### AI-DB 메타 계약 API 설계
+
+v9.0에서 풀스택 엔지니어링의 핵심은 **AI-DB 5-field 메타 계약을 API 레이어에 반영**한 것입니다. 모든 문서 생성·수정 API는 `keyword`, `simple_summary`, `detail_summary`, `wiki_links`, `artifact_path` 5개 필드를 필수 입력으로 강제하며, Codex OAuth 토큰으로 인증된 Agent만 쓰기 권한을 갖습니다.
+
+### v9.0 풀스택 핵심 성과
+
+| 성과 항목 | 내용 | 의의 |
+|:---|:---|:---|
+| **AI-DB 메타 계약 API** | 5-field 강제 스키마 | 문서 일관성 API 수준 보장 |
+| **Codex OAuth 통합 연동** | OAuth 토큰 기반 Agent 인증 | 실행 채널 보안 |
+| **온톨로지 변경 프로세스 UI** | Impact 분석→승인→반영→검증 4단계 | 안전한 지식구조 변경 |
+| **projection_hash 검증 엔드포인트** | 소스-투영 무결성 API | 데이터 드리프트 탐지 |
 
 ---
 

@@ -3,7 +3,7 @@
 ## 기본 정보
 
 **이름**: 권순룡  
-**현 소속**: 한솔코에버 연구소 대리 (2020.09 ~ 재직중)  
+**전 소속**: 한솔코에버 연구소 대리 (2020.09.01 ~ 2026.01.31, 퇴직)  
 **총 경력**: 5년 5개월 (2020.09~2026.01)  
 **핵심 역량**: 대규모 시스템 아키텍처 설계, Microservices 아키텍처, Multi-Agent 시스템 설계, 통합 플랫폼 생태계 구축, Neo4j 그래프 DB 설계, 5층 아키텍처 설계, Platform All 통합 플랫폼 설계  
 **이메일**: m920831@naver.com  
@@ -35,7 +35,11 @@ timeline
          : 포미아 DX 실증센터 분석 플랫폼 아키텍처 설계
          : FMEA 자동화 Multi-Agent 시스템 아키텍처 설계
          : Platform All 통합 플랫폼 생태계 설계
-    2026 : Virtual Company Creation Agent 아키텍처 설계 완료
+    2026 : Virtual Company Creation Agent v9.0 아키텍처 완성
+         : AI-DB 이벤트 소싱 아키텍처 설계 (pb.zst Source of Truth)
+         : Codex OAuth 채널 라우팅 아키텍처 설계 (provider_router_policy_v3)
+         : 채널 동등성 검증 아키텍처 (codex_oauth/claude/api_direct 비교)
+         : 토탈 모니터링 게임보드 아키텍처 설계
          : Factory Ontology Manager AI Agent 아키텍처 설계
          : Dual-Tier AI 아키텍처 설계 (87% 비용 절감)
 ```
@@ -53,6 +57,8 @@ timeline
 **Multi-Agent 시스템 아키텍처 설계** 경험으로는 FMEA 자동화 시스템에서 **Master Orchestrator 기반 8개 독립 Sub-Agent 협업 구조**를 설계했습니다. Claude Sub-Agent 기반으로 R&D, Mfg, QA 등 8개의 독립 Sub-Agent가 협업하는 구조를 설계했으며, Phase 0~5 자동화 워크플로우를 통해 전체 프로세스를 자동화했습니다. Original Development Plan에서는 **LangGraph/CrewAI 방식 워크플로우 오케스트레이션**, **상태 기반 진행 모니터링 및 완료 조건 판단 시스템**을 설계하여 복잡한 개발 프로세스를 자동화했습니다.
 
 **통합 플랫폼 생태계 구축** 경험으로는 Platform All 프로젝트에서 **통합 플랫폼 생태계**를 설계했습니다. AMS, DPS, CoCTK 등 다양한 플랫폼을 통합하여 하나의 생태계로 구축했으며, 각 플랫폼 간 데이터 흐름과 API 인터페이스를 설계했습니다. Virtual Company Creation Agent에서는 **Dual-Tier AI 아키텍처**를 설계하여 High-Spec AI (추론)와 Low-Spec AI (조회)를 분리하여 최대 87%의 LLM 비용을 절감했습니다.
+
+**v9.0 이벤트 기반 아키텍처 설계 성과 (2026)**: `pb.zst` 이벤트 스트림을 진실 소스로 하는 AI-DB 이벤트 소싱 아키텍처를 설계했습니다. `codex_oauth / claude / api_direct` 3개 채널의 동등성 검증 아키텍처를 수립하고, `provider_router_policy_v3` 기반 채널 라우팅 정책을 설계했습니다. 게이트 점수화(PASS/FAIL + 리스크 포인트) 기반의 토탈 모니터링 게임보드 아키텍처를 설계하여 릴리즈 품질 관리 체계를 완성했습니다.
 
 이러한 경험을 바탕으로 대규모 시스템 아키텍처를 설계하고 통합 플랫폼 생태계를 구축하는 Solutions Architect로 기여하고자 합니다.
 
@@ -89,6 +95,13 @@ mindmap
       서버-엣지 하이브리드 인프라
       마이크로서비스 아키텍처
       컨테이너 오케스트레이션
+    v9.0 이벤트 기반 아키텍처 (신규)
+      pb.zst 이벤트 소싱 아키텍처 설계
+      Source/Projection 계층 분리 설계
+      채널 라우팅 정책 설계 (codex_oauth 기본)
+      동등성 검증 아키텍처 (3-채널 비교)
+      토탈 모니터링 게임보드 아키텍처
+      Human Loop 승인 게이트 구조 설계
 ```
 
 ---

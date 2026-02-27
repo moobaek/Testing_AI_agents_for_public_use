@@ -3,7 +3,7 @@
 ## 기본 정보
 
 **이름**: 권순룡  
-**현 소속**: 한솔코에버 연구소 대리 (2020.09 ~ 재직중)  
+**전 소속**: 한솔코에버 연구소 대리 (2020.09.01 ~ 2026.01.31, 퇴직)  
 **총 경력**: 5년 5개월 (2020.09~2026.01)  
 **핵심 역량**: 데이터 파이프라인 구축, ETL 프로세스 설계, 시계열 데이터 분석, 데이터 수집 및 처리, 데이터베이스 설계 및 관리, Neo4j 그래프 DB, 실시간 스트리밍 처리, 배치 처리  
 **이메일**: m920831@naver.com  
@@ -35,7 +35,10 @@ timeline
     2025 : AMS GS 인증 1등급 취득
          : 테크웰/신성오토텍 데이터 분석 컨설팅
          : FMEA 자동화 Multi-Agent 시스템 개발
-    2026 : Virtual Company Creation Agent 데이터 구조 설계
+    2026 : Virtual Company Creation Agent v9.0 AI-DB 데이터 구조 완성
+         : pb.zst 이벤트 스트림 기반 AI-DB 운영 모델 설계
+         : Source/Projection 계층 분리 설계 (projection_hash 연결)
+         : AI-DB 메타 계약 5종 필드 설계
          : Factory Ontology Manager AI Agent 데이터 매핑
 ```
 
@@ -54,6 +57,8 @@ timeline
 **데이터 분석 역량**으로는 시계열 데이터 분석, 패턴 분석, 상관관계 분석 등 다양한 데이터 분석 경험을 보유하고 있습니다. 에이치피앤씨 화장품 시계열 분석, 다마요팩 ARIMA 시계열 분석, 생산공정 에너지 데이터 패턴 분석 등을 수행하여 제조 현장의 데이터 패턴을 파악했습니다.
 
 **데이터베이스 설계 및 관리 역량**으로는 Neo4j, MSSQL Server, PostgreSQL 등 다양한 데이터베이스를 설계하고 관리하는 경험을 보유하고 있습니다. Neo4j 그래프 DB를 활용하여 4M2E 관계 온톨로지 정의 및 지식 그래프 플랫폼을 구축했으며, 확률 네트워크를 Neo4j에 저장하여 복잡한 관계를 모델링했습니다.
+
+**v9.0 AI-DB 데이터 구조 설계 성과 (2026)**: `pb.zst` 이벤트 스트림을 진실 소스로 하는 AI-DB 운영 모델을 설계했습니다. Source 계층(`pb.zst` 이벤트)과 Projection 계층(`md/json`)을 명확히 분리하고, `projection_hash`로 두 계층의 무결성을 연결했습니다. 무거운 산출물은 본문 저장이 아닌 `artifact_path` 참조 원칙을 확립하여 데이터 스토리지 효율성을 극대화했습니다. 문서 메타 계약(keyword/simple_summary/detail_summary/wiki_links/artifact_path) 5종 필드를 설계하여 AI-DB 조회 정합성을 보장했습니다.
 
 이러한 경험을 바탕으로 데이터 파이프라인을 구축하고 데이터를 분석하는 Data Engineer로 기여하고자 합니다.
 
@@ -85,6 +90,12 @@ mindmap
       PostgreSQL
       온톨로지 정의
       지식 그래프 플랫폼
+    v9.0 AI-DB 데이터 구조 (신규)
+      pb.zst 이벤트 스트림 설계
+      Source/Projection 계층 분리
+      AI-DB 메타 계약 5종 필드
+      projection_hash 무결성 연결
+      artifact_path 외부 참조 원칙
 ```
 
 ---

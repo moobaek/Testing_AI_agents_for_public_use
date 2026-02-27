@@ -3,7 +3,7 @@
 ## 기본 정보
 
 **이름**: 권순룡  
-**현 소속**: 한솔코에버 연구소 대리 (2020.09 ~ 재직중)  
+**전 소속**: 한솔코에버 연구소 대리 (2020.09.01 ~ 2026.01.31, 퇴직)  
 **총 경력**: 5년 5개월 (2020.09~2026.01)  
 **핵심 역량**: Python 백엔드 개발, Qt 프론트엔드 개발, 풀스택 개발, API 설계 및 개발, AI/ML 플랫폼 개발, 코딩 에이전트 활용 프론트엔드 개발 확장  
 **이메일**: m920831@naver.com  
@@ -34,8 +34,10 @@ timeline
     2025 : 코딩 에이전트 개발로 프론트엔드 개발 확장
          : FMEA 자동화 Multi-Agent 시스템 개발
          : Virtual Company Creation Agent 개발
-    2026 : Factory Ontology Manager AI Agent 개발
-         : 온톨로지 공장 agent 개발 (코딩 에이전트 활용)
+    2026 : Factory Ontology Manager AI Agent 개발 완성
+         : AI-DB 메타 계약 API 설계 (keyword/summary/artifact_path)
+         : Codex OAuth 기반 에이전트 실행 API 통합
+         : 온톨로지 변경 공정 UI/API 연동 (impact→승인→반영→검증)
 ```
 
 ---
@@ -53,6 +55,8 @@ AI/ML 플랫폼을 개발하는 Full-stack Engineer 역할에 기여하고자 �
 **풀스택 개발 역량**으로는 CoCTK 프로젝트에서 엔진 총괄 설계 및 화면설계 개발 총괄 PM을 담당했습니다. 생산공정 에너지 데이터 패턴 분석 프로젝트에서는 초기 백엔드 개발에서 시작하여 풀스택 개발 및 총괄 PM으로 확장했습니다. 코아아이티에서 Python+Qt 풀스택 개발 경험을 쌓아 AI Agent 설계 및 개발의 기초가 되었습니다.
 
 **코딩 에이전트 활용**으로는 외주 개발자 산출물 관리 문제를 해결하기 위해 코딩 에이전트를 개발했습니다. 백엔드 AI 개발자였지만 코딩 툴을 만들어서 말도 안 되는 시간에 말도 안 되는 개발 개수를 성공적으로 완료했습니다. 이를 통해 온톨로지 공장 agent 개발도 가능해졌으며, 프론트엔드/시각화 부분도 개발할 수 있게 되었습니다.
+
+**v9.0 AI-DB API 연동 성과 (2026)**: Factory Ontology Manager AI Agent v9.0에서 AI-DB 메타 계약 API(keyword/simple_summary/artifact_path 엔드포인트)를 설계하고 구현했습니다. Codex OAuth 실행 채널을 백엔드 API와 통합하여 에이전트 실행 결과를 AI-DB에 이벤트 append 방식으로 저장하는 풀스택 파이프라인을 구축했습니다. 온톨로지 변경 공정(impact→승인→반영→검증)의 각 단계를 UI에서 제어할 수 있는 API 레이어를 설계했습니다.
 
 이러한 경험을 바탕으로 AI/ML 플랫폼을 개발하는 Full-stack Engineer로 기여하고자 합니다.
 
@@ -84,6 +88,11 @@ mindmap
       외주 개발자 산출물 관리
       프론트엔드/시각화 개발 확장
       온톨로지 공장 agent 개발
+    v9.0 AI-DB API 연동 (신규)
+      AI-DB 메타 계약 API 설계
+      keyword/summary/artifact_path 엔드포인트
+      Codex OAuth 실행 API 통합
+      온톨로지 변경 공정 UI 연동
 ```
 
 ---
