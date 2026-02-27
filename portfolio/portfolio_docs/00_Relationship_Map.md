@@ -788,7 +788,44 @@ graph TB
 - `project.opsclaw` - OpsClaw - AI 기반 메시징 게이트웨이 및 개발 플랫폼 (설계 단계), 멀티 채널 지원, OntoFlow_doc 및 AI_DB_center 통합
 - `project.goose_architecture_analysis` - Goose Architecture Analysis - 로컬 AI 에이전트 데스크톱 앱 아키텍처 파악 (파악 단계), Platform All 생태계 설계 참고
 
+- `phase.operations.v9` - Phase 4 Operations (v9.0) - AI-DB 전환, Codex OAuth 실행 경로, 온톨로지 변경 공정, 토탈 모니터링
+- `ops.ai_db` - AI-DB 운영 모델 - pb.zst 이벤트 스트림 기반 진실 소스, tri-mode 동일 계약
+- `ops.coding_agent_chain` - 코딩 에이전트 실행 체인 - human_loop 필수, run_id 격리
+- `ops.ontology_change` - 온톨로지 변경 공정 - impact→승인→반영→검증 루프
+- `ops.monitoring` - 토탈 모니터링 게임보드 - 미션/게이트/점수/개선 루프
+- `ops.channel_policy` - 채널 정책 - codex_oauth 기본, equivalence 검증
+
 **관련 문서**: [[00_ID_System_Guide|ID 시스템 가이드]] (`guide.id.system`)
+
+---
+
+## 🏭 Phase 4 Operations 관계 맵 (v9.0)
+
+```mermaid
+graph TB
+    subgraph "Phase 4: Operations (v9.0)"
+        AIDB["ops.ai_db\nAI-DB 운영 모델\n(pb.zst 이벤트 스트림)"]
+        CHAIN["ops.coding_agent_chain\n코딩 에이전트 실행 체인\n(human_loop + run_id)"]
+        ONTO["ops.ontology_change\n온톨로지 변경 공정\n(impact→승인→반영→검증)"]
+        MON["ops.monitoring\n토탈 모니터링 게임보드\n(미션/게이트/점수)"]
+        CHAN["ops.channel_policy\n채널 정책\n(codex_oauth 기본)"]
+    end
+
+    subgraph "AI Agent & 지식 관리"
+        VIRTUAL_COMPANY["Virtual Company\nCreation Agent"]
+        ONTOFLOW["OntoFlow Document\nProcessing Chain Agent"]
+        AI_DB_TESTER["AI_DB_tester\nVACTS"]
+    end
+
+    CHAIN --> AIDB
+    CHAIN --> CHAN
+    ONTO --> AIDB
+    MON --> CHAIN
+    MON --> ONTO
+    AIDB -. "pb.zst 스트림" .-> VIRTUAL_COMPANY
+    ONTO -. "frontmatter 계약" .-> ONTOFLOW
+    CHAIN -. "run_id 격리" .-> AI_DB_TESTER
+```
 
 ---
 

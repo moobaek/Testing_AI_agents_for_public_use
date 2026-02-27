@@ -87,11 +87,20 @@
   - 실행 결과를 기록하고 시각화하는 과정 (Step 6 ~ Step 7)
 - **Phase 3: Expansion (확장)**
   - 피드백을 통해 시스템을 무한히 확장하는 과정 (Step 8 ~ Step 9)
+- **Phase 4: Operations (v9.0 AI-DB + Codex OAuth 운영 체계)**
+  - AI-DB 전환, Codex OAuth 실행 경로 고정, 온톨로지 변경 공정, 토탈 모니터링 적용
 
 ### 3️⃣ Guides (가이드라인)
 - `00_ID_System_Guide.md`: 모든 자산을 연결하는 ID 체계
-- `00_AI_Workflow_Guide.md`: AI 에이전트 협업 가이드
+- `00_AI_Workflow_Guide.md`: AI 에이전트 협업 가이드 (v9.0: codex_oauth 실행 경로 포함)
 - `00_PM_Roles_Guide.md`, `00_Team_Roles_Guide.md`: 역할 정의
+
+### 4️⃣ Phase 4: Operations (v9.0 신규)
+- `Phase_4_Operations/Phase_4_AI_DB_Operating_Model.md`: AI-DB 운영 모델 (tri-mode, 메타 계약)
+- `Phase_4_Operations/Phase_4_Coding_Agent_Execution_Chain.md`: 코딩 에이전트 실행 체인 (human_loop 포함)
+- `Phase_4_Operations/Phase_4_Ontology_Change_Control.md`: 온톨로지 변경 공정 (impact → 승인 → 반영 → 검증)
+- `Phase_4_Operations/Phase_4_Total_Monitoring_Gameboard.md`: 게임형 모니터링 대시보드
+- `Phase_4_Operations/Phase_4_Channel_Policy_and_Equivalence.md`: 채널 정책 및 동등성 검증 (codex_oauth 기본)
 
 ---
 

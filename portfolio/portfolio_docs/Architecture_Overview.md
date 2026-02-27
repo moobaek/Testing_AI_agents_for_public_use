@@ -59,6 +59,12 @@
 11. [🚀 사무 자동화의 미래 비전](#사무-자동화의-미래-비전)
 12. [🌐 Platform All: 통합 플랫폼 생태계](#platform-all-통합-플랫폼-생태계)
     - 7.1 Original_Development_Plan: LangGraph Chain 설계 방법론 및 LLM 트러블슈팅 시스템
+13. [🏭 Phase 4: Operations (v9.0)](#-phase-4-operations-v90--ai-db--codex-oauth--온톨로지-변경--토탈-모니터링)
+    - A. AI-DB 운영 모델 (tri-mode, 메타 계약)
+    - B. 코딩 에이전트 실행 체인 (human_loop 포함)
+    - C. 문서 온톨로지 변경 공정
+    - D. 토탈 모니터링 게임 대시보드
+    - E. 채널/실행 정책 (codex_oauth 기본)
 
 > [!TIP] 옵시디언 네비게이션
 > 옵시디언에서 자동으로 앵커 링크가 생성되므로, 목차의 링크를 클릭하면 해당 섹션으로 바로 이동할 수 있습니다.
@@ -1281,7 +1287,7 @@ graph TB
 ## 🌐 Platform All: 통합 플랫폼 생태계 (`section.architecture.platform_all`)
 
 > [!NOTE] 섹션 개요
-> 본 섹션은 8개 통합 플랫폼 프로젝트(Original_Development_Plan, factory_ontology_manager, **OntoFlow_doc**, pipeline_system_complete, TAM_Hub, Evaluation_Framework, all_platform_center, FMEA_Automation_Generation_Technology)의 생태계 구성을 설명합니다.
+> 본 섹션은 9개 통합 플랫폼 프로젝트(Original_Development_Plan, factory_ontology_manager, **factory_automation_mvp_web (NEO-FOUNDRY)**, **OntoFlow_doc**, pipeline_system_complete, TAM_Hub, Evaluation_Framework, all_platform_center, FMEA_Automation_Generation_Technology)의 생태계 구성을 설명합니다.
 > 
 > **관련 문서**:
 > - [[02_Projects_Overview|프로젝트 개요]] - Platform All 프로젝트 상세 정보
@@ -1449,7 +1455,44 @@ LangChain/CrewAI 기반 시스템의 트러블슈팅을 위한 **Mock 테스트 
 - **채팅 히스토리**: `AI_DB_center/generated/chat_history.json` (session_id 기준, 최대 50개). **캔버스 변경/저장 흐름과 분리** (분석 전용)
 - **설계 참조**: `platform_all/factory_ontology_manager/docs/obsidian_design_origin/architecture` — AI_Chat_Query_Design.md, Blue_Print.md, AI_Role_Policy.md
 
-### 7.3 OntoFlow_doc (문서 파이프라인)
+### 7.3 factory_automation_mvp_web (NEO-FOUNDRY)
+
+**스마트 팩토리 웹게임 MVP - 공장 운영 의사결정 학습/검증 시뮬레이션 허브**:
+
+- **목적**: 자원 생성·이송·처리·버퍼 수령·무역 납품을 한 화면에서 다루는 React + TypeScript 웹게임
+- **현재 가치**: 에디터/시뮬레이션/게이밍 + KPI/원가/리플레이 결합 MVP 운영 가능 상태
+- **중간 허브 가치**: MES/ERP/Ontology 데이터를 받아 최적화 시나리오를 돌리고 LLM으로 설명·추천하는 허브
+- **최종 목표**: 실데이터가 흐르는 디지털트윈 운영센터(의사결정-실행-검증 폐루프)
+
+**기술 스택**:
+- **Frontend**: React 18.3.1 + TypeScript 5.5.3 + Vite 7.1.12
+- **상태 관리**: React Hook 기반 (`useFactoryLogic`)
+- **API 연동**: Flask API (AI_DB_center, 포트 5000), FastAPI (AI Agent, 포트 8002)
+- **게임 루프**: 틱 기반 시뮬레이션 (320ms/tick)
+- **저장소**: localStorage (UI 설정), IndexedDB (리플레이 세션)
+
+**주요 기능**:
+- **게임플레이**: 2D 그리드 기반 배치, 벨트 이동, 공정 처리, 자재/공정 마스터 편집
+- **KPI 모니터링**: OEE, 품질률, 원가 효율, 납기율 등 7대 KPI 실시간 추적
+- **ERP 연동**: SO/PO 주문 관리, BOM 편집, 비용 회계, 거래처 관리, 조달 자동화
+- **리플레이 시스템**: 세션 기록/재생, KPI 타임라인, 병목 히트맵, 원가 흐름 분석, AI 제안
+- **원가 파이프라인**: 원자재/가공/인건비/물류비 추적, 공급망 최적화
+
+**Platform All 생태계 연결**:
+- **factory_ontology_manager**: API/설정 공유 (동일 Flask API, AI_DB_center JSON 저장소)
+- **AI_DB_center**: 공장 데이터 저장소 연동 (`stored_data.factories`, `stored_data.hierarchy_config`)
+- **ERP 시스템**: SO/PO 주문 관리, BOM, 비용 회계 기능
+- **디지털트윈**: 실시간 데이터 연동 준비 (MES/ERP/Ontology 데이터 수신)
+
+**비즈니스 가치**:
+- **초기 CAPEX**: 약 1.06억원 (293 UFP, 17.6 M/M 기준)
+- **운영 시뮬레이션 허브**: 공장 운영 의사결정(납기·품질·원가) 학습/검증
+- **회수 시나리오**: 기준 시나리오 기준 7.5개월 투자 회수 (연 순효과 1.70억원)
+
+**설계 문서 경로**: `platform_all/factory_automation_mvp_web/docs/obsidian_design_origin/architecture/`
+- 주요 설계 문서: Business_Summary.md, Blue_Print.md, Gameplay_Design.md, State_Management_Design.md, API_Design.md, Project_Structure_Design.md 등
+
+### 7.4 OntoFlow_doc (문서 파이프라인)
 
 **문서 기반 지식 그래프 및 AI 온톨로지 서비스**:
 
@@ -1459,7 +1502,7 @@ LangChain/CrewAI 기반 시스템의 트러블슈팅을 위한 **Mock 테스트 
 - **API**: `api.ai.chat.query`, `api.ai.ontology.preview` / `apply` / `status`, `api.db.documents` 등 — 외부 AI/프론트엔드에서 JSON DB 직접 조회·분석 결과 저장 가능
 - **설계 참조**: `platform_all/OntoFlow_doc/docs/obsidian_design_origin/architecture` — AI_UI_Spec.md, AI_Chat_Service_Design.md, Ontology_Update_Service_Design.md, Blue_Print.md
 
-### 7.4 pipeline_system_complete
+### 7.5 pipeline_system_complete
 
 **시계열 데이터 파이프라인**:
 
@@ -1467,7 +1510,7 @@ LangChain/CrewAI 기반 시스템의 트러블슈팅을 위한 **Mock 테스트 
 - Supabase 기반 실시간 데이터 처리
 - 체계적인 문서화 (219개 Markdown)
 
-### 7.5 TAM_Hub
+### 7.6 TAM_Hub
 
 **기술 자산 관리 허브**:
 
@@ -1475,7 +1518,7 @@ LangChain/CrewAI 기반 시스템의 트러블슈팅을 위한 **Mock 테스트 
 - AMS 엔진, progressing_engine 통합
 - Obsidian Design Origin 기반 문서화
 
-### 7.6 Evaluation_Framework
+### 7.7 Evaluation_Framework
 
 **AI 에이전트 평가 프레임워크**:
 
@@ -1483,7 +1526,7 @@ LangChain/CrewAI 기반 시스템의 트러블슈팅을 위한 **Mock 테스트 
 - LangGraph 워크플로우 오케스트레이션
 - Docker 기반 배포
 
-### 7.7 all_platform_center
+### 7.8 all_platform_center
 
 **통합 플랫폼 센터**:
 
@@ -1491,7 +1534,7 @@ LangChain/CrewAI 기반 시스템의 트러블슈팅을 위한 **Mock 테스트 
 - 통합 대시보드
 - 사용자 인증 및 권한 관리
 
-### 7.8 FMEA_Automation_Generation_Technology (Claude Sub-Agent)
+### 7.9 FMEA_Automation_Generation_Technology (Claude Sub-Agent)
 
 **코드 에이전트에서 영감을 받은 전체 공장/회사/사무 자동화의 백정보 핵심**:
 
@@ -1537,18 +1580,26 @@ graph TB
             Factory --> |드래그 앤 드롭| VisualDesign[시각적 공정 설계]
         end
         
-        subgraph "5. pipeline_system_complete"
+        subgraph "5. factory_automation_mvp_web"
+            NEOFoundry[factory_automation_mvp_web<br/>NEO-FOUNDRY<br/>스마트 팩토리 웹게임 MVP]
+            NEOFoundry --> |틱 기반 시뮬레이션| Simulation[게임플레이<br/>공정 처리]
+            NEOFoundry --> |7대 KPI 모니터링| KPIMonitoring[OEE/품질률/<br/>원가효율/납기율]
+            NEOFoundry --> |ERP 연동| ERPIntegration[SO/PO 주문<br/>BOM/비용 회계]
+            NEOFoundry --> |리플레이 시스템| ReplaySystem[세션 기록/재생<br/>병목 분석]
+        end
+        
+        subgraph "6. pipeline_system_complete"
             Pipeline[시계열 데이터 파이프라인]
             Pipeline --> |8단계 파이프라인| DataFlow[데이터 수집부터<br/>분석까지]
         end
         
-        subgraph "6. all_platform_center"
+        subgraph "7. all_platform_center"
             Center[통합 플랫폼 센터]
             Center --> |통합 대시보드| Dashboard[모든 플랫폼<br/>중앙 관리]
             Center --> |인증/권한| Auth[사용자 인증 및<br/>권한 관리]
         end
         
-        subgraph "7. FMEA_Automation_Generation_Technology"
+        subgraph "8. FMEA_Automation_Generation_Technology"
             FMEA[FMEA 자동화 생성 시스템<br/>코드 에이전트에서 영감]
             FMEA --> |8개 Sub-Agent| MultiAgent[R&D/Manufacturing/QA<br/>팀별 협업]
             FMEA --> |Phase 0-5 워크플로우| FMEAWorkflow[컨텍스트 수집부터<br/>지속 개선까지]
@@ -1556,7 +1607,7 @@ graph TB
             FMEA --> |범용 도메인| UniversalDomain[제조업/사무업무/<br/>서비스업 지원]
         end
         
-        subgraph "8. Virtual_Company_Creation_Agent"
+        subgraph "9. Virtual_Company_Creation_Agent"
             VCCA[Virtual Company Creation Agent<br/>AI 에이전트로만 구성된 가상 기업]
             VCCA --> |HQONS 구조| HQONS[Hyper-Quantum Omni-Net<br/>13개 조직 유형]
             VCCA --> |하이퍼디멘션| HDC[초차원 공간 정보 전달<br/>양자 얽힘-like 통신]
@@ -1573,7 +1624,10 @@ graph TB
     ODP -.->|평가 기준 제공| Eval
     Eval -.->|평가 결과| TAM
     TAM -.->|기술 자산 관리| Factory
+    Factory -.->|API/설정 공유| NEOFoundry
     Factory -.->|온톨로지 데이터| Pipeline
+    NEOFoundry -.->|공장 데이터 연동| Factory
+    NEOFoundry -.->|ERP 연동| Pipeline
     Pipeline -.->|파이프라인 결과| Center
     Center -.->|통합 관리| ODP
     FMEA -.->|백정보 핵심| ODP
@@ -1589,6 +1643,7 @@ graph TB
     style Eval fill:#3498db,color:#fff
     style TAM fill:#9b59b6,color:#fff
     style Factory fill:#e67e22,color:#fff
+    style NEOFoundry fill:#e91e63,color:#fff
     style Pipeline fill:#1abc9c,color:#fff
     style Center fill:#f39c12,color:#fff
     style FMEA fill:#16a085,color:#fff
@@ -1600,15 +1655,17 @@ graph TB
 1. **Original_Development_Plan → Evaluation_Framework**: 설계 문서를 평가 프레임워크에 제공하여 AI 에이전트 평가 기준으로 활용
 2. **Evaluation_Framework → TAM_Hub**: 평가 결과를 기술 자산으로 관리하여 지속적 개선 추적
 3. **TAM_Hub → factory_ontology_manager**: 기술 자산을 팩토리 온톨로지에 통합하여 제조 공정 설계에 활용
-4. **factory_ontology_manager → pipeline_system_complete**: 팩토리 온톨로지 데이터를 시계열 파이프라인으로 전달하여 실시간 분석
-5. **pipeline_system_complete → all_platform_center**: 파이프라인 결과를 통합 플랫폼 센터로 집중하여 대시보드 표시
-6. **all_platform_center → Original_Development_Plan**: 통합 관리 결과를 Original_Development_Plan에 피드백하여 지속적 개선
-7. **Original_Development_Plan → FMEA_Automation_Generation_Technology**: 코드 에이전트 구조를 FMEA 시스템에 제공하여 역설계 시스템 구현
-8. **FMEA_Automation_Generation_Technology → factory_ontology_manager**: FMEA 리스크 분석 결과를 팩토리 온톨로지에 통합하여 제조 공정 리스크 관리
-9. **FMEA_Automation_Generation_Technology → pipeline_system_complete**: FMEA 데이터를 시계열 파이프라인으로 전달하여 리스크 추적 및 분석
-10. **FMEA_Automation_Generation_Technology → Original_Development_Plan**: 전체 공장/회사/사무 자동화의 백정보 핵심으로 활용
-11. **Virtual_Company_Creation_Agent → Platform All**: HQONS 기반 초차원 공간 정보 전달 시스템으로 Platform All 생태계의 확장성과 효율성 극대화, 양자 얽힘-like 통신으로 무한 확장성 달성
-12. **Platform All → Virtual_Company_Creation_Agent**: 기존 플랫폼들의 경험과 구조를 가상 기업 생성에 활용하여 실증된 아키텍처 기반 기업 설계 자동화
+4. **factory_ontology_manager → factory_automation_mvp_web**: API/설정 공유, 공장 데이터 연동 (동일 Flask API, AI_DB_center JSON 저장소)
+5. **factory_automation_mvp_web → pipeline_system_complete**: ERP 연동 데이터를 시계열 파이프라인으로 전달
+6. **pipeline_system_complete → all_platform_center**: 파이프라인 결과를 통합 플랫폼 센터로 집중하여 대시보드 표시
+7. **all_platform_center → Original_Development_Plan**: 통합 관리 결과를 Original_Development_Plan에 피드백하여 지속적 개선
+8. **Original_Development_Plan → FMEA_Automation_Generation_Technology**: 코드 에이전트 구조를 FMEA 시스템에 제공하여 역설계 시스템 구현
+9. **FMEA_Automation_Generation_Technology → factory_ontology_manager**: FMEA 리스크 분석 결과를 팩토리 온톨로지에 통합하여 제조 공정 리스크 관리
+10. **FMEA_Automation_Generation_Technology → factory_automation_mvp_web**: FMEA 리스크 분석 결과를 시뮬레이션 허브에 통합하여 운영 의사결정 개선
+11. **FMEA_Automation_Generation_Technology → pipeline_system_complete**: FMEA 데이터를 시계열 파이프라인으로 전달하여 리스크 추적 및 분석
+12. **FMEA_Automation_Generation_Technology → Original_Development_Plan**: 전체 공장/회사/사무 자동화의 백정보 핵심으로 활용
+13. **Virtual_Company_Creation_Agent → Platform All**: HQONS 기반 초차원 공간 정보 전달 시스템으로 Platform All 생태계의 확장성과 효율성 극대화, 양자 얽힘-like 통신으로 무한 확장성 달성
+14. **Platform All → Virtual_Company_Creation_Agent**: 기존 플랫폼들의 경험과 구조를 가상 기업 생성에 활용하여 실증된 아키텍처 기반 기업 설계 자동화
 
 > [!NOTE] 진화 스토리
 > Virtual Company Creation Agent와 AI_DB_tester (VACTS)는 LLM 활용하다보니 온톨로지를 잘 못알아먹고 벡터도 부족하다는 것을 깨달고, 특화 중간 DB를 만들어서 LLM을 서포트하기 위해 탄생했습니다. "어차피 AI LLM은 앞뒤 주는 것만 잘하면 되니까" 특화 중간 DB(GFS)를 만들어서 LLM 비용을 87% 절감했습니다. 상세한 스토리는 [[02_Projects_Overview#024-virtual-company-creation-agent--ai_db_tester-vacts-진화-스토리-llm을-서포트하기-위한-특화-중간-db|0.2.4 Virtual Company Creation Agent & AI_DB_tester (VACTS) 진화 스토리]]를 참조하세요.
@@ -1771,11 +1828,129 @@ graph TB
 
 ---
 
+## 🏭 Phase 4: Operations (v9.0) — AI-DB + Codex OAuth + 온톨로지 변경 + 토탈 모니터링
+
+> [!NOTE] v9.0 출시 기준
+> 2026-02-27 FinalGate `codex_oauth_runtime_smoke` PASS 증적 기반으로 운영 체계가 확정되었습니다.
+> 증적 경로: `platform_all/Original_Development_Plan/docs/checklists/approvals/v9.0/2026-02-27_FinalGate_codex_oauth_runtime_smoke_result.json`
+
+### A. AI-DB 운영 모델
+
+AI-DB는 `pb.zst` 이벤트 스트림을 진실 소스(source of truth)로 사용하며, `json/jsonl/md` 파일은 조회·보고용 projection으로만 활용합니다.
+
+**팀별·단계별·문서별 접근 구조**:
+- `design_governance`: meta 계약 및 온톨로지 정책 관할
+- `architecture_team`: 아키텍처 문서 및 설계 산출물 관할
+- `development_team`: 런타임 체인, 오케스트레이터, 코드 산출물 관할
+
+**문서 메타 계약 (필수 필드)**:
+
+| 필드 | 역할 |
+|------|------|
+| `keywords` | 검색 색인 키 |
+| `simple_summary` | 1줄 요약 |
+| `detail_summary` | 상세 설명 |
+| `wiki_links` | 연관 문서 참조 |
+| `artifact_path` | 무거운 산출물의 외부 저장 경로 |
+
+- 무거운 산출물(`.pb.zst`, 번들, 로그)은 본문 저장이 아닌 `artifact_path` 참조 원칙
+- tri-mode(설계/개발/트러블슈팅) 전 모드에서 동일 DB 계약으로 동작
+
+**데이터 흐름**:
+
+```mermaid
+graph LR
+    A["사용자/에이전트 요청"] --> B["의도 파싱"]
+    B --> C["AI-DB 메타 조회\n(키워드/단계별 필터)"]
+    C --> D["관련 문서 요약\n(simple_summary + detail_summary)"]
+    D --> E["Human Loop 승인"]
+    E --> F["실행 (codex_oauth)"]
+    F --> G["산출물 생성\n(artifact_path 등록)"]
+    G --> H["AI-DB 이벤트 append\n(pb.zst)"]
+    H --> I["Projection 갱신\n(md/json)"]
+```
+
+### B. 코딩 에이전트 실행 체인
+
+**실행 순서**: 사용자 지시 → 의도 파싱 → 관련 문서/페르소나 요약 → Human Loop 승인 → 실행 → 리포트 → 문서 업데이트
+
+**병렬 실행 오염 방지 규칙**:
+- 작업 단위(run_id) 격리: 각 실행은 독립 `run_id`로 추적
+- 충돌 감지 시 즉시 중단 → Human Loop 승인 후 재개
+- `closed` 상태의 run 재실행은 idempotency skip 경로 적용
+
+**End-to-End 실행 체인 다이어그램**:
+
+```mermaid
+flowchart TD
+    A["👤 사용자 지시"] --> B["🧠 의도 파싱\n(LLM + 컨텍스트 주입)"]
+    B --> C["📚 AI-DB 조회\n(관련 문서 + 페르소나 요약)"]
+    C --> D{{"🔁 Human Loop 승인"}}
+    D -->|"proceed"| E["⚙️ 실행\n(codex_oauth 채널)"]
+    D -->|"modify"| B
+    D -->|"blocked"| Z["🛑 중단 기록\n(run_ledger)"]
+    E --> F["📄 리포트 생성\n(run_id 연계)"]
+    F --> G["📝 문서 업데이트\n(AI-DB + Projection)"]
+    G --> H["✅ 완료\n(doc_sync_done=true)"]
+```
+
+### C. 문서 온톨로지 변경 공정
+
+온톨로지 변경은 `relation_type / category / relations` 기준으로 관리됩니다.
+
+**변경 공정 (입력 → 게이트 → 산출물 → 증적)**:
+
+| 단계 | 입력 | 게이트 | 산출물 | 증적 |
+|------|------|--------|--------|------|
+| Impact 분석 | 변경 요청서 | 영향 범위 0 또는 승인된 범위 | Ontology_Impact_Analysis.md | impact_map 파일 |
+| 승인 | Impact 분석 결과 | Human Loop `proceed` | 승인 토큰 | approval lineage 레코드 |
+| 반영 | 승인 토큰 | 충돌 없음 | 변경된 메타 frontmatter | frontmatter diff |
+| 검증 | 반영 결과 | drift = 0 | Validation Report | canonical/mirror drift 리포트 |
+
+### D. 토탈 모니터링 (게임 형식)
+
+운영자가 한눈에 볼 수 있는 게임형 대시보드로, 미션 단위(일일/주간/릴리즈)로 관리합니다.
+
+**게이트 점수 체계**:
+- PASS: 0 리스크 포인트
+- FAIL: 리스크 포인트 누적 (심각도별 가중치)
+- 누적 리스크 포인트 임계값 초과 시 릴리즈 블로커
+
+**게임형 모니터링 루프**:
+
+```mermaid
+flowchart LR
+    M["🎯 미션 시작\n(일일/주간/릴리즈)"] --> G["🔎 게이트 실행\n(자동 검증)"]
+    G -->|"PASS"| S["🏆 점수 +0\n(계속 진행)"]
+    G -->|"FAIL"| R["⚠️ 리스크 포인트 +N\n(임계값 체크)"]
+    R -->|"임계값 이하"| I["📋 개선 액션 등록\n(backlog)"]
+    R -->|"임계값 초과"| B["🚫 릴리즈 블로커\n(Human Loop 필수)"]
+    I --> M
+    B --> H{{"🔁 Human Loop 결정"}}
+    H -->|"proceed"| M
+    H -->|"blocked"| E["🛑 릴리즈 보류"]
+    S --> M
+```
+
+### E. 채널/실행 정책
+
+| 채널 | 역할 | 비고 |
+|------|------|------|
+| `codex_oauth` | **기본 운영 채널** | 모든 프로덕션 실행 |
+| `claude` | 보조 비교 채널 | 동등성 검증 관점 |
+| `api_direct` | 보조 비교 채널 | 동등성 검증 관점 |
+| `cursor` | **범위 제외** | 운영 채널 아님 |
+
+- Codex OAuth 실증 증적 (2026-02-27): `status=passed`, `observed=CODEX_OAUTH_RUNTIME_SMOKE_OK`
+- 동등성 검증: `codex_oauth` 채널 결과를 `claude`, `api_direct`와 비교하여 출력 동등성 확인
+
+---
+
 ## ID 참조
 
 - **문서 ID**: `page.portfolio.architecture`
-- **관련 Phase**: `phase.foundation.*`
-- **관련 프로젝트**: `project.ams`, `project.dps`, `project.coctk`, `project.ai_db_tester`, `project.ontoflow_doc_processor`, `project.factory_ontology_manager_ai_agent`, `project.insight_ops`, `project.opsclaw`, `project.goose_architecture_analysis` 등
+- **관련 Phase**: `phase.foundation.*`, `phase.operations.v9`
+- **관련 프로젝트**: `project.ams`, `project.dps`, `project.coctk`, `project.ai_db_tester`, `project.ontoflow_doc_processor`, `project.factory_ontology_manager_ai_agent`, `project.factory_automation_mvp_web`, `project.insight_ops`, `project.opsclaw`, `project.goose_architecture_analysis` 등
 - **관련 문서**: `page.portfolio.*`
 
 ---

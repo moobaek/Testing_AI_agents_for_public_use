@@ -454,6 +454,48 @@ relations:
 
 ---
 
+## v9.0 실행 채널 정책 (Codex OAuth 기준)
+
+> [!IMPORTANT] v9.0 운영 기본 채널
+> 모든 코딩 에이전트 프로덕션 실행은 **`codex_oauth`** 채널을 기본으로 합니다.
+> 2026-02-27 FinalGate smoke 테스트 PASS 증적:
+> `platform_all/Original_Development_Plan/docs/checklists/approvals/v9.0/2026-02-27_FinalGate_codex_oauth_runtime_smoke_result.json`
+
+### 채널별 역할 분리
+
+| 채널 | 역할 | API key 필요 여부 |
+|------|------|-----------------|
+| `codex_oauth` | **기본 운영 채널** — 프로덕션 실행 전용 | OAuth 토큰 (API key 불필요) |
+| `claude` | 보조 비교 채널 — 동등성 검증 관점 | API key |
+| `api_direct` | 보조 비교 채널 — 동등성 검증 관점 | API key |
+| `cursor` | **운영 범위 제외** | — |
+
+### AI-DB 연동 실행 흐름 (v9.0)
+
+```mermaid
+flowchart TD
+    A["👤 사용자 지시"] --> B["🧠 의도 파싱"]
+    B --> C["📚 AI-DB 조회\n(ai-db, keyword/summary 계약)"]
+    C --> D["📋 관련 문서·페르소나 요약 제시"]
+    D --> E{{"🔁 Human Loop 승인\n(proceed / modify / blocked)"}}
+    E -->|"proceed"| F["⚙️ codex_oauth 채널 실행"]
+    E -->|"modify"| B
+    E -->|"blocked"| G["🛑 run_ledger 기록\n(status=blocked)"]
+    F --> H["📄 리포트 + 산출물\n(run_id, artifact_path)"]
+    H --> I["📝 AI-DB 이벤트 append\n+ 문서 동기화"]
+    I --> J["✅ doc_sync_done=true"]
+```
+
+### Human Loop 필수 조건
+
+AI 에이전트는 아래 조건에서 반드시 인간 검토를 요청해야 합니다:
+1. 문서 구조(온톨로지) 변경이 포함된 경우
+2. `artifact_path` 신규 등록이 포함된 경우
+3. 병렬 실행 충돌 감지 시 (`run_id` 격리 오염)
+4. 릴리즈 게이트 임계값 초과 시 (리스크 포인트 누적)
+
+---
+
 ## 관련 문서
 
 - [[00_ID_System_Guide|ID 시스템 가이드]] - ID 명명 규칙 및 사용 방법
